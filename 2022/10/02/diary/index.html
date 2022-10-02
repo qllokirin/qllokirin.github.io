@@ -8,7 +8,7 @@
         <script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-        <title>从0到使用hexo + ParticleX主题 | 70loKirin</title>
+        <title>稀疏平常的生活 | 70loKirin</title>
         <meta name="author" content="70loKirin">
         <meta name="description" content="~\(≧▽≦)/~">
         <meta name="keywords" content="">
@@ -147,22 +147,22 @@
                         
 <div class="article">
     <div>
-        <h1>从0到使用hexo + ParticleX主题 </h1>
+        <h1>稀疏平常的生活 </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/9/28
+            2022/10/2
         </span>
         
         <span class="category">
-            <a href="/categories/教程/">
+            <a href="/categories/生活/">
                 <span class="icon">
                     <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
                 </span>
-                教程
+                生活
             </a>
         </span>
         
@@ -174,8 +174,8 @@
             
             <span class="tag">
                 
-                <a href="/tags/hexo/" style="color: #03a9f4">
-                    hexo
+                <a href="/tags/日记/" style="color: #00bcd4">
+                    日记
                 </a>
             </span>
             
@@ -183,81 +183,12 @@
         
     </div>
     <div class="content" v-pre>
-        <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>我自己捯饬了很久才发现ParticleX作者有很详细的教程</p>
-<p><a target="_blank" rel="noopener" href="https://argvchs.github.io/page/2/">https://argvchs.github.io/page/2/</a></p>
-<p>以下内容仅作个人记录</p>
-<h1 id="使用hexo框架"><a href="#使用hexo框架" class="headerlink" title="使用hexo框架"></a>使用hexo框架</h1><blockquote>
-<p>hexo搭建起来非常方便，真的太好用啦</p>
-</blockquote>
-<p>0基础萌新推荐一下这个视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1mU4y1j72n">保姆级Hexo+github搭建个人博客</a></p>
-<blockquote>
-<p>视频后面运行<code>hexo d</code>发布到GitHub仓库的时候不需要做那么多工作</p>
-<p>因为已经绑定了ssh key所以是可以直接更新到GitHub的</p>
-<p>（一直提交失败是因为GitHub有时候要梯子</p>
-</blockquote>
-<p>hexo基本指令介绍</p>
-<pre><code class="bash"># 清除网页
-hexo cl
-# 生成网页
-hexo g
-# 网页本地发布
-hexo s
-# 网页提交到GitHub
-heox d
-</code></pre>
-<h1 id="使用ParticleX主题"><a href="#使用ParticleX主题" class="headerlink" title="使用ParticleX主题"></a>使用ParticleX主题</h1><p>仓库地址：<a target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">Hexo-Theme-ParticleX</a></p>
-<ul>
-<li><p>1.ParticleX主题的基本搭建</p>
-<p>按照仓库的readme配置好基本网页（主题安装+关闭 Hexo 自带 highlight）</p>
-<p>然后在<code>_config.yml</code>里面找到<code>theme: </code>改为<code>theme: ParticleX</code></p>
-<blockquote>
-<p>注意：yml文件的冒号后面都有一个空格！！！！</p>
-</blockquote>
-<p>依次运行</p>
-<pre><code class="bash">hexo cl
-hexo g
-hexo s
-</code></pre>
-</li>
-<li><p>2.ParticleX主题的基本使用</p>
-<p>生成categories、about、tags</p>
-<pre><code class="bash">hexo new page categories
-hexo new page about
-hexo new page tags
-hexo new post first
-</code></pre>
-<p>然后就可以在source文件中发现如下文件结构</p>
-<pre><code class="text">|---source
-    |---_posts		#每一篇帖子的内容
-    |---about		#about点开之后的内容
-    |---categories
-    |---tags
-</code></pre>
-<p>categories和tags不用管，会自动生成</p>
-<p>about和_posts都是md文件格式</p>
-<p><code>hexo new post &lt;post-name&gt;</code>会在_posts中再生成一个md文件（<code>&lt;post-name&gt;</code>为文件名</p>
-<p>post文件开头示例：</p>
-<pre><code class="md">title: first
-date: 2022-09-27 19:52:59
-tags: 
-  - 测试
-categories:
-  - 踩坑
-description: &quot;界面终于正常啦&quot;
-</code></pre>
-<p>背景、图标、评论配置参阅原仓库readme中：<a target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">配置文件说明</a></p>
-<blockquote>
-<p>tips：图标有两个元素，一个是name，一个是theme，在图标官网可以查阅</p>
-<p>​		  比如GitHub图标的theme是brands</p>
-</blockquote>
-</li>
-<li><p>3.ParticleX主题的进阶配置</p>
-<p>原作者已经有了教程我也不过多赘述：<a target="_blank" rel="noopener" href="https://argvchs.github.io/2022/04/17/hexo-blog-3/">https://argvchs.github.io/2022/04/17/hexo-blog-3/</a></p>
-<p>包含live2d、鼠标点击特效、流星背景特效、鼠标指针特效</p>
-<blockquote>
-<p>live2d我最后使用了这个教程：<a target="_blank" rel="noopener" href="https://haremu.com/p/205">https://haremu.com/p/205</a></p>
-</blockquote>
-</li>
+        <h1 id="2022-9-30"><a href="#2022-9-30" class="headerlink" title="2022.9.30"></a>2022.9.30</h1><ul>
+<li>烧了一个小时程序最后发现是板子有问题</li>
+<li>足基蛋糕 好耶</li>
+</ul>
+<h1 id="2022-10-1"><a href="#2022-10-1" class="headerlink" title="2022.10.1"></a>2022.10.1</h1><ul>
+<li>规划器.局部规划&amp;全局规划调试（穿啊 你快穿过去啊  （急了</li>
 </ul>
 
     </div>
