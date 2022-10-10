@@ -8,7 +8,7 @@
         <script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-        <title>从0到使用hexo + ParticleX主题 | 70loKirin</title>
+        <title>Ubuntu使用 | 70loKirin</title>
         <meta name="author" content="70loKirin">
         <meta name="description" content="~\(≧▽≦)/~">
         <meta name="keywords" content="">
@@ -147,22 +147,22 @@
                         
 <div class="article">
     <div>
-        <h1>从0到使用hexo + ParticleX主题 </h1>
+        <h1>Ubuntu使用 </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/9/28
+            2022/10/10
         </span>
         
         <span class="category">
-            <a href="/categories/教程/">
+            <a href="/categories/记录/">
                 <span class="icon">
                     <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
                 </span>
-                教程
+                记录
             </a>
         </span>
         
@@ -174,8 +174,8 @@
             
             <span class="tag">
                 
-                <a href="/tags/hexo/" style="color: #03a9f4">
-                    hexo
+                <a href="/tags/ubuntu/" style="color: #ff7d73">
+                    ubuntu
                 </a>
             </span>
             
@@ -183,80 +183,60 @@
         
     </div>
     <div class="content" v-pre>
-        <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>我自己捯饬了很久才发现ParticleX作者有很详细的教程</p>
-<p><a target="_blank" rel="noopener" href="https://argvchs.github.io/page/2/">https://argvchs.github.io/page/2/</a></p>
-<p>以下内容仅作个人记录</p>
-<h1 id="使用hexo框架"><a href="#使用hexo框架" class="headerlink" title="使用hexo框架"></a>使用hexo框架</h1><blockquote>
-<p>hexo搭建起来非常方便，真的太好用啦</p>
-</blockquote>
-<p>0基础萌新推荐一下这个视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1mU4y1j72n">保姆级Hexo+github搭建个人博客</a></p>
+        <h1 id="ubuntu安装"><a href="#ubuntu安装" class="headerlink" title="ubuntu安装"></a>ubuntu安装</h1><p>安装的话大致流程就是</p>
+<p>在Windows下分盘-&gt;制作启动盘-&gt;u盘启动安装-&gt;下一步下一步下一步（可能分盘会麻烦一点，但是可以只分一个&#x2F;</p>
+<h1 id="安装完之后马上要做的事"><a href="#安装完之后马上要做的事" class="headerlink" title="安装完之后马上要做的事"></a>安装完之后马上要做的事</h1><ul>
+<li><strong>网卡</strong>  检测网卡是否正常，如果可以直接开始上网，那就是非常的不戳</li>
+</ul>
 <blockquote>
-<p>视频后面运行<code>hexo d</code>发布到GitHub仓库的时候不需要做那么多工作</p>
-<p>因为已经绑定了ssh key所以是可以直接更新到GitHub的</p>
-<p>（一直提交失败是因为GitHub有时候要梯子</p>
+<p>有可能开机之后没有wifi选项，最好的情况是先连网线或者手机usb数据共享，然后去网上源码编译一下网卡驱动就ok了</p>
+<p>但是不排除究极螃蟹网卡（对 我说的是mt7921 会时好时坏）最后我直接换了ax210</p>
 </blockquote>
-<p>hexo基本指令介绍</p>
-<pre><code class="bash"># 清除网页
-hexo cl
-# 生成网页
-hexo g
-# 网页本地发布
-hexo s
-# 网页提交到GitHub
-heox d
-</code></pre>
-<h1 id="使用ParticleX主题"><a href="#使用ParticleX主题" class="headerlink" title="使用ParticleX主题"></a>使用ParticleX主题</h1><p>仓库地址：<a target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">Hexo-Theme-ParticleX</a></p>
 <ul>
-<li><p>1.ParticleX主题的基本搭建</p>
-<p>按照仓库的readme配置好基本网页（主题安装+关闭 Hexo 自带 highlight）</p>
-<p>然后在<code>_config.yml</code>里面找到<code>theme: </code>改为<code>theme: ParticleX</code></p>
-<blockquote>
-<p>注意：yml文件的冒号后面都有一个空格！！！！</p>
-</blockquote>
-<p>依次运行</p>
-<pre><code class="bash">hexo cl
-hexo g
-hexo s
-</code></pre>
+<li><strong>换源</strong>  选择一个国内源安装软件会更快，在<code>软件更新</code>这个软件里点点就行</li>
+<li><strong>显卡驱动</strong>  安装显卡驱动（如果有显卡的话），首选方法是在<code>软件更新</code>这个软件里面点一下安装<ul>
+<li>如果重启电脑正常启动，那恭喜你非常的顺利</li>
+<li>如果再次进入ubuntu，就在开机时候选第二个找一个恢复模式启动，再去<code>软件更新</code>里把显卡驱动卸载掉（点到最后一个就是卸载显卡驱动）</li>
+<li>如果还是要装显卡驱动可以去官网下载，但如果安装之后还是无法进入ubuntu，则需要开机选第二个然后选第一个再选root进入命令行找到显卡驱动文件执行<code>./xxxxx  --uninstall</code>进行卸载</li>
+</ul>
 </li>
-<li><p>2.ParticleX主题的基本使用</p>
-<p>生成categories、about、tags</p>
-<pre><code class="bash">hexo new page categories
-hexo new page about
-hexo new page tags
-hexo new post first
-</code></pre>
-<p>然后就可以在source文件中发现如下文件结构</p>
-<pre><code class="text">|---source
-    |---_posts		#每一篇帖子的内容
-    |---about		#about点开之后的内容
-    |---categories
-    |---tags
-</code></pre>
-<p>categories和tags不用管，会自动生成</p>
-<p>about和_posts都是md文件格式</p>
-<p><code>hexo new post &lt;post-name&gt;</code>会在_posts中再生成一个md文件（<code>&lt;post-name&gt;</code>为文件名</p>
-<p>post文件开头示例：</p>
-<pre><code class="md">title: first
-date: 2022-09-27 19:52:59
-tags: 
-  - 测试
-categories:
-  - 踩坑
-description: &quot;界面终于正常啦&quot;
-</code></pre>
-<p>背景、图标、评论配置参阅原仓库readme中：<a target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">配置文件说明</a></p>
+</ul>
+<h1 id="非常好用的工具"><a href="#非常好用的工具" class="headerlink" title="非常好用的工具"></a>非常好用的工具</h1><ul>
+<li><p><strong><a target="_blank" rel="noopener" href="https://github.com/Fndroid/clash_for_windows_pkg/releases/">clash for windows</a></strong></p>
 <blockquote>
-<p>tips：图标有两个元素，一个是name，一个是theme，在图标官网可以查阅</p>
-<p>​		  比如GitHub图标的theme是brands</p>
+<p>clash 懂得都懂</p>
 </blockquote>
+<p>虽然是for Windows，但是有ubuntu版本，非常的不戳</p>
 </li>
-<li><p>3.ParticleX主题的进阶配置</p>
-<p>原作者已经有了教程我也不过多赘述：<a target="_blank" rel="noopener" href="https://argvchs.github.io/2022/04/17/hexo-blog-3/">https://argvchs.github.io/2022/04/17/hexo-blog-3/</a></p>
-<p>包含live2d、鼠标点击特效、流星背景特效、鼠标指针特效</p>
-<blockquote>
-<p>live2d我最后使用了这个教程：<a target="_blank" rel="noopener" href="https://haremu.com/p/205">https://haremu.com/p/205</a></p>
-</blockquote>
+<li><p><strong><a target="_blank" rel="noopener" href="https://m-ouse.github.io/post/proxychains%E9%85%8D%E7%BD%AE/">proxychains&#x2F;proxychains4</a></strong></p>
+<p>在某一个命令前面加伤这串，一定会让这个命令走上代理，适用于规则代理或者全局代理不管用的时候</p>
+</li>
+<li><p><strong><a target="_blank" rel="noopener" href="https://blog.csdn.net/yaxuan88521/article/details/118481936">scp</a></strong></p>
+<p>对远端服务器直接进行复制粘贴</p>
+</li>
+<li><p><strong>vim&#x2F;nano</strong></p>
+<p>终端文本编辑器，我用vim</p>
+</li>
+<li><p><strong>tmux&#x2F;screen</strong></p>
+<p>tmux&gt;screen，可窗口多开，一窗口可分开成多个隔间</p>
+</li>
+<li><p><strong>输入法</strong></p>
+<p>首推还是搜狗，词库雀食是强大的  如果无法使用可以安装ibus的输出法，一定不会报错</p>
+</li>
+<li><p><strong>ros（不是</strong></p>
+<p>做机器人相关项目才会需要</p>
+<p>放个xtdrone文档放这：<a target="_blank" rel="noopener" href="https://www.yuque.com/xtdrone/manual_cn/basic_config#iud2s">https://www.yuque.com/xtdrone/manual_cn/basic_config#iud2s</a></p>
+</li>
+</ul>
+<h1 id="可能会遇到的问题"><a href="#可能会遇到的问题" class="headerlink" title="可能会遇到的问题"></a>可能会遇到的问题</h1><ul>
+<li><p>GitHub sshkey怎么生成都是鉴权失败</p>
+<p>可能是端口问题：<a target="_blank" rel="noopener" href="https://blog.csdn.net/alex_my/article/details/89336493">https://blog.csdn.net/alex_my/article/details/89336493</a></p>
+<pre><code>vim ~/.ssh/config
+
+Host github.com
+Hostname ssh.github.com
+Port 443
+</code></pre>
 </li>
 </ul>
 
