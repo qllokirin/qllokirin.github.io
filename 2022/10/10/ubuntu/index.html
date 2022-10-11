@@ -174,7 +174,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/ubuntu/" style="color: #ff7d73">
+                <a href="/tags/ubuntu/" style="color: #ffa2c4">
                     ubuntu
                 </a>
             </span>
@@ -189,7 +189,7 @@
 <li><strong>网卡</strong>  检测网卡是否正常，如果可以直接开始上网，那就是非常的不戳</li>
 </ul>
 <blockquote>
-<p>有可能开机之后没有wifi选项，最好的情况是先连网线或者手机usb数据共享，然后去网上源码编译一下网卡驱动就ok了</p>
+<p>有可能开机之后没有wifi选项，解决办法是：先连网线或者手机usb数据共享，然后去网上源码编译一下网卡驱动就ok了</p>
 <p>但是不排除究极螃蟹网卡（对 我说的是mt7921 会时好时坏）最后我直接换了ax210</p>
 </blockquote>
 <ul>
@@ -209,7 +209,7 @@
 <p>虽然是for Windows，但是有ubuntu版本，非常的不戳</p>
 </li>
 <li><p><strong><a target="_blank" rel="noopener" href="https://m-ouse.github.io/post/proxychains%E9%85%8D%E7%BD%AE/">proxychains&#x2F;proxychains4</a></strong></p>
-<p>在某一个命令前面加伤这串，一定会让这个命令走上代理，适用于规则代理或者全局代理不管用的时候</p>
+<p>在某一个命令前面加上这串，一定会让这个命令走上代理，适用于规则代理或者全局代理不管用的时候</p>
 </li>
 <li><p><strong><a target="_blank" rel="noopener" href="https://blog.csdn.net/yaxuan88521/article/details/118481936">scp</a></strong></p>
 <p>对远端服务器直接进行复制粘贴</p>
@@ -227,10 +227,16 @@
 <p>做机器人相关项目才会需要</p>
 <p>放个xtdrone文档放这：<a target="_blank" rel="noopener" href="https://www.yuque.com/xtdrone/manual_cn/basic_config#iud2s">https://www.yuque.com/xtdrone/manual_cn/basic_config#iud2s</a></p>
 </li>
+<li><p><strong>飞书（不是</strong></p>
+<p>先进团队都用飞书（）</p>
+</li>
 </ul>
 <h1 id="可能会遇到的问题"><a href="#可能会遇到的问题" class="headerlink" title="可能会遇到的问题"></a>可能会遇到的问题</h1><ul>
 <li><p>GitHub sshkey怎么生成都是鉴权失败</p>
 <p>可能是端口问题：<a target="_blank" rel="noopener" href="https://blog.csdn.net/alex_my/article/details/89336493">https://blog.csdn.net/alex_my/article/details/89336493</a></p>
+<blockquote>
+<p>基地的wifi有代理 可能会占用22端口</p>
+</blockquote>
 <pre><code>vim ~/.ssh/config
 
 Host github.com
