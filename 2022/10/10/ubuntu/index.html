@@ -174,7 +174,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/ubuntu/" style="color: #00bcd4">
+                <a href="/tags/ubuntu/" style="color: #00a596">
                     ubuntu
                 </a>
             </span>
@@ -210,22 +210,26 @@
 </li>
 <li><p><strong><a target="_blank" rel="noopener" href="https://telegram.org/">telegram</a></strong></p>
 <p>ubuntu的QQ上一次更新是在2020年，远古版QQ，根本没维护了</p>
-<p>国外一般都用telegram，相当于国内QQ，唯一的不方便之处是必须要梯子</p>
+<p>国外一般都用telegram，<strong>相当于国内QQ</strong>，唯一的不方便之处是必须要梯子</p>
 <blockquote>
 <p>但真的好看又好用</p>
+</blockquote>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.jetbrains.com/clion/download/#section=linux"><strong>clion编译器</strong></a></p>
+<p>好用且配置方便，<del>爆杀vscode</del>（先选三十天试用，学生可以通过学信网认证免费使用</p>
+<p><code>sudo snap install clion --classic</code>直接安装，然后输入<code>clion</code>运行即可</p>
+<blockquote>
+<p>如果是下载的压缩包，则需运行里面的clion.sh脚本</p>
+<p>在.bashrc&#x2F;.zshrc中写入<code>alias clion=xxx/bin/clion.sh</code> 之后就也可以输入clion命令打开了	</p>
 </blockquote>
 </li>
 <li><p><strong><a target="_blank" rel="noopener" href="https://github.com/Fndroid/clash_for_windows_pkg/releases/">clash for windows</a></strong></p>
 <p>虽然是for Windows，但是有ubuntu版本，非常的不戳</p>
 <blockquote>
-<p>clash 懂得都懂</p>
-</blockquote>
-</li>
-</ul>
-<blockquote>
+<p>clash 懂得都懂 </p>
 <p>ubuntu上需要在网络中配置中选到手动 设置为127.0.0.1和7890端口</p>
 </blockquote>
-<ul>
+</li>
 <li><p><strong><a target="_blank" rel="noopener" href="https://m-ouse.github.io/post/proxychains%E9%85%8D%E7%BD%AE/">proxychains&#x2F;proxychains4</a></strong></p>
 <p>在某一个命令前面加上这串，一定会让这个命令走上代理，适用于规则代理或者全局代理不管用的时候</p>
 <blockquote>
@@ -246,6 +250,9 @@
 <li><p><strong>输入法</strong></p>
 <p>首推还是搜狗，词库雀食是强大的  如果无法使用可以安装ibus的输出法，一定不会报错</p>
 </li>
+<li><p><a target="_blank" rel="noopener" href="https://ohmyz.sh/#install">on my zsh终端美化</a></p>
+<p>好看且好用，自动补全，语法高亮，用了都说好</p>
+</li>
 <li><p><a target="_blank" rel="noopener" href="https://blog.zzsqwq.cn/posts/141/">ubuntu优化</a></p>
 <p>战老师yyds！</p>
 </li>
@@ -259,22 +266,14 @@
 <li><p><strong>飞书（不是</strong></p>
 <p>先进团队都用飞书（）</p>
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://www.jetbrains.com/clion/download/#section=linux"><strong>clion</strong></a></p>
-<p><code>sudo snap install clion --classic</code>直接安装，然后输入<code>clion</code>运行即可</p>
-<blockquote>
-<p>如果是下载的压缩包，则需运行里面的clion.sh脚本</p>
-<p>在.bashrc&#x2F;.zshrc中写入<code>alias clion=xxx/bin/clion.sh</code> 之后就也可以输入clion命令打开了</p>
-</blockquote>
-</li>
 </ul>
-<p>	</p>
 <h1 id="可能会遇到的问题"><a href="#可能会遇到的问题" class="headerlink" title="可能会遇到的问题"></a>可能会遇到的问题</h1><ul>
 <li><p>GitHub sshkey怎么生成都是鉴权失败</p>
 <p>可能是端口问题：<a target="_blank" rel="noopener" href="https://blog.csdn.net/alex_my/article/details/89336493">https://blog.csdn.net/alex_my/article/details/89336493</a></p>
 <blockquote>
 <p>基地的wifi有代理 可能会占用22端口</p>
 </blockquote>
-<pre><code>vim ~/.ssh/config
+<pre><code class="zsh">vim ~/.ssh/config
 
 Host github.com
 Hostname ssh.github.com
