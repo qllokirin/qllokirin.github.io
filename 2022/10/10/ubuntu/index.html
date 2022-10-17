@@ -174,7 +174,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/ubuntu/" style="color: #ff7d73">
+                <a href="/tags/ubuntu/" style="color: #03a9f4">
                     ubuntu
                 </a>
             </span>
@@ -202,18 +202,40 @@
 </li>
 </ul>
 <h1 id="非常好用的工具"><a href="#非常好用的工具" class="headerlink" title="非常好用的工具"></a>非常好用的工具</h1><ul>
-<li><p><strong><a target="_blank" rel="noopener" href="https://github.com/Fndroid/clash_for_windows_pkg/releases/">clash for windows</a></strong></p>
+<li><p><strong><a target="_blank" rel="noopener" href="https://www.google.com/">谷歌搜索</a></strong></p>
+<p>谷歌一搜就是官网，就算是广告也有明显标注，百度  懂得都懂</p>
 <blockquote>
-<p>clash 懂得都懂 </p>
+<p>如果想看中文搜索结果也可以点<code>工具</code>-&gt;<code>选择语言</code></p>
+</blockquote>
+</li>
+<li><p><strong><a target="_blank" rel="noopener" href="https://telegram.org/">telegram</a></strong></p>
+<p>ubuntu的QQ上一次更新是在2020年，远古版QQ，根本没维护了</p>
+<p>国外一般都用telegram，相当于国内QQ，唯一的不方便之处是必须要梯子</p>
+<blockquote>
+<p>但真的好看又好用</p>
+</blockquote>
+</li>
+<li><p><strong><a target="_blank" rel="noopener" href="https://github.com/Fndroid/clash_for_windows_pkg/releases/">clash for windows</a></strong></p>
+<p>虽然是for Windows，但是有ubuntu版本，非常的不戳</p>
+<blockquote>
+<p>clash 懂得都懂</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
 <p>ubuntu上需要在网络中配置中选到手动 设置为127.0.0.1和7890端口</p>
 </blockquote>
-<p>虽然是for Windows，但是有ubuntu版本，非常的不戳</p>
-</li>
+<ul>
 <li><p><strong><a target="_blank" rel="noopener" href="https://m-ouse.github.io/post/proxychains%E9%85%8D%E7%BD%AE/">proxychains&#x2F;proxychains4</a></strong></p>
 <p>在某一个命令前面加上这串，一定会让这个命令走上代理，适用于规则代理或者全局代理不管用的时候</p>
+<blockquote>
+<p>如果使用的是clash的话，点port那行有个终端图标，复制命令之后运行也是同样的效果</p>
+</blockquote>
 </li>
 <li><p><strong><a target="_blank" rel="noopener" href="https://blog.csdn.net/yaxuan88521/article/details/118481936">scp</a></strong></p>
 <p>对远端服务器直接进行复制粘贴</p>
+<pre><code class="zsh">scp -r -P 316 ./xxx root@xx.xx.xx.xx:/home/xx
+</code></pre>
 </li>
 <li><p><strong>vim&#x2F;nano</strong></p>
 <p>终端文本编辑器，我用vim</p>
@@ -238,12 +260,14 @@
 <p>先进团队都用飞书（）</p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://www.jetbrains.com/clion/download/#section=linux"><strong>clion</strong></a></p>
-<p>.bashrc&#x2F;.zshrc中写入<code>alias clion=xxx/bin/clion.sh</code> 之后就可以输入clion命令打开了	</p>
+<p><code>sudo snap install clion --classic</code>直接安装，然后输入<code>clion</code>运行即可</p>
 <blockquote>
-<p>也可以命令行安装<code>sudo snap install clion --classic</code></p>
+<p>如果是下载的压缩包，则需运行里面的clion.sh脚本</p>
+<p>在.bashrc&#x2F;.zshrc中写入<code>alias clion=xxx/bin/clion.sh</code> 之后就也可以输入clion命令打开了</p>
 </blockquote>
 </li>
 </ul>
+<p>	</p>
 <h1 id="可能会遇到的问题"><a href="#可能会遇到的问题" class="headerlink" title="可能会遇到的问题"></a>可能会遇到的问题</h1><ul>
 <li><p>GitHub sshkey怎么生成都是鉴权失败</p>
 <p>可能是端口问题：<a target="_blank" rel="noopener" href="https://blog.csdn.net/alex_my/article/details/89336493">https://blog.csdn.net/alex_my/article/details/89336493</a></p>
