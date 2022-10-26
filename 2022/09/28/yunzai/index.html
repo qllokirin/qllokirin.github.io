@@ -4,7 +4,6 @@
     <head>
         <!-- <link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css">
         <script src="https://fastly.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script> -->
-        <link rel="stylesheet" href="/live2d/css/live2d.css" />
         <script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
@@ -37,12 +36,7 @@
         <script src="/css/cursor.css"></script>
         <script src="/js/cursor.js"></script> -->
     <meta name="generator" content="Hexo 6.3.0"></head>
-    <body>
-        <div id="landlord">
-            <div class="message" style="opacity:0"></div>
-            <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
-            <div class="hide-button">隐藏</div>
-        </div>        
+    <body>      
         <div id="loading" style="height:100vh;width:100vw;position:fixed;display:flex;z-index:200;justify-content:space-between;background:#fff;transition:opacity 0.3s ease-out"><div style="position:fixed;height:100vh;width:100vw;display:flex;justify-content:center;align-items:center"><div id="loadcontent" style="width:50vmin;height:50vmin;padding:50px;border-radius:50%;display:flex;justify-content:center;align-items:center;border:solid 10px #a3ddfb;text-align:center"><div><h2>LOADING...</h2><p style="word-break:keep-all">加载过慢请开启缓存(浏览器默认开启)</p><div><img alt="loading" src="/loading.gif"></div></div></div></div></div>
         <div id="layout">
             <i data-fa-symbol="calendar-solid" class="fa-solid fa-calendar fa-fw"></i>
@@ -272,14 +266,5 @@
 </script>
 
 
-        <!-- <script type="text/javascript">
-            var message_Path = '/live2d/'
-            var home_Path = 'https://70lokirin.github.io/'  //此处修改为你的域名，必须带斜杠
-        </script>
-        <script type="text/javascript" src="/live2d/js/live2d.js"></script>
-        <script type="text/javascript" src="/live2d/js/message.js"></script>
-        <script type="text/javascript">
-            loadlive2d("live2d", "/live2d/model/tia/model.json");
-        </script> -->
     </body>
 </html>
