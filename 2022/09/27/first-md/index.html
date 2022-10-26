@@ -177,11 +177,11 @@
         <h1 id="好耶！！"><a href="#好耶！！" class="headerlink" title="好耶！！"></a>好耶！！</h1>
     </div>
     
-    
-    <link rel="stylesheet" href="https://cdn.staticfile.org/waline/2.9.1/waline.min.css" />
+    <link rel="stylesheet" href="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.css">
     <div id="comment">
-        <div id="waline-container"></div>
+        <div id="gitalk-container"></div>
     </div>
+    
     
 </div>
                          
@@ -211,24 +211,24 @@
         <script src="/js/particlex.js"></script>
         <script src="/js/showimg.js"></script>
         
-
-<script src="https://cdn.staticfile.org/waline/2.9.1/waline.min.js"></script>
+<script src="https://cdn.staticfile.org/gitalk/1.7.2/gitalk.min.js"></script>
 <script>
-    Waline.init({
-        el: '#waline-container',
-        serverURL: "https://waline-common-h9z49bhcy-70lokirin.vercel.app/",
-        commentCount: true,
-        pageview: false,
-        emoji: "https://unpkg.com/@waline/emojis@1.0.1/weibo,https://unpkg.com/@waline/emojis@1.0.1/alus,https://unpkg.com/@waline/emojis@1.0.1/bilibili,https://unpkg.com/@waline/emojis@1.0.1/qq,https://unpkg.com/@waline/emojis@1.0.1/tieba,https://unpkg.com/@waline/emojis@1.0.1/tw-emoji".split(','),
-        meta: "nick,mail,link".split(','),
-        requiredMeta: "nick".split(','),
-        lang: "zh-CN",
-        wordLimit: parseInt("0"),
-        pageSize: "10",
-        login: "enable",
-        locale: {}
-    });
+    var clientID = "8bed742f27c7ffdd8e18", clientSecret = "68fe9f608fec857390c1ae378091ad22d3026e73";
+    
+    const gitalk = new Gitalk({
+        clientID: clientID,
+        clientSecret: clientSecret,
+        repo: "hexo-blog-comment",
+        owner: "70loKirin",
+        admin: ["70loKirin"],
+        language: "zh-CN",
+        id: location.pathname,
+        distractionFreeMode: false,
+        
+    })
+    gitalk.render("gitalk-container")
 </script>
+
 
         <!-- <script type="text/javascript">
             var message_Path = '/live2d/'
