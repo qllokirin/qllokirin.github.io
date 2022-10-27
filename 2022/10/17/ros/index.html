@@ -228,7 +228,7 @@ roscore
 rosrun turtlesim turtlesim_node
 </code></pre>
 <p>再打开一个终端备用，现在的情况大概如下图</p>
-<p><img src="/%5Cimages%5Cros%5Cros_1.png" alt="ros_1"></p>
+<p><img src="/%5Cimages%5Cros_1.png" alt="ros_1"></p>
 <p>接下来我们先熟悉一下一些基本<strong>命令行指令</strong></p>
 <pre><code class="zsh"># 查看当前的所有话题
 rostopic list
@@ -284,7 +284,7 @@ angular:
   z: 1.0&quot;
 </code></pre>
 <p>现在应大致如下图</p>
-<p><img src="/%5Cimages%5Cros%5Cros_2.png" alt="ros_1"></p>
+<p><img src="/%5Cimages%5Cros_2.png" alt="ros_1"></p>
 <p>现在你应该明白了，我们可以通过<strong>话题通信</strong>的方式订阅（Subscriber）到小乌龟的位置信息<code>/turtle1/pose</code>、向速度话题<code>/turtle1/cmd_vel</code>里发布（Publisher）速度控制小乌龟移动</p>
 <p>接下来我将以<strong>c++<strong>为例演示如何在</strong>代码</strong>中实现这部分操作</p>
 <ul>
@@ -360,11 +360,108 @@ catkin_create_pkg control_tortoise roscpp rospy std_msgs geometry_msgs turtlesim
         |-- CMakeLists.txt: 编译的基本配置 初始化工作空间时生成
 </code></pre>
 <h2 id="2、源码书写"><a href="#2、源码书写" class="headerlink" title="2、源码书写"></a>2、源码书写</h2><p>如上文件结构所示，cpp文件放在src中，先生成一个main.cpp（运行<code>touch main.cpp</code>即可生成）</p>
-<pre><code class="cpp">
+<p>建议自己打一打喔~ 最好能理解</p>
+<pre><code class="cpp">//ros语法基本头文件
+#include&lt;ros/ros.h&gt;
+//小乌龟速度的数据类型是geometry_msgs::Twist所以引入以下头文件（geometry_msgs在cmake中find_package里已经填写过了
+#include&lt;geometry_msgs/Twist.h&gt;
+//小乌龟位置的数据类型是turtlesim::Pose所以引入以下头文件（turtlesim在cmake中find_package里已经填写过了
+#include&lt;turtlesim/Pose.h&gt;
+
+//申明全局变量速度和位置 和int a之类的其实差不多
+geometry_msgs::Twist vel;
+
+turtlesim::Pose pose;
+
+//这里是回调函数callback 每次运行ros::spinOnce()就会调用回调函数
+void pose_update_cb(const turtlesim::Pose::ConstPtr &amp;msg)
+&#123;
+    //回调函数读出小乌龟位置信息然后存入pose变量中
+    pose = (*msg);
+&#125;
+
+//主程序
+int main(int argc, char **argv)
+&#123;
+    //初始化ROS,它允许ROS通过命令行进行名称重映射
+    ros::init(argc, argv, &quot;control_tortoise&quot;);
+    //为这个进程的节点创建一个句柄
+    ros::NodeHandle n;
+    //创建一个订阅者，名叫pose_sub，因为是订阅者所以是subscribe，数据类型是turtlesim::Pose
+    //括号里面第一个参数是话题名，第二个是队列长度，不明白的话就用1，第三个是回调函数，会读取队列里面的数据
+    ros::Subscriber pose_sub = n.subscribe&lt;turtlesim::Pose&gt;(&quot;/turtle1/pose&quot;, 1, pose_update_cb);
+    //创建一个发布者，名叫vel_pub，因为是发布者所以是advertise，数据类型是geometry_msgs::Twist
+    //括号里面第一个参数是话题名，第二个是队列长度，不明白的话就用1，因为是发布者所以没有回调函数
+    ros::Publisher vel_pub = n.advertise&lt;geometry_msgs::Twist&gt;(&quot;/turtle1/cmd_vel&quot;, 1);
+    //指定循环频率是10，r为变量名
+    ros::Rate r(10);
+
+    //进入循环 当我们按下ctrl+c终止程序时循环结束
+    while (ros::ok()) &#123;
+        //打印pose的信息
+        ROS_INFO(&quot;pose : (%.2lf , %.2lf)&quot;, pose.x, pose.y);
+        //设定速度
+        vel.linear.x = 1.0;
+        vel.angular.z = 1.0;
+        //发布速度
+        vel_pub.publish(vel);
+        //调用回调函数
+        ros::spinOnce();
+        //睡一下 以达到我们设定的频率
+        r.sleep();
+    &#125;
+&#125;
 </code></pre>
 <h2 id="3、编译工作空间"><a href="#3、编译工作空间" class="headerlink" title="3、编译工作空间"></a>3、编译工作空间</h2><ul>
 <li>编译之前首先要去<strong>功能包</strong>下的CMakeLists.txt修改一些东西</li>
 </ul>
+<p><img src="/%5Cimages%5Cros_3.png" alt="ros_3"></p>
+<p>看到138行152、153、153 （或许在这几行附近）把注释去掉</p>
+<p>改为如下样子</p>
+<pre><code class="cmake"># 括号里第一个参数是节点的名字 就像小乌龟的节点名叫/turtlesim一样
+# 第二个参数是cpp文件的路径，从功能包根目录开始 可以写多个cpp
+add_executable(control_tortoise_node src/main.cpp)
+
+# 此处节点名保持和上述一直
+target_link_libraries(control_tortoise_node
+   $&#123;catkin_LIBRARIES&#125;
+)
+</code></pre>
+<ul>
+<li>编译</li>
+</ul>
+<pre><code class="zsh"># 编译时要进入工作空间根目录
+cd ~/catkin_ws
+# 编译
+catkin_make
+</code></pre>
+<blockquote>
+<p>没有红色报错的话就算是成功啦</p>
+</blockquote>
+<h2 id="4、运行"><a href="#4、运行" class="headerlink" title="4、运行"></a>4、运行</h2><p>还是和之前一样把小乌龟启动起来</p>
+<pre><code class="zsh"># 终端1
+roscore
+# 终端2
+rosrun turtlesim turtlesim_node
+</code></pre>
+<p>现在已经准备就绪，接下来的就是把我们的程序运行起来</p>
+<pre><code class="zsh"># rosrun命令可以启动某个节点 第一个参数书是功能包的名字 第二个参数是节点名字
+# 功能包的名字是在我们生成功能包时命名的 节点的名字则是在cmakelist中填写的 还记得吗
+rosrun control_tortoise control_tortoise_node
+</code></pre>
+<p>如果不出意外的小乌龟就可以正常转圈，控制台输出位置信息了</p>
+<p>还可以使用<code>rosrun rqt_plot rqt_plot</code>图形化查看数据内容</p>
+<p><img src="/%5Cimages%5Cros_4.png" alt="ros_4"></p>
+<p>现在的你是否可以自己订阅一个话题或者往一个话题里面发布消息呢</p>
+<h2 id="5、launch文件"><a href="#5、launch文件" class="headerlink" title="5、launch文件"></a>5、launch文件</h2><p>有些时候使用的是roslaunch而并非rosrun，roslaunch的好处在于可以一次性<strong>开很多个节点</strong></p>
+<p>在功能包下新建launch文件，并生成一个<code>control_tortoise.launch</code></p>
+<p>填入如下内容</p>
+<pre><code class="xml">&lt;launch&gt;
+  &lt;node pkg=&quot;control_tortoise&quot; type=&quot;control_tortoise_node&quot; name=&quot;control_tortoise_name&quot; output=&quot;screen&quot;/&gt;
+&lt;/launch&gt;
+</code></pre>
+<p>pkg代表功能包的名字   type是节点名   name可以随意取名   <code>output=&quot;screen&quot;</code>意味着结果会输出在控制台</p>
+<p>这时候可以输入<code>roslaunch control_tortoise control_tortoise.launch</code>来代替<code>rosrun control_tortoise control_tortoise_node</code></p>
 
     </div>
     
