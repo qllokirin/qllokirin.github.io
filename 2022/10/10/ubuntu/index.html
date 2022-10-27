@@ -188,9 +188,9 @@
 </blockquote>
 <ul>
 <li><strong>换源</strong>  选择一个国内源安装软件会更快，在<code>软件更新</code>这个软件里点点就行</li>
-<li><strong>显卡驱动</strong>  安装显卡驱动（如果有显卡的话），首选方法是在<code>软件更新</code>这个软件里面点一下安装<ul>
+<li><strong>显卡驱动</strong>  安装显卡驱动（如果有显卡的话），首选方法是在<code>软件更新</code>这个软件里面点一下安装，建议选择sever版本<ul>
 <li>如果重启电脑正常启动，那恭喜你非常的顺利</li>
-<li>如果再次进入ubuntu，就在开机时候选第二个找一个恢复模式启动，再去<code>软件更新</code>里把显卡驱动卸载掉（点到最后一个就是卸载显卡驱动）</li>
+<li>如果重启无法进入ubuntu，就在开机时候选第二个找一个恢复模式启动，再去<code>软件更新</code>里把显卡驱动卸载掉（点到最后一个就是卸载显卡驱动）</li>
 <li>如果还是要装显卡驱动可以去官网下载，但如果安装之后还是无法进入ubuntu，则需要开机选第二个然后选第一个再选root进入命令行找到显卡驱动文件执行<code>./xxxxx  --uninstall</code>进行卸载</li>
 </ul>
 </li>
@@ -226,7 +226,7 @@
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://typora.io/">typora</a></p>
 <p>Markdown语法文件即md为后缀的文件，用多了是真的好用，加上typora的适配，不过他开始收费了www 穷学生用不起正版还是偷偷用<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1MxeuYGiGLoqJSOQDIyThVQ?pwd=kiri">老版</a>了</p>
-<p>去下载老文件然后放到&#x2F;usr&#x2F;share里面也可以用  老版deb文件安装也是可以的</p>
+<p>去下载老文件然后放到&#x2F;usr&#x2F;share里面就可以直接用  老版deb文件安装也是可以的</p>
 <pre><code class="zsh">sudo cp -r /typora /usr/share/
 </code></pre>
 </li>
@@ -234,7 +234,7 @@
 <p>虽然是for Windows，但是有ubuntu版本，非常的不戳</p>
 <blockquote>
 <p>clash 懂得都懂 </p>
-<p>ubuntu上需要在网络中配置中选到手动 设置为127.0.0.1和7890端口</p>
+<p>ubuntu上需要在<code>设置</code>-&gt;<code>网络</code>-&gt;<code>代理</code>选择手动 设置为127.0.0.1和7890端口</p>
 </blockquote>
 </li>
 <li><p><strong><a target="_blank" rel="noopener" href="https://m-ouse.github.io/post/proxychains%E9%85%8D%E7%BD%AE/">proxychains&#x2F;proxychains4</a></strong></p>

@@ -168,7 +168,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/ros/" style="color: #03a9f4">
+                <a href="/tags/ros/" style="color: #ffa2c4">
                     ros
                 </a>
             </span>
@@ -178,8 +178,47 @@
     </div>
     <div class="content" v-pre>
         <blockquote>
-<p>现在是个饼</p>
+<p>现在只有简单指令合集</p>
 </blockquote>
+<h1 id="什么是ros"><a href="#什么是ros" class="headerlink" title="什么是ros"></a>什么是ros</h1><p>全称是Robot Operating System，中文为<strong>机器人操作系统</strong></p>
+<p>我认为最主要的是理解<strong>话题（topic）</strong>这个概念</p>
+<p>一个话题可以被订阅，也可以被发布，这也是我们所说的<strong>订阅者</strong>和<strong>发布者</strong></p>
+<p>下面是一些有关话题的<strong>命令行指令</strong>，或许你现在还不太清楚，但不要紧</p>
+<p>话题名形如<code>/cmd_vel</code></p>
+<pre><code class="zsh"># 查看当前的所有话题
+rostopic list
+# 查看某个话题的订阅者、发布者、发布内容的数据类型
+rostopic info 话题名
+# 查看该话题发布的具体内容
+# -n 可以指定发布次数
+rostopic echo 话题名
+# 查看一个话题的发布频率
+rostopic hz 话题名
+# 查看某个数据类型的具体内容
+rosmsg show 数据类型名称
+# 向某个话题里发布内容 可以使用tab自动补全
+# -n 可以指定发布次数 -r 可以指定发布频率
+rostopic pub 话题名 数据类型 数据内容
+# 可以把某个话题保存到.bag文件
+rosbag record 话题名
+# 可以把.bag文件保存的内容发布出去
+# -s 可以指定开始秒数 -r 可以指定发布速度
+rosbag play .bag文件
+</code></pre>
+<h1 id="简单话题操作"><a href="#简单话题操作" class="headerlink" title="简单话题操作"></a>简单话题操作</h1><blockquote>
+<p>还没有安装ros？跟着官网一步一步做就好了</p>
+<p>ubuntu20.04-&gt;<a target="_blank" rel="noopener" href="http://wiki.ros.org/cn/noetic/Installation/Ubuntu">官网安装教程</a></p>
+</blockquote>
+<p>先使用小乌龟（经典）操作一下吧</p>
+<pre><code class="zsh"># 打开一个终端（ctrl+alt+T）输入 回车
+roscore
+</code></pre>
+<pre><code class="zsh"># 再打开一个终端输入 回车 就可以看到小乌龟啦
+rosrun turtlesim turtlesim_node
+</code></pre>
+<p>再打开一个终端备用，现在的情况大概如下图</p>
+<p><img src="/%5Cimages%5Cros_1.png" alt="ros_1"></p>
+<p>接下来我们先熟悉一下一些基本<strong>命令行指令</strong></p>
 
     </div>
     
