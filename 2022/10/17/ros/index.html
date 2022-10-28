@@ -168,7 +168,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/ros/" style="color: #ff7d73">
+                <a href="/tags/ros/" style="color: #ffa2c4">
                     ros
                 </a>
             </span>
@@ -185,8 +185,7 @@
 <blockquote>
 <p>初入Linux也可以先学习一下Linux基本操作：<a target="_blank" rel="noopener" href="https://mapleroid.github.io/unix_tutorial/index.html">https://mapleroid.github.io/unix_tutorial/index.html</a></p>
 </blockquote>
-<p>目录</p>
-<ul>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ul>
 <li><a href="#%E4%BB%80%E4%B9%88%E6%98%AFros">什么是ros</a></li>
 <li><a href="#%E5%9C%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E8%BF%9B%E8%A1%8C%E8%AF%9D%E9%A2%98%E9%80%9A%E4%BF%A1">在命令行中进行话题通信</a></li>
 <li><a href="#%E7%94%A8c++%E5%AE%9E%E7%8E%B0%E8%AF%9D%E9%A2%98%E9%80%9A%E4%BF%A1">用c++实现话题通信</a></li>
@@ -194,7 +193,8 @@
 <h1 id="什么是ros"><a href="#什么是ros" class="headerlink" title="什么是ros"></a><a id="什么是ros">什么是ros</a></h1><p>全称是Robot Operating System，中文为<strong>机器人操作系统</strong></p>
 <p>我认为最主要的是理解<strong>话题（topic）</strong>这个概念，由此又一个概念叫<strong>节点</strong></p>
 <p>一个<strong>话题</strong>可以被订阅，也可以往里发布内容，做这些事的叫<strong>节点</strong>，这也是我们所说的<strong>订阅者</strong>和<strong>发布者</strong></p>
-<h3 id="就像这里有一个正方形的门，它就是一个话题，一边有一人P在往里输入正方形的物体，它就是发布者，也是一个节点，另一边有一人S在收这个正方形的物体，他就是订阅者，也是一个节点。这个正方形就是某种指定的数据类型"><a href="#就像这里有一个正方形的门，它就是一个话题，一边有一人P在往里输入正方形的物体，它就是发布者，也是一个节点，另一边有一人S在收这个正方形的物体，他就是订阅者，也是一个节点。这个正方形就是某种指定的数据类型" class="headerlink" title="就像这里有一个正方形的门，它就是一个话题，一边有一人P在往里输入正方形的物体，它就是发布者，也是一个节点，另一边有一人S在收这个正方形的物体，他就是订阅者，也是一个节点。这个正方形就是某种指定的数据类型"></a>就像这里有一个正方形的门，它就是一个<strong>话题</strong>，一边有一人P在往里输入正方形的物体，它就是<strong>发布者</strong>，也是一个节点，另一边有一人S在收这个正方形的物体，他就是订阅者，也是一个节点。这个正方形就是某种指定的数据类型</h3><p>下面是一些有关话题的<strong>命令行指令</strong>，或许你现在还不太清楚，但不要紧</p>
+<p><strong>就像这里有一个正方形的门，它就是一个话题，一边有一人P在往里输入正方形的物体，它就是发布者，也是一个节点，另一边有一人S在收这个正方形的物体，他就是订阅者，也是一个节点。这个正方形就是某种指定的数据类型</strong></p>
+<p>下面是一些有关话题的<strong>命令行指令</strong>，或许你现在还不太清楚，但不要紧</p>
 <p>话题名形如<code>/cmd_vel</code></p>
 <pre><code class="zsh"># 查看当前的所有话题
 rostopic list
@@ -339,7 +339,7 @@ catkin_create_pkg control_tortoise roscpp rospy std_msgs geometry_msgs turtlesim
 
     |--- src: 源码
 
-        |-- package1：功能包1(ROS基本单元)，只能由小写字母、数字与下划线组成
+        |-- package1：功能包1(ROS基本单元)，只能由字母、数字与下划线组成
 
             |-- CMakeLists.txt 配置编译规则 需要进行一定的修改
 
