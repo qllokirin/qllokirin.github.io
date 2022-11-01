@@ -168,7 +168,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/ros/" style="color: #ffa2c4">
+                <a href="/tags/ros/" style="color: #00bcd4">
                     ros
                 </a>
             </span>
@@ -181,7 +181,7 @@
 <p>在写了在写了</p>
 </blockquote>
 <p>这里官方教程：<a target="_blank" rel="noopener" href="http://wiki.ros.org/cn/ROS/Tutorials">http://wiki.ros.org/cn/ROS/Tutorials</a></p>
-<p>我刚学的时候竟然没有搜到这个教程，枯了，说的还是很细致的，主要是很全（当然啦，毕竟都是自己写的）<del>不过感觉略显枯燥（?）</del></p>
+<p>我刚学的时候竟然没有搜到这个教程，枯了，说的还是很细致的，主要是很全<del>不过感觉略显枯燥（?）</del></p>
 <blockquote>
 <p>初入Linux也可以先学习一下Linux基本操作：<a target="_blank" rel="noopener" href="https://mapleroid.github.io/unix_tutorial/index.html">https://mapleroid.github.io/unix_tutorial/index.html</a></p>
 </blockquote>
@@ -215,6 +215,8 @@ rosbag record 话题名
 # 可以把.bag文件保存的内容发布出去
 # -s 可以指定开始秒数 -r 可以指定发布速度
 rosbag play .bag文件
+#动态调参
+rosrun rqt_reconfigure rqt_reconfigure
 </code></pre>
 <h1 id="在命令行中进行话题通信"><a href="#在命令行中进行话题通信" class="headerlink" title="在命令行中进行话题通信"></a><a id="在命令行中进行话题通信">在命令行中进行话题通信</a></h1><blockquote>
 <p>还没有安装ros？跟着官网一步一步做就好了</p>
@@ -418,7 +420,7 @@ int main(int argc, char **argv)
 <p><img src="/images/ros_3.png" alt="ros_3"></p>
 <p>看到138行152、153、153 （或许在这几行附近）把注释去掉</p>
 <p>改为如下样子</p>
-<pre><code class="cmake"># 括号里第一个参数是节点的名字 就像小乌龟的节点名叫/turtlesim一样
+<pre><code class="cmake"># 括号里第一个参数是节点的名字
 # 第二个参数是cpp文件的路径，从功能包根目录开始 可以写多个cpp
 add_executable(control_tortoise_node src/main.cpp)
 
