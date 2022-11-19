@@ -7,7 +7,7 @@
         <script src="https://cdn.staticfile.org/animejs/3.2.1/anime.min.js"></script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-        <title>Tmux的学习记录 | 70loKirin</title>
+        <title>ubuntu20.04安装PX4 Firmware/Autopilot的 | 70loKirin</title>
         <meta name="author" content="70loKirin">
         <meta name="description" content="~\(≧▽≦)/~">
         <meta name="keywords" content="">
@@ -141,22 +141,22 @@
                         
 <div class="article">
     <div>
-        <h1>Tmux的学习记录 </h1>
+        <h1>ubuntu20.04安装PX4 Firmware/Autopilot的 </h1>
     </div>
     <div class="info">
         <span class="date">
             <span class="icon">
                 <svg class="fa-icon"><use xlink:href="#calendar-solid"></use></svg>
             </span>
-            2022/10/6
+            2022/11/20
         </span>
         
         <span class="category">
-            <a href="/categories/记录/">
+            <a href="/categories/教程/">
                 <span class="icon">
                     <svg class="fa-icon"><use xlink:href="#bookmark-solid"></use></svg>
                 </span>
-                记录
+                教程
             </a>
         </span>
         
@@ -168,8 +168,8 @@
             
             <span class="tag">
                 
-                <a href="/tags/tmux/" style="color: #ffa2c4">
-                    tmux
+                <a href="/tags/px4/" style="color: #ff7d73">
+                    px4
                 </a>
             </span>
             
@@ -177,24 +177,75 @@
         
     </div>
     <div class="content" v-pre>
-        <h1 id="tmux的学习记录"><a href="#tmux的学习记录" class="headerlink" title="tmux的学习记录"></a>tmux的学习记录</h1><p>前言：远程连接上位机只有一个窗口，但是要运行多个指令才能把任务跑起来，所以需要会话多开，tmux是个不错的选择</p>
-<h2 id="基本操作指令记录"><a href="#基本操作指令记录" class="headerlink" title="基本操作指令记录"></a>基本操作指令记录</h2><pre><code class="zsh"># 新开一个窗口
-tmux new -s &lt;session-name&gt;
-# 结束并退出当前窗口
-exit        (Ctrl+d)
-# 退出但保存当前窗口
-tmux detach    (Ctrl+b  d)
-# 重新连接到已经有的窗口
-tmux attach -t &lt;session-name&gt;
-# 显示当前所有窗口
-tmux ls
+        <blockquote>
+<p><strong>暂未实测</strong>（）后面会自己重新跑一遍的.</p>
+<p>环境：ubuntu20.04+ros-noetic+gazbeo11</p>
+</blockquote>
+<h1 id="依赖安装"><a href="#依赖安装" class="headerlink" title="依赖安装"></a>依赖安装</h1><pre><code class="bash">sudo apt install ninja-build exiftool ninja-build protobuf-compiler libeigen3-dev genromfs xmlstarlet libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gawk
 </code></pre>
-<h2 id="快捷键"><a href="#快捷键" class="headerlink" title="快捷键"></a>快捷键</h2><pre><code class="zsh">Ctrl+b %  划分左右两个窗格
-Ctrl+b &quot;  划分上下两个窗格
-Ctrl+b 箭头  光标切换到其他窗格
+<h1 id="ros安装"><a href="#ros安装" class="headerlink" title="ros安装"></a>ros安装</h1><pre><code class="bash"># 设置软件库
+sudo sh -c &#39;echo &quot;deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main&quot; &gt; /etc/apt/sources.list.d/ros-latest.list&#39;
+# 设置KEY
+curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+# 更新软件列表
+sudo apt update
+# 安装完整ROS包
+sudo apt install ros-noetic-desktop-full
+</code></pre>
+<h1 id="mavros的安装"><a href="#mavros的安装" class="headerlink" title="mavros的安装"></a>mavros的安装</h1><pre><code class="bash"># 安装mavros包
+sudo apt install ros-noetic-mavros ros-noetic-mavros-extras
+# 下载脚本
+wget https://gitee.com/robin_shaun/XTDrone/raw/master/sitl_config/mavros/install_geographiclib_datasets.sh
+# 添加权限
+sudo chmod a+x ./install_geographiclib_datasets.sh
+# 执行脚本 安装依赖
+sudo ./install_geographiclib_datasets.sh
+</code></pre>
+<h1 id="python"><a href="#python" class="headerlink" title="python"></a>python</h1><ul>
+<li><p>1.装了<strong>conda</strong>的话跳过此步骤</p>
+</li>
+<li><p>2.<code>pip -V</code>和<code>python -V</code>正常显示版本则代表已安装好</p>
+</li>
+<li><p>3.<code>pip -V</code>或<code>python -V</code>显示command not found</p>
+<p>可以用<code>sodu apt install python3 python3-pip</code>安装一下python3</p>
+<blockquote>
+<p>或者使用源码编译或者使用ubuntu的工具进行管理，自行搜索一下，推荐使用第一种情况提到的conda</p>
+</blockquote>
+</li>
+</ul>
+<h1 id="PX4配置"><a href="#PX4配置" class="headerlink" title="PX4配置"></a>PX4配置</h1><pre><code class="bash"># 下载v1.11.3的版本
+git clone -b v1.11.3 https://github.com/PX4/PX4-Autopilot.git
+# 进入目录
+cd PX4-Autopilot
+# 子模块更新（因为px4仓库里面放了很多其他的仓库，这步在代理不稳定时极容易失败，反复运行直到没有报错，也可以使用下面的压缩包）
+git submodule update --init --recursive
+# 编译（极容易报错）
+make px4_sitl_default gazebo
 </code></pre>
 <blockquote>
-<p>tmux脚本超级好用 命令都直接输好了</p>
+<p>基地的同学可以用这个<a target="_blank" rel="noopener" href="https://seafile.npu5v5.cn/lib/e7fbd356-97f9-4ba2-b6ef-84013f32cc03/file/%E5%9F%BA%E5%9C%B0%E5%B8%B8%E7%94%A8/%E6%97%A0%E4%BA%BA%E6%9C%BA%E8%B5%84%E6%96%99/%E8%BD%AF%E4%BB%B6%E8%B5%84%E6%96%99/PX4-Autopilot.zip">压缩包</a></p>
+<p>TODO：后面测试完毕之后传一份网盘~</p>
+</blockquote>
+<p>编译完成出现gazebo，会出现一架飞机</p>
+<p>将下面的内容写入**.bashrc**</p>
+<pre><code class="bash">source ~/catkin_ws/devel/setup.bash
+source ~/PX4-Autopilot/Tools/setup_gazebo.bash ~/PX4-Autopilot/ ~/PX4-Autopilot/build/px4_sitl_default
+export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4-Autopilot
+export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4-Autopilot/Tools/sitl_gazebo
+</code></pre>
+<blockquote>
+<p>重新打开一个终端会出现几个路径，则设置代表成功</p>
+<p>如果不想每次都看见那几行路径，则去<code>~/PX4-Autopilot/Tools/setup_gazebo.bash</code>中把echo的几句话全部注释掉即可</p>
+</blockquote>
+<p>新开一个终端，运行下面的launch</p>
+<pre><code class="bash">roslaunch px4 mavros_posix_sitl.launch
+</code></pre>
+<p>执行<code>rostopic echo /mavros/state</code>,<code>connected</code>为true则成功</p>
+<blockquote>
+<p>真机与飞控相连时会用到<a target="_blank" rel="noopener" href="https://docs.qgroundcontrol.com/en/getting_started/download_and_install.html">QGroundControl</a></p>
+</blockquote>
+<h1 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h1><blockquote>
+<p>先不着急（）</p>
 </blockquote>
 
     </div>

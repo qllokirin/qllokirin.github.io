@@ -187,24 +187,20 @@
 <p>但是不排除究极螃蟹网卡（对 我说的是mt7921 会时好时坏）最后我直接换了ax210</p>
 </blockquote>
 <ul>
-<li><strong>换源</strong>  选择一个国内源安装软件会更快，在<code>软件更新</code>这个软件里点点就行</li>
-<li><strong>显卡驱动</strong>  安装显卡驱动（如果有显卡的话），首选方法是在<code>软件更新</code>这个软件里面点一下安装，建议选择sever版本<ul>
+<li><p><strong>换源</strong>  选择一个国内源安装软件会更快，在<code>软件更新</code>这个软件里点点就行</p>
+</li>
+<li><p><del><strong>显卡驱动</strong></del>  (<strong>很容易给ubunut安装到打不开，不熟可先跳过</strong>)</p>
+<p>安装显卡驱动（如果有显卡的话），首选方法是在<code>软件更新</code>这个软件里面点一下安装，建议选择<strong>sever版本</strong></p>
+<ul>
 <li>如果重启电脑正常启动，那恭喜你非常的顺利</li>
 <li>如果重启无法进入ubuntu，就在开机时候选第二个找一个恢复模式启动，再去<code>软件更新</code>里把显卡驱动卸载掉（点到最后一个就是卸载显卡驱动）</li>
 <li>如果还是要装显卡驱动可以去官网下载，但如果安装之后还是无法进入ubuntu，则需要开机选第二个然后选第一个再选root进入命令行找到显卡驱动文件执行<code>./xxxxx  --uninstall</code>进行卸载</li>
 </ul>
 </li>
 </ul>
-<blockquote>
-<p><del>我的显卡驱动一直没装好 但是可以连显示屏 非常离谱</del></p>
-<p>在学长的帮助下弄好了 可以连显示屏的原因可能是开启了另外了x什么，也因此导致显卡驱动一直没装好，卸载禁用之后再软件源中点一下就安装好了</p>
-</blockquote>
 <h1 id="非常好用的工具"><a href="#非常好用的工具" class="headerlink" title="非常好用的工具"></a>非常好用的工具</h1><ul>
-<li><p><strong><a target="_blank" rel="noopener" href="https://www.google.com/">谷歌搜索</a></strong></p>
-<p>谷歌一搜就是官网，就算是广告也有明显标注，百度  懂得都懂</p>
-<blockquote>
-<p>如果想看中文搜索结果也可以点<code>工具</code>-&gt;<code>选择语言</code></p>
-</blockquote>
+<li><p><strong><a target="_blank" rel="noopener" href="https://www.google.com/">谷歌搜索引擎</a></strong></p>
+<p>谷歌搜索引擎用多了只会觉得百度很垃（</p>
 </li>
 <li><p><strong><a target="_blank" rel="noopener" href="https://telegram.org/">telegram</a></strong></p>
 <p>ubuntu的QQ上一次更新是在2020年，远古版QQ，根本没维护了</p>
@@ -225,37 +221,20 @@
 <p>首推还是<a target="_blank" rel="noopener" href="https://shurufa.sogou.com/linux?r=pinyin">搜狗</a>，词库雀食是强大的  如果无法使用可以安装ibus的输出法，一定不会报错</p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://typora.io/">typora</a></p>
-<p>Markdown语法文件即md为后缀的文件，用多了是真的好用，加上typora的适配，不过他开始收费了www 穷学生用不起正版还是偷偷用<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1MxeuYGiGLoqJSOQDIyThVQ?pwd=kiri">老版</a>了</p>
-<p>去下载老文件然后放到&#x2F;usr&#x2F;share里面就可以直接用  老版deb文件安装也是可以的</p>
+<p>Markdown语法文件即md为后缀的文件，用多了是真的好用，加上typora的适配，不过他开始收费了www 穷学生用不起正版还是偷偷用<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1MxeuYGiGLoqJSOQDIyThVQ?pwd=kiri">老版</a>了（基地的朋友可以用<a target="_blank" rel="noopener" href="https://seafile.npu5v5.cn/f/1987177353694871a940/">seafile</a>）</p>
+<p>去下载老文件然后放到&#x2F;usr&#x2F;share里面就可以直接用</p>
 <pre><code class="zsh">sudo cp -r /typora /usr/share/
 </code></pre>
 </li>
 <li><p><strong><a target="_blank" rel="noopener" href="https://github.com/Fndroid/clash_for_windows_pkg/releases/">clash for windows</a></strong></p>
 <p>虽然是for Windows，但是有ubuntu版本，非常的不戳</p>
+<p>简答来说就是这个软件可以用来翻墙，推荐一个<a target="_blank" rel="noopener" href="https://ikuuu.one/user">免费机场</a></p>
 <blockquote>
-<p>clash 懂得都懂 </p>
 <p>ubuntu上需要在<code>设置</code>-&gt;<code>网络</code>-&gt;<code>代理</code>选择手动 设置为127.0.0.1和7890端口</p>
 </blockquote>
 </li>
-<li><p><strong><a target="_blank" rel="noopener" href="https://m-ouse.github.io/post/proxychains%E9%85%8D%E7%BD%AE/">proxychains&#x2F;proxychains4</a></strong></p>
-<p><del>在某一个命令前面加上这串，这个一定会让这个命令走上代理，适用于规则代理或者全局代理不管用的时候</del></p>
-<blockquote>
-<p>有clash的话，点port那行有个终端图标，复制命令之后在终端运行也是同样的效果，更方便</p>
-</blockquote>
-</li>
-<li><p><strong><a target="_blank" rel="noopener" href="https://blog.csdn.net/yaxuan88521/article/details/118481936">scp</a></strong></p>
-<p>对远端服务器直接进行复制粘贴</p>
-<pre><code class="zsh">scp -r -P 316 ./xxx root@xx.xx.xx.xx:/home/xx
-</code></pre>
-</li>
-<li><p><strong>vim&#x2F;nano</strong></p>
-<p>终端文本编辑器，我用vim</p>
-</li>
-<li><p><strong>tmux&#x2F;screen</strong></p>
-<p>tmux&gt;screen，可窗口多开，一窗口可分开成多个隔间</p>
-</li>
 <li><p><a target="_blank" rel="noopener" href="https://ohmyz.sh/#install">on my zsh终端美化</a></p>
-<p>好看且好用，自动补全，语法高亮，用了都说好</p>
+<p>好看且好用，<strong>自动补全</strong>，<strong>语法高亮</strong>，用了都说好</p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://blog.zzsqwq.cn/posts/141/">ubuntu优化</a></p>
 <p>战老师yyds！</p>
@@ -271,12 +250,21 @@
 </blockquote>
 <p><img src="/images/%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E7%94%BB%E9%9D%A2.png"></p>
 </li>
+</ul>
+<hr>
+<p>下面是不太有用的东西</p>
+<ul>
 <li><p><strong>ros（不是</strong></p>
 <p>做机器人相关项目才会需要</p>
 <p>放个xtdrone文档放这：<a target="_blank" rel="noopener" href="https://www.yuque.com/xtdrone/manual_cn/basic_config#iud2s">https://www.yuque.com/xtdrone/manual_cn/basic_config#iud2s</a></p>
 <blockquote>
 <p>要不什么时候写个<a target="_blank" rel="noopener" href="https://70lokirin.github.io/2022/10/17/ros/">教程</a>？</p>
 </blockquote>
+</li>
+<li><p><strong><a target="_blank" rel="noopener" href="https://blog.csdn.net/yaxuan88521/article/details/118481936">scp</a></strong></p>
+<p>对远端服务器直接进行复制粘贴</p>
+<pre><code class="zsh">scp -r -P 316 ./xxx root@xx.xx.xx.xx:/home/xx
+</code></pre>
 </li>
 </ul>
 <h1 id="可能会遇到的问题"><a href="#可能会遇到的问题" class="headerlink" title="可能会遇到的问题"></a>可能会遇到的问题</h1><ul>
