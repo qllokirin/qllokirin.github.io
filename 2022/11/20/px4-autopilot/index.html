@@ -218,7 +218,8 @@ sudo ./install_geographiclib_datasets.sh
 <li><p>3.<code>pip -V</code>或<code>python -V</code>显示command not found</p>
 <p>可以用<code>sodu apt install python3 python3-pip</code>安装一下python3</p>
 <blockquote>
-<p>或者使用源码编译又或者使用ubuntu的工具进行管理，自行搜索一下，推荐使用第一种情况提到的conda</p>
+<p>或者使用源码编译又或者使用ubuntu的工具进行管理，自行搜索一下</p>
+<p>图方便使用第三步的指令即可</p>
 </blockquote>
 </li>
 </ul>
@@ -247,7 +248,7 @@ export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4-Autopilot/Tools/sitl_gazebo
 <blockquote>
 <p>重新打开一个终端会出现几个路径，则设置代表成功</p>
 <p>如果不想每次都看见那几行路径，则去<code>~/PX4-Autopilot/Tools/setup_gazebo.bash</code>中把echo的几句话全部注释掉即可</p>
-<p>tips：若你选择下载<strong>最新版本</strong>的px4，这个脚本sitl_gazebo和的路径会发生变化，注意替换</p>
+<p>tips：若你选择下载<strong>最新版本</strong>的px4，这个脚本sitl_gazebo和的路径会发生变化，注意更换</p>
 </blockquote>
 <p>新开一个终端，运行下面的launch</p>
 <pre><code class="bash">roslaunch px4 mavros_posix_sitl.launch
@@ -259,7 +260,8 @@ export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4-Autopilot/Tools/sitl_gazebo
 <h1 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h1><blockquote>
 <p>先不着急（）</p>
 </blockquote>
-<h1 id="mavros简介"><a href="#mavros简介" class="headerlink" title="mavros简介"></a>mavros简介</h1><ul>
+<h1 id="mavros简介"><a href="#mavros简介" class="headerlink" title="mavros简介"></a>mavros简介</h1><p>提供的数据：</p>
+<ul>
 <li><p><code>mavros/local_position/pose</code>本地位置信息</p>
 <p>类型名称：<code>geometry_msgs::PoseStamped</code></p>
 </li>
@@ -268,9 +270,8 @@ export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4-Autopilot/Tools/sitl_gazebo
 <li><p><code>mavros/imu/data</code>imu数据</p>
 </li>
 </ul>
-<blockquote>
-<p>待补充</p>
-</blockquote>
+<p>提供的控制接口：</p>
+<p>* </p>
 
     </div>
     

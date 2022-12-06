@@ -168,7 +168,7 @@
             
             <span class="tag">
                 
-                <a href="/tags/ubuntu/" style="color: #00a596">
+                <a href="/tags/ubuntu/" style="color: #ff7d73">
                     ubuntu
                 </a>
             </span>
@@ -199,9 +199,13 @@
 <li><p><del><strong>显卡驱动</strong></del>  (<strong>很容易给ubunut安装到打不开，不熟可先跳过</strong>)</p>
 <p>安装显卡驱动（如果有显卡的话），首选方法是在<code>软件更新</code>这个软件里面点一下安装，建议选择<strong>sever版本</strong></p>
 <ul>
-<li>如果重启电脑正常启动，那恭喜你非常的顺利</li>
-<li>如果重启无法进入ubuntu，就在开机时候选第二个找一个恢复模式启动，再去<code>软件更新</code>里把显卡驱动卸载掉（点到最后一个就是卸载显卡驱动）</li>
-<li>如果还是要装显卡驱动可以去官网下载，但如果安装之后还是无法进入ubuntu，则需要开机选第二个然后选第一个再选root进入命令行找到显卡驱动文件执行<code>./xxxxx  --uninstall</code>进行卸载</li>
+<li><p>如果重启电脑正常启动，那恭喜你非常的顺利</p>
+</li>
+<li><p>如果重启无法进入ubuntu，就在开机时候选第二个找一个恢复模式启动，再去<code>软件更新</code>里把显卡驱动卸载掉（点到最后一个就是卸载显卡驱动）</p>
+</li>
+<li><p>如果还是要装显卡驱动可以去官网下载，有一些二选一需要做，可以参考<a target="_blank" rel="noopener" href="https://qii404.me/2021/07/03/ubuntu-install-nvidia-driver.html">这篇文章</a>，不过我的<code>X configuration</code>那个必须选no才能安装成功</p>
+<p>但如果安装之后还是<strong>无法进入ubuntu</strong>，则需要开机选第二个然后选第一个再选root进入命令行找到显卡驱动文件执行<code>./xxxxx  --uninstall</code>进行卸载</p>
+</li>
 </ul>
 </li>
 </ul>
@@ -262,12 +266,18 @@
 </li>
 </ul>
 <hr>
-<p>下面是可能不太有用的东西</p>
+<p>选择性安装软件</p>
 <ul>
 <li><p><strong>ros（不是</strong></p>
 <p>做机器人相关项目才会需要</p>
 <blockquote>
 <p>要不什么时候写个<a target="_blank" rel="noopener" href="https://70lokirin.github.io/2022/10/17/ros/">教程</a>？</p>
+</blockquote>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://downloads.nomachine.com/linux/?id=1">nomachine</a></p>
+<p>远程桌面链接软件，配合3.5元的HDMI欺诈器能很好的图形化控制nuc等上位机</p>
+<blockquote>
+<p>记得选下面的x86&#x2F;adm64即<strong>64位</strong>的软件，上面是32位</p>
 </blockquote>
 </li>
 <li><p><strong><a target="_blank" rel="noopener" href="https://blog.csdn.net/yaxuan88521/article/details/118481936">scp</a></strong></p>
@@ -294,6 +304,9 @@ Port 443
 <blockquote>
 <p>虽然你可能会说你肯定之前关闭了，但你再看一眼，就会发现很神奇的是enable</p>
 </blockquote>
+</li>
+<li><p>ros拥有多个工作空间，在<code>.bashrc</code>中写了source但是没有用</p>
+<p>在每一次source之后都加入–extend</p>
 </li>
 </ul>
 
