@@ -217,6 +217,10 @@ rosbag record 话题名
 rosbag play .bag文件
 #动态调参
 rosrun rqt_reconfigure rqt_reconfigure
+#图形化发布服务
+rosrun rqt_service_caller rqt_service_caller
+#图形化查看话题
+rosrun rqt_topic rqt_topic
 </code></pre>
 <h1 id="在命令行中进行话题通信"><a href="#在命令行中进行话题通信" class="headerlink" title="在命令行中进行话题通信"></a>在命令行中进行话题通信</h1><blockquote>
 <p>还没有安装ros？跟着官网一步一步做就好了</p>
@@ -326,7 +330,9 @@ source ~/catkin_ws/devel/setup.bash
 </blockquote>
 </li>
 <li><p>4.创建功能包</p>
-<pre><code class="zsh"># 创建功能包 这句指令应该在src目录下运行
+<pre><code class="zsh"># 进入指定位置
+cd ~/catkin_ws/src
+# 创建功能包 这句指令应该在src目录下运行
 catkin_create_pkg control_tortoise roscpp rospy std_msgs geometry_msgs turtlesim
 </code></pre>
 <p><code>control_tortoise</code>是功能包的名字，后面都是一些依赖</p>
@@ -465,15 +471,89 @@ rosrun control_tortoise control_tortoise_node
 <p>pkg代表功能包的名字   type是节点名   name可以随意取名   <code>output=&quot;screen&quot;</code>意味着结果会输出在控制台</p>
 <p>这时候可以输入<code>roslaunch control_tortoise control_tortoise.launch</code>来代替<code>rosrun control_tortoise control_tortoise_node</code></p>
 <blockquote>
-<p>此外，当使用launch文件时，可以进行配置文件的读入和命名空间的书写等等操作</p>
+<p>此外，当使用launch文件时，可以进行配置文件的读入、话题的重映射、命名空间的书写等等操作</p>
+<p>下面是一个launch实例，<strong>没有实际意义</strong>，只是向你表述launch的各种使用方法，比如arg、remap、node、include、rosparam、group等</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;launch&gt;
+    &lt;arg name=&quot;map_frame&quot; default=&quot;map&quot;/&gt;
+    &lt;remap from=&quot;/odom&quot; to=&quot;/base_link&quot;/&gt;
+    &lt;include file=&quot;$(find mavros)/launch/px4.launch&quot;&gt;
+        &lt;arg name=&quot;fcu_url&quot; value=&quot;/dev/ttyUSB0:57600&quot;/&gt;
+    &lt;/include&gt;
+    &lt;node pkg=&quot;camera&quot; type=&quot;transform_cam_to_10hz&quot; name=&quot;transform_cam_to_10hz&quot; output=&quot;screen&quot;/&gt;
+    &lt;node type=&quot;rviz&quot; name=&quot;rviz&quot; pkg=&quot;rviz&quot; args=&quot;-d $(find uav_robotcup)/rviz/local.rviz&quot; /&gt;
+    &lt;node pkg=&quot;cat&quot; type=&quot;cat&quot; name=&quot;cat&quot; output=&quot;screen&quot;/&gt;
+          &lt;rosparam file=&quot;$(find uav_robotcup)/params/settings.yaml&quot; command=&quot;load&quot;/&gt;
+    &lt;group ns=&quot;door&quot;&gt;
+        &lt;node pkg=&quot;move_base&quot; type=&quot;move_base&quot; respawn=&quot;false&quot; name=&quot;move_base&quot; output=&quot;screen&quot; clear_params=&quot;true&quot;&gt;
+            &lt;param name=&quot;controller_frequency&quot; value=&quot;10.0&quot;/&gt; 
+            &lt;rosparam file=&quot;$(find nav_2d_door)/params/costmap_common_params.yaml&quot; command=&quot;load&quot; ns=&quot;global_costmap&quot;/&gt;
+            &lt;remap from=&quot;/laser/scan&quot; to=&quot;$(arg laser_topic)&quot;/&gt;
+           &lt;/node&gt;
+    &lt;/group&gt;
+    &lt;node pkg=&quot;tf&quot; type=&quot;static_transform_publisher&quot; name=&quot;tf_world_to_map_broadcaster&quot; required=&quot;true&quot;
+          args=&quot;0 0 0 0 0 0 world map 100&quot;/&gt;
+&lt;/launch&gt;
+</code></pre>
 </blockquote>
+<h1 id="tf坐标转换"><a href="#tf坐标转换" class="headerlink" title="tf坐标转换"></a>tf坐标转换</h1><blockquote>
+<p>建议先行阅读<a target="_blank" rel="noopener" href="http://wiki.ros.org/tf">ros wiki的tf教程</a>以及<a target="_blank" rel="noopener" href="http://wiki.ros.org/tf/Tutorials/Introduction%20to%20tf">发布坐标转换</a> 下文主要向你表述在px4+gazebo11仿真情况下如何连接飞机的坐标系</p>
+<p>其他动态tf连接同理，如果你没有安装px4，不需要跟着教程一步一步实现，看明白即可</p>
+</blockquote>
+<p>飞机的定位信息在<code>mavros/local_position/pose</code>中发布，包含坐标xyz以及四元数xyzw</p>
+<p>使用<code>rosrun rqt_tf_tree rqt_tf_tree</code>中查看tf树可以看到一个游离的map和base_link，我们的目标就是<strong>把这两个坐标系正确的连接起来</strong></p>
+<p>示例代码如下</p>
+<pre><code class="cpp">#include &lt;ros/ros.h&gt;
+#include &lt;tf/transform_broadcaster.h&gt;
+#include &lt;geometry_msgs/PoseStamped.h&gt;
+
+void poseCallback(const geometry_msgs::PoseStamped&amp; msg)&#123;
+    # 申明一个静态的广播用来转发
+    static tf::TransformBroadcaster br;
+    # 这个变量是用来表示两个坐标系的变换关系
+    tf::Transform transform;
+    # 先设置xyz坐标的关系
+    transform.setOrigin(tf::Vector3(msg.pose.position.x, msg.pose.position.y, msg.pose.position.z));
+    # 申明一个tf的四元数
+    tf::Quaternion q;
+    # 从msg类型的四元数转换到tf的四元数（tf::中还有其他方法可以使用）
+    tf::quaternionMsgToTF(msg.pose.orientation,q);
+    # 如果是用欧拉角则使用下面的这个函数
+    //q.setRPY(0, 0, msg-&gt;theta);
+    # 设定四元数
+    transform.setRotation(q);
+    # 发布坐标转换，前者是父坐标系，后者是子坐标系
+    br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), &quot;map&quot;, &quot;base_link&quot;));
+&#125;
+
+int main(int argc, char** argv)&#123;
+    ros::init(argc, argv, &quot;broadcaster_map_to_base_link&quot;);
+    ros::NodeHandle node;
+    ros::Subscriber sub = node.subscribe(&quot;/mavros/local_position/pose&quot;, 10, &amp;poseCallback);
+    ros::spin();
+    return 0;
+&#125;;
+</code></pre>
+<p>然后可以打开一个rviz订阅两个坐标系，接着让飞机起飞，观察是否和现实相符合</p>
 <blockquote>
-<p> TODO：多机</p>
-<p> tf坐标转换</p>
-<p> tf树的连接</p>
-<p> 读取参数param</p>
-<p> 自定义msg</p>
+<p>在mavros中也提供了一个很方便的接口，在启动gazebo的launch中最后加入下面几行和上面的效果是一样的</p>
+<pre><code class="xml"> &lt;param name=&quot;/mavros/local_position/tf/frame_id&quot; type=&quot;str&quot; value=&quot;map&quot; /&gt;
+   &lt;param name=&quot;/mavros/local_position/tf/child_frame_id&quot; type=&quot;str&quot; value=&quot;base_link&quot; /&gt;
+   &lt;param name=&quot;/mavros/local_position/tf/send&quot; type=&quot;bool&quot; value=&quot;true&quot; /&gt;
+</code></pre>
 </blockquote>
+<h1 id="多机通信"><a href="#多机通信" class="headerlink" title="多机通信"></a>多机通信</h1><blockquote>
+<p>该方法可以实现在一台电脑（从机）上订阅另外一台电脑（主机）里的ros话题（需在局域网下）</p>
+</blockquote>
+<ul>
+<li><p>输入<code>ifconfig</code>查看本机ip地址</p>
+</li>
+<li><p>把下面的内容写入.bashrc中，两台电脑中的<code>ROS_MASTER_URI</code>里的ip地址填<strong>主机</strong>的ip，<code>ROS_IP</code>就填自己的ip</p>
+<pre><code class="bash">export ROS_MASTER_URI=http://192.168.1.113:11311
+export ROS_IP=192.168.1.108
+</code></pre>
+</li>
+</ul>
 
     </div>
     
