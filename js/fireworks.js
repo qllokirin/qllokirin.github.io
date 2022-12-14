@@ -1,1 +1,128 @@
-!function(){var n=function(){return parseFloat(getComputedStyle(document.documentElement).fontSize)},e=document.getElementById("fireworks"),t=e.getContext("2d"),a=200,i=0,r=0,o=[],u=function(){scale=window.devicePixelRatio||1,e.width=window.innerWidth*scale,e.height=window.innerHeight*scale,t.scale(scale,scale)},d=["#FF324A","#31FFA6","#206EFF","#FFFF99"],c=function(e,a){var i={};return i.x=e,i.y=a,i.color=d[anime.random(0,d.length-1)],i.radius=anime.random(n(),2*n()),i.draw=function(){t.beginPath(),t.arc(i.x,i.y,i.radius,0,2*Math.PI,!0),t.fillStyle=i.color,t.fill()},i},l=function(n){var e=o.indexOf(n);e>-1&&o.splice(e,1)},m=function(e,i){u();var r=function(n,e){for(var t=[],a=0;a<24;a++){var i=c(n,e);t.push(i)}return t}(e,i),m=function(n,e){var a={};return a.x=n,a.y=e,a.color=d[anime.random(0,d.length-1)],a.color="#FFF",a.radius=0,a.alpha=1,a.lineWidth=6,a.draw=function(){t.globalAlpha=a.alpha,t.beginPath(),t.arc(a.x,a.y,a.radius,0,2*Math.PI,!0),t.lineWidth=a.lineWidth,t.strokeStyle=a.color,t.stroke(),t.globalAlpha=1},a}(e,i),s=anime({targets:r,x:function(n){return n.x+anime.random(-200,a)},y:function(n){return n.y+anime.random(-200,a)},radius:0,duration:function(){return anime.random(1200,1800)},easing:"easeOutExpo",complete:l}),f=anime({targets:m,radius:function(){return anime.random(8.75*n(),11.25*n())},lineWidth:0,alpha:{value:0,easing:"linear",duration:function(){return anime.random(400,600)}},duration:function(){return anime.random(1200,1800)},easing:"easeOutExpo",complete:l});o.push(s),o.push(f)};anime({duration:1/0,update:function(){t.clearRect(0,0,e.width,e.height),o.forEach((function(n){n.animatables.forEach((function(n){n.target.draw()}))}))}});document.addEventListener("mousedown",(function(n){i=n.clientX,r=n.clientY,m(i,r)}),!1),window.addEventListener("resize",u,!1)}();
+var canvasEl = document.querySelector('.fireworks')
+if (canvasEl) {
+  var ctx = canvasEl.getContext('2d')
+  var numberOfParticules = 30
+  var pointerX = 0
+  var pointerY = 0
+  // var tap = ('ontouchstart' in window || navigator.msMaxTouchPoints) ? 'touchstart' : 'mousedown'
+  // Fixed the mobile scroll
+  var tap = 'mousedown'
+  var colors = ['#FF1461', '#18FF92', '#5A87FF', '#FBF38C']
+
+  var setCanvasSize = debounce(function () {
+    canvasEl.width = window.innerWidth
+    canvasEl.height = window.innerHeight
+    canvasEl.style.width = window.innerWidth + 'px'
+    canvasEl.style.height = window.innerHeight + 'px'
+    canvasEl.getContext('2d').scale(1, 1)
+  }, 500)
+
+  var render = anime({
+    duration: Infinity,
+    update: function () {
+      ctx.clearRect(0, 0, canvasEl.width, canvasEl.height)
+    }
+  })
+
+  document.addEventListener(tap, function (e) {
+    if (e.target.id !== 'sidebar' && e.target.id !== 'toggle-sidebar' && e.target.nodeName !== 'A' && e.target.nodeName !== 'IMG') {
+      render.play()
+      updateCoords(e)
+      animateParticules(pointerX, pointerY)
+    }
+  }, false)
+
+  setCanvasSize()
+  window.addEventListener('resize', setCanvasSize, false)
+}
+
+function updateCoords (e) {
+  pointerX = (e.clientX || e.touches[0].clientX) - canvasEl.getBoundingClientRect().left
+  pointerY = e.clientY || e.touches[0].clientY - canvasEl.getBoundingClientRect().top
+}
+
+function setParticuleDirection (p) {
+  var angle = anime.random(0, 360) * Math.PI / 180
+  var value = anime.random(50, 180)
+  var radius = [-1, 1][anime.random(0, 1)] * value
+  return {
+    x: p.x + radius * Math.cos(angle),
+    y: p.y + radius * Math.sin(angle)
+  }
+}
+
+function createParticule (x, y) {
+  var p = {}
+  p.x = x
+  p.y = y
+  p.color = colors[anime.random(0, colors.length - 1)]
+  p.radius = anime.random(16, 32)
+  p.endPos = setParticuleDirection(p)
+  p.draw = function () {
+    ctx.beginPath()
+    ctx.arc(p.x, p.y, p.radius, 0, 2 * Math.PI, true)
+    ctx.fillStyle = p.color
+    ctx.fill()
+  }
+  return p
+}
+
+function createCircle (x, y) {
+  var p = {}
+  p.x = x
+  p.y = y
+  p.color = '#F00'
+  p.radius = 0.1
+  p.alpha = 0.5
+  p.lineWidth = 6
+  p.draw = function () {
+    ctx.globalAlpha = p.alpha
+    ctx.beginPath()
+    ctx.arc(p.x, p.y, p.radius, 0, 2 * Math.PI, true)
+    ctx.lineWidth = p.lineWidth
+    ctx.strokeStyle = p.color
+    ctx.stroke()
+    ctx.globalAlpha = 1
+  }
+  return p
+}
+
+function renderParticule (anim) {
+  for (var i = 0; i < anim.animatables.length; i++) {
+    anim.animatables[i].target.draw()
+  }
+}
+
+function animateParticules (x, y) {
+  var circle = createCircle(x, y)
+  var particules = []
+  for (var i = 0; i < numberOfParticules; i++) {
+    particules.push(createParticule(x, y))
+  }
+  anime.timeline().add({
+    targets: particules,
+    x: function (p) {
+      return p.endPos.x
+    },
+    y: function (p) {
+      return p.endPos.y
+    },
+    radius: 0.1,
+    duration: anime.random(1200, 1800),
+    easing: 'easeOutExpo',
+    update: renderParticule
+  })
+    .add({
+      targets: circle,
+      radius: anime.random(80, 160),
+      lineWidth: 0,
+      alpha: {
+        value: 0,
+        easing: 'linear',
+        duration: anime.random(600, 800)
+      },
+      duration: anime.random(1200, 1800),
+      easing: 'easeOutExpo',
+      update: renderParticule,
+    }, 0)
+}
