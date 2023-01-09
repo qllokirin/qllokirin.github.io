@@ -3,7 +3,7 @@
   <head>
      
     <meta charset="UTF-8">
-    <title>first - 70loKirin</title>
+    <title>docker学习 - 70loKirin</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
     <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
     
@@ -15,7 +15,7 @@
 
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
     <meta property="og:site_name" content="70loKirin">
-    <meta property="og:title" content="first"/>
+    <meta property="og:title" content="docker学习"/>
     
     <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
     
@@ -53,29 +53,98 @@
     <main>
     <div class="wrap min">
         <section class="post-title">
-            <h2>first</h2>
+            <h2>docker学习</h2>
             <div class="post-meta">
-                <time class="date">2022.09.27</time>
+                <time class="date">2023.01.09</time>
+            
+                <span class="category"><a class="category-link" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a></span>
             
             </div>
         </section>
         <article class="post-content">
         
-            <h1 id="好耶！！"><a href="#好耶！！" class="headerlink" title="好耶！！"></a>好耶！！</h1>
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>docker！yyds！真的好用，一键部署</p>
+<p>我学习的是这个教程：<a target="_blank" rel="noopener" href="https://yeasy.gitbook.io/docker_practice">https://yeasy.gitbook.io/docker_practice</a></p>
+<p>教程里前六章为基础内容讲解比较详细，可以自行阅读，下面记载一下指令方便后续查阅</p>
+<h1 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h1><h3 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h3><p><strong>拉取镜像</strong></p>
+<pre><code class="bash"> docker pull [选项] &lt;域名/IP&gt;[:端口号] &lt;用户名&gt;/&lt;软件名&gt;
+ 如：
+ docker pull ubuntu:18.04
+</code></pre>
+<p><strong>运行镜像</strong></p>
+<pre><code class="bash">docker run -it --rm ubuntu:18.04 bash
+</code></pre>
+<ul>
+<li><p><code>-it</code>： <code>-i</code>：交互式操作，<code>-t</code>呼出一个终端</p>
+</li>
+<li><p><code>--rm</code>：容器退出后随之将其删除</p>
+</li>
+<li><p><code>ubuntu:18.04</code>：这是指用 <code>ubuntu:18.04</code> 镜像为基础来启动容器</p>
+</li>
+<li><p><code>bash</code>：放在镜像名后的是 <strong>命令</strong></p>
+</li>
+</ul>
+<p><strong>列出镜像</strong></p>
+<pre><code class="bash"># 正在运行的
+docker image ls
+# 所有的
+docker image ls -a
+</code></pre>
+<p><strong>删除镜像</strong></p>
+<pre><code class="bash">docker image rm [选项] &lt;镜像1&gt; [&lt;镜像2&gt; ...]
+</code></pre>
+<p><strong>commit构建镜像</strong></p>
+<pre><code class="bash">docker commit [选项] &lt;容器&gt; &lt;命名&gt;
+
+docker commit \
+    --author &quot;watashi&quot; \
+    --message &quot;修改了xx&quot; \
+    webserver \
+    nginx:v2
+</code></pre>
+<blockquote>
+<p>作者建议使用Dockerfile构建镜像，不推荐commit</p>
+</blockquote>
+<h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><p><strong>新建</strong></p>
+<pre><code class="bash">docker run ubuntu:18.04 /bin/echo &#39;Hello world&#39;
+</code></pre>
+<ul>
+<li><code>-d</code>：后台运行，<code>docker container logs &lt;容器&gt;</code>可以查看输出</li>
+</ul>
+<p><strong>改变容器状态</strong></p>
+<pre><code>docker container start/stop &lt;容器&gt; 
+</code></pre>
+<p><strong>进入容器</strong></p>
+<pre><code class="bash">docker attach &lt;容器&gt;
+</code></pre>
+<p>使用<kbd>ctrl</kbd>+<kbd>d</kbd>或者<code>exit</code>退出时容器会关闭，使用<kbd>ctrl</kbd>+<kbd>p</kbd>然后<kbd>ctrl</kbd>+<kbd>q</kbd>退出时容器不会关闭</p>
+<pre><code>docker exec -it &lt;容器&gt; bash
+</code></pre>
+<p>退出时容器不会关闭</p>
+<p><strong>导出容器</strong></p>
+<pre><code class="bash">docker export &lt;容器id&gt; &gt; ubuntu.tar
+</code></pre>
+<p><strong>导入容器快照</strong></p>
+<pre><code class="bash">docker import &lt;文件&gt;/&lt;url&gt; [命名(可选)]
+</code></pre>
+<p><strong>删除容器</strong></p>
+<pre><code class="bash"> docker container rm &lt;容器&gt;
+</code></pre>
+
         </article>
         <section class="post-near">
             <ul>
                 
-                    <li>上一篇: <a href="/2022/09/28/hexo_use/">从0到使用hexo + ParticleX主题</a></li>
+                    <li>上一篇: 看完啦 (つд⊂)</li>
                 
                 
-                    <li>下一篇: 看完啦 (つд⊂)</li>
+                    <li>下一篇: <a href="/2023/01/08/easyconnect/">Ubuntu20.04如何使用EasyConnect进入校园网</a></li>
                 
             </ul>
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/%E6%B5%8B%E8%AF%95/" rel="tag">测试</a>
+            <a class="-none-link" href="/tags/docker/" rel="tag">docker</a>
             </section>
         
     
