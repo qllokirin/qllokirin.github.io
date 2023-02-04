@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>docker学习 - 70loKirin</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="70loKirin">
+    <meta property="og:title" content="docker学习"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>70loKirin</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><a class="category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><a class="category-link" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>docker学习</h2>
+            <div class="post-meta">
+                <time class="date">2023.01.09</time>
+            
+                <span class="category"><a class="category-link" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <p>最近的比赛要用到docker，去学习了下怎么用，感觉这玩意儿是真的强</p>
+<span id="more"></span>
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>docker！yyds！真的好用，一键部署</p>
+<p>我学习的是这个教程：<a target="_blank" rel="noopener" href="https://yeasy.gitbook.io/docker_practice">https://yeasy.gitbook.io/docker_practice</a></p>
+<p>教程里前六章为基础内容讲解比较详细，可以自行阅读，下面记载一下指令方便后续查阅</p>
+<h1 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h1><h3 id="镜像"><a href="#镜像" class="headerlink" title="镜像"></a>镜像</h3><p><strong>拉取镜像</strong></p>
+<pre><code class="bash"> docker pull [选项] &lt;域名/IP&gt;[:端口号] &lt;用户名&gt;/&lt;软件名&gt;
+ 如：
+ docker pull ubuntu:18.04
+</code></pre>
+<p><strong>运行镜像</strong></p>
+<pre><code class="bash">docker run -it --rm ubuntu:18.04 bash
+</code></pre>
+<ul>
+<li><p><code>-it</code>： <code>-i</code>：交互式操作，<code>-t</code>呼出一个终端</p>
+</li>
+<li><p><code>--rm</code>：容器退出后随之将其删除</p>
+</li>
+<li><p><code>ubuntu:18.04</code>：这是指用 <code>ubuntu:18.04</code> 镜像为基础来启动容器</p>
+</li>
+<li><p><code>bash</code>：放在镜像名后的是 <strong>命令</strong></p>
+</li>
+</ul>
+<p><strong>列出镜像</strong></p>
+<pre><code class="bash"># 正在运行的
+docker image ls
+# 所有的
+docker image ls -a
+</code></pre>
+<p><strong>删除镜像</strong></p>
+<pre><code class="bash">docker image rm [选项] &lt;镜像1&gt; [&lt;镜像2&gt; ...]
+</code></pre>
+<p><strong>commit构建镜像</strong></p>
+<pre><code class="bash">docker commit [选项] &lt;容器&gt; &lt;命名&gt;
+
+docker commit \
+    --author &quot;watashi&quot; \
+    --message &quot;修改了xx&quot; \
+    webserver \
+    nginx:v2
+</code></pre>
+<blockquote>
+<p>作者建议使用Dockerfile构建镜像，不推荐commit</p>
+</blockquote>
+<h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><p><strong>新建</strong></p>
+<pre><code class="bash">docker run ubuntu:18.04 /bin/echo &#39;Hello world&#39;
+</code></pre>
+<ul>
+<li><code>-d</code>：后台运行，<code>docker container logs &lt;容器&gt;</code>可以查看输出</li>
+</ul>
+<p><strong>改变容器状态</strong></p>
+<pre><code>docker container start/stop &lt;容器&gt; 
+</code></pre>
+<p><strong>进入容器</strong></p>
+<pre><code class="bash">docker attach &lt;容器&gt;
+</code></pre>
+<p>使用<kbd>ctrl</kbd>+<kbd>d</kbd>或者<code>exit</code>退出时容器会关闭，使用<kbd>ctrl</kbd>+<kbd>p</kbd>然后<kbd>ctrl</kbd>+<kbd>q</kbd>退出时容器不会关闭</p>
+<pre><code>docker exec -it &lt;容器&gt; bash
+</code></pre>
+<p>退出时容器不会关闭</p>
+<p><strong>导出容器</strong></p>
+<pre><code class="bash">docker export &lt;容器id&gt; &gt; ubuntu.tar
+</code></pre>
+<p><strong>导入容器快照</strong></p>
+<pre><code class="bash">docker import &lt;文件&gt;/&lt;url&gt; [命名(可选)]
+</code></pre>
+<p><strong>删除容器</strong></p>
+<pre><code class="bash"> docker container rm &lt;容器&gt;
+</code></pre>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2023/01/30/12.remake_ubuntu/">重装Ubuntu</a></li>
+                
+                
+                    <li>下一篇: <a href="/2023/01/08/10.easyconnect/">Ubuntu20.04如何使用EasyConnect进入校园网</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/docker/" rel="tag">docker</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://s2.loli.net/2022/09/27/6rzl4WOitu8pUqg.jpg" alt="70loKirin" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>70loKirin</h4>
+                <p>你好，我是祈菱不是麒麟，很高兴与你相遇</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/7777/07/07/diary/">稀疏平常的生活</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/02/05/13.shuangsheng/">第一次去livehouse</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/01/30/12.remake_ubuntu/">重装Ubuntu</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/01/09/11.docker/">docker学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/01/08/10.easyconnect/">Ubuntu20.04如何使用EasyConnect进入校园网</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/01/01/09.animation/">感谢与二次元情投</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/7777/07/">July 7777</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/EasyConnect/" style="font-size: 10px;">EasyConnect</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/livehouse/" style="font-size: 10px;">livehouse</a> <a href="/tags/px4/" style="font-size: 10px;">px4</a> <a href="/tags/ros/" style="font-size: 10px;">ros</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/%E4%BA%91%E5%B4%BD/" style="font-size: 10px;">云崽</a> <a href="/tags/%E5%8F%8C%E7%AC%99/" style="font-size: 10px;">双笙</a> <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA%E7%BB%84%E8%A3%85/" style="font-size: 10px;">无人机组装</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 10px;">日记</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%95%AA/" style="font-size: 10px;">番</a> <a href="/tags/%E9%87%8D%E8%A3%85/" style="font-size: 10px;">重装</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2023 <a href="/">70loKirin</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":false,"night":true});</script>
+
+  </body>
+</html>

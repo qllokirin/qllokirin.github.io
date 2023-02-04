@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>从0到使用hexo + ParticleX主题 - 70loKirin</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="70loKirin">
+    <meta property="og:title" content="从0到使用hexo + ParticleX主题"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>70loKirin</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><a class="category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><a class="category-link" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>从0到使用hexo + ParticleX主题</h2>
+            <div class="post-meta">
+                <time class="date">2022.09.28</time>
+            
+                <span class="category"><a class="category-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <p>记录一下hexo搭建过程</p>
+<span id="more"></span>
+
+<h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>我自己捯饬了很久才发现ParticleX作者有很详细的教程</p>
+<p><a target="_blank" rel="noopener" href="https://argvchs.github.io/page/2/">https://argvchs.github.io/page/2/</a></p>
+<blockquote>
+<p>现我已换为<a target="_blank" rel="noopener" href="https://github.com/Dreamer-Paul/Hingle">Hingle</a>主题，简约而不简单，我很喜欢</p>
+<p><a target="_blank" rel="noopener" href="https://docs.paul.ren/hingle/#/">教程</a>   <a target="_blank" rel="noopener" href="https://github.com/Dreamer-Paul/Hingle">GitHub仓库</a></p>
+</blockquote>
+<p>以下内容仅作个人记录</p>
+<h1 id="使用hexo框架"><a href="#使用hexo框架" class="headerlink" title="使用hexo框架"></a>使用hexo框架</h1><blockquote>
+<p>hexo搭建起来非常方便，真的太好用啦</p>
+</blockquote>
+<p>0基础萌新推荐一下这个视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1mU4y1j72n">保姆级Hexo+github搭建个人博客</a></p>
+<blockquote>
+<p>视频后面运行<code>hexo d</code>发布到GitHub仓库的时候不需要做那么多工作</p>
+<p>因为已经绑定了ssh key所以是可以直接更新到GitHub的</p>
+<p>（一直提交失败是因为GitHub有时候要梯子</p>
+</blockquote>
+<p>hexo基本指令介绍</p>
+<pre><code class="bash"># 清除网页
+hexo cl
+# 生成网页
+hexo g
+# 网页本地发布
+hexo s
+# 网页提交到GitHub
+heox d
+</code></pre>
+<h1 id="使用ParticleX主题"><a href="#使用ParticleX主题" class="headerlink" title="使用ParticleX主题"></a>使用ParticleX主题</h1><blockquote>
+<p>现我已换为<a target="_blank" rel="noopener" href="https://github.com/Dreamer-Paul/Hingle">Hingle</a>主题，简约而不简单，我很喜欢</p>
+<p><a target="_blank" rel="noopener" href="https://docs.paul.ren/hingle/#/">教程</a>   <a target="_blank" rel="noopener" href="https://github.com/Dreamer-Paul/Hingle">GitHub仓库</a></p>
+<p>主要是ParticleX加载很花时间（这可能就是因为好看而付出的代价吧），不太适合经常访问</p>
+</blockquote>
+<p>仓库地址：<a target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">Hexo-Theme-ParticleX</a></p>
+<ul>
+<li><p>1.ParticleX主题的基本搭建</p>
+<p>按照仓库的readme配置好基本网页（主题安装+关闭 Hexo 自带 highlight）</p>
+<p>然后在<code>_config.yml</code>里面找到<code>theme: </code>改为<code>theme: ParticleX</code></p>
+<blockquote>
+<p>注意：yml文件的冒号后面都有一个空格！！！！</p>
+</blockquote>
+<p>依次运行</p>
+<pre><code class="bash">hexo cl
+hexo g
+hexo s
+</code></pre>
+</li>
+<li><p>2.ParticleX主题的基本使用</p>
+<p>生成categories、about、tags</p>
+<pre><code class="bash">hexo new page categories
+hexo new page about
+hexo new page tags
+hexo new post first
+</code></pre>
+<p>然后就可以在source文件中发现如下文件结构</p>
+<pre><code class="text">|---source
+    |---_posts        #每一篇帖子的内容
+    |---about        #about点开之后的内容
+    |---categories
+    |---tags
+</code></pre>
+<p>categories和tags不用管，会自动生成</p>
+<p>about和_posts都是md文件格式</p>
+<p><code>hexo new post &lt;post-name&gt;</code>会在_posts中再生成一个md文件（<code>&lt;post-name&gt;</code>为文件名</p>
+<p>post文件开头示例：</p>
+<pre><code class="md">title: first
+date: 2022-09-27 19:52:59
+tags: 
+  - 测试
+categories:
+  - 踩坑
+description: &quot;界面终于正常啦&quot;
+</code></pre>
+<p>背景、图标、评论配置参阅原仓库readme中：<a target="_blank" rel="noopener" href="https://github.com/argvchs/hexo-theme-particlex">配置文件说明</a></p>
+<blockquote>
+<p>tips：图标有两个元素，一个是name，一个是theme，在图标官网可以查阅</p>
+<p>​          比如GitHub图标的theme是brands</p>
+</blockquote>
+</li>
+<li><p>3.ParticleX主题的进阶配置</p>
+<p>原作者已经有了教程我也不过多赘述：<a target="_blank" rel="noopener" href="https://argvchs.github.io/2022/04/17/hexo-blog-3/">https://argvchs.github.io/2022/04/17/hexo-blog-3/</a></p>
+<p>包含live2d、鼠标点击特效、流星背景特效、鼠标指针特效</p>
+<blockquote>
+<p>live2d我最后使用了这个教程：<a target="_blank" rel="noopener" href="https://haremu.com/p/205">https://haremu.com/p/205</a></p>
+</blockquote>
+</li>
+</ul>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2022/09/28/03.yunzai/">云崽机器人搭建</a></li>
+                
+                
+                    <li>下一篇: <a href="/2022/09/27/01.first_md/">first</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/hexo/" rel="tag">hexo</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://s2.loli.net/2022/09/27/6rzl4WOitu8pUqg.jpg" alt="70loKirin" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>70loKirin</h4>
+                <p>你好，我是祈菱不是麒麟，很高兴与你相遇</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/7777/07/07/diary/">稀疏平常的生活</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/02/05/13.shuangsheng/">第一次去livehouse</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/01/30/12.remake_ubuntu/">重装Ubuntu</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/01/09/11.docker/">docker学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/01/08/10.easyconnect/">Ubuntu20.04如何使用EasyConnect进入校园网</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/01/01/09.animation/">感谢与二次元情投</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/7777/07/">July 7777</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/EasyConnect/" style="font-size: 10px;">EasyConnect</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/livehouse/" style="font-size: 10px;">livehouse</a> <a href="/tags/px4/" style="font-size: 10px;">px4</a> <a href="/tags/ros/" style="font-size: 10px;">ros</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/%E4%BA%91%E5%B4%BD/" style="font-size: 10px;">云崽</a> <a href="/tags/%E5%8F%8C%E7%AC%99/" style="font-size: 10px;">双笙</a> <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA%E7%BB%84%E8%A3%85/" style="font-size: 10px;">无人机组装</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 10px;">日记</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%95%AA/" style="font-size: 10px;">番</a> <a href="/tags/%E9%87%8D%E8%A3%85/" style="font-size: 10px;">重装</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2023 <a href="/">70loKirin</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":false,"night":true});</script>
+
+  </body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>Ubuntu20.04如何使用EasyConnect进入校园网 - 70loKirin</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="70loKirin">
+    <meta property="og:title" content="Ubuntu20.04如何使用EasyConnect进入校园网"/>
+    
+    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>70loKirin</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><a class="category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><a class="category-link" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>Ubuntu20.04如何使用EasyConnect进入校园网</h2>
+            <div class="post-meta">
+                <time class="date">2023.01.08</time>
+            
+                <span class="category"><a class="category-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <p>软件只适配到Ubuntu18.04，20.04需要弄一点东西</p>
+<span id="more"></span>
+
+<blockquote>
+<p>后续补充：多次使用后，安装软件的方法使用多次后会提示版本不符，需要再次安装，然后用了几次后又提示版本不符，很麻烦<br>docker版本推荐使用vnc版本的7.6.7，纯命令行的可能会有问题，windows使用docker的话建议把docker desktop设置为开机自启动，不然会有问题</p>
+</blockquote>
+<h1 id="Ubuntu20-04如何使用EasyConnect进入校园网"><a href="#Ubuntu20-04如何使用EasyConnect进入校园网" class="headerlink" title="Ubuntu20.04如何使用EasyConnect进入校园网"></a>Ubuntu20.04如何使用EasyConnect进入校园网</h1><p>前言：首先下载一下软件，<a target="_blank" rel="noopener" href="http://download.sangfor.com.cn/download/product/sslvpn/pkg/linux_767/EasyConnect_x64.deb">64位Ubuntu</a> <code>sudo dpkg -i EasyConnect_x64.deb </code>安装   <a target="_blank" rel="noopener" href="https://vpn.tju.edu.cn/com/installClient_en.html#auto-service">其他版本</a></p>
+<blockquote>
+<p>但软件本体只适配到Ubuntu18.04<br>吐槽一下：这<a target="_blank" rel="noopener" href="https://bbs.sangfor.com.cn/plugin.php?id=service:download&action=view&fid=100000001552254#/100001589167895/all/0/0">官网</a>上我是真没找到Linux版本，我们学校提供的网站的Linux下载又放了个空连接，麻<br>找了半天谷歌上搜到了天津大学的下载界面，但是最抽象的是，从主界面进去，根本找不到这个下载界面</p>
+</blockquote>
+<h3 id="安装后无法打开，原因是Harfbuzz版本太低"><a href="#安装后无法打开，原因是Harfbuzz版本太低" class="headerlink" title="安装后无法打开，原因是Harfbuzz版本太低"></a>安装后无法打开，原因是Harfbuzz版本太低</h3><ul>
+<li><p><strong>单击打开easyconnect没有反应</strong></p>
+<p>在<code>/usr/share/applications </code>中找到<code>EasyConnect.desktop</code>后发现它的命令行启动方式是<code>/usr/share/sangfor/EasyConnect/EasyConnect</code></p>
+<p>执行后报错</p>
+<pre><code class="bash">$ /usr/share/sangfor/EasyConnect/EasyConnect
+
+(EasyConnect:64314): Pango-ERROR **: 15:45:06.256: Harfbuzz version too old (1.3.1)
+
+[1]    64314 trace trap (core dumped)  /usr/share/sangfor/EasyConnect/EasyConnect
+</code></pre>
+<p><strong>提示Harfbuzz版本太低</strong>，论坛上有人提出这个问题，但目前也只适配ubuntu也至适配到18.04，原因可能是electron太老，最终提出的解决方案是<strong>把pango的版本降低</strong>，为了不对系统造成影响，因此只把低版本的pango给easyconnect用即可</p>
+</li>
+<li><p><strong>解决:降级pango</strong></p>
+<p>先查看easyconnect目前使用的pango</p>
+<pre><code class="bash">$ ldd /usr/share/sangfor/EasyConnect/EasyConnect | grep pango
+    libpangocairo-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libpangocairo-1.0.so.0 (0x00007f9713518000)
+    libpango-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libpango-1.0.so.0 (0x00007f971337e000)
+    libpangoft2-1.0.so.0 =&gt; /usr/lib/x86_64-linux-gnu/libpangoft2-1.0.so.0 (0x00007f97116d8000)
+</code></pre>
+<p><del>下载适配ubuntu18.04的<a target="_blank" rel="noopener" href="https://packages.ubuntu.com/bionic/amd64/libpangocairo-1.0-0/download">libpangocairo</a>、<a target="_blank" rel="noopener" href="https://packages.ubuntu.com/bionic/amd64/libpango-1.0-0/download">libpango</a>、<a target="_blank" rel="noopener" href="https://packages.ubuntu.com/bionic/amd64/libpangoft2-1.0-0/download">libpangoft2</a>，解压deb，然后解压里面的data.tar.xz，找到上述所写三个文件移入<code>/usr/share/sangfor/EasyConnect</code>目录下即可</del></p>
+<p>为了方便，可以使用我已下载好的压缩包<a target="_blank" rel="noopener" href="https://wwcm.lanzoub.com/ifd9c0kfvgmf">https://wwcm.lanzoub.com/ifd9c0kfvgmf</a> 解压后放置在主目录下</p>
+<p>输入下面的指令把三个文件移入<code>/usr/share/sangfor/EasyConnect</code></p>
+<pre><code class="bash">sudo cp ~/usr/lib/x86_64-linux-gnu/libpango-1.0.so.0 ~/usr/lib/x86_64-linux-gnu/libpangocairo-1.0.so.0 ~/usr/lib/x86_64-linux-gnu/libpangoft2-1.0.so.0 /usr/share/sangfor/EasyConnect/
+</code></pre>
+<p>再次查看即会发现发生变化</p>
+<pre><code class="bash">$ ldd /usr/share/sangfor/EasyConnect/EasyConnect | grep pango
+    libpangocairo-1.0.so.0 =&gt; /usr/share/sangfor/EasyConnect/libpangocairo-1.0.so.0 (0x00007f1538cd4000)
+    libpango-1.0.so.0 =&gt; /usr/share/sangfor/EasyConnect/libpango-1.0.so.0 (0x00007f153893c000)
+    libpangoft2-1.0.so.0 =&gt; /usr/share/sangfor/EasyConnect/libpangoft2-1.0.so.0 (0x00007f1536a95000)
+</code></pre>
+<p>然后<strong>点击图标启动</strong>或<strong>命令行启动</strong><code>/usr/share/sangfor/EasyConnect/EasyConnect</code>都是可以的</p>
+</li>
+</ul>
+<hr>
+<p>下面是使用<strong>docker</strong>运行EasyConnect的一些探索</p>
+<h3 id="现有docker容器docker-easyconnect"><a href="#现有docker容器docker-easyconnect" class="headerlink" title="现有docker容器docker-easyconnect"></a>现有docker容器<a target="_blank" rel="noopener" href="https://github.com/Hagb/docker-easyconnect">docker-easyconnect</a></h3><p>docker！yyds！一键部署</p>
+<p>配合<a target="_blank" rel="noopener" href="https://chrome.google.com/webstore/detail/proxy-switchyomega/padekgcemlokbadohgkifijomclgjgif">SwitchyOmega</a>会有比较好的体验，不然一直切换有点麻烦  <a target="_blank" rel="noopener" href="https://switchyomega.org/">SwitchyOmega讲解</a> </p>
+<blockquote>
+<p>我捯饬了半天，最后发现只需要选http协议即可，选择8888端口，auto switch里面匹配你要访问的校园网（比如说我要访问的是基地的网站），默认情景模式我选择到7890端口，这样可以让clash再来一次规则代理</p>
+<p>这样就可以实现上基地网站&#x2F;翻墙自动切换</p>
+</blockquote>
+<p>使用<code> export https_proxy=http://127.0.0.1:8888</code>可以让终端走代理</p>
+<blockquote>
+<p>不过用ssh的git clone无法克隆下来仓库，不太懂</p>
+<pre><code class="bash">$ git clone https://git.x.git
+正克隆到 &#39;x&#39;...
+^C
+(base) 
+# magic @ magic in ~ [19:35:20] C:130
+$ export https_proxy=http://127.0.0.1:8888                   
+(base) 
+# magic @ magic in ~ [19:35:25] 
+$ git clone https://git.x.git
+正克隆到 &#39;x&#39;...
+Username for &#39;https://git.x&#39;: ^C
+(base) 
+# magic @ magic in ~ [19:35:32] C:130
+$ git clone git@git.x.git    
+正克隆到 &#39;x&#39;...
+^C
+</code></pre>
+<p>但如果使用<strong>proxychains</strong>填写<code>http 127.0.0.1 8888</code>则可克隆ssh的仓库 怪</p>
+<pre><code class="bash">$ proxychains4 git clone git@git.x.git
+[proxychains] config file found: /etc/proxychains4.conf
+[proxychains] preloading /usr/lib/x86_64-linux-gnu/libproxychains.so.4
+[proxychains] DLL init: proxychains-ng 4.14
+正克隆到 &#39;x&#39;...
+[proxychains] DLL init: proxychains-ng 4.14
+[proxychains] Dynamic chain  ...  127.0.0.1:8888  ...  git.x:22  ...  OK
+[proxychains] DLL init: proxychains-ng 4.14
+remote: Enumerating objects: 1817, done.
+remote: Counting objects: 100% (32/32), done.
+remote: Compressing objects: 100% (31/31), done.
+</code></pre>
+</blockquote>
+<h3 id="自行配置docker"><a href="#自行配置docker" class="headerlink" title="自行配置docker"></a>自行配置docker</h3><p>起初的想法是，既然Ubuntu20.04版本不匹配，那就用一个Ubuntu18.04的镜像来安装easyconnect，然后把画面传到电脑上，但直接运行可能会有流量无法代理的可能，浅试了一下，先搁置了</p>
+<p>参考链接：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/cocode/p/12890684.html">https://www.cnblogs.com/cocode/p/12890684.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://unix.stackexchange.com/questions/589993/pango-error-harfbuzz-version-too-old">https://unix.stackexchange.com/questions/589993/pango-error-harfbuzz-version-too-old</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/panpanwelcome/p/12877902.html">https://www.cnblogs.com/panpanwelcome/p/12877902.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://packages.ubuntu.com/">https://packages.ubuntu.com/</a></p>
+
+        </article>
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/2023/01/09/11.docker/">docker学习</a></li>
+                
+                
+                    <li>下一篇: <a href="/2023/01/01/09.animation/">感谢与二次元情投</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/EasyConnect/" rel="tag">EasyConnect</a>
+            </section>
+        
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://s2.loli.net/2022/09/27/6rzl4WOitu8pUqg.jpg" alt="70loKirin" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>70loKirin</h4>
+                <p>你好，我是祈菱不是麒麟，很高兴与你相遇</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/7777/07/07/diary/">稀疏平常的生活</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/02/05/13.shuangsheng/">第一次去livehouse</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/01/30/12.remake_ubuntu/">重装Ubuntu</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/01/09/11.docker/">docker学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/01/08/10.easyconnect/">Ubuntu20.04如何使用EasyConnect进入校园网</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/01/01/09.animation/">感谢与二次元情投</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/7777/07/">July 7777</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/EasyConnect/" style="font-size: 10px;">EasyConnect</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/livehouse/" style="font-size: 10px;">livehouse</a> <a href="/tags/px4/" style="font-size: 10px;">px4</a> <a href="/tags/ros/" style="font-size: 10px;">ros</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/%E4%BA%91%E5%B4%BD/" style="font-size: 10px;">云崽</a> <a href="/tags/%E5%8F%8C%E7%AC%99/" style="font-size: 10px;">双笙</a> <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA%E7%BB%84%E8%A3%85/" style="font-size: 10px;">无人机组装</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 10px;">日记</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%95%AA/" style="font-size: 10px;">番</a> <a href="/tags/%E9%87%8D%E8%A3%85/" style="font-size: 10px;">重装</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2023 <a href="/">70loKirin</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":false,"night":true});</script>
+
+  </body>
+</html>
