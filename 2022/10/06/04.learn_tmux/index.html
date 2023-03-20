@@ -17,8 +17,6 @@
     <meta property="og:site_name" content="70loKirin">
     <meta property="og:title" content="tmux的学习记录"/>
     
-    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
-    
 <meta name="generator" content="Hexo 6.3.0"></head>
 
   <body>
@@ -86,20 +84,21 @@ Ctrl+b 箭头  光标切换到其他窗格
 <pre><code class="sh">#!/bin/bash
 ## tmux new -s &lt;window-name&gt; 创建一个会话
 ## -d是在后台创建（重要 没有这个参数会有bug）
-tmux new -d -s ros
+tmux kill-session -t start
+tmux new -d -s start
 
 ## 分割成四块
-tmux split-window -h -t ros
-tmux split-window -v -t ros.0
-tmux split-window -v -t ros.2
+tmux split-window -h -t start
+tmux split-window -v -t start.0
+tmux split-window -v -t start.2
 
 ## 填入指令 0是左上 1是坐下 2是右上 3是右下
-tmux send -t ros.0 &quot; &quot; 
-tmux send -t ros.1 &quot; &quot; 
-tmux send -t ros.2 &quot; &quot; 
-tmux send -t ros.3 &quot; &quot; 
+tmux send -t start.0 &quot; &quot; 
+tmux send -t start.1 &quot; &quot; 
+tmux send -t start.2 &quot; &quot; 
+tmux send -t start.3 &quot; &quot; 
 ## 显示刚刚创建的会话
-tmux a -t ros
+tmux a -t start
 </code></pre>
 <p>使用方法：新建一个<code>tmux.sh</code>的文件，将内容写入，执行<code>chmod +x tmux.sh</code>变为可执行文件，<code>./tmux.sh</code>运行</p>
 

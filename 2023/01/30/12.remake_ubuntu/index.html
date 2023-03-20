@@ -17,8 +17,6 @@
     <meta property="og:site_name" content="70loKirin">
     <meta property="og:title" content="重装Ubuntu"/>
     
-    <style>body:before{ content: ''; background-image: url(https://api.paugram.com/wallpaper?source=gh) }</style>
-    
 <meta name="generator" content="Hexo 6.3.0"></head>
 
   <body>
@@ -119,7 +117,23 @@ sudo update-grub
 <p>战老师yyds！</p>
 </li>
 <li><p>zsh</p>
-<p>主题agnoster比较好看，装个字体就能正常显示</p>
+<pre><code class="bash">sh -c &quot;$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)&quot;
+# 切换
+chsh -s /bin/zsh
+# 自动补全插件
+git clone https://github.com/zsh-users/zsh-autosuggestions $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/zsh-autosuggestions
+# 语法高亮
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/zsh-syntax-highlighting
+# 进.zshrc改为
+# plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
+</code></pre>
+<p>主题powerlevel10k比较好看</p>
+<blockquote>
+<pre><code class="bash">git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git $&#123;ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom&#125;/themes/powerlevel10k
+</code></pre>
+<pre><code class="text">ZSH_THEME=&quot;powerlevel10k/powerlevel10k&quot;
+</code></pre>
+</blockquote>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://mirrors.bfsu.edu.cn/anaconda/archive/">conda</a></p>
 <pre><code>wget https://mirrors.bfsu.edu.cn/anaconda/archive/Anaconda3-2022.10-Linux-x86_64.sh
