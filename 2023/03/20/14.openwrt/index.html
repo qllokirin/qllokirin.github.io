@@ -3,7 +3,7 @@
   <head>
      
     <meta charset="UTF-8">
-    <title>云崽机器人搭建 - 70loKirin</title>
+    <title>路由器安装openwrt - 70loKirin</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
     <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
     
@@ -15,7 +15,7 @@
 
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
     <meta property="og:site_name" content="70loKirin">
-    <meta property="og:title" content="云崽机器人搭建"/>
+    <meta property="og:title" content="路由器安装openwrt"/>
     
 <meta name="generator" content="Hexo 6.3.0"></head>
 
@@ -51,9 +51,9 @@
     <main>
     <div class="wrap min">
         <section class="post-title">
-            <h2>云崽机器人搭建</h2>
+            <h2>路由器安装openwrt</h2>
             <div class="post-meta">
-                <time class="date">2022.09.28</time>
+                <time class="date">2023.03.20</time>
             
                 <span class="category"><a class="category-link" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a></span>
             
@@ -61,58 +61,51 @@
         </section>
         <article class="post-content">
         
-            <p>记录云崽搭建问题</p>
+            <p>路由器直接走代理，听着就很酷</p>
 <span id="more"></span>
 
-<p><a target="_blank" rel="noopener" href="https://github.com/Le-niao/Yunzai-Bot">云崽机器人原项目</a></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>基地的网络可以直接用魔法，刚入队的时候就感觉很神奇，现在终于有机会自己试试了</p>
 <blockquote>
-<p>想要自行搭建指路我的另两篇教程</p>
+<p>以下刷入内容仅针对红米ac2100，问就是只有这个</p>
 </blockquote>
-<p>Windows本地云崽部署：<a target="_blank" rel="noopener" href="https://docs.yunzai.org/deploy/windows/local.html">https://docs.yunzai.org/deploy/windows/local.html</a></p>
-<p>云崽问题总结：<a target="_blank" rel="noopener" href="https://docs.qq.com/doc/DT25kQ0x3VVlyc0Jz">https://docs.qq.com/doc/DT25kQ0x3VVlyc0Jz</a></p>
+<h1 id="大体思路"><a href="#大体思路" class="headerlink" title="大体思路"></a>大体思路</h1><p>对于一些”不那么安全“的路由器，我们可以直接修改他们的固件，也就是换一个系统变成<code>openwrt</code>，这时候安装<code>openclash</code>（就是clash的路由器版本），然后就和我们使用clash差不多了</p>
+<p>对于一些“安全”的路由器，这时候无法重刷固件，我们则需要另外的一台计算机来跑openwrt系统（可以选择软路由装个openwrt或者某台主机跑docker镜像），根据代理方式还有旁路由等等分支</p>
+<h1 id="刷入OpenWrt系统"><a href="#刷入OpenWrt系统" class="headerlink" title="刷入OpenWrt系统"></a>刷入OpenWrt系统</h1><p>为了防止路由器变砖，一般会推荐先<a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-4066963-1-1.html">刷一个BREED系统</a>，所以系统变化如下</p>
+<p>红米自带系统-&gt;<code>BREED</code>-&gt;<code>OpenWrt</code></p>
+<p><a target="_blank" rel="noopener" href="https://supes.top/%e7%ba%a2%e7%b1%b3-%e5%b0%8f%e7%b1%b3-ac2100-%e5%88%b7breed%e5%92%8copenwrt%e6%95%99%e7%a8%8b/">这个教程</a>很详细，感觉很好，不过基地路由器已经有学长刷成OpenWrt了，我也不瞎捯饬了，万一变砖了就不好了</p>
 <blockquote>
-<p>在这里重写搭建教程感觉没有什么必要了，就记录一下从相知相遇到相识吧（这样说好奇怪 太奇怪了</p>
+<p>有机会的还是想从头开始刷个固件玩玩</p>
 </blockquote>
-<h1 id="初识云崽"><a href="#初识云崽" class="headerlink" title="初识云崽"></a><div align="center">初识云崽</div></h1><p>那天朋友给我发了一张游戏角色的装备一览图，当时觉得很好看但是游戏内又没有，朋友说是有个群里面有个机器人可以做，我进去看了看的确很有意思<br>后面又wx群有提及此事相关，朋友给我发了一个视频问我要不要试试自己弄一个</p>
-<blockquote>
-<p>此视频正是原作者乐佬的演示视频</p>
-</blockquote>
-<p>跟着乐佬的教程一步一步的总感觉不太对，在评论区找了个群加了进去问问，后面才知道步骤都是对的，只是输出有些不同</p>
-<blockquote>
-<p>乐佬放的图片与大部分人的输出都不相同</p>
-</blockquote>
-<p><font color='blue'>渐渐的，我开始在群里回答别人的问题，在评论区回答</font></p>
-<h1 id="从使用者到创作者"><a href="#从使用者到创作者" class="headerlink" title="从使用者到创作者"></a><div align="center">从使用者到创作者</div></h1><blockquote>
-<p>哈哈，虽这里小小自诩一下创作者，不过就是复制粘贴罢了</p>
-</blockquote>
-<p>云崽的插件是用JavaScript写的，我从来没学过，那怎么写呢</p>
-<p>就  参考云崽自带的插件的写法，看看别人写的插件，然后摸索+捯饬</p>
-<p>最开始写了个建议的给主人留言，还是很有成就感的，然后找了几个api写了个动物图小插件</p>
-<blockquote>
-<p>现在的给主人留言插件支持直接回复了，星佬tql</p>
-</blockquote>
-<p>后面看到atri有佬写了生成语音然后又有命令行版本，所以感觉可以迁移过来当个插件使用   <a target="_blank" rel="noopener" href="https://github.com/70loKirin/ATRI-plugin">ATRI-plugin</a></p>
-<p>然后学了下python，OpenCV想到<a target="_blank" rel="noopener" href="https://zh.moegirl.org.cn/Helltaker">helltaker</a>这个推箱子游戏挺有意思的就也迁移了过来做了个插件  <a target="_blank" rel="noopener" href="https://github.com/70loKirin/PushBox-plugin">PushBox-plugin</a></p>
-<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a><div align="center">小结</div></h2><p>这一路来，学了很多东西，收获了很多乐趣</p>
-<p>写了文档也帮助了很多人搭建</p>
-<p>虽然偶过争吵，亦有风波</p>
-<p>但云崽给予我的，远不止如此</p>
+<h1 id="更新OpenWrt系统"><a href="#更新OpenWrt系统" class="headerlink" title="更新OpenWrt系统"></a>更新OpenWrt系统</h1><p>当系统已经是OpenWrt时，可以随意更新和安装软件包&#x2F;更改主题，最开始时可以使用<a target="_blank" rel="noopener" href="https://supes.top/">这个网站</a>定制出带有基本功能的系统文件，比如预设一个主题，系统自带openclash及其他插件之类的，安装方法他也有很具体的介绍</p>
+<ul>
+<li><code>系统</code>-&gt;<code>系统</code>中可以更改主题</li>
+<li><code>系统</code>-&gt;<code>软件包</code>可以上传<code>.ipk</code>的软件包（如openclash）</li>
+<li><code>系统</code>-&gt;<code>备份与升级</code>可以刷个新固件</li>
+<li>可以ssh链接<code>ssh root@192.168.x.1</code>密码默认root</li>
+</ul>
+<h3 id="重启解决百分之99的问题！！！！"><a href="#重启解决百分之99的问题！！！！" class="headerlink" title="重启解决百分之99的问题！！！！"></a>重启解决百分之99的问题！！！！</h3><p>今天总算是又领悟到这句话的真谛了，一开始上传新固件也是一直报错，一个重启再上传就好了</p>
+<p>打开openclash结果主程序一直显示未运行，捯饬半天各种检查各种搜索，结果一个重启又好了</p>
+<p>遇到<code> * opkg_download: 请检查网络设置, 确保本设备网络可用.</code>也是多运行几次，重启然后再多运行几次就好了</p>
+<p>神奇</p>
+<h1 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h1><p>自行安装插件的时候麻烦还挺多，因为完全不了解，有些README读起来有困难，比如<code>uname -a</code>看到你是mips架构结果你找了半天发现newifid2.zip里面放的就是mipsel的.ipk东西</p>
+<p>传输文件我看网上用sftp用的多，但是我之前习惯了scp，我感觉scp似乎更方便，指令像这样<code>scp *.ipk root@192.168.7.1:/package</code></p>
+<p>我试了老半天<code>luci-app-unblockmusic</code>这个解锁网易云音乐的插件，结果发现最近一次commit是三年前，估计是已经用不了了</p>
 
         </article>
         
         <section class="post-near">
             <ul>
                 
-                    <li>上一篇: <a href="/2022/10/06/04.learn_tmux/">tmux的学习记录</a></li>
+                    <li>上一篇: <a href="/7777/07/07/diary/">稀疏平常的生活</a></li>
                 
                 
-                    <li>下一篇: <a href="/2022/09/28/02.hexo_use/">从0到使用hexo + ParticleX主题</a></li>
+                    <li>下一篇: <a href="/2023/02/05/13.shuangsheng/">第一次去livehouse</a></li>
                 
             </ul>
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/%E4%BA%91%E5%B4%BD/" rel="tag">云崽</a>
+            <a class="-none-link" href="/tags/openwrt/" rel="tag">openwrt</a><a class="-none-link" href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a>
             </section>
         
         <script src="https://giscus.app/client.js"
