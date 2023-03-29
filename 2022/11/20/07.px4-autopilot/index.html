@@ -37,7 +37,7 @@
         <div class="has-child">
             <a>分类</a>
             <div class="sub-menu">
-                <a class="category-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><a class="category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><a class="category-link" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a>
+                <a class="category-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><a class="category-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><a class="category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><a class="category-link" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a>
             </div>
         </div>
         
@@ -95,9 +95,12 @@ wget https://gitee.com/robin_shaun/XTDrone/raw/master/sitl_config/mavros/install
 sudo chmod a+x ./install_geographiclib_datasets.sh
 # 执行脚本 安装依赖
 sudo ./install_geographiclib_datasets.sh
+echo &quot;source /opt/ros/noetic/setup.bash&quot; &gt;&gt; ~/.bashrc
 </code></pre>
-<h1 id="python"><a href="#python" class="headerlink" title="python"></a>python</h1><ul>
-<li><p>1.装了<strong>conda</strong>的话跳过此步骤</p>
+<h1 id="python"><a href="#python" class="headerlink" title="python"></a>python</h1><pre><code class="bash">pip install rospkg
+</code></pre>
+<ul>
+<li><p>1.装了<strong>conda</strong>的话直接运行即可</p>
 </li>
 <li><p>2.<code>pip -V</code>和<code>python -V</code>正常显示版本则代表已安装好</p>
 </li>
@@ -121,7 +124,7 @@ git submodule update --init --recursive
 make px4_sitl_default gazebo
 </code></pre>
 <blockquote>
-<p>基地的同学可以用这个<a target="_blank" rel="noopener" href="https://seafile.npu5v5.cn/lib/e7fbd356-97f9-4ba2-b6ef-84013f32cc03/file/%E5%9F%BA%E5%9C%B0%E5%B8%B8%E7%94%A8/%E6%97%A0%E4%BA%BA%E6%9C%BA%E8%B5%84%E6%96%99/%E8%BD%AF%E4%BB%B6%E8%B5%84%E6%96%99/PX4-Autopilot.zip">压缩包</a></p>
+<p>基地的同学可以用这个<a target="_blank" rel="noopener" href="https://seafile.npu5v5.cn/lib/e7fbd356-97f9-4ba2-b6ef-84013f32cc03/file/%E5%9F%BA%E5%9C%B0%E5%B8%B8%E7%94%A8/%E6%97%A0%E4%BA%BA%E6%9C%BA%E8%B5%84%E6%96%99/%E8%BD%AF%E4%BB%B6%E8%B5%84%E6%96%99/PX4-Autopilot.zip">压缩包</a> 下载下来之后直接编译即可</p>
 <p>或是<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1q0oBvkt80zfAxgTdXl87Fg?pwd=kiri">网盘链接</a></p>
 </blockquote>
 <p>编译完成会有如下文字</p>
@@ -307,6 +310,56 @@ geometry_msgs/Twist twist
 <p>控制飞控 IO 输出(混控器)</p>
 </li>
 </ul>
+<h1 id="任务列表"><a href="#任务列表" class="headerlink" title="任务列表"></a>任务列表</h1><p>下面给出几个任务让你入门无人机代码控制，一份无人机概述<a target="_blank" rel="noopener" href="https://seafile.npu5v5.cn/lib/e7fbd356-97f9-4ba2-b6ef-84013f32cc03/file/%E5%9F%BA%E5%9C%B0%E5%B8%B8%E7%94%A8/%E6%97%A0%E4%BA%BA%E6%9C%BA%E8%B5%84%E6%96%99/%E5%8C%97%E8%88%AA%E6%97%A0%E4%BA%BA%E6%9C%BA.pdf">ppt</a></p>
+<h3 id="1、飞机飞正方形"><a href="#1、飞机飞正方形" class="headerlink" title="1、飞机飞正方形"></a>1、飞机飞正方形</h3><p><strong>任务目标</strong>：控制飞机在仿真环境中完成<strong>起飞</strong>、<strong>定高</strong>飞行一个<strong>正方形</strong>、<strong>降落</strong>的任务。</p>
+<p>为降低任务难度，以下给出推荐学习步骤</p>
+<ul>
+<li><p>了解ros&amp;mavros基础知识</p>
+<ul>
+<li>掌握ros话题订阅和话题发布的方法</li>
+<li>按以上过程配置好px4仿真环境并学习mavros相关话题</li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://docs.px4.io/v1.12/zh/ros/ros1.html">px4官网</a> 查看飞机使用文档</p>
+<ul>
+<li>尝试用mavros控制飞机起飞，飞机起飞时应为offboard模式 <a target="_blank" rel="noopener" href="https://docs.px4.io/v1.12/en/ros/mavros_offboard.html">官方示例代码</a></li>
+<li>Development和Robotics部分阅读一下</li>
+</ul>
+</li>
+<li><p>控制飞机飞正方形</p>
+<ul>
+<li><strong>飞行</strong>至两米的高度，然后以该点为起点<strong>飞一个正方形</strong>（飞机飞行轨迹为正方形，边长建议为5-10m），回到起始点时<strong>降落</strong></li>
+<li>请勿搜索相关代码，<strong>自行书写</strong>就好</li>
+</ul>
+</li>
+</ul>
+<p><strong>注意</strong></p>
+<ul>
+<li>全程以控制飞行速度的方式进行，可以进行多个话题的尝试（但是不能只发目标位姿）</li>
+<li>注意飞机飞行的模式，灵活运用话题、服务、回调等ros基础知识</li>
+<li>注意速度控制方法</li>
+<li>注意代码书写规范，语言不限</li>
+<li>对仿真环境中的机型和环境不作要求</li>
+<li>以上任务采用跑定点的方式即算通过，有余力的同学可以尝试开源导航的嵌入</li>
+</ul>
+<h3 id="2、move-base在无人机中使用"><a href="#2、move-base在无人机中使用" class="headerlink" title="2、move_base在无人机中使用"></a>2、move_base在无人机中使用</h3><p><strong>任务目标</strong>：给无人机安装二维激光雷达，以此使用move_base进行避障，最终效果是在rviz中点哪，飞机去哪且不会撞</p>
+<p>为降低任务难度，在此简介<a target="_blank" rel="noopener" href="http://wiki.ros.org/move_base">move_base</a>，也建议自行看看官网</p>
+<p><img src="https://s2.loli.net/2023/03/29/NjvBQZ16stI93HX.png" alt="overview_tf.png"></p>
+<p>简言之，你给这个功能包想要的输入，他给你你想要的输出</p>
+<p>输入：</p>
+<ul>
+<li><code>tf</code> ：<a target="_blank" rel="noopener" href="http://wiki.ros.org/tf/Tutorials">官方tf教程</a> tf树mavros可代为链接，但是我忘了指令，同时也十分建议自行学习一下tf知识然后自己连接一下tf树，仿真中飞机定位信息已在<code>mavros/local_position/pose</code>中给出</li>
+<li><code>odom</code>：里程计</li>
+<li><code>sensor topics</code>：点云激光二选一，我们选激光，记得要把话题传给move_base（学习一下launch文件的一些写法即可 如remap）</li>
+</ul>
+<p>输出：</p>
+<ul>
+<li><code>cmd_vel</code>：速度</li>
+</ul>
+<p>你要做的就是启动move_base，把他需要的话题给他，正常起飞，然后把cmd_vel的数据转发给mavros</p>
+<p>如果做了一段时间还是感觉很困难，可以求助学长&#x2F;学姐</p>
+<h3 id="3、学习学长-x2F-学姐代码框架"><a href="#3、学习学长-x2F-学姐代码框架" class="headerlink" title="3、学习学长&#x2F;学姐代码框架"></a>3、学习学长&#x2F;学姐代码框架</h3><p>了解实物，打打比赛，探索新算法</p>
+<p>定位、导航、控制</p>
 
         </article>
         
@@ -365,7 +418,7 @@ geometry_msgs/Twist twist
             <div class="row">
                 <div class="col-m-4">
                     <h3 class="title-recent">最新文章：</h3>
-                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/7777/07/07/diary/">稀疏平常的生活</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/03/20/14.openwrt/">路由器安装openwrt</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/02/05/13.shuangsheng/">第一次去livehouse</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/01/30/12.remake_ubuntu/">重装Ubuntu</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/01/09/11.docker/">docker学习</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/01/08/10.easyconnect/">Ubuntu20.04如何使用EasyConnect进入校园网</a></li></ul>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/7777/07/07/diary/">稀疏平常的生活</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/03/22/15.vocaloid/">vocaloid歌曲展厅（不</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/03/20/14.openwrt/">路由器安装openwrt</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/02/05/13.shuangsheng/">第一次去livehouse</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/01/30/12.remake_ubuntu/">重装Ubuntu</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/01/09/11.docker/">docker学习</a></li></ul>
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-date">时光机：</h3>
@@ -373,7 +426,7 @@ geometry_msgs/Twist twist
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-tags">标签云：</h3>
-                    <a href="/tags/EasyConnect/" style="font-size: 10px;">EasyConnect</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/livehouse/" style="font-size: 10px;">livehouse</a> <a href="/tags/openwrt/" style="font-size: 10px;">openwrt</a> <a href="/tags/px4/" style="font-size: 10px;">px4</a> <a href="/tags/ros/" style="font-size: 10px;">ros</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/%E4%BA%91%E5%B4%BD/" style="font-size: 10px;">云崽</a> <a href="/tags/%E5%8F%8C%E7%AC%99/" style="font-size: 10px;">双笙</a> <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA%E7%BB%84%E8%A3%85/" style="font-size: 10px;">无人机组装</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 10px;">日记</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%95%AA/" style="font-size: 10px;">番</a> <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a> <a href="/tags/%E9%87%8D%E8%A3%85/" style="font-size: 10px;">重装</a>
+                    <a href="/tags/EasyConnect/" style="font-size: 10px;">EasyConnect</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/livehouse/" style="font-size: 10px;">livehouse</a> <a href="/tags/openwrt/" style="font-size: 10px;">openwrt</a> <a href="/tags/px4/" style="font-size: 10px;">px4</a> <a href="/tags/ros/" style="font-size: 10px;">ros</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/vocaloid/" style="font-size: 10px;">vocaloid</a> <a href="/tags/%E4%BA%91%E5%B4%BD/" style="font-size: 10px;">云崽</a> <a href="/tags/%E5%8F%8C%E7%AC%99/" style="font-size: 10px;">双笙</a> <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA%E7%BB%84%E8%A3%85/" style="font-size: 10px;">无人机组装</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 10px;">日记</a> <a href="/tags/%E6%AD%8C/" style="font-size: 10px;">歌</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%95%AA/" style="font-size: 10px;">番</a> <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a> <a href="/tags/%E9%87%8D%E8%A3%85/" style="font-size: 10px;">重装</a>
                 </div>
             </div>
         </section>
