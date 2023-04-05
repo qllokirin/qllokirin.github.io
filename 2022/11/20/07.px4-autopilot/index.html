@@ -360,6 +360,24 @@ geometry_msgs/Twist twist
 <p>如果做了一段时间还是感觉很困难，可以求助学长&#x2F;学姐</p>
 <h3 id="3、学习学长-x2F-学姐代码框架"><a href="#3、学习学长-x2F-学姐代码框架" class="headerlink" title="3、学习学长&#x2F;学姐代码框架"></a>3、学习学长&#x2F;学姐代码框架</h3><p>了解实物，打打比赛，探索新算法</p>
 <p>定位、导航、控制</p>
+<h3 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h3><p>但很重要</p>
+<p>在无人机实物中上位机（nuc&#x2F;nx&#x2F;nano&#x2F;tx  就是一台小电脑 安装Ubuntu系统）需要与飞控进行连接，但是经常链接不上(<code>mavros/state</code>的connect是false)下面列一下一些原因，也方便日后排查</p>
+<ul>
+<li><p><strong>usb端口号</strong></p>
+<p>启动连接的文件是 <code>mavros px4.launch</code>，里面有这样一个参数<code>&lt;arg name=&quot;fcu_url&quot; value=&quot;/dev/ttyACM0:57600&quot;/&gt;</code></p>
+<p><code>/dev/ttyACM0</code>是usb端口号，使用<code>ls /dev/tty*</code>可查看所有ubs端口，如果你是使用<code>usb-micro_ubs</code>或者<code>ubs-type_c</code>连接的，则端口号应该是ACM0，如果使用的是<code>ubs-tele1</code>，则应该是UBS0&#x2F;USB1&#x2F;UBS2需要通过抽插ubs并使用<code>ls /dev/tty*</code>确定是哪一个</p>
+</li>
+<li><p><strong>波特率</strong></p>
+<p>上面的<code>57600</code>就是波特率，需要和飞控使用的波特率一致才能正常连接。飞控的波特率在参数中设置，搜<code>SYS_COMPANION</code>或者BAUD什么</p>
+</li>
+<li><p><strong>线的问题</strong></p>
+<p>如果使用<code>usb-micro_ubs</code>或者<code>ubs-type_c</code>，这个问题可能不太会出现，如果能识别到usb串口，基本能链接上</p>
+<p>如果使用的是<code>ubs-tele1</code>，那建议<strong>好好检查</strong>线和那个模块是不是有问题，这个问题最难排除，有一次线松了我排查了半天结果学长定睛一看，用笔把线往里戳了戳就好了</p>
+</li>
+<li><p><strong>mavros未更新</strong></p>
+<p>使用px6c可能会有这个问题，电脑上安装的mavros太旧了，更新一下即可<code>sudo apt install ros-$ROS_DISTRO-mavros  ros-$ROS_DISTRO-mavros–extras</code></p>
+</li>
+</ul>
 
         </article>
         
@@ -397,12 +415,12 @@ geometry_msgs/Twist twist
         <section class="post-author">
         
             <figure class="author-avatar">
-                <img src="https://s2.loli.net/2022/09/27/6rzl4WOitu8pUqg.jpg" alt="70loKirin" />
+                <img src="https://s2.loli.net/2022/09/27/6rzl4WOitu8pUqg.jpg" alt="qllokirin" />
             </figure>
         
             <div class="author-info">
-                <h4>70loKirin</h4>
-                <p>你好，我是祈菱不是麒麟，很高兴与你相遇</p>
+                <h4>qllokirin</h4>
+                <p>你好，我是祈菱不是麒麟(qllokirin)，很高兴与你相遇</p>
             </div>
         </section>
     
@@ -441,7 +459,7 @@ geometry_msgs/Twist twist
 <script src="/static/hingle.js"></script>
 
 
-<script>var hingle = new Paul_Hingle({"copyright":false,"night":true});</script>
+<script>var hingle = new Paul_Hingle({"copyright":false,"night":false});</script>
 
   </body>
 </html>

@@ -76,7 +76,7 @@
 <blockquote>
 <p>有机会的还是想从头开始刷个固件玩玩</p>
 </blockquote>
-<h1 id="更新OpenWrt系统"><a href="#更新OpenWrt系统" class="headerlink" title="更新OpenWrt系统"></a>更新OpenWrt系统</h1><p>当系统已经是OpenWrt时，可以随意更新和安装软件包&#x2F;更改主题，最开始时可以使用<a target="_blank" rel="noopener" href="https://supes.top/">这个网站</a>定制出带有基本功能的系统文件，比如预设一个主题，系统自带openclash及其他插件之类的，安装方法他也有很具体的介绍</p>
+<h1 id="更新OpenWrt系统"><a href="#更新OpenWrt系统" class="headerlink" title="更新OpenWrt系统"></a>更新OpenWrt系统</h1><p>当系统已经是OpenWrt时，可以随意更新和安装软件包&#x2F;更改主题，最开始时可以使用**<a target="_blank" rel="noopener" href="https://supes.top/">supes.top</a>**定制出带有基本功能的系统文件，比如预设一个主题，系统自带openclash及其他插件之类的，安装方法他也有很具体的介绍</p>
 <ul>
 <li><code>系统</code>-&gt;<code>系统</code>中可以更改主题</li>
 <li><code>系统</code>-&gt;<code>软件包</code>可以上传<code>.ipk</code>的软件包（如openclash）</li>
@@ -90,6 +90,34 @@
 <h1 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h1><p>自行安装插件的时候麻烦还挺多，因为完全不了解，有些README读起来有困难，比如<code>uname -a</code>看到你是mips架构结果你找了半天发现newifid2.zip里面放的就是mipsel的.ipk东西</p>
 <p>传输文件我看网上用sftp用的多，但是我之前习惯了scp，我感觉scp似乎更方便，指令像这样<code>scp *.ipk root@192.168.7.1:/package</code></p>
 <p>我试了老半天<code>luci-app-unblockmusic</code>这个解锁网易云音乐的插件，结果发现最近一次commit是三年前，估计是已经用不了了</p>
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p>最近在研究规则代理的问题，因为有时候总会有代理走不上的情况，个人用的话开个全局或者用proxychains也还行，但是挂在路由器上的代理要是规则没写好，那就g</p>
+<p>简单来着只要进入<a target="_blank" rel="noopener" href="https://sub.dler.io/">https://sub.dler.io/</a></p>
+<p>1写你在机场买的节点链接（担心安全问题就不要用）</p>
+<p>3写<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full.ini">https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full.ini</a></p>
+<blockquote>
+<p>我自己在上面基础上添加的规则：</p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/qllokirin/clash-rule-study/main/config/ACL4SSR_Online_Full.ini">https://raw.githubusercontent.com/qllokirin/clash-rule-study/main/config/ACL4SSR_Online_Full.ini</a></p>
+</blockquote>
+<p>想研究什么意思看下面的自定义规则的链接</p>
+<p><img src="https://yattazen.com/usr/uploads/2021/01/subscription-converter-api-new.png"></p>
+<p>然后把链接复制到clash，只要选择rule就行了</p>
+<blockquote>
+<p>这样只是优化你的规则，容我试试再评价好不好</p>
+</blockquote>
+<p>自定义规则：<a target="_blank" rel="noopener" href="https://yattazen.com/tutorial/clash-custom-config.html">https://yattazen.com/tutorial/clash-custom-config.html</a></p>
+<p>图形化编辑教程：<a target="_blank" rel="noopener" href="https://www.jamesdailylife.com/clash_2022">https://www.jamesdailylife.com/clash_2022</a></p>
+<p>clash官方说明：<a target="_blank" rel="noopener" href="https://docs.cfw.lbyczf.com/contents/ui/profiles/rules.html">https://docs.cfw.lbyczf.com/contents/ui/profiles/rules.html</a></p>
+<h1 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h1><ul>
+<li><p>链接到wifi后图标如下显示无法连接到Internet，但是可以上网</p>
+<p><img src="https://s2.loli.net/2023/04/01/AmEVuGYWKIR4iln.png" alt="MA2V~V8_F1__KD7_OEF_MOD.png"></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/vernesong/OpenClash/issues/6">https://github.com/vernesong/OpenClash/issues/6</a></p>
+</li>
+</ul>
+<p>一些相关链接</p>
+<p><a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/forum.php?mod=viewthread&amp;tid=8276453&amp;highlight=%EF%BF%BD%EF%BF%BD%EF%BF%BD%EF%BF%BDopenwrt">https://www.right.com.cn/forum/forum.php?mod=viewthread&amp;tid=8276453&amp;highlight=%B6%A8%D6%C6openwrt</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/kiddin9/OpenWrt_x86-r2s-r4s-r5s-N1">https://github.com/kiddin9/OpenWrt_x86-r2s-r4s-r5s-N1</a></p>
+<p><a target="_blank" rel="noopener" href="https://supes.top/">https://supes.top</a></p>
+<p>op&#x2F;</p>
 
         </article>
         
@@ -127,12 +155,12 @@
         <section class="post-author">
         
             <figure class="author-avatar">
-                <img src="https://s2.loli.net/2022/09/27/6rzl4WOitu8pUqg.jpg" alt="70loKirin" />
+                <img src="https://s2.loli.net/2022/09/27/6rzl4WOitu8pUqg.jpg" alt="qllokirin" />
             </figure>
         
             <div class="author-info">
-                <h4>70loKirin</h4>
-                <p>你好，我是祈菱不是麒麟，很高兴与你相遇</p>
+                <h4>qllokirin</h4>
+                <p>你好，我是祈菱不是麒麟(qllokirin)，很高兴与你相遇</p>
             </div>
         </section>
     
@@ -171,7 +199,7 @@
 <script src="/static/hingle.js"></script>
 
 
-<script>var hingle = new Paul_Hingle({"copyright":false,"night":true});</script>
+<script>var hingle = new Paul_Hingle({"copyright":false,"night":false});</script>
 
   </body>
 </html>
