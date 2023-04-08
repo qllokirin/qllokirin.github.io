@@ -61,7 +61,7 @@
         </section>
         <article class="post-content">
         
-            <blockquote>这篇文章上次修改于 190 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+            <blockquote>这篇文章上次修改于 193 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
         
             <p>记录一下hexo搭建过程</p>
 <span id="more"></span>
@@ -149,6 +149,17 @@ description: &quot;界面终于正常啦&quot;
 <blockquote>
 <p>live2d我最后使用了这个教程：<a target="_blank" rel="noopener" href="https://haremu.com/p/205">https://haremu.com/p/205</a></p>
 </blockquote>
+</li>
+</ul>
+<h1 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h1><ul>
+<li><p>Permission denied</p>
+<pre><code>hexo s
+INFO  Validating config
+FATAL Permission denied. You can&#39;t use port 4000.
+</code></pre>
+<p>本以为是其他进程占用了4000端口，所以只要换个端口就行了<code>hexo s -p 5000</code>，然后就能用了</p>
+<p>不过后来查了查，<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/d3963da3946f">Hexo使用localhost:4000不能进行本地预览</a>，发现4000端口没人用</p>
+<p>最后还得是国外论坛<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/9164915/node-js-eacces-error-when-listening-on-most-ports">net stop winnat</a>只要以管理员身份运行<code>net stop winnat</code>，<code>net start winnat</code>即可</p>
 </li>
 </ul>
 

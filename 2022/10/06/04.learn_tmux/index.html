@@ -61,7 +61,7 @@
         </section>
         <article class="post-content">
         
-            <blockquote>这篇文章上次修改于 181 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+            <blockquote>这篇文章上次修改于 184 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
         
             <p>记录tmux学习内容</p>
 <span id="more"></span>
@@ -103,6 +103,11 @@ tmux send -t start.3 &quot; &quot;
 tmux a -t start
 </code></pre>
 <p>使用方法：新建一个<code>tmux.sh</code>的文件，将内容写入，执行<code>chmod +x tmux.sh</code>变为可执行文件，<code>./tmux.sh</code>运行</p>
+<h3 id="tmux设置鼠标启动"><a href="#tmux设置鼠标启动" class="headerlink" title="tmux设置鼠标启动"></a>tmux设置鼠标启动</h3><pre><code>vim ~/.tmux.conf
+
+set-option -g mouse on
+</code></pre>
+<p>重启</p>
 
         </article>
         
