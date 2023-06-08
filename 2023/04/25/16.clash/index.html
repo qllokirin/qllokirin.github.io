@@ -73,6 +73,9 @@
 <li><p><strong>下载 clash</strong></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/Fndroid/clash_for_windows_pkg/releases">github 官网</a>下载 </p>
 <p>蓝奏云链接：<a target="_blank" rel="noopener" href="https://wwcm.lanzoub.com/iUAAv0txhuid">Windows</a> 密码:ag8g   <a target="_blank" rel="noopener" href="https://wwcm.lanzoub.com/idMaQ0txi0hi">Linux</a> 密码:f07a   <a target="_blank" rel="noopener" href="https://wwcm.lanzoub.com/igQ4L0txh8wf">Android</a> 密码:147u</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://github.com/Z-Siqi/Clash-for-Windows_Chinese/releases">汉化版</a></p>
+</blockquote>
 </li>
 <li><p><strong>一些简短的说明</strong></p>
 <p>profiles 最上方的 url 输入栏就是在机场中买了之后可以获得的，然后点击 download 会自动下载一个配置文件，选中刚刚下载的配置文件，回到 general 中打开 system porxy （系统代理）就可以科学上网了，关闭 system proxy 就是关闭代理</p>
@@ -83,13 +86,13 @@
 <p>proxies 中可以切换规则代理（rule）或者全局（global）代理，机场的配置文件会自带一些规则，但有的不是很好用，如果有时候你发现某个网站没有走代理，可以选择到global（全局代理）通常情况下 所有流量都会走代理</p>
 </li>
 <li><p><strong>总结</strong></p>
-<p>这时候基本的用用谷歌、上上 github 已经基本没有问题了，或许就是慢一点。但我觉得机场自带的规则很烂会导致你有一个感觉：要用的时候开着，不用的时候得关掉，不然会影响到国内网站的浏览。但这其实不是很对，当规则足够完善时，只有少部分漏网之鱼🐟</p>
+<p>这时候基本的用用谷歌、上上 github 已经基本没有问题了，或许就是慢一点。但我觉得机场自带的规则很烂会导致你有一个感觉：要用的时候开着，不用的时候得关掉，不然会影响到国内网站的浏览。但这其实不是很对，当规则足够完善时（但其实不可能，比如有很多个人买的域名套github page，自己写规则几乎不可能能匹配上），只有少部分漏网之鱼🐟</p>
 </li>
 </ul>
 <h3 id="进阶白嫖版"><a href="#进阶白嫖版" class="headerlink" title="进阶白嫖版"></a>进阶白嫖版</h3><p>若你想要白嫖但是感觉上面那个免费机场太慢了<strong>且愿意折腾</strong>，就用用下面的方法（免费机场随着人数的增多，线路压力会越来越大，但机场主不会因此去增加线路，因为得不偿失，所以<strong>这种免费机场的付费不建议买</strong>）</p>
 <ul>
 <li><p><strong>生成订阅转换链接</strong></p>
-<p>这里我们用一个别人的网站：<a target="_blank" rel="noopener" href="https://bianyuan.xyz/">https://bianyuan.xyz/</a></p>
+<p>这里我们用一个别人的网站：<a target="_blank" rel="noopener" href="https://nexconvert.com/">https://nexconvert.com/</a></p>
 <ul>
 <li><p>将下面的内容填入<code>订阅链接</code>一栏</p>
 <pre><code>https://sub.pmsub.me/clash.yaml |
@@ -109,9 +112,9 @@ https://raw.fastgit.org/freefq/free/master/v2
 <li><p><code>远端配置</code>填</p>
 <p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full.ini">https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full.ini</a></p>
 <p>或者</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/qllokirin/ACL4SSR/master/Clash/config/my_rules_group">https://raw.githubusercontent.com/qllokirin/ACL4SSR/master/Clash/config/my_rules_group</a></p>
+<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/qllokirin/ACL4SSR/master/Clash/config/_my_rule.ini">https://raw.githubusercontent.com/qllokirin/ACL4SSR/master/Clash/config/_my_rule.ini</a></p>
 <blockquote>
-<p>第一个是大佬写的，第二个是我在他基础上加了一点</p>
+<p>第一个是大佬写的，第二个是我在他基础上改了一点</p>
 </blockquote>
 </li>
 <li><p>点击<code>生成订阅链接</code>获得转换后的clash订阅链接</p>
@@ -172,7 +175,7 @@ rules:
  - MATCH,🐟 漏网之鱼
 </code></pre>
 <ul>
-<li><p><code>allow-lan</code>：是否允许局域网共享，true 可以让局域网其他设备使用ip:端口使用你的代理，使用clash软件可以在首页设置</p>
+<li><p><code>allow-lan</code>：是否允许局域网共享，true 可以让局域网其他设备使用<code>ip:端口</code>使用你的代理，使用clash软件可以在首页设置</p>
 </li>
 <li><p><code>proxies</code>：代理链接，买机场的代理买的就是这个字段，通过 http、socks5、ss、ssr、vmess、trojan等协议传输数据</p>
 </li>
@@ -201,15 +204,23 @@ rules:
 <p>所以，用大佬的规则就完了（</p>
 <h3 id="钞能力版"><a href="#钞能力版" class="headerlink" title="钞能力版"></a>钞能力版</h3><p>花钱买机场也是个不错的选择，主要是速度会快，体验比较稳定，但是价位有多有少，便宜的几块一个月，中等的一二十一个月，贵的也有100多一个月的</p>
 <p>大多数机场有一个普遍的发展规律，刚起家，人很少—&gt;便宜，带宽负荷暂时较小—&gt;大量推广—&gt;人数变多，负荷增加—&gt;涨价涨价涨价&#x2F;不涨价但是越来越慢，毕竟人数变多了，典型代表有蜂巢（七元一月涨到现在的二十五元一个月）、一元机场（11一年保持到现在但是人数爆多，tg群已经有7w人了，其实更加恐怖的是我在很多国内应用的软件的评论区多次看到过有人推广，感觉要不太行了）</p>
-<p>目前（2023.4.29）我感觉找到一个目前感觉挺不错的<a target="_blank" rel="noopener" href="https://www.paopao.dog/#/register?code=Ext3RyMd">机场</a>，7.5一个月，ChatGPT百分之90节点解锁，延迟 200 - 400 ，tg群7k，机场主比较活跃（反观一元机场全是牛鬼蛇神哈哈哈），有问必答，速速上车，锁死车门，此外<a target="_blank" rel="noopener" href="https://sockboom.shop/auth/register?affid=458077">这个</a>一年75感觉还行，用过一年，只不过有很多很多 timeout 节点感觉很难受（但 clash 最近出了一个功能是可以筛掉 timeout 节点，感觉挺不错），富哥直接谷歌奶昔，100+一个月</p>
+<p>目前（2023.4.29）我感觉找到一个目前感觉挺不错的<a target="_blank" rel="noopener" href="https://www.paopao.dog/#/register?code=Ext3RyMd">泡泡</a>，7.5一个月，ChatGPT百分之90节点解锁，延迟 200 - 400 ，tg群7k，机场主比较活跃（反观一元机场全是牛鬼蛇神哈哈哈），有问必答，速速上车，锁死车门</p>
+<blockquote>
+<p>用了一两个月了，现在线路转专线，很快，20块钱买110g，我用的少，一个月用20g，这我能用5个月</p>
+<p>全IPLC是真的香，延迟都是一两百 看的真舒服</p>
+</blockquote>
+<p>此外<a target="_blank" rel="noopener" href="https://sockboom.shop/auth/register?affid=458077">sockboom</a>一年75感觉还行，用过一年，只不过有很多很多 timeout 节点感觉很难受（但 clash 最近出了一个功能是可以筛掉 timeout 节点，感觉挺不错），富哥直接谷歌奶昔，100+一个月</p>
+<p>中转天花板还的是<a target="_blank" rel="noopener" href="https://home.xsus.me/index.php#/register?code=YicYe04A">xsus</a></p>
 <p>总的来说，越贵的越好，但是有些比较虚高，太便宜的机场也不指望多稳定，能用就行，想找性价比的高（价格低，稳定，速度快、不会跑路）的就得多逛逛</p>
+<p>这里有个好东西，把这几个勾上有时候能解决几个问题</p>
+<p><img src="https://s2.loli.net/2023/06/02/H5fzCS2JbM7eEWK.png" alt="image.png"></p>
 
         </article>
         
         <section class="post-near">
             <ul>
                 
-                    <li>上一篇: <a href="/7777/07/07/diary/">稀疏平常的生活</a></li>
+                    <li>上一篇: <a href="/2023/06/09/17.callback/">对 ROS 中 callback 机制进行一点探索</a></li>
                 
                 
                     <li>下一篇: <a href="/2023/03/22/15.vocaloid/">vocaloid歌曲展厅（不</a></li>
@@ -261,15 +272,15 @@ rules:
             <div class="row">
                 <div class="col-m-4">
                     <h3 class="title-recent">最新文章：</h3>
-                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/7777/07/07/diary/">稀疏平常的生活</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/04/25/16.clash/">一篇有魔力的文章</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/03/22/15.vocaloid/">vocaloid歌曲展厅（不</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/03/20/14.openwrt/">路由器安装openwrt</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/02/05/13.shuangsheng/">第一次去livehouse</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/01/30/12.remake_ubuntu/">重装Ubuntu</a></li></ul>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/7777/07/07/diary/">稀疏平常的生活</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/06/09/17.callback/">对 ROS 中 callback 机制进行一点探索</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/04/25/16.clash/">一篇有魔力的文章</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/03/22/15.vocaloid/">vocaloid歌曲展厅（不</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/03/20/14.openwrt/">路由器安装openwrt</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/02/05/13.shuangsheng/">第一次去livehouse</a></li></ul>
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-date">时光机：</h3>
-                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/7777/07/">July 7777</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li></ul>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/7777/07/">July 7777</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li></ul>
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-tags">标签云：</h3>
-                    <a href="/tags/EasyConnect/" style="font-size: 10px;">EasyConnect</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/clash/" style="font-size: 10px;">clash</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/livehouse/" style="font-size: 10px;">livehouse</a> <a href="/tags/openwrt/" style="font-size: 10px;">openwrt</a> <a href="/tags/px4/" style="font-size: 10px;">px4</a> <a href="/tags/ros/" style="font-size: 10px;">ros</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/vocaloid/" style="font-size: 10px;">vocaloid</a> <a href="/tags/%E4%BA%91%E5%B4%BD/" style="font-size: 10px;">云崽</a> <a href="/tags/%E5%8F%8C%E7%AC%99/" style="font-size: 10px;">双笙</a> <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA%E7%BB%84%E8%A3%85/" style="font-size: 10px;">无人机组装</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 10px;">日记</a> <a href="/tags/%E6%AD%8C/" style="font-size: 10px;">歌</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%95%AA/" style="font-size: 10px;">番</a> <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a> <a href="/tags/%E9%87%8D%E8%A3%85/" style="font-size: 10px;">重装</a> <a href="/tags/%E9%AD%94%E6%B3%95/" style="font-size: 10px;">魔法</a>
+                    <a href="/tags/EasyConnect/" style="font-size: 10px;">EasyConnect</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/clash/" style="font-size: 10px;">clash</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/livehouse/" style="font-size: 10px;">livehouse</a> <a href="/tags/openwrt/" style="font-size: 10px;">openwrt</a> <a href="/tags/px4/" style="font-size: 10px;">px4</a> <a href="/tags/ros/" style="font-size: 20px;">ros</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/vocaloid/" style="font-size: 10px;">vocaloid</a> <a href="/tags/%E4%BA%91%E5%B4%BD/" style="font-size: 10px;">云崽</a> <a href="/tags/%E5%8F%8C%E7%AC%99/" style="font-size: 10px;">双笙</a> <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA%E7%BB%84%E8%A3%85/" style="font-size: 10px;">无人机组装</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 10px;">日记</a> <a href="/tags/%E6%AD%8C/" style="font-size: 10px;">歌</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%95%AA/" style="font-size: 10px;">番</a> <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a> <a href="/tags/%E9%87%8D%E8%A3%85/" style="font-size: 10px;">重装</a> <a href="/tags/%E9%AD%94%E6%B3%95/" style="font-size: 10px;">魔法</a>
                 </div>
             </div>
         </section>

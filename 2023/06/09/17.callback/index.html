@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>对 ROS 中 callback 机制进行一点探索 - qllokirin</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="qllokirin">
+    <meta property="og:title" content="对 ROS 中 callback 机制进行一点探索"/>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>qllokirin</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><a class="category-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><a class="category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><a class="category-link" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>对 ROS 中 callback 机制进行一点探索</h2>
+            <div class="post-meta">
+                <time class="date">2023.06.09</time>
+            
+                <span class="category"><a class="category-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a>，<a class="category-link" href="/categories/%E6%95%99%E7%A8%8B/%E8%AE%B0%E5%BD%95/">记录</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <h1 id="对-ROS-中-callback-机制进行一点探索"><a href="#对-ROS-中-callback-机制进行一点探索" class="headerlink" title="对 ROS 中 callback 机制进行一点探索"></a>对 ROS 中 callback 机制进行一点探索</h1><span id="more"></span>
+
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前在使用 YOLO 时，因为我们使用的是 GPU 算力很低（或者说无）的 nuc 运行的，最大速度是 0.1s 一帧，也就是 10Hz，但是相机一般都有 30Hz，当时出现了很奇怪的延时，就是 YOLO 运行的结果总是比相机话题中的画面明显慢的多（秒为单位），当时<strong>错误的理解为队列长度设置为 1，就可以一直保证是最新的消息</strong>，所以一直没有很好的解决。当时是把相机的帧率转到只有 10Hz，再让 YOLO 跑，就没有延时了，当时没管，最新想起来了，就配合 ChatGPT 写了点代码测试了一下。</p>
+<h3 id="实验过程"><a href="#实验过程" class="headerlink" title="实验过程"></a>实验过程</h3><p>先用python写了个发布者和订阅者，发布者一秒一发，1 2 3 4 … ，这样一个一个发下去</p>
+<p>接受者使用 rospy.spin() 一直运行 callback 函数，callback 函数中延时 5s，模拟回调函数花费时间很长</p>
+<pre><code>#!/usr/bin/env python
+import rospy
+from std_msgs.msg import String
+rospy.init_node(&#39;publisher_node&#39;)
+pub = rospy.Publisher(&#39;my_topic&#39;, String, queue_size=10)
+
+rate = rospy.Rate(1)  # 发布频率为1Hz
+
+message = 0
+while not rospy.is_shutdown():
+    message = message + 1
+    rospy.loginfo(message)
+    pub.publish(str(message))
+    rate.sleep()
+</code></pre>
+<pre><code>#!/usr/bin/env python
+import rospy
+from std_msgs.msg import String
+import time
+def callback(data):
+    time.sleep(5)
+    rospy.loginfo(&#39;I heard %s&#39;, data.data)
+
+rospy.init_node(&#39;subscriber_node&#39;)
+rospy.Subscriber(&#39;my_topic&#39;, String, callback)
+rospy.spin()
+</code></pre>
+<p>结果如下：</p>
+<pre><code>[INFO] [1686216384.496250]: 1
+[INFO] [1686216385.496821]: 2
+[INFO] [1686216386.496821]: 3
+[INFO] [1686216387.496814]: 4
+[INFO] [1686216388.496830]: 5
+[INFO] [1686216389.496828]: 6
+[INFO] [1686216390.496855]: 7
+[INFO] [1686216390.503832]: I heard 2
+[INFO] [1686216391.496830]: 8
+[INFO] [1686216392.496856]: 9
+[INFO] [1686216393.496890]: 10
+[INFO] [1686216394.496953]: 11
+[INFO] [1686216395.496850]: 12
+[INFO] [1686216395.508812]: I heard 3
+[INFO] [1686216396.496810]: 13
+[INFO] [1686216397.496806]: 14
+[INFO] [1686216398.496805]: 15
+[INFO] [1686216399.496846]: 16
+[INFO] [1686216400.496842]: 17
+[INFO] [1686216400.512905]: I heard 4
+[INFO] [1686216401.496842]: 18
+[INFO] [1686216402.496794]: 19
+[INFO] [1686216403.496824]: 20
+[INFO] [1686216404.496812]: 21
+[INFO] [1686216405.496868]: 22
+[INFO] [1686216405.520205]: I heard 5
+</code></pre>
+<p>回调函数的运行机制是，当有一个消息过来时，就执行回调函数，没有则不执行，这里依照此原则一个一个执行，于是从 1 2 3 4 … 一个一个进行接受。显然，这样无法达到我们希望消息实时更新的想法。</p>
+<p>这时候加上队列长度为会变成如下结果，令 queue_size&#x3D;1</p>
+<pre><code>[INFO] [1686216536.836731]: 1
+[INFO] [1686216537.837433]: 2
+[INFO] [1686216538.838505]: 3
+[INFO] [1686216539.838197]: 4
+[INFO] [1686216540.838405]: 5
+[INFO] [1686216541.838377]: 6
+[INFO] [1686216542.838640]: 7
+[INFO] [1686216542.845194]: I heard 2
+[INFO] [1686216543.838433]: 8
+[INFO] [1686216544.837319]: 9
+[INFO] [1686216545.837338]: 10
+[INFO] [1686216546.838616]: 11
+[INFO] [1686216547.838296]: 12
+[INFO] [1686216547.853294]: I heard 7
+[INFO] [1686216548.838559]: 13
+[INFO] [1686216549.837330]: 14
+[INFO] [1686216550.838616]: 15
+[INFO] [1686216551.838163]: 16
+[INFO] [1686216552.838629]: 17
+[INFO] [1686216552.860943]: I heard 12
+[INFO] [1686216553.838344]: 18
+[INFO] [1686216554.838617]: 19
+[INFO] [1686216555.837327]: 20
+[INFO] [1686216556.837750]: 21
+[INFO] [1686216557.838477]: 22
+[INFO] [1686216557.868910]: I heard 17
+</code></pre>
+<p>从结果来看，队列长度里面储存的内容是在上一次 callback 执行时更新的，<strong>如果callback花费很长时间，这个队列为一的消息并不是最新的</strong>，而是上一次 callback 运行时候的值，而不写队列长度则会把所有的数据全部储存，一个一个依次读取</p>
+<p>显然，两种结果都不是想要的结果</p>
+<p>由于 python 没有 spinOnce 机制，于是我测试了 c ++ 的 ros::spinOnce() 函数，其效果与队列长度设置为1更新机制一样，即使用的消息是上一次执行callback保存的值</p>
+<pre><code>#include &lt;ros/ros.h&gt;
+#include &lt;std_msgs/String.h&gt;
+#include &lt;chrono&gt;
+#include &lt;thread&gt;
+void callback(const std_msgs::String::ConstPtr&amp; msg)
+&#123;
+    std::this_thread::sleep_for(std::chrono::seconds(5));
+    ROS_INFO(&quot;c++ I heard: [%s]&quot;, msg-&gt;data.c_str());
+&#125;
+
+int main(int argc, char** argv)
+&#123;
+    ros::init(argc, argv, &quot;subscriber_node&quot;);
+    ros::NodeHandle nh;
+
+    ros::Subscriber sub = nh.subscribe&lt;std_msgs::String&gt;(&quot;my_topic&quot;, 1, callback);  // 设置队列长度为10
+
+    while (ros::ok())&#123;
+        ros::spinOnce();
+    &#125;
+//    ros::spin();
+
+    return 0;
+&#125;
+</code></pre>
+<pre><code>[INFO] [1686236228.724176]: 1
+[INFO] [1686236229.725438]: 2
+[INFO] [1686236230.725013]: 3
+[INFO] [1686236231.725994]: 4
+[INFO] [1686236232.725972]: 5
+[INFO] [1686236233.726002]: 6
+[INFO] [1686236234.726026]: 7
+[ INFO] [1686236234.727809610]: c++ I heard: [2]
+[INFO] [1686236234.732852]: python I heard 2
+[INFO] [1686236235.725834]: 8
+[INFO] [1686236236.726048]: 9
+[INFO] [1686236237.725904]: 10
+[INFO] [1686236238.725657]: 11
+[INFO] [1686236239.725623]: 12
+[ INFO] [1686236239.730360900]: c++ I heard: [7]
+[INFO] [1686236239.741026]: python I heard 7
+[INFO] [1686236240.725924]: 13
+[INFO] [1686236241.726004]: 14
+[INFO] [1686236242.726119]: 15
+[INFO] [1686236243.726149]: 16
+[INFO] [1686236244.725790]: 17
+[ INFO] [1686236244.730969842]: c++ I heard: [12]
+[INFO] [1686236244.746302]: python I heard 12
+</code></pre>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><ul>
+<li><ol>
+<li>rospy.spin() 单独放在最下面</li>
+</ol>
+<p>直接上代码</p>
+<pre><code>#!/usr/bin/env python
+import rospy
+from std_msgs.msg import String
+import time
+a = &#39; &#39;
+def callback(data):
+    global a
+    a = data.data
+
+rospy.init_node(&#39;subscriber_node&#39;)
+rospy.Subscriber(&#39;my_topic&#39;, String, callback, queue_size=1)
+
+while not rospy.is_shutdown():
+    time.sleep(5)
+    rospy.loginfo(&#39;python %s&#39;, a)
+rospy.spin()
+</code></pre>
+<p>输出</p>
+<pre><code>[INFO] [1686239068.123173]: 1
+[INFO] [1686239069.124314]: 2
+[INFO] [1686239070.124508]: 3
+[INFO] [1686239071.124797]: 4
+[INFO] [1686239072.124445]: 5
+[INFO] [1686239073.124328]: 6
+[INFO] [1686239073.138271]: python 6
+[INFO] [1686239074.124528]: 7
+[INFO] [1686239075.124556]: 8
+[INFO] [1686239076.124529]: 9
+[INFO] [1686239077.124631]: 10
+[INFO] [1686239078.124316]: 11
+[INFO] [1686239078.146387]: python 11
+[INFO] [1686239079.124611]: 12
+[INFO] [1686239080.124351]: 13
+[INFO] [1686239081.124512]: 14
+[INFO] [1686239082.124566]: 15
+[INFO] [1686239083.124489]: 16
+[INFO] [1686239083.154269]: python 16
+[INFO] [1686239084.124850]: 17
+[INFO] [1686239085.124540]: 18
+[INFO] [1686239086.123901]: 19
+[INFO] [1686239087.124629]: 20z`
+[INFO] [1686239088.124192]: 21
+[INFO] [1686239088.159253]: python 21
+</code></pre>
+<p>把费时间的程序放在while中即可，spin 负责一直更新参数</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_16583687/article/details/55263148">https://blog.csdn.net/qq_16583687/article/details/55263148</a></p>
+</blockquote>
+</li>
+<li><p>2.双线程</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lizhiyuanbest/article/details/104710653">https://blog.csdn.net/lizhiyuanbest/article/details/104710653</a></p>
+</blockquote>
+</li>
+</ul>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>这主要对于视觉代码提出了要求，如果使用重型网络，只有10hz的处理速度，则需要把 <strong>rospy.spin() 单独放在最下面，回调函数中一直更新图像</strong>，网络放在 while 中一直执行，或者修改图像消息的帧率，或者使用多线程更新图像</p>
+<p>如果是传统视觉，一般处理速度较快，30hz 到100hz 左右，这时候只要加上队列长度就可基本保证消息是实时的。当消息处理能力大于话题消息频率时，十分推荐使用spin函数</p>
+
+        </article>
+        
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/7777/07/07/diary/">稀疏平常的生活</a></li>
+                
+                
+                    <li>下一篇: <a href="/2023/04/25/16.clash/">一篇有魔力的文章</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/ros/" rel="tag">ros</a>
+            </section>
+        
+        <script src="https://giscus.app/client.js"
+        data-repo="qllokirin/hexo_blog_comments"
+        data-repo-id="R_kgDOI8fvWA"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOI8fvWM4CUIlh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+        </script>
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://s2.loli.net/2022/09/27/6rzl4WOitu8pUqg.jpg" alt="qllokirin" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>qllokirin</h4>
+                <p>你好，我是祈菱不是麒麟(qllokirin)，很高兴与你相遇</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/7777/07/07/diary/">稀疏平常的生活</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/06/09/17.callback/">对 ROS 中 callback 机制进行一点探索</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/04/25/16.clash/">一篇有魔力的文章</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/03/22/15.vocaloid/">vocaloid歌曲展厅（不</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/03/20/14.openwrt/">路由器安装openwrt</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/02/05/13.shuangsheng/">第一次去livehouse</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/7777/07/">July 7777</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/EasyConnect/" style="font-size: 10px;">EasyConnect</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/clash/" style="font-size: 10px;">clash</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/livehouse/" style="font-size: 10px;">livehouse</a> <a href="/tags/openwrt/" style="font-size: 10px;">openwrt</a> <a href="/tags/px4/" style="font-size: 10px;">px4</a> <a href="/tags/ros/" style="font-size: 20px;">ros</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/vocaloid/" style="font-size: 10px;">vocaloid</a> <a href="/tags/%E4%BA%91%E5%B4%BD/" style="font-size: 10px;">云崽</a> <a href="/tags/%E5%8F%8C%E7%AC%99/" style="font-size: 10px;">双笙</a> <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA%E7%BB%84%E8%A3%85/" style="font-size: 10px;">无人机组装</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 10px;">日记</a> <a href="/tags/%E6%AD%8C/" style="font-size: 10px;">歌</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%95%AA/" style="font-size: 10px;">番</a> <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a> <a href="/tags/%E9%87%8D%E8%A3%85/" style="font-size: 10px;">重装</a> <a href="/tags/%E9%AD%94%E6%B3%95/" style="font-size: 10px;">魔法</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2023 <a href="/">qllokirin</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":false,"night":false});</script>
+
+  </body>
+</html>
