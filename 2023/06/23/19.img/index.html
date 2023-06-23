@@ -3,7 +3,7 @@
   <head>
      
     <meta charset="UTF-8">
-    <title>第一次去livehouse - qllokirin</title>
+    <title>img镜像制作与烧录 - qllokirin</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
     <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
     
@@ -15,7 +15,7 @@
 
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
     <meta property="og:site_name" content="qllokirin">
-    <meta property="og:title" content="第一次去livehouse"/>
+    <meta property="og:title" content="img镜像制作与烧录"/>
     
 <meta name="generator" content="Hexo 6.3.0"></head>
 
@@ -51,45 +51,86 @@
     <main>
     <div class="wrap min">
         <section class="post-title">
-            <h2>第一次去livehouse</h2>
+            <h2>img镜像制作与烧录</h2>
             <div class="post-meta">
-                <time class="date">2023.02.05</time>
+                <time class="date">2023.06.23</time>
             
-                <span class="category"><a class="category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a></span>
+                <span class="category"><a class="category-link" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a></span>
             
             </div>
         </section>
         <article class="post-content">
         
-            <p>双笙的幻彩国巡演来西安啦，运气真好~</p>
+            <p>之前有制作也有烧录过 nano 的镜像，这次又遇到了一个相关的问题，费了点时间解决了，小做记录</p>
 <span id="more"></span>
 
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>怎么说呢，算是对高中的我进行一个还愿吧，曾经，谁没有幻想过能见一见自己喜欢的歌手呢，想听现场演唱，现在机会摆在面前，当然是直接去啦！高中那段时间，晚上用MP3偷偷听你的歌或许是最惬意的时光吧，感谢有你的陪伴~</p>
-<h1 id="关于livehouse"><a href="#关于livehouse" class="headerlink" title="关于livehouse"></a>关于livehouse</h1><p>livehouse就是在小场馆内开演唱会，突出优点是氛围感很强，离歌手也比较近</p>
-<p>一定要早点去！！！！！一定要早点去！！！！！</p>
-<p>比如双笙这场是19.30开始，我后面看到兑票处写的是17.00开始兑票，所以17.00之前早点去排队，简而言之建议提前两三个小时到（或更早），不然站到后面被挡住了真的小不适</p>
-<p>因为livehouse都是站着，先到站前面，后来就只能站后面，然后VIP票和普通票是分开的，前面是VIP 后面是普通票，建议还是加钱买张VIP，前面看的更清楚</p>
-<p>对了，兑票有还挺有意思，他是给你手背上印一个章，但是你是看不到印子的，我当时还看了好几眼哈哈哈（店员肯定一眼看出我是第一次来），因为那个是夜光的，进去的时候会打光看手上有没有那个章</p>
-<h1 id="现场"><a href="#现场" class="headerlink" title="现场"></a>现场</h1><p>现场感觉两三百人，现成听还是感觉挺不一样的，简单来说就是听的很爽，不过中间那音响不知道为啥有点电流噪音，有点小g，我看双笙好像也注意到了，弄了一下耳麦和后背的线，至于说唱功什么的，我自己纯纯跑调大师的什么，不太懂这些，反正 好听很稳就行啦。场间的互动也好有意思哈哈哈，有喝水唱歌（不过最后还是没唱出来哈哈 可能是怕卡到喉咙影响后面唱歌吧）还有现场花笙米高声表白（双笙:“不要男妈妈”哈哈哈）哦对了 读弹幕抽奖的时候看到一个人提到了饼饼，不过双笙一看id是“饼饼炸了”哈哈哈哈就没念他，估计他肠子都悔青了 悲</p>
-<p>《朝汐》《循》几首很有回忆感的歌一起来，都是感到一哆嗦，毕竟，那几首歌陪伴了我的高中生活，太温柔啦，现在想来还是很喜欢，一直在列表里面听着</p>
-<p>我一定要吐槽一下普通区周围的竟然不喊安可 可恶 没有喊安可的livehouse是不完整的，之前看了轻音的演唱会，当时看到全场一起喊安可的时候，很震撼我，我就想着一定要喊一次安可，前面VIP区还是比较给力，一直在喊，我们那片我感觉就我一个人在喊（）没事，勇敢祈菱 不怕社死，喊一回安可才算是来了livehouse哈哈</p>
-<h1 id="最后的话"><a href="#最后的话" class="headerlink" title="最后的话"></a>最后的话</h1><p>好啦，幻彩国又过了一站，我也该  也该好好面对开学考试了哈哈哈哈</p>
+<p><strong>烧写有风险，误操作数据易丢失</strong></p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这里的 nano 是指 <a target="_blank" rel="noopener" href="https://developer.nvidia.com/embedded/jetson-nano-developer-kit">Jetson Nano</a>，就是一台小型计算机，普通的笔记本电脑的硬盘一般是固态硬盘或者机械硬盘，而 nano 使用的是 sd 卡，这有一个好处是可以很容易的通过更改 sd 卡的内容对 nano 的系统进行备份或者烧录，毕竟只需要拿下来并放到读卡器里即可。比如进行大批量售卖同一内容的 nano 时，只需要配好一张卡里面的环境，然后用这张卡制作一个镜像，其他的 sd 卡只需要猛猛的烧录就行了。或者你需要对自己的 nano 进行备份以防不时之需。</p>
+<h1 id="使用dd进行镜像制作"><a href="#使用dd进行镜像制作" class="headerlink" title="使用dd进行镜像制作"></a>使用dd进行镜像制作</h1><blockquote>
+<p>网上详细教程很多，这里写着主要方便自己以后用，所以写的很简陋</p>
+</blockquote>
+<p>插⼊要备份的SD卡（TF卡），找到对应的设备名，⼀般来说会是 <code>/dev/sdb</code>或者<code>/dev/sda</code></p>
+<pre><code>sudo fdisk -l
+</code></pre>
+<p>查看分区是否有挂载，一般在最后⼀⾏显⽰有挂载就先卸载</p>
+<pre><code>df -h
+</code></pre>
+<p>卸载挂载，<code>/dev/sdb</code>注意替换</p>
+<pre><code>umount /dev/sdb1
+</code></pre>
+<p>使⽤<strong>dd</strong>备份镜像</p>
+<pre><code>sudo dd if=/dev/sdb conv=sync,noerror of=空闲的某个路径/镜像名.img bs=4M
+</code></pre>
+<blockquote>
+<p>如果你的 sd 卡是 64g，那么制作出来的镜像也是 64g，所以一般用下面的压缩指令 </p>
+</blockquote>
+<p><strong>使用dd备份镜像并且压缩</strong></p>
+<pre><code>sudo dd if=/dev/sdb conv=sync,noerror bs=4M | gzip -c &gt; 空闲的某个路径/镜像名.img.gz
+</code></pre>
+<blockquote>
+<p>64g 的镜像压缩之后一般在 10g 左右</p>
+</blockquote>
+<h1 id="使用dd烧写镜像"><a href="#使用dd烧写镜像" class="headerlink" title="使用dd烧写镜像"></a>使用<strong>dd</strong>烧写镜像</h1><p><code>/dev/sdb</code>注意替换</p>
+<pre><code>sudo dd if=空闲的某个路径/镜像名.img of=/dev/sdb bs=4M status=progress
+</code></pre>
+<p>解压并且烧录</p>
+<pre><code>gunzip -c 空闲的某个路径/镜像名.img.gz | sudo dd of=/dev/sdb bs=4M status=progress
+</code></pre>
+<blockquote>
+<p>速度取决于读卡器的速度，如果是 usb3.0 的读卡器只需要半小时，平均速度50mb&#x2F;s，usb2.0 的读卡器需要几个小时</p>
+<p>status&#x3D;progress可以显示实时进度</p>
+</blockquote>
+<p><img src="https://s2.loli.net/2023/06/23/fJ7PaKn3ArSM8xg.png" alt="image-20230309163423770.png"></p>
+<p>结束时会是这样，没有error则是成功</p>
+<p>如果提示<strong>dd: error writing ‘&#x2F;dev&#x2F;sdb’: No space left on device</strong>中文是<strong>dd: 写入’&#x2F;dev&#x2F;sdb’ 出错: 设备上没有空间</strong></p>
+<p>经过多种方法的尝试，我最终还是认为：<strong>镜像制作在 64g 的 sd 卡 A 上制作，烧录在 64g 的卡 B 上，但是看磁盘信息，卡 B 比卡 A 少了一点点内存（64 和 64 亦有区别），导致烧录失败，解决办法为给新sd卡烧录一个<a target="_blank" rel="noopener" href="https://developer.nvidia.com/embedded/downloads">原版镜像</a>，再重新配环境</strong></p>
+<blockquote>
+<p>卡 A 的<strong>卡</strong>大小63,864,569,856kb<br>卡 A 制作出的<strong>镜像</strong>大小63,866,667,008kb<br>卡 B 的<strong>卡</strong>大小63,831,015,424kb<br>卡 B 制作出的<strong>镜像</strong>大小63,833,112,576kb</p>
+<p>看起来卡 B 制作出的镜像应该能烧录到卡 A 上，但是当时并未尝试</p>
+</blockquote>
+<h1 id="近期遇到的一个问题"><a href="#近期遇到的一个问题" class="headerlink" title="近期遇到的一个问题"></a>近期遇到的一个问题</h1><p>由于某些情况我得到了一份 sd 卡的镜像，是 <code>xxx.gz</code>，我需要查看里面的内容，但是我手里没有 sd 卡，无法烧录，但是镜像是可以挂在的，所以我现将这个压缩包解压得到一个 120g 的无后缀名文件，我兴高采烈的一手双击，提示没有选择打开方式，我反手改后缀名为 img，我心想就这，不是轻松解决，但是他提示：<code>Cannot mount block device /dev/loop read-only</code>，搜索到相关问题是<a target="_blank" rel="noopener" href="https://serverfault.com/questions/839898/cannot-mount-block-device-dev-loop-read-only?newreg=a92584edac764f9b97f9a65c41592794">这个</a>，但报错还是一样</p>
+<p>其实一般情况下 .img&#x2F;iso 镜像应该是可以直接双击挂载的，不知道这个为什么不行，接下来我的搜索关键词一直是<strong>挂载 镜像</strong>，试了半天最后看了一眼标题，<strong>Ubuntu挂载ISO文件</strong>，我再看了一眼 dd 制作的镜像，g，原来是 img，加上关键词 img，很容易搜到<a target="_blank" rel="noopener" href="https://zhou-yuxin.github.io/articles/2015/Linux%E6%8C%82%E8%BD%BDimg%E7%A3%81%E7%9B%98%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6/index.html">这篇文章</a>，原来主要是要指定 offset 的值，不过也好，解决了就行</p>
+<blockquote>
+<p>此外说说最近找到的有点用的东西</p>
+<p>一个是 ssh 链接客户端：<a target="_blank" rel="noopener" href="https://termius.com/">termius</a>，只能说这个ui真的是太舒服了，以前都是靠 zsh 记忆或者 Windows 下就用 Xshell，或者 finalshell（Ubuntu 或者 Windows 都可以，就是ui比较简陋），付费功能可以用学生认证代替付费，可以先认证 github 的学生身份，不过那个有点坑，交了好几次照片，最后是把录取通知书、一卡通、一张小纸条（写 My github’s name is qllokirin）才通过</p>
+<p>另外一个是百度网盘不限速：<a target="_blank" rel="noopener" href="https://wiki.tttt.ee/wiki/wyb.html">TT快下</a> 2023.6.20 仍有效，直接冲到我带宽上限50 了，你说为什么只有 50 ？，哈哈，校园网，懂得都懂</p>
+</blockquote>
 
         </article>
         
         <section class="post-near">
             <ul>
                 
-                    <li>上一篇: <a href="/2023/03/20/14.openwrt/">路由器安装openwrt</a></li>
+                    <li>上一篇: <a href="/7777/07/07/diary/">稀疏平常的生活</a></li>
                 
                 
-                    <li>下一篇: <a href="/2023/01/30/12.remake_ubuntu/">重装Ubuntu</a></li>
+                    <li>下一篇: <a href="/2023/06/12/18.travel-to-hainan/">海南之旅</a></li>
                 
             </ul>
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/livehouse/" rel="tag">livehouse</a><a class="-none-link" href="/tags/%E5%8F%8C%E7%AC%99/" rel="tag">双笙</a>
+            <a class="-none-link" href="/tags/%E8%AE%B0%E5%BD%95/" rel="tag">记录</a>
             </section>
         
         <script src="https://giscus.app/client.js"
