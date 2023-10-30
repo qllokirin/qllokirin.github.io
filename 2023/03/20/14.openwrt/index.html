@@ -61,6 +61,8 @@
         </section>
         <article class="post-content">
         
+            <blockquote>这篇文章上次修改于 224 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+        
             <p>路由器直接走代理，听着就很酷</p>
 <span id="more"></span>
 
@@ -91,18 +93,13 @@
 <p>传输文件我看网上用sftp用的多，但是我之前习惯了scp，我感觉scp似乎更方便，指令像这样<code>scp *.ipk root@192.168.7.1:/package</code></p>
 <p>我试了老半天<code>luci-app-unblockmusic</code>这个解锁网易云音乐的插件，结果发现最近一次commit是三年前，估计是已经用不了了</p>
 <h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p>最近在研究规则代理的问题，因为有时候总会有代理走不上的情况，个人用的话开个全局或者用proxychains也还行，但是挂在路由器上的代理要是规则没写好，那就g</p>
-<p>简单来着只要进入<a target="_blank" rel="noopener" href="https://sub.dler.io/">https://sub.dler.io/</a></p>
-<p>1写你在机场买的节点链接（担心安全问题就不要用）</p>
+<p>简单来着只要进入<a target="_blank" rel="noopener" href="https://nexconvert.com/">https://nexconvert.com/</a></p>
+<p>1写你在机场买的节点链接（担心安全问题就不要用，用不怕，怕不用）</p>
 <p>3写<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full.ini">https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full.ini</a></p>
-<blockquote>
-<p>我自己在上面基础上添加的规则：（目前就加了个chatgpt的规则）</p>
-<p><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/qllokirin/ACL4SSR/master/Clash/config/my_rules_group">https://raw.githubusercontent.com/qllokirin/ACL4SSR/master/Clash/config/my_rules_group</a></p>
-</blockquote>
-<p>想研究什么意思看下面的自定义规则的链接</p>
 <p><img src="https://yattazen.com/usr/uploads/2021/01/subscription-converter-api-new.png"></p>
-<p>然后把链接复制到clash，只要选择rule就行了</p>
+<p>然后把链接复制到clash，下载即可</p>
 <blockquote>
-<p>这样只是优化你的规则，容我试试再评价好不好</p>
+<p>这样只是优化你的规则，并且会抹掉最前面的dns字段，在openclash上使用时可能会造成一些问题</p>
 </blockquote>
 <p>自定义规则：<a target="_blank" rel="noopener" href="https://yattazen.com/tutorial/clash-custom-config.html">https://yattazen.com/tutorial/clash-custom-config.html</a></p>
 <p>图形化编辑教程：<a target="_blank" rel="noopener" href="https://www.jamesdailylife.com/clash_2022">https://www.jamesdailylife.com/clash_2022</a></p>
@@ -117,7 +114,130 @@
 DOMAIN-SUFFIX,msftncsi.com,🚀 节点选择
 </code></pre>
 <p>需要让这两个网站走代理，修改规则即可</p>
-<p>或者使用我的<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/qllokirin/ACL4SSR/master/Clash/config/_my_rule.ini">规则</a></p>
+</li>
+<li><p>重启 openclash 插件之后无法科学上网，打开谷歌或者有关提示 dns 解析错误或者 ip 找不到，有时候等待十几分钟或几个小时就好了</p>
+<p>最终的解决办法是在配置文件前面添加上dns字段。原因是订阅转换之后导致自带的dns字段被抹掉了，openclash日志显示会自动补全，但是可能自动补全的这个无法使用。但日志时不时输出一句更新内核失败，从 raw.github 什么什么的链接失败，可能也会有点影响，github 上有一个相关的 issue 可以解决那个问题</p>
+<p>下面是订阅转换之后的配置文件</p>
+<pre><code>port: 7890
+socks-port: 7891
+allow-lan: true
+mode: Rule
+log-level: info
+external-controller: :9090
+proxies:
+    ……………………
+    ……………………
+</code></pre>
+<p>只需要加上dns字段即可</p>
+<pre><code>port: 7890
+socks-port: 7891
+allow-lan: true
+mode: Rule
+log-level: info
+external-controller: :9090
+dns:
+  enable: true
+  ipv6: false
+  listen: 127.0.0.1:8853
+  enhanced-mode: fake-ip
+  nameserver:
+    - https://223.5.5.5/dns-query
+    - https://223.6.6.6/dns-query
+    - https://doh.pub/dns-query
+  fake-ip-filter:
+    - &quot;*.lan&quot;
+    - stun.*.*.*
+    - stun.*.*
+    - time.windows.com
+    - time.nist.gov
+    - time.apple.com
+    - time.asia.apple.com
+    - &quot;*.ntp.org.cn&quot;
+    - &quot;*.openwrt.pool.ntp.org&quot;
+    - time1.cloud.tencent.com
+    - time.ustc.edu.cn
+    - pool.ntp.org
+    - ntp.ubuntu.com
+    - ntp.aliyun.com
+    - ntp1.aliyun.com
+    - ntp2.aliyun.com
+    - ntp3.aliyun.com
+    - ntp4.aliyun.com
+    - ntp5.aliyun.com
+    - ntp6.aliyun.com
+    - ntp7.aliyun.com
+    - time1.aliyun.com
+    - time2.aliyun.com
+    - time3.aliyun.com
+    - time4.aliyun.com
+    - time5.aliyun.com
+    - time6.aliyun.com
+    - time7.aliyun.com
+    - &quot;*.time.edu.cn&quot;
+    - time1.apple.com
+    - time2.apple.com
+    - time3.apple.com
+    - time4.apple.com
+    - time5.apple.com
+    - time6.apple.com
+    - time7.apple.com
+    - time1.google.com
+    - time2.google.com
+    - time3.google.com
+    - time4.google.com
+    - music.163.com
+    - &quot;*.music.163.com&quot;
+    - &quot;*.126.net&quot;
+    - musicapi.taihe.com
+    - music.taihe.com
+    - songsearch.kugou.com
+    - trackercdn.kugou.com
+    - &quot;*.kuwo.cn&quot;
+    - api-jooxtt.sanook.com
+    - api.joox.com
+    - joox.com
+    - y.qq.com
+    - &quot;*.y.qq.com&quot;
+    - streamoc.music.tc.qq.com
+    - mobileoc.music.tc.qq.com
+    - isure.stream.qqmusic.qq.com
+    - dl.stream.qqmusic.qq.com
+    - aqqmusic.tc.qq.com
+    - amobile.music.tc.qq.com
+    - &quot;*.xiami.com&quot;
+    - &quot;*.music.migu.cn&quot;
+    - music.migu.cn
+    - &quot;*.msftconnecttest.com&quot;
+    - &quot;*.msftncsi.com&quot;
+    - localhost.ptlogin2.qq.com
+    - &quot;*.*.*.srv.nintendo.net&quot;
+    - &quot;*.*.stun.playstation.net&quot;
+    - xbox.*.*.microsoft.com
+    - &quot;*.ipv6.microsoft.com&quot;
+    - &quot;*.*.xboxlive.com&quot;
+    - speedtest.cros.wr.pvp.net
+proxies:
+</code></pre>
+<p>这里还有一份dns设置</p>
+<pre><code>mixed-port: 7890
+allow-lan: true
+bind-address: &#39;*&#39;
+mode: rule
+log-level: info
+external-controller: &#39;127.0.0.1:9090&#39;
+dns:
+    enable: true
+    ipv6: false
+    default-nameserver: [223.5.5.5, 119.29.29.29]
+    enhanced-mode: fake-ip
+    fake-ip-range: 198.18.0.1/16
+    use-hosts: true
+    nameserver: [&#39;https://doh.pub/dns-query&#39;, &#39;https://dns.alidns.com/dns-query&#39;]
+    fallback: [&#39;https://doh.dns.sb/dns-query&#39;, &#39;https://dns.cloudflare.com/dns-query&#39;, &#39;https://dns.twnic.tw/dns-query&#39;, &#39;tls://8.8.4.4:853&#39;]
+    fallback-filter: &#123; geoip: true, ipcidr: [240.0.0.0/4, 0.0.0.0/32] &#125;
+proxies:
+</code></pre>
+<p>应该都是可以的，我只试了前者。切换之后用了一会儿之后，再使用没有dns字段的配置文件也可以正常使用代理了，可能是，他自己记住了？</p>
 </li>
 </ul>
 <p>一些相关链接</p>
@@ -183,15 +303,15 @@ DOMAIN-SUFFIX,msftncsi.com,🚀 节点选择
             <div class="row">
                 <div class="col-m-4">
                     <h3 class="title-recent">最新文章：</h3>
-                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/7777/07/07/diary/">稀疏平常的生活</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/06/23/19.img/">img镜像制作与烧录</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/06/12/18.travel-to-hainan/">海南之旅</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/06/09/17.callback/">对 ROS 中 callback 机制进行一点探索</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/04/25/16.clash/">一篇有魔力的文章</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/03/22/15.vocaloid/">vocaloid歌曲展厅（不</a></li></ul>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/7777/07/07/diary/">稀疏平常的生活</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/08/18/21.computer_optimize/">华硕天选2笔记本优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/08/14/20.new_computer/">第一次自组机！</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/06/23/19.img/">img镜像制作与烧录</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/06/12/18.travel-to-hainan/">海南之旅</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/06/09/17.callback/">对 ROS 中 callback 机制进行一点探索</a></li></ul>
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-date">时光机：</h3>
-                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/7777/07/">July 7777</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li></ul>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/7777/07/">July 7777</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li></ul>
                 </div>
                 <div class="col-m-4">
                     <h3 class="title-tags">标签云：</h3>
-                    <a href="/tags/EasyConnect/" style="font-size: 10px;">EasyConnect</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/clash/" style="font-size: 10px;">clash</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/livehouse/" style="font-size: 10px;">livehouse</a> <a href="/tags/openwrt/" style="font-size: 10px;">openwrt</a> <a href="/tags/px4/" style="font-size: 10px;">px4</a> <a href="/tags/ros/" style="font-size: 20px;">ros</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/vocaloid/" style="font-size: 10px;">vocaloid</a> <a href="/tags/%E4%BA%91%E5%B4%BD/" style="font-size: 10px;">云崽</a> <a href="/tags/%E5%8F%8C%E7%AC%99/" style="font-size: 10px;">双笙</a> <a href="/tags/%E6%97%85%E6%B8%B8/" style="font-size: 10px;">旅游</a> <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA%E7%BB%84%E8%A3%85/" style="font-size: 10px;">无人机组装</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 10px;">日记</a> <a href="/tags/%E6%AD%8C/" style="font-size: 10px;">歌</a> <a href="/tags/%E6%AF%94%E8%B5%9B/" style="font-size: 10px;">比赛</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%95%AA/" style="font-size: 10px;">番</a> <a href="/tags/%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">记录</a> <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a> <a href="/tags/%E9%87%8D%E8%A3%85/" style="font-size: 10px;">重装</a> <a href="/tags/%E9%AD%94%E6%B3%95/" style="font-size: 10px;">魔法</a>
+                    <a href="/tags/EasyConnect/" style="font-size: 10px;">EasyConnect</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/clash/" style="font-size: 10px;">clash</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/livehouse/" style="font-size: 10px;">livehouse</a> <a href="/tags/openwrt/" style="font-size: 10px;">openwrt</a> <a href="/tags/px4/" style="font-size: 10px;">px4</a> <a href="/tags/ros/" style="font-size: 20px;">ros</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/vocaloid/" style="font-size: 10px;">vocaloid</a> <a href="/tags/%E4%BA%91%E5%B4%BD/" style="font-size: 10px;">云崽</a> <a href="/tags/%E5%8F%8C%E7%AC%99/" style="font-size: 10px;">双笙</a> <a href="/tags/%E6%97%85%E6%B8%B8/" style="font-size: 10px;">旅游</a> <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA%E7%BB%84%E8%A3%85/" style="font-size: 10px;">无人机组装</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 10px;">日记</a> <a href="/tags/%E6%AD%8C/" style="font-size: 10px;">歌</a> <a href="/tags/%E6%AF%94%E8%B5%9B/" style="font-size: 10px;">比赛</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%95%AA/" style="font-size: 10px;">番</a> <a href="/tags/%E7%AC%94%E8%AE%B0%E6%9C%AC%E4%BC%98%E5%8C%96/" style="font-size: 10px;">笔记本优化</a> <a href="/tags/%E8%A3%85%E6%9C%BA/" style="font-size: 10px;">装机</a> <a href="/tags/%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">记录</a> <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a> <a href="/tags/%E9%87%8D%E8%A3%85/" style="font-size: 10px;">重装</a> <a href="/tags/%E9%AD%94%E6%B3%95/" style="font-size: 10px;">魔法</a>
                 </div>
             </div>
         </section>

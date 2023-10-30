@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     
+    <meta charset="UTF-8">
+    <title>华硕天选2笔记本优化 - qllokirin</title>
+    <link rel="shortcut icon" href="/static/img/icon.png">
+    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
+    
+<link rel="stylesheet" href="/static/kico.css">
+<link rel="stylesheet" href="/static/hingle.css">
+
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
+    <meta property="og:site_name" content="qllokirin">
+    <meta property="og:title" content="华硕天选2笔记本优化"/>
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  <body>
+    <header>
+    <div class="head-title">
+        <h4>qllokirin</h4>
+    </div>
+    <div class="head-action">
+        <div class="toggle-btn"></div>
+        <div class="light-btn"></div>
+        <div class="search-btn"></div>
+    </div>
+    <form class="head-search" method="post">
+        <input type="text" name="s" placeholder="搜索什么？">
+    </form>
+    <nav class="head-menu">
+        <a href="/">首页</a>
+        <div class="has-child">
+            <a>分类</a>
+            <div class="sub-menu">
+                <a class="category-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><a class="category-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><a class="category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><a class="category-link" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a>
+            </div>
+        </div>
+        
+            <a href="/about">关于我</a>
+        
+            <a href="/friends">朋友们</a>
+        
+    </nav>
+</header>
+
+    <main>
+    <div class="wrap min">
+        <section class="post-title">
+            <h2>华硕天选2笔记本优化</h2>
+            <div class="post-meta">
+                <time class="date">2023.08.18</time>
+            
+                <span class="category"><a class="category-link" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a></span>
+            
+            </div>
+        </section>
+        <article class="post-content">
+        
+            <p>无独显直连电脑性能优化，提高独立显卡调用，有时候看 b 站直播都能卡，受不了了现在终于解决了，很舒服</p>
+<span id="more"></span>
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>电脑是高考结束之后买的华硕天选 2，R7 5800H + RTX 3060，7499入手，就从现在看来当时买还是不太亏的，便宜有现货，就是性能丐一点，没有独显直连，屏幕不是特别好，但是我也看不出来，无所谓。我记得最开始用应该是没什么问题的，后面重装过几次系统，Windows 和 Ubuntu 都重装过，可能是因此发生了一些变化导致现在看 b 站直播都能卡。</p>
+<h1 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h1><p><img src="https://s2.loli.net/2023/08/19/bkAcDEraPuIH4iW.png" alt="2.png"></p>
+<p>习惯性打开任务管理器看一眼，cpu 和内存占用很正常，百分之五十以下，显卡是两张，一张 RTX 3060，6G <strong>专用 GPU 内存</strong>，一张 AMD 芯片自带核显，512MB <strong>专用 GPU 内存</strong>。经后面分析，就是这个 GPU 的缓存被大量占用导致电脑卡的不行，上面是打开 tim wallpaper 火绒 clash 四个应用的内存占用，99 MB，下面是再加上 B 站直播，436MB，已经卡死了，鼠标卡的非常难以操作，<strong>已经到了不能正常使用的地步</strong></p>
+<p><img src="https://s2.loli.net/2023/08/19/WDjaHEyXoQJsG9q.png" alt="6.png"></p>
+<p>但 3060 基本以 0 的占用在呼呼睡大觉，麻了。似乎只有在打游戏的时候才会调用独显。</p>
+<p><img src="https://s2.loli.net/2023/08/19/nLiMV5PuCKSY89a.png" alt="5.png"></p>
+<h1 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h1><p>还是搜索的魅力，我换了很多关键词，<code>华硕天选2优化</code> <code>提升显卡性能</code> <code>独显直连</code>等等。首先华硕天选 2 是不支持独显直连的，只能采用混合模式或者核显模式，混合就是让Windows自行决定用什么显卡，那后面就想到是不是能让谷歌浏览器只使用独显就好了，再经理一番搜索之后终于，找到<a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv6266330?spm_id_from=333.999.0.0">这篇文章</a>。里面的几种方法建议都操作一下。我的电脑起作用的是下面这个，非常有用。调整完之后看 B 站直播开原画，核显占用 228 MB&#x2F;512 MB，独显0.2&#x2F;6 GB。</p>
+<p><img src="https://s2.loli.net/2023/08/19/Nq7L6AU8fpkJs1S.png" alt="3.png"></p>
+<p>还有一点是 Windows 的任务管理器左边的百分比显示一般是指 3D 一栏，专用 GPU 内存利用率要在右边看。</p>
+<p><img src="https://s2.loli.net/2023/08/19/9yrxlpOtASJQu1P.png" alt="4.png"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>感觉这个问题解决的难点在于如何搜索，在不能独显直连的限制下是否能想到指定某软件使用独显，否则难以搜索出对应的教程。我搜索了两三天才解决好😭</p>
+<blockquote>
+<p>不过我看评论区也有说切换之后更卡的，猜测可能是显卡不支持 B 站默认 av1 视频的解码，可以尝试在右下角小齿轮-更多播放设置-更改播放策略试试（未验证）</p>
+<p>此外提一点是华硕天选 2的外接显示屏独显直连需要使用 type-c 转 DP1.4 的线，转 HDMI 似乎也可以。就是连笔记本不能连 HDMI 口，不然还是核显，确实是十分抽象的。</p>
+</blockquote>
+<p>“Windows将双显卡的调用策略放到了系统级的设置中，于是导致Nvidia控制面板这一软件层面的设置不起作用了”</p>
+<p>“windows10 2004， Chrome 83 亲测有效。刚重装了系统，以前都可以的，很可能是windows最新版的锅，真的时不时给你整些幺蛾子出来”</p>
+<p>评论区有人这么说，感觉倒很合理，解释了为什么一开始我用着没问题，现在出问题了，因为Windows有更新我都是直接更的。</p>
+
+        </article>
+        
+        <section class="post-near">
+            <ul>
+                
+                    <li>上一篇: <a href="/7777/07/07/diary/">稀疏平常的生活</a></li>
+                
+                
+                    <li>下一篇: <a href="/2023/08/14/20.new_computer/">第一次自组机！</a></li>
+                
+            </ul>
+        </section>
+        
+            <section class="post-tags">
+            <a class="-none-link" href="/tags/%E7%AC%94%E8%AE%B0%E6%9C%AC%E4%BC%98%E5%8C%96/" rel="tag">笔记本优化</a>
+            </section>
+        
+        <script src="https://giscus.app/client.js"
+        data-repo="qllokirin/hexo_blog_comments"
+        data-repo-id="R_kgDOI8fvWA"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOI8fvWM4CUIlh"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+        </script>
+    
+        <section class="post-author">
+        
+            <figure class="author-avatar">
+                <img src="https://s2.loli.net/2022/09/27/6rzl4WOitu8pUqg.jpg" alt="qllokirin" />
+            </figure>
+        
+            <div class="author-info">
+                <h4>qllokirin</h4>
+                <p>你好，我是祈菱不是麒麟(qllokirin)，很高兴与你相遇</p>
+            </div>
+        </section>
+    
+    </div>
+</main>
+
+    <footer>
+    <div class="buttons">
+        <a class="to-top" href="#"></a>
+    </div>
+    <div class="wrap min">
+        <section class="widget">
+            <div class="row">
+                <div class="col-m-4">
+                    <h3 class="title-recent">最新文章：</h3>
+                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/7777/07/07/diary/">稀疏平常的生活</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/08/18/21.computer_optimize/">华硕天选2笔记本优化</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/08/14/20.new_computer/">第一次自组机！</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/06/23/19.img/">img镜像制作与烧录</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/06/12/18.travel-to-hainan/">海南之旅</a></li><li class="post-list-item"><a class="post-list-link" href="/2023/06/09/17.callback/">对 ROS 中 callback 机制进行一点探索</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-date">时光机：</h3>
+                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/7777/07/">July 7777</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li></ul>
+                </div>
+                <div class="col-m-4">
+                    <h3 class="title-tags">标签云：</h3>
+                    <a href="/tags/EasyConnect/" style="font-size: 10px;">EasyConnect</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/clash/" style="font-size: 10px;">clash</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/livehouse/" style="font-size: 10px;">livehouse</a> <a href="/tags/openwrt/" style="font-size: 10px;">openwrt</a> <a href="/tags/px4/" style="font-size: 10px;">px4</a> <a href="/tags/ros/" style="font-size: 20px;">ros</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/vocaloid/" style="font-size: 10px;">vocaloid</a> <a href="/tags/%E4%BA%91%E5%B4%BD/" style="font-size: 10px;">云崽</a> <a href="/tags/%E5%8F%8C%E7%AC%99/" style="font-size: 10px;">双笙</a> <a href="/tags/%E6%97%85%E6%B8%B8/" style="font-size: 10px;">旅游</a> <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA%E7%BB%84%E8%A3%85/" style="font-size: 10px;">无人机组装</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 10px;">日记</a> <a href="/tags/%E6%AD%8C/" style="font-size: 10px;">歌</a> <a href="/tags/%E6%AF%94%E8%B5%9B/" style="font-size: 10px;">比赛</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%95%AA/" style="font-size: 10px;">番</a> <a href="/tags/%E7%AC%94%E8%AE%B0%E6%9C%AC%E4%BC%98%E5%8C%96/" style="font-size: 10px;">笔记本优化</a> <a href="/tags/%E8%A3%85%E6%9C%BA/" style="font-size: 10px;">装机</a> <a href="/tags/%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">记录</a> <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a> <a href="/tags/%E9%87%8D%E8%A3%85/" style="font-size: 10px;">重装</a> <a href="/tags/%E9%AD%94%E6%B3%95/" style="font-size: 10px;">魔法</a>
+                </div>
+            </div>
+        </section>
+        <section class="sub-footer">
+            <p>© 2023 <a href="/">qllokirin</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+        </section>
+    </div>
+</footer>
+
+
+<script src="/static/kico.js"></script>
+<script src="/static/hingle.js"></script>
+
+
+<script>var hingle = new Paul_Hingle({"copyright":false,"night":false});</script>
+
+  </body>
+</html>
