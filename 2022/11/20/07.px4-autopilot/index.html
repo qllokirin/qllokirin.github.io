@@ -61,7 +61,7 @@
         </section>
         <article class="post-content">
         
-            <blockquote>这篇文章上次修改于 344 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+            <blockquote>这篇文章上次修改于 363 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
         
             <p>px4_firmware编译老报错，记录一下遇到的问题</p>
 <span id="more"></span>
@@ -116,10 +116,10 @@ echo &quot;source /opt/ros/noetic/setup.bash&quot; &gt;&gt; ~/.bashrc
 </blockquote>
 <h1 id="PX4配置"><a href="#PX4配置" class="headerlink" title="PX4配置"></a>PX4配置</h1><pre><code class="bash"># 克隆px4仓库
 git clone https://github.com/PX4/PX4-Autopilot.git
-# 新建名为1.11.3的分支，切换到v1.11.3的版本（tag）
-git checkout -b 1.11.3 v1.11.3
 # 进入目录
 cd PX4-Autopilot
+# 新建名为1.11.3的分支，切换到v1.11.3的版本（tag）
+git checkout -b 1.11.3 v1.11.3
 # 子模块更新（因为px4仓库里面放了很多其他的仓库，这步在代理不稳定时极容易失败，反复运行直到没有报错，也可以使用下面的压缩包）
 git submodule update --init --recursive
 # 编译（极容易报错）
