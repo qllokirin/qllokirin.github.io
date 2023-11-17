@@ -126,8 +126,7 @@ git submodule update --init --recursive
 make px4_sitl_default gazebo
 </code></pre>
 <blockquote>
-<p>基地的同学可以用这个<a target="_blank" rel="noopener" href="https://seafile.npu5v5.cn/lib/e7fbd356-97f9-4ba2-b6ef-84013f32cc03/file/%E5%9F%BA%E5%9C%B0%E5%B8%B8%E7%94%A8/%E6%97%A0%E4%BA%BA%E6%9C%BA%E8%B5%84%E6%96%99/%E8%BD%AF%E4%BB%B6%E8%B5%84%E6%96%99/PX4-Autopilot.zip">压缩包</a> 下载下来之后直接编译即可</p>
-<p>或是<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1q0oBvkt80zfAxgTdXl87Fg?pwd=kiri">网盘链接</a></p>
+<p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1RbHA3QFzmGPLxwFwcO_0VQ?pwd=j4gb">网盘链接</a></p>
 </blockquote>
 <p>编译完成会有如下文字</p>
 <p><font color="green">[Msg] Waiting for master.</font><br><font color="green">[Msg] Connected to gazebo master @ h ttp:&#x2F;&#x2F;127.0.0.1:11345</font><br><font color="green">[Msg] Publicized address: 192.168.1.113</font></p>
@@ -136,8 +135,7 @@ make px4_sitl_default gazebo
 <blockquote>
 <p>使用的zsh就写入.zshrc中（虽然有个source的是bash文件，但也是可以用的）</p>
 </blockquote>
-<pre><code class="bash">source ~/catkin_ws/devel/setup.bash
-source ~/PX4-Autopilot/Tools/setup_gazebo.bash ~/PX4-Autopilot/ ~/PX4-Autopilot/build/px4_sitl_default
+<pre><code class="bash">source ~/PX4-Autopilot/Tools/setup_gazebo.bash ~/PX4-Autopilot/ ~/PX4-Autopilot/build/px4_sitl_default
 export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4-Autopilot
 export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4-Autopilot/Tools/sitl_gazebo
 </code></pre>
@@ -312,7 +310,7 @@ geometry_msgs/Twist twist
 <p>控制飞控 IO 输出(混控器)</p>
 </li>
 </ul>
-<h1 id="任务列表"><a href="#任务列表" class="headerlink" title="任务列表"></a>任务列表</h1><p>下面给出几个任务让你入门无人机代码控制，一份无人机概述<a target="_blank" rel="noopener" href="https://seafile.npu5v5.cn/lib/e7fbd356-97f9-4ba2-b6ef-84013f32cc03/file/%E5%9F%BA%E5%9C%B0%E5%B8%B8%E7%94%A8/%E6%97%A0%E4%BA%BA%E6%9C%BA%E8%B5%84%E6%96%99/%E5%8C%97%E8%88%AA%E6%97%A0%E4%BA%BA%E6%9C%BA.pdf">ppt</a></p>
+<h1 id="任务列表"><a href="#任务列表" class="headerlink" title="任务列表"></a>任务列表</h1><p>下面给出几个任务让你入门无人机代码控制</p>
 <h3 id="1、飞机飞正方形"><a href="#1、飞机飞正方形" class="headerlink" title="1、飞机飞正方形"></a>1、飞机飞正方形</h3><p><strong>任务目标</strong>：控制飞机在仿真环境中完成<strong>起飞</strong>、<strong>定高</strong>飞行一个<strong>正方形</strong>、<strong>降落</strong>的任务。</p>
 <p>为降低任务难度，以下给出推荐学习步骤</p>
 <ul>
