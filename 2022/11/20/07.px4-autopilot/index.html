@@ -61,7 +61,7 @@
         </section>
         <article class="post-content">
         
-            <blockquote>这篇文章上次修改于 363 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+            <blockquote>这篇文章上次修改于 371 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
         
             <p>px4_firmware编译老报错，记录一下遇到的问题</p>
 <span id="more"></span>
@@ -96,8 +96,8 @@ wget https://gitee.com/robin_shaun/XTDrone/raw/master/sitl_config/mavros/install
 # 添加权限
 sudo chmod a+x ./install_geographiclib_datasets.sh
 # 执行脚本 安装依赖
+# 容易因为网络问题下载不下来 多次执行知道全部succeed
 sudo ./install_geographiclib_datasets.sh
-echo &quot;source /opt/ros/noetic/setup.bash&quot; &gt;&gt; ~/.bashrc
 </code></pre>
 <h1 id="python"><a href="#python" class="headerlink" title="python"></a>python</h1><pre><code class="bash">pip install rospkg
 </code></pre>
@@ -120,7 +120,7 @@ git clone https://github.com/PX4/PX4-Autopilot.git
 cd PX4-Autopilot
 # 新建名为1.11.3的分支，切换到v1.11.3的版本（tag）
 git checkout -b 1.11.3 v1.11.3
-# 子模块更新（因为px4仓库里面放了很多其他的仓库，这步在代理不稳定时极容易失败，反复运行直到没有报错，也可以使用下面的压缩包）
+# 子模块更新（因为px4仓库里面放了很多其他的仓库，这步在代理不稳定时极容易失败，最好能一次全部通过，也可以使用下面的压缩包）
 git submodule update --init --recursive
 # 编译（极容易报错）
 make px4_sitl_default gazebo
@@ -130,8 +130,8 @@ make px4_sitl_default gazebo
 </blockquote>
 <p>编译完成会有如下文字</p>
 <p><font color="green">[Msg] Waiting for master.</font><br><font color="green">[Msg] Connected to gazebo master @ h ttp:&#x2F;&#x2F;127.0.0.1:11345</font><br><font color="green">[Msg] Publicized address: 192.168.1.113</font></p>
-<p>出现gazebo，里面会有<strong>一架飞机</strong></p>
-<p>将下面的内容写入.bashrc文件中</p>
+<p>出现gazebo，里面会有<strong>一架飞机</strong>，则说明编译成功，按<code>ctrl+c</code>关闭进程等待gazebo自动关闭</p>
+<p>然后将下面的内容写入.bashrc文件中</p>
 <blockquote>
 <p>使用的zsh就写入.zshrc中（虽然有个source的是bash文件，但也是可以用的）</p>
 </blockquote>
@@ -163,7 +163,7 @@ mode: &quot;AUTO.LOITER&quot;
 system_status: 3
 </code></pre>
 <blockquote>
-<p>调整飞控时会用到<a target="_blank" rel="noopener" href="https://docs.qgroundcontrol.com/en/getting_started/download_and_install.html">QGroundControl</a></p>
+<p>实物飞机调整飞控时会用到<a target="_blank" rel="noopener" href="https://docs.qgroundcontrol.com/en/getting_started/download_and_install.html">QGroundControl</a></p>
 <p>此外给一份<a target="_blank" rel="noopener" href="https://docs.px4.io/v1.12/en/ros/mavros_offboard.html">官方示例代码</a>运行起来之后飞机就能起飞啦</p>
 </blockquote>
 <h1 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h1><ul>
@@ -288,13 +288,11 @@ geometry_msgs/Twist twist
 <p>如果是base_link，速度x&#x3D;1,y&#x3D;0的话，就是一直往前（飞机头的方向）飞，这时候就跟着飞机头朝向一起走了</p>
 </blockquote>
 </li>
-<li><p><code>/mavros/setpoint_accel/accel</code></p>
-<p>加速度控制话题</p>
-</li>
 <li><p><code>/mavros/setpoint_position/local</code></p>
 <p>位置控制话题</p>
 <blockquote>
-<p>不是很建议使用，因为这个只是单纯的使用内置pid走直线去到指定位置</p>
+<p><del>不是很建议使用</del>，因为这个只是单纯的使用内置pid走直线去到指定位置（或许飞控的内置pid会比我们的好？</p>
+<p>听说有队伍也在使用这个打比赛，配合上在飞控的参数里面限制飞行速度最大值</p>
 </blockquote>
 </li>
 <li><p><code>/mavros/setpoint_raw/local</code></p>
@@ -381,6 +379,7 @@ geometry_msgs/Twist twist
 <p>使用px6c可能会有这个问题，电脑上安装的mavros太旧了，更新一下即可<code>sudo apt install ros-$ROS_DISTRO-mavros  ros-$ROS_DISTRO-mavros–extras</code></p>
 </li>
 </ul>
+<p><code>rostopic echo /mavros/local_position/pose</code>没有消息或者xy为0，z有值的时候检查一下飞控参数中<code>EKF2_AID_MASK</code>是否设置为了24，<code>EKF2_HGT_MODE</code>是否设置为VISON</p>
 
         </article>
         
