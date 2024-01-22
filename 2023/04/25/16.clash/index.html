@@ -61,7 +61,7 @@
         </section>
         <article class="post-content">
         
-            <blockquote>这篇文章上次修改于 215 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+            <blockquote>这篇文章上次修改于 272 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
         
             <p>magic 碰都不能碰的滑梯</p>
 <span id="more"></span>
@@ -216,6 +216,25 @@ rules:
 <p>总的来说，越贵的越好，但是有些比较虚高，太便宜的机场也不指望多稳定，能用就行，想找性价比的高（价格低，稳定，速度快、不会跑路）的就得多逛逛</p>
 <p>这里有个好东西，把这几个勾上有时候能解决几个问题</p>
 <p><img src="https://s2.loli.net/2023/06/02/H5fzCS2JbM7eEWK.png" alt="image.png"></p>
+<h1 id="docker版clash"><a href="#docker版clash" class="headerlink" title="docker版clash"></a>docker版clash</h1><p>当前路径下放置<code>config.yaml</code></p>
+<p>前几行参考示例：</p>
+<pre><code>mixed-port: 7890
+allow-lan: true
+bind-address: &#39;*&#39;
+mode: rule
+log-level: info
+external-controller: &#39;0.0.0.0:9090&#39;
+proxies:
+</code></pre>
+<p>运行docker</p>
+<pre><code>run -d --name clash-client --restart always -p 7890:7890 -p 7891:7891 -p 9090:9090 -v ./config.yaml:/root/.config/clash/config.yaml  dreamacro/clash
+</code></pre>
+<p>运行yacd面板</p>
+<pre><code>docker run -p 1234:80 -d --rm --name yacd haishanh/yacd
+</code></pre>
+<p>访问<code>IP:1234</code>，填写<code>http://IP:9090</code>即可</p>
+<p>使用<code>proxychains4</code>时填写<code>http 127.0.0.1 7890</code></p>
+<p>或者直接执行<code>export http_proxy=http://127.0.0.1:7890</code></p>
 
         </article>
         
@@ -287,7 +306,7 @@ rules:
             </div>
         </section>
         <section class="sub-footer">
-            <p>© 2023 <a href="/">qllokirin</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+            <p>© 2024 <a href="/">qllokirin</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
         </section>
     </div>
 </footer>

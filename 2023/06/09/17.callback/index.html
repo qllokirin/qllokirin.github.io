@@ -61,6 +61,8 @@
         </section>
         <article class="post-content">
         
+            <blockquote>这篇文章上次修改于 228 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+        
             <h1 id="对-ROS-中-callback-机制进行一点探索"><a href="#对-ROS-中-callback-机制进行一点探索" class="headerlink" title="对 ROS 中 callback 机制进行一点探索"></a>对 ROS 中 callback 机制进行一点探索</h1><span id="more"></span>
 
 <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>之前在使用 YOLO 时，因为我们使用的是 GPU 算力很低（或者说无）的 nuc 运行的，最大速度是 0.1s 一帧，也就是 10Hz，但是相机一般都有 30Hz，当时出现了很奇怪的延时，就是 YOLO 运行的结果总是比相机话题中的画面明显慢的多（秒为单位），当时<strong>错误的理解为队列长度设置为 1，就可以一直保证是最新的消息</strong>，所以一直没有很好的解决。当时是把相机的帧率转到只有 10Hz，再让 YOLO 跑，就没有延时了，当时没管，最新想起来了，就配合 ChatGPT 写了点代码测试了一下。</p>
@@ -335,7 +337,7 @@ rospy.spin()
             </div>
         </section>
         <section class="sub-footer">
-            <p>© 2023 <a href="/">qllokirin</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+            <p>© 2024 <a href="/">qllokirin</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
         </section>
     </div>
 </footer>

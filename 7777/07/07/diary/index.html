@@ -200,7 +200,7 @@
 <p><img src="https://s2.loli.net/2022/12/17/AGzoInhDa8FElNe.jpg" alt="5UNDVVMR_1E8TBQ__FSD2_X.jpg"></p>
 <p><img src="https://s2.loli.net/2022/12/17/f8yjSmDGoNAC6tW.jpg" alt="WVW_G697FL2__QHE6_P_QWM.jpg"></p>
 <p>![3_2&#96;4I6M3T_QT5_T__F0_88.jpg](<a target="_blank" rel="noopener" href="https://s2.loli.net/2022/12/17/cNdo5nBamzURMQp.jpg">https://s2.loli.net/2022/12/17/cNdo5nBamzURMQp.jpg</a>)</p>
-<p>![7_B&#96;KAFQ7S~<a href="mailto:&#95;&#49;&#x32;&#55;&#x40;&#x49;&#x5f;&#x55;&#x5f;&#82;&#x5f;&#55;&#46;&#106;&#112;&#103;">&#95;&#49;&#x32;&#55;&#x40;&#x49;&#x5f;&#x55;&#x5f;&#82;&#x5f;&#55;&#46;&#106;&#112;&#103;</a>](<a target="_blank" rel="noopener" href="https://s2.loli.net/2022/12/17/kdOpUzbv6yqIfJr.jpg">https://s2.loli.net/2022/12/17/kdOpUzbv6yqIfJr.jpg</a>)</p>
+<p>![7_B&#96;KAFQ7S~<a href="mailto:&#95;&#x31;&#50;&#x37;&#x40;&#73;&#x5f;&#x55;&#95;&#82;&#x5f;&#55;&#x2e;&#x6a;&#112;&#x67;">&#95;&#x31;&#50;&#x37;&#x40;&#73;&#x5f;&#x55;&#95;&#82;&#x5f;&#55;&#x2e;&#x6a;&#112;&#x67;</a>](<a target="_blank" rel="noopener" href="https://s2.loli.net/2022/12/17/kdOpUzbv6yqIfJr.jpg">https://s2.loli.net/2022/12/17/kdOpUzbv6yqIfJr.jpg</a>)</p>
 </li>
 <li><p>今天终于解决了蓝牙的问题 好耶！！</p>
 <p>之前一直有个情况是：连了蓝牙会有两个设备</p>
@@ -296,6 +296,29 @@
 <ul>
 <li>github学生认证：录取通知书+一卡通+小纸条写github name</li>
 </ul>
+<p><strong>十二月</strong></p>
+<ul>
+<li><p>太神奇了，<a target="_blank" rel="noopener" href="https://developer.aliyun.com/ask/104139"><code>QQ邮箱不行 其他邮箱 使用 smtp 加密端口号 465</code></a>      <a target="_blank" rel="noopener" href="https://blog.csdn.net/u013412790/article/details/72904038"><code>由于阿里云禁用了25端口所以替换成465端口并修改协议为ssl才能发送邮件</code></a>   </p>
+<p>最近是用的一个<a target="_blank" rel="noopener" href="https://github.com/cheanus/Automation/blob/main/GradesMonitorLinux">自动监测成绩脚本</a>，里面发送邮件相关的函数是<code>smtp_obj.connect(&#39;smtp.qq.com&#39;, 25)</code>，使用的是25端口，阿里云把它给封了，用<code>telnet smtp.qq.com 25</code>无法连通，但是<code>telnet smtp.qq.com 465</code>是可以的，换了几次关键词上面两个相似的博客，最终还是问的GPT【<strong>smtp_obj.connect(‘smtp.qq.com’, 25)修改为使用465端口 并 修改协议为ssl</strong>】直接成功拿下，用如下代码即可</p>
+<pre><code>smtp_obj = smtplib.SMTP_SSL(mail_host, mail_port)
+</code></pre>
+<blockquote>
+<p>转眼六个月没更新日记了，哈哈 发生了什么呢</p>
+</blockquote>
+</li>
+</ul>
+<p>2024</p>
+<p><strong>一月</strong></p>
+<p>把windows powershell设置为预测历史指令自动补全</p>
+<pre><code class="powershell">#寻找最新版本
+Find-Module PSReadLine -AllVersions | Select-Object -First 5
+#我这里最新是2.3.4
+Install-Module -Name PSReadLine -RequiredVersion 2.3.4
+#把预测源目设置成历史
+Set-PSReadLineOption -PredictionSource History
+#重启powershell即可
+</code></pre>
+<p>第一次重启后可能存在psreadline模块无法加载的情况参考<a target="_blank" rel="noopener" href="https://www.miyil.com/vue/940.html">这个</a></p>
 
         </article>
         
@@ -367,7 +390,7 @@
             </div>
         </section>
         <section class="sub-footer">
-            <p>© 2023 <a href="/">qllokirin</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+            <p>© 2024 <a href="/">qllokirin</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
         </section>
     </div>
 </footer>

@@ -61,7 +61,7 @@
         </section>
         <article class="post-content">
         
-            <blockquote>这篇文章上次修改于 371 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+            <blockquote>这篇文章上次修改于 429 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
         
             <p>px4_firmware编译老报错，记录一下遇到的问题</p>
 <span id="more"></span>
@@ -376,10 +376,17 @@ geometry_msgs/Twist twist
 <p>如果使用的是<code>ubs-tele1</code>，那建议<strong>好好检查</strong>线和那个模块是不是有问题，这个问题最难排除，有一次线松了我排查了半天结果学长定睛一看，用笔把线往里戳了戳就好了</p>
 </li>
 <li><p><strong>mavros未更新</strong></p>
-<p>使用px6c可能会有这个问题，电脑上安装的mavros太旧了，更新一下即可<code>sudo apt install ros-$ROS_DISTRO-mavros  ros-$ROS_DISTRO-mavros–extras</code></p>
+<p>使用px6c可能会有这个问题，电脑上安装的mavros太旧了，更新一下即可<code>sudo apt install ros-$ROS_DISTRO-mavros  ros-$ROS_DISTRO-mavros-extras</code></p>
+</li>
+<li><p><strong>端口占用 busy</strong></p>
+<pre><code>[FATAL] [1705922606.620863352]: FCU: DeviceError:serial:open: Device or resource busy
+================================================================================REQUIRED process [mavros-2] has died!
+</code></pre>
+<p>把QGC地面站关闭即可</p>
+</li>
+<li><p><code>rostopic echo /mavros/local_position/pose</code>没有消息或者xy为0，z有值的时候检查一下飞控参数中<code>EKF2_AID_MASK</code>是否设置为了24，<code>EKF2_HGT_MODE</code>是否设置为VISON</p>
 </li>
 </ul>
-<p><code>rostopic echo /mavros/local_position/pose</code>没有消息或者xy为0，z有值的时候检查一下飞控参数中<code>EKF2_AID_MASK</code>是否设置为了24，<code>EKF2_HGT_MODE</code>是否设置为VISON</p>
 
         </article>
         
@@ -451,7 +458,7 @@ geometry_msgs/Twist twist
             </div>
         </section>
         <section class="sub-footer">
-            <p>© 2023 <a href="/">qllokirin</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
+            <p>© 2024 <a href="/">qllokirin</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
         </section>
     </div>
 </footer>
