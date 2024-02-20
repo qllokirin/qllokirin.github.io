@@ -61,7 +61,7 @@
         </section>
         <article class="post-content">
         
-            <blockquote>这篇文章上次修改于 251 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+            <blockquote>这篇文章上次修改于 257 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
         
             <h1 id="对-ROS-中-callback-机制进行一点探索"><a href="#对-ROS-中-callback-机制进行一点探索" class="headerlink" title="对 ROS 中 callback 机制进行一点探索"></a>对 ROS 中 callback 机制进行一点探索</h1><span id="more"></span>
 
@@ -206,7 +206,7 @@ int main(int argc, char** argv)
 </code></pre>
 <h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><ul>
 <li><ol>
-<li>rospy.spin() 单独放在最下面</li>
+<li>使用<code>while not rospy.is_shutdown():</code>，实测会来了一个消息就会开始执行callback</li>
 </ol>
 <p>直接上代码</p>
 <pre><code>#!/usr/bin/env python
@@ -224,7 +224,6 @@ rospy.Subscriber(&#39;my_topic&#39;, String, callback, queue_size=1)
 while not rospy.is_shutdown():
     time.sleep(5)
     rospy.loginfo(&#39;python %s&#39;, a)
-rospy.spin()
 </code></pre>
 <p>输出</p>
 <pre><code>[INFO] [1686239068.123173]: 1
