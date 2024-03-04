@@ -61,37 +61,84 @@
         </section>
         <article class="post-content">
         
-            <blockquote>这篇文章上次修改于 346 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+            <blockquote>这篇文章上次修改于 350 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
         
             <p>路由器直接走代理，听着就很酷</p>
 <span id="more"></span>
 
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>基地的网络可以直接用魔法，刚入队的时候就感觉很神奇，现在终于有机会自己试试了</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>基地的网络可以直接用魔法，刚入队的时候就感觉很神奇，现在终于有机会自己试试了。现在快退役了，丰富一下教程内容。</p>
 <blockquote>
-<p>以下刷入内容仅针对红米 ac2100，问就是只有这个，但是这种比较便宜的硬路由直接刷OpenWrt，CPU 算力比较吃紧，会有断流或者卡住之类的情况，我看别人都是建议拿几k的硬路由才能刷OpenWrt</p>
+<p>基地目前（2024.3.4）拥有一个红米 AC2100、两个友善 Nanopi R2S 软路由、一个 J1800 x86 2核4G 小主机</p>
 </blockquote>
-<h1 id="大体思路"><a href="#大体思路" class="headerlink" title="大体思路"></a>大体思路</h1><p>对于一些”不那么安全“的路由器，我们可以直接修改他们的固件，也就是换一个系统变成<code>openwrt</code>，这时候安装<code>openclash</code>（就是clash的路由器版本），然后就和我们使用clash差不多了</p>
-<p>对于一些“安全”的路由器，这时候无法重刷固件，我们则需要另外的一台计算机来跑openwrt系统（可以选择软路由装个openwrt或者某台主机跑docker镜像），根据代理方式还有旁路由等等分支</p>
-<h1 id="刷入OpenWrt系统"><a href="#刷入OpenWrt系统" class="headerlink" title="刷入OpenWrt系统"></a>刷入OpenWrt系统</h1><p>为了防止路由器变砖，一般会推荐先<a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-4066963-1-1.html">刷一个BREED系统</a>，所以系统变化如下</p>
+<h1 id="红米-AC2100刷openwrt"><a href="#红米-AC2100刷openwrt" class="headerlink" title="红米 AC2100刷openwrt"></a>红米 AC2100刷openwrt</h1><p>像这种路由器也叫<strong>硬路由</strong>，cpu 算力不高，但是无线性能好。要刷成openwrt系统会经历下面的过程：</p>
 <p>红米自带系统-&gt;<code>BREED</code>-&gt;<code>OpenWrt</code></p>
-<p><a target="_blank" rel="noopener" href="https://supes.top/%e7%ba%a2%e7%b1%b3-%e5%b0%8f%e7%b1%b3-ac2100-%e5%88%b7breed%e5%92%8copenwrt%e6%95%99%e7%a8%8b/">这个教程</a>很详细，感觉很好，不过基地路由器已经有学长刷成OpenWrt了，我也不瞎捯饬了，万一变砖了就不好了</p>
-<blockquote>
-<p>有机会的还是想从头开始刷个固件玩玩</p>
+<p><a target="_blank" rel="noopener" href="https://supes.top/%e7%ba%a2%e7%b1%b3-%e5%b0%8f%e7%b1%b3-ac2100-%e5%88%b7breed%e5%92%8copenwrt%e6%95%99%e7%a8%8b/">这个教程</a>很详细。热门路由器在网上搜索都可以找到相应的教程，不过值得注意的是，硬路由因为本身性能不高，低价位的路由器刷成 openwrt 系统后可能会出现<strong>卡顿、断流</strong>等情况，所以这个路由器基本闲置了。</p>
+<h1 id="友善-Nanopi-R2S-软路由刷入OpenWrt系统"><a href="#友善-Nanopi-R2S-软路由刷入OpenWrt系统" class="headerlink" title="友善 Nanopi R2S 软路由刷入OpenWrt系统"></a>友善 Nanopi R2S 软路由刷入OpenWrt系统</h1><blockquote>
+<p>接口：</p>
+<p>一个 type-C 供电口</p>
+<p>一个 WAN 口（连接学校的网口）</p>
+<p>一个 LAN 口（连接局域网设备，如路由器、电脑）</p>
+<p>一张 SD 卡</p>
 </blockquote>
-<h1 id="更新OpenWrt系统"><a href="#更新OpenWrt系统" class="headerlink" title="更新OpenWrt系统"></a>更新OpenWrt系统</h1><p>当系统已经是OpenWrt时，可以随意更新和安装软件包&#x2F;更改主题，最开始时可以使用**<a target="_blank" rel="noopener" href="https://supes.top/">supes.top</a>**定制出带有基本功能的系统文件，比如预设一个主题，系统自带openclash及其他插件之类的，安装方法他也有很具体的介绍</p>
 <ul>
-<li><code>系统</code>-&gt;<code>系统</code>中可以更改主题</li>
-<li><code>系统</code>-&gt;<code>软件包</code>可以上传<code>.ipk</code>的软件包（如openclash）</li>
-<li><code>系统</code>-&gt;<code>备份与升级</code>可以刷个新固件</li>
-<li>可以ssh链接<code>ssh root@192.168.x.1</code>密码默认root</li>
+<li><p>我习惯使用大佬的<a target="_blank" rel="noopener" href="https://openwrt.ai/">固件定制网站</a>，搜索 R2S，自定义固件里面把 OpenClash（clash的openwrt插件版）安装上，后台地址和后台密码按需修改，在校园内建议修改为192.168.x.1</p>
+</li>
+<li><p>将 R2S 上的 sd 卡拿下来放入 sd 卡中插入电脑</p>
+</li>
+<li><p>我这里使用烧录软件<a target="_blank" rel="noopener" href="https://github.com/balena-io/etcher/releases/tag/v1.18.11">balenaEtcher</a>将镜像烧录到 sd 卡中，一步一步按提示操作即可</p>
+</li>
+<li><p>插入 sd 卡并开机，LAN 口与自己的电脑连接，你将被分配一个 192.168.x.x 的 ip，访问 192.168.x.1 或者 &#x2F;op 即可访问 openwrt后台</p>
+</li>
+</ul>
+<blockquote>
+<p>就普通使用而言，编译固件、ssh、命令行 opkg等等都用不到，如果愿意请自行折腾</p>
+</blockquote>
+<h1 id="J1800-x86刷openwrt"><a href="#J1800-x86刷openwrt" class="headerlink" title="J1800 x86刷openwrt"></a>J1800 x86刷openwrt</h1><blockquote>
+<p>接口：</p>
+<p>一个 12V DC 供电</p>
+<p>一个 LAN1 口</p>
+<p>一个 LAN2 口</p>
+<p>一个 HDMI 口</p>
+<p>一个 VGA 口</p>
+</blockquote>
+<p>因为它的硬盘不方便&#x2F;不能像 R2S 一样可以直接接入电脑进行烧录，所以我们选择借助 PE 系统，在 J1800 上运行 pe 系统然后将镜像烧录到原本的硬盘里</p>
+<ul>
+<li><p>我习惯使用大佬的<a target="_blank" rel="noopener" href="https://openwrt.ai/">固件定制网站</a>，搜索 x86&#x2F;64，自定义固件里面把 OpenClash（clash的openwrt插件版）安装上，后台地址和后台密码按需修改，在校园内建议修改为192.168.x.1</p>
+</li>
+<li><p>烧录 PE 系统，我使用的是<a target="_blank" rel="noopener" href="http://upe.net/">优启通</a> PE 系统</p>
+</li>
+<li><p>将<a target="_blank" rel="noopener" href="https://github.com/namazso/WinDiskFlash/releases/tag/v1.1">烧录软件WinDiskFlash</a> 和 openwrt 镜像放入 u 盘之中</p>
+</li>
+<li><p>开机乱按进入 BIOS，选择以 u 盘启动</p>
+</li>
+<li><p>试一试两个LAN 口与自己的电脑连接，接入其中一个时你将被分配一个 192.168.x.x 的 ip，那个就是真正的 LAN 口，另外一个是 WAN 口，访问 192.168.x.1 或者 &#x2F;op 即可访问 openwrt后台</p>
+</li>
 </ul>
 <h3 id="重启解决百分之99的问题！！！！"><a href="#重启解决百分之99的问题！！！！" class="headerlink" title="重启解决百分之99的问题！！！！"></a>重启解决百分之99的问题！！！！</h3><p>今天总算是又领悟到这句话的真谛了，一开始上传新固件也是一直报错，一个重启再上传就好了</p>
 <p>打开openclash结果主程序一直显示未运行，捯饬半天各种检查各种搜索，结果一个重启又好了</p>
 <p>遇到<code> * opkg_download: 请检查网络设置, 确保本设备网络可用.</code>也是多运行几次，重启然后再多运行几次就好了</p>
 <p>神奇</p>
-<h1 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h1><p>自行安装插件的时候麻烦还挺多，因为完全不了解，有些README读起来有困难，比如<code>uname -a</code>看到你是mips架构结果你找了半天发现newifid2.zip里面放的就是mipsel的.ipk东西</p>
+<h1 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h1><blockquote>
+<p>可选</p>
+</blockquote>
+<p>自行安装插件的时候麻烦还挺多，因为完全不了解，有些README读起来有困难，比如<code>uname -a</code>看到你是mips架构结果你找了半天发现newifid2.zip里面放的就是mipsel的.ipk东西</p>
 <p>传输文件我看网上用sftp用的多，但是我之前习惯了scp，我感觉scp似乎更方便，指令像这样<code>scp *.ipk root@192.168.7.1:/package</code></p>
 <p>我试了老半天<code>luci-app-unblockmusic</code>这个解锁网易云音乐的插件，结果发现最近一次commit是三年前，估计是已经用不了了</p>
+<h1 id="OpenClash的使用"><a href="#OpenClash的使用" class="headerlink" title="OpenClash的使用"></a>OpenClash的使用</h1><p>上网设置</p>
+<ul>
+<li><p><code>网络</code>-&gt;<code>接口</code>，WAN 口设置为 PPPOE 拨号，输入学号密码，在学院楼的话账号是不用充钱的</p>
+<p>LAN 口的静态地址千万别改，不然就可以考虑重新刷机了</p>
+</li>
+</ul>
+<p>opencalsh设置</p>
+<ul>
+<li><code>服务</code>-&gt;<code>OpenClash</code>，最下方 启动！然后查看运行日志，但必然会碰到<a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/thread-8272767-1-1.html">这个问题</a></li>
+<li>其余的就是上传订阅了，剩下的自行探索一下</li>
+</ul>
+<blockquote>
+<p>OpenClash 与 IPV6 极不兼容，使用 IPV6 的情况下容易发生问题（官方自己说的）</p>
+<p>代理发生问题时刻尝试关闭 IPV6 相关设置</p>
+</blockquote>
 <h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p>最近在研究规则代理的问题，因为有时候总会有代理走不上的情况，个人用的话开个全局或者用proxychains也还行，但是挂在路由器上的代理要是规则没写好，那就g</p>
 <p>简单来着只要进入<a target="_blank" rel="noopener" href="https://nexconvert.com/">https://nexconvert.com/</a></p>
 <p>1写你在机场买的节点链接（担心安全问题就不要用，用不怕，怕不用）</p>
@@ -237,7 +284,7 @@ dns:
     fallback-filter: &#123; geoip: true, ipcidr: [240.0.0.0/4, 0.0.0.0/32] &#125;
 proxies:
 </code></pre>
-<p>应该都是可以的，我只试了前者。切换之后用了一会儿之后，再使用没有dns字段的配置文件也可以正常使用代理了，可能是，他自己记住了？</p>
+<p>应该都是可以的，我只试了前者。切换之后用了一会儿之后，再使用没有dns字段的配置文件也可以正常使用代理了，可能是，他自己记住了？也或许不是这个 dns 的问题</p>
 </li>
 </ul>
 <p>一些相关链接</p>
