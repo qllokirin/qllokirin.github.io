@@ -118,7 +118,7 @@
 <p>打开openclash结果主程序一直显示未运行，捯饬半天各种检查各种搜索，结果一个重启又好了</p>
 <p>遇到<code> * opkg_download: 请检查网络设置, 确保本设备网络可用.</code>也是多运行几次，重启然后再多运行几次就好了</p>
 <p>神奇</p>
-<h1 id="安装插件"><a href="#安装插件" class="headerlink" title="安装插件"></a>安装插件</h1><blockquote>
+<h1 id="命令行安装插件"><a href="#命令行安装插件" class="headerlink" title="命令行安装插件"></a>命令行安装插件</h1><blockquote>
 <p>可选</p>
 </blockquote>
 <p>自行安装插件的时候麻烦还挺多，因为完全不了解，有些README读起来有困难，比如<code>uname -a</code>看到你是mips架构结果你找了半天发现newifid2.zip里面放的就是mipsel的.ipk东西</p>
@@ -127,7 +127,7 @@
 <h1 id="OpenClash的使用"><a href="#OpenClash的使用" class="headerlink" title="OpenClash的使用"></a>OpenClash的使用</h1><p>上网设置</p>
 <ul>
 <li><p><code>网络</code>-&gt;<code>接口</code>，WAN 口设置为 PPPOE 拨号，输入学号密码，在学院楼的话账号是不用充钱的</p>
-<p>LAN 口的静态地址千万别改，不然就可以考虑重新刷机了</p>
+<p>LAN 口的静态地址千万别改，不然就可以考虑重新刷机了（或许设置静态地址也能脸上？没试过）</p>
 </li>
 </ul>
 <p>opencalsh设置</p>
@@ -142,15 +142,16 @@
 <h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><p>最近在研究规则代理的问题，因为有时候总会有代理走不上的情况，个人用的话开个全局或者用proxychains也还行，但是挂在路由器上的代理要是规则没写好，那就g</p>
 <p>简单来着只要进入<a target="_blank" rel="noopener" href="https://nexconvert.com/">https://nexconvert.com/</a></p>
 <p>1写你在机场买的节点链接（担心安全问题就不要用，用不怕，怕不用）</p>
-<p>3写<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full.ini">https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full.ini</a></p>
-<p><img src="https://yattazen.com/usr/uploads/2021/01/subscription-converter-api-new.png"></p>
-<p>然后把链接复制到clash，下载即可</p>
+<p>2远程配置写<a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full.ini">https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full.ini</a></p>
+<p>3然后把链接复制到clash，下载即可</p>
 <blockquote>
 <p>这样只是优化你的规则，并且会抹掉最前面的dns字段，在openclash上使用时可能会造成一些问题</p>
+<p>不过我现在已经不用订阅转换了，最开头自己写规则是因为当时作者还没有把 ChatGPT 相关网站加进去，现在已经有了。还有一方面是订阅转换的网站不开代理不一样连得上，有时候还挺难受的</p>
 </blockquote>
-<p>自定义规则：<a target="_blank" rel="noopener" href="https://yattazen.com/tutorial/clash-custom-config.html">https://yattazen.com/tutorial/clash-custom-config.html</a></p>
-<p>图形化编辑教程：<a target="_blank" rel="noopener" href="https://www.jamesdailylife.com/clash_2022">https://www.jamesdailylife.com/clash_2022</a></p>
-<p>clash官方说明：<a target="_blank" rel="noopener" href="https://docs.cfw.lbyczf.com/contents/ui/profiles/rules.html">https://docs.cfw.lbyczf.com/contents/ui/profiles/rules.html</a></p>
+<p><del>自定义规则：<a target="_blank" rel="noopener" href="https://yattazen.com/tutorial/clash-custom-config.html">https://yattazen.com/tutorial/clash-custom-config.html</a></del></p>
+<p><del>图形化编辑教程：<a target="_blank" rel="noopener" href="https://www.jamesdailylife.com/clash_2022">https://www.jamesdailylife.com/clash_2022</a></del></p>
+<p><del>clash官方说明：<a target="_blank" rel="noopener" href="https://docs.cfw.lbyczf.com/contents/ui/profiles/rules.html">https://docs.cfw.lbyczf.com/contents/ui/profiles/rules.html</a></del></p>
+<p>看来之前的风波真挺大，教程全没了</p>
 <h1 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h1><ul>
 <li><p>链接到wifi后图标如下显示无法连接到Internet，但是可以上网</p>
 <p><img src="https://s2.loli.net/2023/04/01/AmEVuGYWKIR4iln.png" alt="MA2V~V8_F1__KD7_OEF_MOD.png"></p>
