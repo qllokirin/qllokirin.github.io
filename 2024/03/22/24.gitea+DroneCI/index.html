@@ -137,9 +137,9 @@ ALLOWED_HOST_LIST = *
 </code></pre>
 <p><code>[sever]</code>字段中含有域名的填写，如果后续有域名一直对不上的情况，请检查一下</p>
 <h1 id="二、启动Drone-CI"><a href="#二、启动Drone-CI" class="headerlink" title="二、启动Drone CI"></a>二、启动Drone CI</h1><h3 id="1-在gitea中获得参数"><a href="#1-在gitea中获得参数" class="headerlink" title="1.在gitea中获得参数"></a>1.在gitea中获得参数</h3><p>像如下生成ID和密钥</p>
-<p><img src="https://s2.loli.net/2024/03/22/qCn3tzHBvogPh59.png" alt="4.png"></p>
-<p><img src="https://s2.loli.net/2024/03/22/A1cmjtIKDzTbeV7.png" alt="3.png"></p>
-<p>这个ID就是<code>DRONE_GITEA_CLIENT_ID</code></p>
+<p><img src="https://s2.loli.net/2024/03/24/npxmqocueVUKIWk.png" alt="drone.png"></p>
+<p>生成会得到ID和密钥</p>
+<p>ID就是<code>DRONE_GITEA_CLIENT_ID</code></p>
 <p>密钥是<code>DRONE_GITEA_CLIENT_SECRET</code>，后面会用</p>
 <p>Linux下使用<code>openssl rand -hex 16</code>可获得一个32位的token，就是<code>DRONE_RPC_SECRET</code></p>
 <h3 id="2-启动Drone"><a href="#2-启动Drone" class="headerlink" title="2.启动Drone"></a>2.启动Drone</h3><pre><code>docker run \
@@ -150,7 +150,7 @@ ALLOWED_HOST_LIST = *
   --env=DRONE_RPC_SECRET=&#123;上面生成的32位token&#125; \
   --env=DRONE_SERVER_HOST=&#123;drone的地址，如drone.drone.cn&#125; \
   --env=DRONE_SERVER_PROTO=&#123;协议，如https&#125; \
-  --env=DRONE_GIT_ALWAYS_AUTH=&#123;true&#125; \
+  --env=DRONE_GIT_ALWAYS_AUTH=true \
   --publish=6080:80 \
   --publish=6443:443 \
   --restart=always \
@@ -176,7 +176,7 @@ ALLOWED_HOST_LIST = *
   drone/drone-runner-docker:1
 </code></pre>
 <blockquote>
-<p>6030端口可以、随便改</p>
+<p>6030端口可以随便改</p>
 </blockquote>
 <p>查看日志，正常运行</p>
 <pre><code> ➜  ~ docker logs runner   
@@ -229,12 +229,44 @@ trigger:
 <p>配置<code>ssh_host</code>、<code>ssh_port</code>、<code>ssh_username</code>、<code>ssh_password</code>四个参数</p>
 <p><strong>现在，当有推送时会编译博客，当pr成功时会将博客内容复制到目标文件夹，ngix反代完成实时更新</strong></p>
 <p>点击右上角new build可以测试</p>
+<h1 id="三、使用OwnCloud"><a href="#三、使用OwnCloud" class="headerlink" title="三、使用OwnCloud"></a>三、使用OwnCloud</h1><blockquote>
+<p>顺便搭了个校园网局域网云盘，这玩意儿有点小坑，权限问题</p>
+</blockquote>
+<p>这里我需要把一个机械硬盘持久化挂载在在某一目录并让 owncloud 使用</p>
+<ul>
+<li><p><code>sudo vim /etc/fstab</code>追加如下内容让硬盘挂载持久化</p>
+<pre><code>UUID=7E524C65524C23ED /home/v5/disk_hdd ntfs defaults,utf8,uid=33,gid=33,dmask=007,fmask=007  0 2
+</code></pre>
+<ul>
+<li><code>/home/v5/disk_hdd</code>：修改为你想挂载的路径</li>
+<li><code>33</code>：修改为<code>id www-data</code>返回的值</li>
+<li><code>007</code>：意味770，只允许<code>www-data</code>用户访问，不让其他用户访问（设置为770是他的要求，试了个网上的参数改为false也没作用只好按他说的做）</li>
+<li>用<code>ll</code>和<code>df -h</code>可以查看权限和挂载结果</li>
+</ul>
+</li>
+<li><p>启动docker</p>
+<pre><code>docker run -p 7070:80 -d -v /home/v5/disk_hdd/owncloud:/var/www/html --name=owncloud --restart always owncloud
+</code></pre>
+<ul>
+<li><code>/home/v5/disk_hdd/owncloud</code>：修改为owncloud使用的文件夹</li>
+<li><code>7070</code>：需要ngix反代到域名</li>
+</ul>
+</li>
+<li><p>如果直接操作文件夹<code>owncloud/data/&#123;user_name&#125;/files</code>增加文件，需要进行如下操作在网页中才能看见</p>
+<ul>
+<li><code>docker exec -it owncloud /bin/bash</code>进入容器</li>
+<li><code>su www-data -s /bin/bash -c &#39;php occ files:scan --all&#39;</code>更新索引文件夹</li>
+<li><code>ctrl</code>+<code>D</code>退出容器</li>
+</ul>
+</li>
+</ul>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>我踩的第一个坑是docker run的时候每个字符串加了引号（或许是这个，不是很确定），然后域名当时改了要用<code>git.</code>，一直写的是<code>gitea.</code>，然后一直鉴权失败</p>
 <p>第二个坑是gitea的app.ini，可恶，还是域名改了的问题，要从<code>gitea.</code>换成<code>git.</code>，当时就看到Drone运行的时候，我明明docker启动传的参是的<code>git.</code>，但是他就从<code>gitea.</code>仓库里面拉，一直鉴权失败</p>
 <p>然后就是如果之前哪出问题了要重新run Drone一定要<code>sudo rm -rf /var/lib/drone </code>，不然还是会和之前一样</p>
 <p>参考教程：</p>
 <p><a target="_blank" rel="noopener" href="https://blog.moon.re/2021/02/17/Hexo-on-CI-CD-%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98%E6%94%BB%E7%95%A5/">https://blog.moon.re/2021/02/17/Hexo-on-CI-CD-%E6%9C%AC%E5%9C%B0%E9%83%A8%E7%BD%B2%E5%AE%9E%E6%88%98%E6%94%BB%E7%95%A5/</a></p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/467226209">https://zhuanlan.zhihu.com/p/467226209</a></p>
+<p><a target="_blank" rel="noopener" href="https://koomu.cn/fstab-mount-with-uid-gid-fmask-dmask/">https://koomu.cn/fstab-mount-with-uid-gid-fmask-dmask/</a></p>
 
         </article>
         
