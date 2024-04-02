@@ -228,6 +228,9 @@ trigger:
 <h3 id="6-返回Drone配置参数"><a href="#6-返回Drone配置参数" class="headerlink" title="6.返回Drone配置参数"></a>6.返回Drone配置参数</h3><p>博客仓库-&gt;Settings-&gt;Secrets-&gt;New secret，勾选<code>Allow Pull Repuest</code></p>
 <p>配置<code>ssh_host</code>、<code>ssh_port</code>、<code>ssh_username</code>、<code>ssh_password</code>四个参数</p>
 <p><strong>现在，当有推送时会编译博客，当pr成功时会将博客内容复制到目标文件夹，ngix反代完成实时更新</strong></p>
+<blockquote>
+<p>第一次点new build是会没有反应的，第一次启用后需要在仓库中添加<code>.drone.yml</code>后用个push，让自动完成更新一次</p>
+</blockquote>
 <p>点击右上角new build可以测试</p>
 <h1 id="三、使用OwnCloud"><a href="#三、使用OwnCloud" class="headerlink" title="三、使用OwnCloud"></a>三、使用OwnCloud</h1><blockquote>
 <p>顺便搭了个校园网局域网云盘，这玩意儿有点小坑，权限问题</p>
