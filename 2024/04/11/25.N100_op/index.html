@@ -385,6 +385,13 @@ opkg install ipv6helper
         option reqprefix &#39;auto&#39;
 </code></pre>
 <p>详细解释 ipv6：<a target="_blank" rel="noopener" href="https://post.smzdm.com/p/awzodmpp/">https://post.smzdm.com/p/awzodmpp/</a></p>
+<blockquote>
+<p>如果要实现 ipv6 转发到 ipv4 端口可以用下面这个插件</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/big-tooth/luci-app-socatg">https://github.com/big-tooth/luci-app-socatg</a></p>
+<p>测试端口通断<code>nmap -6 &#123;IPV6 地址&#125; -p 8080,20000,30000-30004 -Pn</code></p>
+<p>clash 开着会影响 ipv6 地址的访问</p>
+<p>不知道为啥我的 IPV6 防火墙没生效，可以直接访问内网的设备</p>
+</blockquote>
 <p><strong>2.加入无线网卡</strong></p>
 <blockquote>
 <p>题外话一句，我买的 N100 自带 AX101 网卡，是 WiFi6 但是很垃圾 ，最重要的是官方没有适配驱动，在 Ubuntu22.04 系统上开机即可使用，但是带宽甚至跑不满百兆，个人猜测是识别成了其他网卡能用但是调度不好，跑不满千兆也能理解，但是跑不满百兆就有点离谱了。</p>
