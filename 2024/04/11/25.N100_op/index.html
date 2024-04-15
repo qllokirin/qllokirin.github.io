@@ -386,11 +386,21 @@ opkg install ipv6helper
 </code></pre>
 <p>详细解释 ipv6：<a target="_blank" rel="noopener" href="https://post.smzdm.com/p/awzodmpp/">https://post.smzdm.com/p/awzodmpp/</a></p>
 <blockquote>
-<p>如果要实现 ipv6 转发到 ipv4 端口可以用下面这个插件</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/big-tooth/luci-app-socatg">https://github.com/big-tooth/luci-app-socatg</a></p>
-<p>测试端口通断<code>nmap -6 &#123;IPV6 地址&#125; -p 8080,20000,30000-30004 -Pn</code></p>
-<p>clash 开着会影响 ipv6 地址的访问</p>
-<p>不知道为啥我的 IPV6 防火墙没生效，可以直接访问内网的设备</p>
+<p>如果要实现 ipv6 转发到 ipv4 端口，socat软件包能直接在<code>软件包</code>里面点一下安装，<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/559034124">socat 教程</a></p>
+<p>如果要监听 80 和 443 端口，因为被<code>uhttpd</code>占住了所以需要改一下设置，让<code>uhttpd</code>不监听 IPV6 地址</p>
+<pre><code># 查看uhttp监听情况
+netstat -tlnp | grep uhttpd
+# 修改配置，注释掉ipv6的监听
+vi /etc/config/uhttpd
+# 重启uhttpd
+/etc/init.d/uhttpd restart
+# 再次查看
+netstat -tlnp | grep uhttpd
+</code></pre>
+<p>如果要在 LAN 网络下使用 IPV6 域名解析，<code>网络</code>-&gt;<code>DHCP/DNS</code>-&gt;<code>高级设置</code>-&gt;<code>禁止解析 IPV6 DNS 记录</code></p>
+<p>测试端口通断<code>nmap -6 &#123;IPV6 地址&#125; -p 80,4438080,20000,30004 -Pn</code></p>
+<p>clash 开着会影响 ipv6 地址的访问，无敌了，后面发现原因是会域名代理，如果你买的机场的这个节点有 IPV6，甚至可以用代理脸上，即使你自己没有 IPV6 网络</p>
+<p>不知道为啥我的 IPV6 防火墙没生效，可以直接访问内网的设备，发现 IPV4 也是一样的，防火墙没有阻断，有点奇怪，<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/620831429">这个教程</a>有 nmap 使用方法，哎不管了，开就开吧</p>
 </blockquote>
 <p><strong>2.加入无线网卡</strong></p>
 <blockquote>
@@ -399,9 +409,9 @@ opkg install ipv6helper
 </blockquote>
 <p>有尝试使用 macvlan 等操作挂进 openwrt，不过想了想好像用处不大，最终的方法是直接开一个热点，把<code>192.168.100.100</code>获得的网络共享出去</p>
 <pre><code># 使用nmcli启用WiFi
-nmcli device wifi hotspot ifname &#123;网卡名称，如wlp1s0&#125; con-name &#123;在nm中的名字&#125; ssid &#123;WiFi名字&#125; password &#123;密码&#125;
+sudo nmcli device wifi hotspot ifname &#123;网卡名称，如wlp1s0&#125; con-name &#123;在nm中的名字&#125; ssid &#123;WiFi名字&#125; password &#123;密码&#125;
 # 如下
-# nmcli device wifi hotspot ifname wlp1s0 con-name nmcli-wifi ssid n100-wifi password 123456789
+# sudo nmcli device wifi hotspot ifname wlp1s0 con-name nmcli-wifi ssid n100-wifi password 123456789
 </code></pre>
 <blockquote>
 <p>也是重启会失效，所以加入之前写的开机脚本里</p>
@@ -419,8 +429,8 @@ sudo route add default gw 192.168.100.1 me_to_op
 
 sudo sh -c &#39;echo &quot;nameserver 192.168.100.1&quot; &gt; /etc/resolv.conf&#39;
 
-nmcli connection delete nmcli-wifi
-nmcli device wifi hotspot ifname wlp1s0 con-name nmcli-wifi ssid n100-wifi password 123456789
+sudo nmcli connection delete nmcli-wifi
+sudo nmcli device wifi hotspot ifname wlp1s0 con-name nmcli-wifi ssid n100-wifi password 123456789
 </code></pre>
 <p>因为使用的是热点，所以<code>ifconfig</code>中无线会变成一个<code>10.x</code>的网段，链接上WiFi的设备也会获得<code>10.x</code>的网段，不过跟我的 WAN 口地址不冲突，所以我也就不管了，应也该可以改网段的。</p>
 <blockquote>
