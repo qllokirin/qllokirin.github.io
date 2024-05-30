@@ -313,6 +313,23 @@ sudo sh -c &#39;echo &quot;nameserver 192.168.100.1&quot; &gt; /etc/resolv.conf&
 <p><strong>Tips：两个怪问题</strong></p>
 <ul>
 <li><p>1.<strong>LAN 口不插东西宿主机就 ping 不通 192.168.100.1</strong>，就是这么的神奇，必须得要 LAN 口有一个设备，不然就是 ping 不通，我的理解是 LAN 口不插东西就没有被激活，所以上面设置的 macvlan 没有生效，比如接个电脑是可以的，接个交换机（交换机不接其他东西）也是可以的，只要 LAN 口灯亮着就是可以的，没亮就是不行的</p>
+<blockquote>
+<p>其实还有个方案是不用<code>enp2s0</code>而用<code>wlp1s0</code>，也就是用网卡开一个macvlan，然后就不用一直插一个东西了</p>
+<pre><code>sudo ip link set enp4s0 promisc on
+sudo ip link set enp2s0 promisc on
+sudo ip link set wlp1s0 promisc on
+sleep 10
+
+sudo ip link del me_to_op
+sudo ip link add me_to_op link wlp1s0 type macvlan mode bridge
+sudo ip addr add 192.168.200.200 dev me_to_op
+sudo ip link set me_to_op up
+sudo ip route add 192.168.200.1 dev me_to_op
+sudo route add default gw 192.168.200.1 me_to_op
+sudo sh -c &#39;echo &quot;nameserver 192.168.200.1&quot; &gt; /etc/resolv.conf&#39;
+</code></pre>
+<p>这里加了<code>sleep 10</code>是因为不知道为啥会设置不成功，加上就好了</p>
+</blockquote>
 </li>
 <li><p>2.<strong>LAN 口下的网络不能正常访问域名解析到 WAN 口 IP 上的内容</strong>，具体点来说是，我的 openwrt 的 80 端口转发到了宿主机<code>192.168.100.100</code>的 80 上，然后由 nginx 反代，<code>op.xx.xx</code>代理到 op 的管理页面，<code>files.xx.xx</code>代理到 GoWebDav 上，跟 WAN 口同网段的<code>10.x.x.x.</code>的设备可以正常使用，但是 LAN 口下的设备用域名不能访问，而直接端口 + IP 是可以的，需要做如下改动（是与桥接网络过滤器有关的内容，具体原因不是很清楚）</p>
 <pre><code>1.ssh连接openwrt系统后，编辑/etc/sysctl.d/11-br-netfilter.conf文件。
