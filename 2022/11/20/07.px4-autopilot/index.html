@@ -120,12 +120,16 @@ git clone https://github.com/PX4/PX4-Autopilot.git
 cd PX4-Autopilot
 # 新建名为1.11.3的分支，切换到v1.11.3的版本（tag）
 git checkout -b 1.11.3 v1.11.3
-# 子模块更新（因为px4仓库里面放了很多其他的仓库，这步在代理不稳定时极容易失败，最好能一次全部通过）
+# 子模块更新（因为px4仓库里面放了很多其他的仓库，这步在代理不稳定时极容易失败，最好能一次全部通过,也可以使用下面的网盘下载好解压后直接执行下面的编译操作）
 git submodule update --init --recursive
 # 编译（极容易报错）
 make px4_sitl_default gazebo
 </code></pre>
 <blockquote>
+<p><a target="_blank" rel="noopener" href="https://pan.quark.cn/s/2650872edf53">夸克网盘</a></p>
+<p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/19KValVqzDl0bvXqIHnX_Ag?pwd=zmov">百度网盘</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.123pan.com/s/CVqajv-9DqWd.html">123网盘</a></p>
+<p><strong>SHA1校验值</strong>ea08780db25e277fc287147445360a15458392ae</p>
 </blockquote>
 <p>编译完成会有如下文字</p>
 <p><font color="green">[Msg] Waiting for master.</font><br><font color="green">[Msg] Connected to gazebo master @ h ttp:&#x2F;&#x2F;127.0.0.1:11345</font><br><font color="green">[Msg] Publicized address: 192.168.1.113</font></p>
