@@ -3,7 +3,7 @@
   <head>
      
     <meta charset="UTF-8">
-    <title>img镜像制作与烧录 - qllokirin</title>
+    <title>一些视觉代码使用的记录 - qllokirin</title>
     <link rel="shortcut icon" href="/static/img/icon.png">
     <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
     
@@ -15,7 +15,7 @@
 
     <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
     <meta property="og:site_name" content="qllokirin">
-    <meta property="og:title" content="img镜像制作与烧录"/>
+    <meta property="og:title" content="一些视觉代码使用的记录"/>
     
 <meta name="generator" content="Hexo 6.3.0"></head>
 
@@ -51,9 +51,9 @@
     <main>
     <div class="wrap min">
         <section class="post-title">
-            <h2>img镜像制作与烧录</h2>
+            <h2>一些视觉代码使用的记录</h2>
             <div class="post-meta">
-                <time class="date">2023.06.23</time>
+                <time class="date">2024.08.05</time>
             
                 <span class="category"><a class="category-link" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a></span>
             
@@ -61,80 +61,136 @@
         </section>
         <article class="post-content">
         
-            <blockquote>这篇文章上次修改于 410 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
-        
-            <p>之前有制作也有烧录过 nano 的镜像，这次又遇到了一个相关的问题，费了点时间解决了，小做记录</p>
+            <p>做了这么久的比赛，虽然已经离队了，不过还是总结一下与视觉联调的时候总结的一些小问题</p>
 <span id="more"></span>
 
-<p><strong>烧写有风险，误操作数据易丢失</strong></p>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这里的 nano 是指 <a target="_blank" rel="noopener" href="https://developer.nvidia.com/embedded/jetson-nano-developer-kit">Jetson Nano</a>，就是一台小型计算机，普通的笔记本电脑的硬盘一般是固态硬盘或者机械硬盘，而 nano 使用的是 sd 卡，这有一个好处是可以很容易的通过更改 sd 卡的内容对 nano 的系统进行备份或者烧录，毕竟只需要拿下来并放到读卡器里即可。比如进行大批量售卖同一内容的 nano 时，只需要配好一张卡里面的环境，然后用这张卡制作一个镜像，其他的 sd 卡只需要猛猛的烧录就行了。或者你需要对自己的 nano 进行备份以防不时之需。</p>
-<h1 id="使用dd进行镜像制作"><a href="#使用dd进行镜像制作" class="headerlink" title="使用dd进行镜像制作"></a>使用dd进行镜像制作</h1><blockquote>
-<p>网上详细教程很多，这里写着主要方便自己以后用，所以写的很简陋</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>此篇仅做记录，对视觉算法等等涉入尚欠，想必会有很多纰漏与错误。比赛中主要的任务就是识别圆与神经网络分类，故从这两个任务进行记录。</p>
+<h1 id="识别圆"><a href="#识别圆" class="headerlink" title="识别圆"></a>识别圆</h1><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p>具体使用与调参我也不懂，只是近日看学弟的代码发现六七个参数就能有比较好的效果了，微做感叹。</p>
+<h3 id="标定"><a href="#标定" class="headerlink" title="标定"></a>标定</h3><blockquote>
+<p>参考<a target="_blank" rel="noopener" href="http://wiki.ros.org/camera_calibration/Tutorials/MonocularCalibration">官方教程</a>，<a target="_blank" rel="noopener" href="https://blog.csdn.net/heyijia0327/article/details/43538695">补充</a></p>
 </blockquote>
-<p>插⼊要备份的SD卡（TF卡），找到对应的设备名，⼀般来说会是 <code>/dev/sdb</code>或者<code>/dev/sda</code></p>
-<pre><code>sudo fdisk -l
+<p>这主要是需要使用相机内参矩阵计算<strong>圆心距离无人机中心水平坐标差</strong>，不过说起来，其实每次标定计算内参的时候，浮动还挺大的，上下浮动几十吧，不清楚到底是什么问题，不过用起来还可以，挺好的。以前总以为越清晰越好，现在感觉，就咱这识别任务，480p足以，糊一点还免的高斯模糊了（不是）</p>
+<p>1.安装usb_cam包</p>
+<pre><code>sudo apt install ros-noetic-usb-cam
 </code></pre>
-<p>查看分区是否有挂载，一般在最后⼀⾏显⽰有挂载就先卸载</p>
-<pre><code>df -h
-</code></pre>
-<p>卸载挂载，<code>/dev/sdb</code>注意替换</p>
-<pre><code>umount /dev/sdb1
-</code></pre>
-<p>使⽤<strong>dd</strong>备份镜像</p>
-<pre><code>sudo dd if=/dev/sdb conv=sync,noerror of=空闲的某个路径/镜像名.img bs=4M
+<p>2.启动相机</p>
+<pre><code>roslaunch usb_cam usb_cam-test.launch
 </code></pre>
 <blockquote>
-<p>如果你的 sd 卡是 64g，那么制作出来的镜像也是 64g，所以一般用下面的压缩指令 </p>
+<p>若是使用自己的笔记本（有摄像头的话），大概率需要修改<code>/dev/video0</code>为<code>/dev/video2</code>或者<code>/dev/video4</code>，把下面的内容写入<code>usb_cam.launch</code>后使用<code>roslaunch ./usb_cam.launch</code>启动即可，或者<code>sudo vim /opt/ros/noetic/share/usb_cam/launch/usb_cam-test.launch</code>直接修改原launch也可以</p>
+<pre><code>&lt;launch&gt;
+  &lt;node name=&quot;usb_cam&quot; pkg=&quot;usb_cam&quot; type=&quot;usb_cam_node&quot; output=&quot;screen&quot; &gt;
+    &lt;param name=&quot;video_device&quot; value=&quot;/dev/video0&quot; /&gt;
+    &lt;param name=&quot;image_width&quot; value=&quot;640&quot; /&gt;
+    &lt;param name=&quot;image_height&quot; value=&quot;480&quot; /&gt;
+    &lt;param name=&quot;pixel_format&quot; value=&quot;yuyv&quot; /&gt;
+    &lt;param name=&quot;color_format&quot; value=&quot;yuv422p&quot; /&gt;
+    &lt;param name=&quot;camera_frame_id&quot; value=&quot;usb_cam&quot; /&gt;
+    &lt;param name=&quot;io_method&quot; value=&quot;mmap&quot;/&gt;
+  &lt;/node&gt;
+  &lt;node name=&quot;image_view&quot; pkg=&quot;image_view&quot; type=&quot;image_view&quot; respawn=&quot;false&quot; output=&quot;screen&quot;&gt;
+    &lt;remap from=&quot;image&quot; to=&quot;/usb_cam/image_raw&quot;/&gt;
+    &lt;param name=&quot;autosize&quot; value=&quot;true&quot; /&gt;
+  &lt;/node&gt;
+&lt;/launch&gt;
+</code></pre>
 </blockquote>
-<p><strong>使用dd备份镜像并且压缩</strong></p>
-<pre><code>sudo dd if=/dev/sdb conv=sync,noerror bs=4M | gzip -c &gt; 空闲的某个路径/镜像名.img.gz
+<p>3.准备<a href="https://wiki.ros.org/camera_calibration/Tutorials/MonocularCalibration?action=AttachFile&do=view&target=check-108.pdf">标定板</a>，我使用的是A4纸打印的，矩形的边长是0.0244m，所以是<code>--square 0.0244 </code></p>
+<blockquote>
+<p>图片是9x7的格子，标定使用的是8x6个内角点，所以下面是<code>--size 8x6</code></p>
+</blockquote>
+<p> 4.启动标定程序</p>
+<pre><code class="&#39;">rosrun camera_calibration cameracalibrator.py --size 8x6 --square 0.0244 image:=/usb_cam/image_raw camera:=/usb_cam
+</code></pre>
+<p>静置相机，把标定板粘贴在硬纸板&#x2F;硬书上（防止弯曲），左右（x）、上下（y）、前后（size）、旋转（skew），各个距离都完善后进度条都变绿时点击CALIBRATE即可得出相机内参。</p>
+<blockquote>
+<p>旋转需要有各个角度，俯仰、偏航的旋转，而非竖直旋转</p>
+</blockquote>
+<h3 id="相机内参使用"><a href="#相机内参使用" class="headerlink" title="相机内参使用"></a>相机内参使用</h3><p>有一个坐标系的事情需要说明，相机中的坐标系是右x下y，比赛的无人机一般是把相机水平朝下放置，而ROS一般坐标系是前x左y上z，所以<strong>视觉的-x才是策略里的y，-y才是策略里的x</strong>，可能这么说有点绕，看看下面的代码会好理解的多。</p>
+<pre><code class="python"># 相机内参
+cx = ...
+cy = ...
+fx = ...
+fy = ...
+# 识别圆获得的像素坐标
+pixel_x = ...
+pixel_y = ...
+# 计算策略代码中需要的圆目标xy
+target_x = - (pixel_y - cy) / fy
+target_y = - (pixel_x - cx) / fx
+</code></pre>
+<p>策略获得target_x、target_y后再<strong>乘以相机离地面的高度</strong>即可计算出圆的相对水平距离</p>
+<h1 id="YOLO"><a href="#YOLO" class="headerlink" title="YOLO"></a>YOLO</h1><p>使用神经网络时的问题在于，我们的上位机使用的是NUC，用cpu硬跑yolov5能跑到10帧多，但是由于ros callback的机制原因，你可能会发现画面有非常大的延迟，详见<a target="_blank" rel="noopener" href="https://qllokirin.github.io/2023/06/09/17.callback/">此处</a></p>
+<h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>不优雅，但能用，将输入给yolo的数据控制在10Hz，因为计算一帧的时间小于0.1s，所以能比较实时的输出结果，至少没有大延迟。</p>
+<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>使用<code>while not rospy.is_shutdown()</code>，目测rospy会自动开一个线程及时调用回调函数，不论while中运行的是什么，花费了多少时间，参照下面的写法即可</p>
+<pre><code class="python">def imgmsg_to_cv2(img_msg):
+    # ros图像转cv图像
+    ...
+    # 获取图像和消息的时间戳
+    return image_opencv, img_msg.header.seq  
+
+def task(img_origin):
+    # 输入图片，使用模型进行推理的代码放在此处
+    ...
+
+img_ros_data = None
+seq_current = None
+# 这个回调函数会实时调用，来了一个消息就会调用，不会被主线程卡住，只负责更新图像变量
+def image_callback(data):
+    global img_ros_data, seq_current
+    img_ros_data, seq_current = imgmsg_to_cv2(data)
+
+if __name__ == &quot;__main__&quot;:
+    rospy.init_node(&#39;yolo_node&#39;, anonymous=True)
+    # YoloTypeAndCoordinate 是自定义消息
+    info_pub = rospy.Publisher(&#39;/yolo/detect&#39;, YoloTypeAndCoordinate, queue_size=1)
+    img_pub = rospy.Publisher(&#39;/yolo/detect_img&#39;, Image, queue_size=1)
+    rospy.Subscriber(&#39;/usb_cam/image_raw&#39;, Image, image_callback)
+
+    # 获取上一次的时间戳，当时间戳相同（没有新图像发布）时不推理（不发布结果消息）
+    seq_last_time = None
+    while not rospy.is_shutdown():
+        # img_ros_data和seq_current都不是None也就是最开始启动的时候没有图像消息时也不推理（不发布结果消息）
+        if (img_ros_data or seq_current) is not None and seq_current != seq_last_time:
+            seq_last_time = seq_current
+            task(img_ros_data)
 </code></pre>
 <blockquote>
-<p>64g 的镜像压缩之后一般在 10g 左右</p>
+<p>yolo训练过程相信视觉的朋友都会，但后续我打算补一个详细流程，方便我自己以后可能用（</p>
 </blockquote>
-<h1 id="使用dd烧写镜像"><a href="#使用dd烧写镜像" class="headerlink" title="使用dd烧写镜像"></a>使用<strong>dd</strong>烧写镜像</h1><p><code>/dev/sdb</code>注意替换</p>
-<pre><code>sudo dd if=空闲的某个路径/镜像名.img of=/dev/sdb bs=4M status=progress
+<h1 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h1><h3 id="ros如何在a功能包中使用b功能包定义的数据类型"><a href="#ros如何在a功能包中使用b功能包定义的数据类型" class="headerlink" title="ros如何在a功能包中使用b功能包定义的数据类型"></a>ros如何在a功能包中使用b功能包定义的数据类型</h3><p>比如视觉自定义了一个消息类型传输结果内容，策略如何导入这个消息，以前一直在用<code>../../</code>什么的，当文件夹位置变化时需要修改，比较麻烦，建议用下面的方法，还可以防止<code>catkin_make</code>多线程编译报错</p>
+<p>1.在自己的功能包的 <code>CMakeLists.txt</code>添加对b包的依赖</p>
+<pre><code>find_package(catkin REQUIRED COMPONENTS
+  roscpp
+  rospy
+  std_msgs
+  b_package
+)
 </code></pre>
-<p>解压并且烧录</p>
-<pre><code>gunzip -c 空闲的某个路径/镜像名.img.gz | sudo dd of=/dev/sdb bs=4M status=progress
+<p>2.在 <code>package.xml</code> 文件中添加对 b包的依赖。</p>
+<pre><code>&lt;depend&gt;b_package&lt;/depend&gt;
 </code></pre>
-<blockquote>
-<p>速度取决于读卡器的速度，如果是 usb3.0 的读卡器只需要半小时，平均速度50mb&#x2F;s，usb2.0 的读卡器需要几个小时</p>
-<p>status&#x3D;progress可以显示实时进度</p>
-</blockquote>
-<p><img src="https://s2.loli.net/2023/06/23/fJ7PaKn3ArSM8xg.png" alt="image-20230309163423770.png"></p>
-<p>结束时会是这样，没有error则是成功</p>
-<p>如果提示<strong>dd: error writing ‘&#x2F;dev&#x2F;sdb’: No space left on device</strong>中文是<strong>dd: 写入’&#x2F;dev&#x2F;sdb’ 出错: 设备上没有空间</strong></p>
-<p>经过多种方法的尝试，我最终还是认为：<strong>镜像制作在 64g 的 sd 卡 A 上制作，烧录在 64g 的卡 B 上，但是看磁盘信息，卡 B 比卡 A 少了一点点内存（64 和 64 亦有区别），导致烧录失败，解决办法为给新sd卡烧录一个<a target="_blank" rel="noopener" href="https://developer.nvidia.com/embedded/downloads">原版镜像</a>，再重新配环境</strong></p>
-<blockquote>
-<p>卡 A 的<strong>卡</strong>大小63,864,569,856kb<br>卡 A 制作出的<strong>镜像</strong>大小63,866,667,008kb<br>卡 B 的<strong>卡</strong>大小63,831,015,424kb<br>卡 B 制作出的<strong>镜像</strong>大小63,833,112,576kb</p>
-<p>看起来卡 B 制作出的镜像应该能烧录到卡 A 上，但是当时并未尝试</p>
-</blockquote>
-<p>更新：保存镜像的时候可以只保存某部分分区，让总体积小一点，烧写的时候如果无法往一块更大的磁盘上直接烧写，可以尝试创建一个一样的分区往分区里烧。</p>
-<p>此外如果使用 jetson 的 emmc + ssd 的组合，向 ssd 中烧录镜像后需要将 emmc 也烧录一个与保存镜像那个 ssd 对应的 emmc 版本，核心版本一样</p>
-<h1 id="近期遇到的一个问题"><a href="#近期遇到的一个问题" class="headerlink" title="近期遇到的一个问题"></a>近期遇到的一个问题</h1><p>由于某些情况我得到了一份 sd 卡的镜像，是 <code>xxx.gz</code>，我需要查看里面的内容，但是我手里没有 sd 卡，无法烧录，但是镜像是可以挂在的，所以我现将这个压缩包解压得到一个 120g 的无后缀名文件，我兴高采烈的一手双击，提示没有选择打开方式，我反手改后缀名为 img，我心想就这，不是轻松解决，但是他提示：<code>Cannot mount block device /dev/loop read-only</code>，搜索到相关问题是<a target="_blank" rel="noopener" href="https://serverfault.com/questions/839898/cannot-mount-block-device-dev-loop-read-only?newreg=a92584edac764f9b97f9a65c41592794">这个</a>，但报错还是一样</p>
-<p>其实一般情况下 .img&#x2F;iso 镜像应该是可以直接双击挂载的，不知道这个为什么不行，接下来我的搜索关键词一直是<strong>挂载 镜像</strong>，试了半天最后看了一眼标题，<strong>Ubuntu挂载ISO文件</strong>，我再看了一眼 dd 制作的镜像，g，原来是 img，加上关键词 img，很容易搜到<a target="_blank" rel="noopener" href="https://zhou-yuxin.github.io/articles/2015/Linux%E6%8C%82%E8%BD%BDimg%E7%A3%81%E7%9B%98%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6/index.html">这篇文章</a>，原来主要是要指定 offset 的值，不过也好，解决了就行</p>
-<blockquote>
-<p>此外说说最近找到的有点用的东西</p>
-<p>一个是 ssh 链接客户端：<a target="_blank" rel="noopener" href="https://termius.com/">termius</a>，只能说这个ui真的是太舒服了，以前都是靠 zsh 记忆或者 Windows 下就用 Xshell，或者 finalshell（Ubuntu 或者 Windows 都可以，就是ui比较简陋），付费功能可以用学生认证代替付费，可以先认证 github 的学生身份，不过那个有点坑，交了好几次照片，最后是把录取通知书、一卡通、一张小纸条（写 My github’s name is qllokirin）才通过</p>
-<p>另外一个是百度网盘不限速：<a target="_blank" rel="noopener" href="https://wiki.tttt.ee/wiki/wyb.html">TT快下</a> 2023.6.20 仍有效，直接冲到我带宽上限50 了，你说为什么只有 50 ？，哈哈，校园网，懂得都懂</p>
-</blockquote>
+<p>3.导入头文件</p>
+<pre><code class="c++">#include &lt;b_package/YourMessageType.h&gt;
+</code></pre>
+<pre><code class="python">from b_package.msg import YourMessageType
+</code></pre>
 
         </article>
         
         <section class="post-near">
             <ul>
                 
-                    <li>上一篇: <a href="/2023/08/14/20.new_computer/">第一次自组机！</a></li>
+                    <li>上一篇: <a href="/7777/07/07/diary/">稀疏平常的生活</a></li>
                 
                 
-                    <li>下一篇: <a href="/2023/06/12/18.travel-to-hainan/">海南之旅</a></li>
+                    <li>下一篇: <a href="/2024/04/11/25.N100_op/">N100双网口小主机使用docker版openwrt做主路由（PPPoE拨号）超详细！！！！</a></li>
                 
             </ul>
         </section>
         
             <section class="post-tags">
-            <a class="-none-link" href="/tags/%E8%AE%B0%E5%BD%95/" rel="tag">记录</a>
+            <a class="-none-link" href="/tags/%E8%A7%86%E8%A7%89/" rel="tag">视觉</a>
             </section>
         
         <script src="https://giscus.app/client.js"
