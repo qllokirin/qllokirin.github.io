@@ -356,6 +356,20 @@ Set-PSReadLineOption -PredictionSource History
 <p>我是不是早已与往日不同了呢</p>
 <p><strong>七月</strong></p>
 <p><a target="_blank" rel="noopener" href="https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors">阿里docker镜像</a> 神！</p>
+<blockquote>
+<p>感觉不如1panel一根</p>
+<pre><code>sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json &lt;&lt;EOF
+&#123;
+    &quot;registry-mirrors&quot;: [
+        &quot;https://docker.1panel.live&quot;,
+    ]
+&#125;
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+</code></pre>
+</blockquote>
 <p>用qt写cmake项目时经常会出现改了ui但是编译运行的时候还是没变，只需要找一个cpp打一个空格然后不保存编译就行了（让他自动保存）</p>
 <p><strong>八月</strong></p>
 <p>最难受的一集，给nuc装系统的时候，硬盘没有初始化，直接选了erase and install，结果给我启动盘擦了，g</p>
