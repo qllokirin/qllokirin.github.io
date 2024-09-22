@@ -61,7 +61,7 @@
         </section>
         <article class="post-content">
         
-            <blockquote>这篇文章上次修改于 631 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
+            <blockquote>这篇文章上次修改于 673 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
         
             <p>px4_firmware编译老报错，记录一下遇到的问题</p>
 <span id="more"></span>
@@ -82,6 +82,8 @@
 </code></pre>
 <h1 id="ros安装"><a href="#ros安装" class="headerlink" title="ros安装"></a>ros安装</h1><pre><code class="bash"># 设置软件库
 sudo sh -c &#39;echo &quot;deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main&quot; &gt; /etc/apt/sources.list.d/ros-latest.list&#39;
+# 设置软件库（清华源）
+# sudo sh -c &#39;. /etc/lsb-release &amp;&amp; echo &quot;deb http://mirrors.tuna.tsinghua.edu.cn/ros/ubuntu/ `lsb_release -cs` main&quot; &gt; /etc/apt/sources.list.d/ros-latest.list&#39;
 # 设置KEY
 curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
 # 更新软件列表
@@ -91,12 +93,9 @@ sudo apt install ros-noetic-desktop-full
 </code></pre>
 <h1 id="mavros的安装"><a href="#mavros的安装" class="headerlink" title="mavros的安装"></a>mavros的安装</h1><pre><code class="bash"># 安装mavros包
 sudo apt install ros-noetic-mavros ros-noetic-mavros-extras
-# 下载脚本
-wget https://gitee.com/robin_shaun/XTDrone/raw/master/sitl_config/mavros/install_geographiclib_datasets.sh
-# 添加权限
-sudo chmod a+x ./install_geographiclib_datasets.sh
+cd /opt/ros/noetic/lib/mavros
 # 执行脚本 安装依赖
-# 容易因为网络问题下载不下来 多次执行知道全部succeed
+# 容易因为网络问题下载不下来 多次执行直到全部succeed 建议科学上网
 sudo ./install_geographiclib_datasets.sh
 </code></pre>
 <h1 id="python"><a href="#python" class="headerlink" title="python"></a>python</h1><pre><code class="bash">pip install rospkg
@@ -128,7 +127,7 @@ make px4_sitl_default gazebo
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://pan.quark.cn/s/2650872edf53">夸克网盘</a></p>
 <p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/19KValVqzDl0bvXqIHnX_Ag?pwd=zmov">百度网盘</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.123pan.com/s/CVqajv-9DqWd.html">123网盘</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.123pan.com/s/CVqajv-9DqWd.html">123网盘</a>（推荐，不限速）</p>
 <p><strong>SHA1校验值</strong>ea08780db25e277fc287147445360a15458392ae</p>
 </blockquote>
 <p>编译完成会有如下文字</p>
