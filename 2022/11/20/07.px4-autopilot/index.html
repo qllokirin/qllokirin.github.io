@@ -1,69 +1,210 @@
-<!DOCTYPE html>
-<html>
+
+  <!DOCTYPE html>
+  <html lang="zh-Hans"  >
   <head>
-     
-    <meta charset="UTF-8">
-    <title>ubuntu20.04安装PX4 - qllokirin</title>
-    <link rel="shortcut icon" href="/static/img/icon.png">
-    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
-    
-<link rel="stylesheet" href="/static/kico.css">
-<link rel="stylesheet" href="/static/hingle.css">
+  <meta charset="utf-8">
+  
 
-    
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
 
-    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
-    <meta property="og:site_name" content="qllokirin">
-    <meta property="og:title" content="ubuntu20.04安装PX4"/>
+  
+
+  
+  <script>window.icon_font = '4552607_tq6stt6tcg';window.clipboard_tips = {"success":"复制成功～(∠・ω< )⌒☆","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};</script>
+  
+  
+  <title>
+    ubuntu20.04安装PX4 |
     
+    qllokirin
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_tq6stt6tcg.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="px4_firmware编译老报错，记录一下遇到的问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ubuntu20.04安装PX4">
+<meta property="og:url" content="http://example.com/2022/11/20/07.px4-autopilot/index.html">
+<meta property="og:site_name" content="qllokirin">
+<meta property="og:description" content="px4_firmware编译老报错，记录一下遇到的问题">
+<meta property="og:locale">
+<meta property="og:image" content="https://s2.loli.net/2022/12/11/A52lrBgX8IMKRui.png">
+<meta property="og:image" content="https://s2.loli.net/2023/03/29/NjvBQZ16stI93HX.png">
+<meta property="article:published_time" content="2022-11-20T10:10:55.000Z">
+<meta property="article:modified_time" content="2024-09-22T11:12:40.442Z">
+<meta property="article:author" content="qllokirin">
+<meta property="article:tag" content="px4">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/12/11/A52lrBgX8IMKRui.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="qllokirin" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.0.1/dist/aos.css">
+
+  
 <meta name="generator" content="Hexo 6.3.0"></head>
 
   <body>
-    <header>
-    <div class="head-title">
-        <h4>qllokirin</h4>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+          <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="#ff5252" />
+          <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+         M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="#ff5252" />
+        </svg>
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
     </div>
-    <div class="head-action">
-        <div class="toggle-btn"></div>
-        <div class="light-btn"></div>
-        <div class="search-btn"></div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      <span class="main-nav-link-wrap">
+        <div class="main-nav-icon icon-taichi"></div>
+        <a class="main-nav-link" href="/">ホーム</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class="main-nav-icon icon-taichi"></div>
+        <a class="main-nav-link" href="/archives">アーカイブ</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class="main-nav-icon icon-taichi"></div>
+        <a class="main-nav-link" href="/about">プロフィール</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class="main-nav-icon icon-taichi"></div>
+        <a class="main-nav-link" href="/friend">フレンド</a>
+      </span>
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSSフィード" target="_blank"></a>
+    
+    
+      <a id="nav-search-btn" class="nav-icon popup-trigger" title="検索"></a>
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    
+      <img fetchpriority="high" src="/images/luo.png" alt="ubuntu20.04安装PX4">
+    
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">ubuntu20.04安装PX4</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
     </div>
-    <form class="head-search" method="post">
-        <input type="text" name="s" placeholder="搜索什么？">
-    </form>
-    <nav class="head-menu">
-        <a href="/">首页</a>
-        <div class="has-child">
-            <a>分类</a>
-            <div class="sub-menu">
-                <a class="category-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><a class="category-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><a class="category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><a class="category-link" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a>
-            </div>
-        </div>
-        
-            <a href="/about">关于我</a>
-        
-            <a href="/friends">朋友们</a>
-        
-    </nav>
+  </div>
 </header>
 
-    <main>
-    <div class="wrap min">
-        <section class="post-title">
-            <h2>ubuntu20.04安装PX4</h2>
-            <div class="post-meta">
-                <time class="date">2022.11.20</time>
-            
-                <span class="category"><a class="category-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></span>
-            
-            </div>
-        </section>
-        <article class="post-content">
-        
-            <blockquote>这篇文章上次修改于 673 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
-        
-            <p>px4_firmware编译老报错，记录一下遇到的问题</p>
+        <div id="content">
+          
+          <section id="main"><article id="post-07.px4-autopilot" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2022/11/20/07.px4-autopilot/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2022-11-20T10:10:55.000Z" itemprop="datePublished">2022-11-20</time>
+    <time style="display: none;" id="post-update-time">2024-09-22</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%99%E7%A8%8B/" data-aos="zoom-in">教程</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <p>px4_firmware编译老报错，记录一下遇到的问题</p>
 <span id="more"></span>
 
 <blockquote>
@@ -78,28 +219,14 @@
 <li><a href="#%E6%8A%A5%E9%94%99">报错</a></li>
 <li><a href="#mavros%E7%AE%80%E4%BB%8B">mavros简介</a></li>
 </ul>
-<h1 id="依赖安装"><a href="#依赖安装" class="headerlink" title="依赖安装"></a>依赖安装</h1><pre><code class="bash">sudo apt install ninja-build exiftool ninja-build protobuf-compiler libeigen3-dev genromfs xmlstarlet libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gawk
-</code></pre>
-<h1 id="ros安装"><a href="#ros安装" class="headerlink" title="ros安装"></a>ros安装</h1><pre><code class="bash"># 设置软件库
-sudo sh -c &#39;echo &quot;deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main&quot; &gt; /etc/apt/sources.list.d/ros-latest.list&#39;
-# 设置软件库（清华源）
-# sudo sh -c &#39;. /etc/lsb-release &amp;&amp; echo &quot;deb http://mirrors.tuna.tsinghua.edu.cn/ros/ubuntu/ `lsb_release -cs` main&quot; &gt; /etc/apt/sources.list.d/ros-latest.list&#39;
-# 设置KEY
-curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
-# 更新软件列表
-sudo apt update
-# 安装完整ROS包
-sudo apt install ros-noetic-desktop-full
-</code></pre>
-<h1 id="mavros的安装"><a href="#mavros的安装" class="headerlink" title="mavros的安装"></a>mavros的安装</h1><pre><code class="bash"># 安装mavros包
-sudo apt install ros-noetic-mavros ros-noetic-mavros-extras
-cd /opt/ros/noetic/lib/mavros
-# 执行脚本 安装依赖
-# 容易因为网络问题下载不下来 多次执行直到全部succeed 建议科学上网
-sudo ./install_geographiclib_datasets.sh
-</code></pre>
-<h1 id="python"><a href="#python" class="headerlink" title="python"></a>python</h1><pre><code class="bash">pip install rospkg
-</code></pre>
+<h1 id="依赖安装"><a href="#依赖安装" class="headerlink" title="依赖安装"></a>依赖安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install ninja-build exiftool ninja-build protobuf-compiler libeigen3-dev genromfs xmlstarlet libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev gawk</span><br></pre></td></tr></table></figure>
+
+<h1 id="ros安装"><a href="#ros安装" class="headerlink" title="ros安装"></a>ros安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置软件库</span></span><br><span class="line">sudo sh -c <span class="string">&#x27;echo &quot;deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main&quot; &gt; /etc/apt/sources.list.d/ros-latest.list&#x27;</span></span><br><span class="line"><span class="comment"># 设置软件库（清华源）</span></span><br><span class="line"><span class="comment"># sudo sh -c &#x27;. /etc/lsb-release &amp;&amp; echo &quot;deb http://mirrors.tuna.tsinghua.edu.cn/ros/ubuntu/ `lsb_release -cs` main&quot; &gt; /etc/apt/sources.list.d/ros-latest.list&#x27;</span></span><br><span class="line"><span class="comment"># 设置KEY</span></span><br><span class="line">curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -</span><br><span class="line"><span class="comment"># 更新软件列表</span></span><br><span class="line">sudo apt update</span><br><span class="line"><span class="comment"># 安装完整ROS包</span></span><br><span class="line">sudo apt install ros-noetic-desktop-full</span><br></pre></td></tr></table></figure>
+
+<h1 id="mavros的安装"><a href="#mavros的安装" class="headerlink" title="mavros的安装"></a>mavros的安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装mavros包</span></span><br><span class="line">sudo apt install ros-noetic-mavros ros-noetic-mavros-extras</span><br><span class="line"><span class="built_in">cd</span> /opt/ros/noetic/lib/mavros</span><br><span class="line"><span class="comment"># 执行脚本 安装依赖</span></span><br><span class="line"><span class="comment"># 容易因为网络问题下载不下来 多次执行直到全部succeed 建议科学上网</span></span><br><span class="line">sudo ./install_geographiclib_datasets.sh</span><br></pre></td></tr></table></figure>
+
+<h1 id="python"><a href="#python" class="headerlink" title="python"></a>python</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install rospkg</span><br></pre></td></tr></table></figure>
+
 <ul>
 <li><p>1.装了<strong>conda</strong>的话直接运行即可</p>
 </li>
@@ -113,17 +240,8 @@ sudo ./install_geographiclib_datasets.sh
 <p>或者使用conda或者源码编译python又或者使用ubuntu的工具进行管理，自行搜索一下</p>
 <p>图方便使用第三步的指令即可</p>
 </blockquote>
-<h1 id="PX4配置"><a href="#PX4配置" class="headerlink" title="PX4配置"></a>PX4配置</h1><pre><code class="bash"># 克隆px4仓库
-git clone https://github.com/PX4/PX4-Autopilot.git
-# 进入目录
-cd PX4-Autopilot
-# 新建名为1.11.3的分支，切换到v1.11.3的版本（tag）
-git checkout -b 1.11.3 v1.11.3
-# 子模块更新（因为px4仓库里面放了很多其他的仓库，这步在代理不稳定时极容易失败，最好能一次全部通过,也可以使用下面的网盘下载好解压后直接执行下面的编译操作）
-git submodule update --init --recursive
-# 编译（极容易报错）
-make px4_sitl_default gazebo
-</code></pre>
+<h1 id="PX4配置"><a href="#PX4配置" class="headerlink" title="PX4配置"></a>PX4配置</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 克隆px4仓库</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/PX4/PX4-Autopilot.git</span><br><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> PX4-Autopilot</span><br><span class="line"><span class="comment"># 新建名为1.11.3的分支，切换到v1.11.3的版本（tag）</span></span><br><span class="line">git checkout -b 1.11.3 v1.11.3</span><br><span class="line"><span class="comment"># 子模块更新（因为px4仓库里面放了很多其他的仓库，这步在代理不稳定时极容易失败，最好能一次全部通过,也可以使用下面的网盘下载好解压后直接执行下面的编译操作）</span></span><br><span class="line">git submodule update --init --recursive</span><br><span class="line"><span class="comment"># 编译（极容易报错）</span></span><br><span class="line">make px4_sitl_default gazebo</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://pan.quark.cn/s/2650872edf53">夸克网盘</a></p>
 <p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/19KValVqzDl0bvXqIHnX_Ag?pwd=zmov">百度网盘</a></p>
@@ -137,53 +255,32 @@ make px4_sitl_default gazebo
 <blockquote>
 <p>使用的zsh就写入.zshrc中（虽然有个source的是bash文件，但也是可以用的）</p>
 </blockquote>
-<pre><code class="bash">source ~/PX4-Autopilot/Tools/setup_gazebo.bash ~/PX4-Autopilot/ ~/PX4-Autopilot/build/px4_sitl_default
-export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4-Autopilot
-export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4-Autopilot/Tools/sitl_gazebo
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/PX4-Autopilot/Tools/setup_gazebo.bash ~/PX4-Autopilot/ ~/PX4-Autopilot/build/px4_sitl_default</span><br><span class="line"><span class="built_in">export</span> ROS_PACKAGE_PATH=<span class="variable">$ROS_PACKAGE_PATH</span>:~/PX4-Autopilot</span><br><span class="line"><span class="built_in">export</span> ROS_PACKAGE_PATH=<span class="variable">$ROS_PACKAGE_PATH</span>:~/PX4-Autopilot/Tools/sitl_gazebo</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p><strong>重新</strong>打开一个终端会出现几个路径，则设置代表成功</p>
 <p>如果不想每次都看见那几行路径，则去<code>~/PX4-Autopilot/Tools/setup_gazebo.bash</code>中把echo的几句话全部注释掉即可</p>
 <p>tips：若你选择下载<strong>最新版本</strong>的px4，这setup_gazebo.bash和sitl_gazebo文件夹的路径会发生变化，注意更换</p>
 </blockquote>
 <p><strong>新开</strong>一个终端，运行下面的launch（一定要新开一个终端！！）</p>
-<pre><code class="bash">roslaunch px4 mavros_posix_sitl.launch
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">roslaunch px4 mavros_posix_sitl.launch</span><br></pre></td></tr></table></figure>
+
 <p>运行<code>rostopic echo /mavros/state</code>   其中<code>connected</code>为true则成功</p>
-<pre><code class="bash">$ rostopic echo /mavros/state
-header: 
-  seq: 29
-  stamp: 
-    secs: 29
-    nsecs: 532000000
-  frame_id: &#39;&#39;
-connected: True
-armed: False
-guided: True
-manual_input: False
-mode: &quot;AUTO.LOITER&quot;
-system_status: 3
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$ rostopic <span class="built_in">echo</span> /mavros/state</span><br><span class="line">header: </span><br><span class="line">  <span class="built_in">seq</span>: 29</span><br><span class="line">  stamp: </span><br><span class="line">    secs: 29</span><br><span class="line">    nsecs: 532000000</span><br><span class="line">  frame_id: <span class="string">&#x27;&#x27;</span></span><br><span class="line">connected: True</span><br><span class="line">armed: False</span><br><span class="line">guided: True</span><br><span class="line">manual_input: False</span><br><span class="line">mode: <span class="string">&quot;AUTO.LOITER&quot;</span></span><br><span class="line">system_status: 3</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>实物飞机调整飞控时会用到<a target="_blank" rel="noopener" href="https://docs.qgroundcontrol.com/en/getting_started/download_and_install.html">QGroundControl</a></p>
 <p>此外给一份<a target="_blank" rel="noopener" href="https://docs.px4.io/v1.12/en/ros/mavros_offboard.html">官方示例代码</a>运行起来之后飞机就能起飞啦</p>
 </blockquote>
 <h1 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h1><ul>
 <li><p>想要<strong>重新编译</strong>？</p>
-<pre><code class="bash"># 先清除之前编译产生的文件  在PX4-Autopilot文件夹目录下运行
-make clean
-# 再次编译
-make px4_sitl_default gazebo
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先清除之前编译产生的文件  在PX4-Autopilot文件夹目录下运行</span></span><br><span class="line">make clean</span><br><span class="line"><span class="comment"># 再次编译</span></span><br><span class="line">make px4_sitl_default gazebo</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>运行示例代码，<strong>飞机无法起飞</strong></p>
 <ul>
 <li><p>报错<strong>Preflight Fail: Accel #0 uncalibrated</strong>等</p>
 <p><img src="https://s2.loli.net/2022/12/11/A52lrBgX8IMKRui.png" alt="2022-12-11 15-22-30 的屏幕截图.png"></p>
-<pre><code class="bash"># 清空仿真参数再次启动即可
-rm ~/.ros/eeprom/parameters*
-rm -rf ~/.ros/sitl*
-</code></pre>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 清空仿真参数再次启动即可</span></span><br><span class="line"><span class="built_in">rm</span> ~/.ros/eeprom/parameters*</span><br><span class="line"><span class="built_in">rm</span> -rf ~/.ros/sitl*</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>若一直无法进入<strong>offboard</strong>模式，则打开<strong>QGC</strong></p>
 <p>左上角-&gt;<strong>vehicle setup</strong>—&gt;<strong>parameters</strong>—&gt;搜索<strong>COM_RCL_EXCEPT</strong>—&gt;勾选<strong>takeoff</strong></p>
@@ -191,9 +288,8 @@ rm -rf ~/.ros/sitl*
 </ul>
 </li>
 <li><p>有关<strong>gazebo_ros</strong></p>
-<pre><code class="error">ERROR: cannot launch node of type [gazebo_ros/gzserver]: Cannot locate node of type [gzserver] in package [gazebo_ros]. Make sure file exists in package path and permission is set to executable (chmod +x)
-ERROR: cannot launch node of type [gazebo_ros/gzclient]: Cannot locate node of type [gzclient] in package [gazebo_ros]. Make sure file exists in package path and permission is set to executable (chmod +x)
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ERROR: cannot launch node of type [gazebo_ros/gzserver]: Cannot locate node of type [gzserver] in package [gazebo_ros]. Make sure file exists in package path and permission is set to executable (chmod +x)</span><br><span class="line">ERROR: cannot launch node of type [gazebo_ros/gzclient]: Cannot locate node of type [gzclient] in package [gazebo_ros]. Make sure file exists in package path and permission is set to executable (chmod +x)</span><br></pre></td></tr></table></figure>
+
 <p>可能是工作空间放了一个一模一样名字的功能包，把它删掉再次编译即可</p>
 <blockquote>
 <p>使用<code>roscd gazebo_ros</code>即可找到当前的gazebo_ros功能包在哪</p>
@@ -201,24 +297,11 @@ ERROR: cannot launch node of type [gazebo_ros/gzclient]: Cannot locate node of t
 </blockquote>
 </li>
 <li><p><strong>报错</strong></p>
-<pre><code class="error">[vehicle_spawn_magic_5853_2732546998413423669-5] process has died [pid 5940, exit code 1, cmd /opt/ros/noetic/lib/gazebo_ros/spawn_model -sdf -file 
-/home/magic/PX4-Autopilot/Tools/sitl_gazebo/models/iris_rplidar/iris_rplidar.sdf -model iris_rplidar -x 0 -y 0 -z 0 -R 0 -P 0 -Y 0 
-__name:=vehicle_spawn_magic_5853_2732546998413423669 __log:=/home/magic/.ros/log/60dcd1ea-78a8-11ed-8477-4396ccb8ddd5/vehicle_spawn_magic_5853_2732546998413423669-5.log].
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[vehicle_spawn_magic_5853_2732546998413423669-5] process has died [pid 5940, exit code 1, cmd /opt/ros/noetic/lib/gazebo_ros/spawn_model -sdf -file </span><br><span class="line">/home/magic/PX4-Autopilot/Tools/sitl_gazebo/models/iris_rplidar/iris_rplidar.sdf -model iris_rplidar -x 0 -y 0 -z 0 -R 0 -P 0 -Y 0 </span><br><span class="line">__name:=vehicle_spawn_magic_5853_2732546998413423669 __log:=/home/magic/.ros/log/60dcd1ea-78a8-11ed-8477-4396ccb8ddd5/vehicle_spawn_magic_5853_2732546998413423669-5.log].</span><br></pre></td></tr></table></figure>
+
 <p>在这个红色报错里其实什么都找不到，但是再<strong>往上翻</strong>你可以看到白字</p>
-<pre><code class="error">Traceback (most recent call last):
-  File &quot;/opt/ros/noetic/lib/gazebo_ros/spawn_model&quot;, line 20, in &lt;module&gt;
-    import rospy
-  File &quot;/opt/ros/noetic/lib/python3/dist-packages/rospy/__init__.py&quot;, line 49, in &lt;module&gt;
-    from .client import spin, myargv, init_node, \
-  File &quot;/opt/ros/noetic/lib/python3/dist-packages/rospy/client.py&quot;, line 52, in &lt;module&gt;
-    import roslib
-  File &quot;/opt/ros/noetic/lib/python3/dist-packages/roslib/__init__.py&quot;, line 50, in &lt;module&gt;
-    from roslib.launcher import load_manifest  # noqa: F401
-  File &quot;/opt/ros/noetic/lib/python3/dist-packages/roslib/launcher.py&quot;, line 42, in &lt;module&gt;
-    import rospkg
-ModuleNotFoundError: No module named &#39;rospkg&#39;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;/opt/ros/noetic/lib/gazebo_ros/spawn_model&quot;, line 20, in &lt;module&gt;</span><br><span class="line">    import rospy</span><br><span class="line">  File &quot;/opt/ros/noetic/lib/python3/dist-packages/rospy/__init__.py&quot;, line 49, in &lt;module&gt;</span><br><span class="line">    from .client import spin, myargv, init_node, \</span><br><span class="line">  File &quot;/opt/ros/noetic/lib/python3/dist-packages/rospy/client.py&quot;, line 52, in &lt;module&gt;</span><br><span class="line">    import roslib</span><br><span class="line">  File &quot;/opt/ros/noetic/lib/python3/dist-packages/roslib/__init__.py&quot;, line 50, in &lt;module&gt;</span><br><span class="line">    from roslib.launcher import load_manifest  # noqa: F401</span><br><span class="line">  File &quot;/opt/ros/noetic/lib/python3/dist-packages/roslib/launcher.py&quot;, line 42, in &lt;module&gt;</span><br><span class="line">    import rospkg</span><br><span class="line">ModuleNotFoundError: No module named &#x27;rospkg&#x27;</span><br></pre></td></tr></table></figure>
+
 <p><code>No module named &#39;rospkg&#39;</code>这个就很熟悉了，python没有rospkg这个包</p>
 <p><code>pip install rospkg</code>安装一下就行了</p>
 </li>
@@ -227,21 +310,7 @@ ModuleNotFoundError: No module named &#39;rospkg&#39;
 <ul>
 <li><p><code>mavros/local_position/pose</code>本地位置信息</p>
 <p>数据类型名称：<code>geometry_msgs::PoseStamped</code></p>
-<pre><code class="msg">std_msgs/Header header
-  uint32 seq
-  time stamp
-  string frame_id
-geometry_msgs/Pose pose
-  geometry_msgs/Point position
-    float64 x
-    float64 y
-    float64 z
-  geometry_msgs/Quaternion orientation
-    float64 x
-    float64 y
-    float64 z
-    float64 w
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">std_msgs/Header header</span><br><span class="line">  uint32 seq</span><br><span class="line">  time stamp</span><br><span class="line">  string frame_id</span><br><span class="line">geometry_msgs/Pose pose</span><br><span class="line">  geometry_msgs/Point position</span><br><span class="line">    float64 x</span><br><span class="line">    float64 y</span><br><span class="line">    float64 z</span><br><span class="line">  geometry_msgs/Quaternion orientation</span><br><span class="line">    float64 x</span><br><span class="line">    float64 y</span><br><span class="line">    float64 z</span><br><span class="line">    float64 w</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><code>mavros/state</code></p>
 <p>当前状态话题，包括是否连接、解锁以及当前的飞行模式</p>
@@ -257,32 +326,12 @@ geometry_msgs/Pose pose
 <ul>
 <li><p><code>/mavros/setpoint_velocity/cmd_vel_unstamped</code>控制无人机的速度话题</p>
 <p>数据类型名称：<code>geometry_msgs/Twist</code></p>
-<pre><code class="msg">geometry_msgs/Vector3 linear
-  float64 x
-  float64 y
-  float64 z
-geometry_msgs/Vector3 angular
-  float64 x
-  float64 y
-  float64 z
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">geometry_msgs/Vector3 linear</span><br><span class="line">  float64 x</span><br><span class="line">  float64 y</span><br><span class="line">  float64 z</span><br><span class="line">geometry_msgs/Vector3 angular</span><br><span class="line">  float64 x</span><br><span class="line">  float64 y</span><br><span class="line">  float64 z</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><code>/mavros/setpoint_velocity/cmd_vel</code>控制无人机的速度话题</p>
 <p>数据类型名称：<code>geometry_msgs/TwistStamped</code></p>
-<pre><code class="msg">std_msgs/Header header
-  uint32 seq
-  time stamp
-  string frame_id
-geometry_msgs/Twist twist
-  geometry_msgs/Vector3 linear
-    float64 x
-    float64 y
-    float64 z
-  geometry_msgs/Vector3 angular
-    float64 x
-    float64 y
-    float64 z
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">std_msgs/Header header</span><br><span class="line">  uint32 seq</span><br><span class="line">  time stamp</span><br><span class="line">  string frame_id</span><br><span class="line">geometry_msgs/Twist twist</span><br><span class="line">  geometry_msgs/Vector3 linear</span><br><span class="line">    float64 x</span><br><span class="line">    float64 y</span><br><span class="line">    float64 z</span><br><span class="line">  geometry_msgs/Vector3 angular</span><br><span class="line">    float64 x</span><br><span class="line">    float64 y</span><br><span class="line">    float64 z</span><br></pre></td></tr></table></figure>
+
 <p>关于这两个速度话题，有一个点<strong>需要关注</strong>的</p>
 <p>前一个话题没有<strong>frame_id</strong>，默认就是<strong>map</strong></p>
 <blockquote>
@@ -381,96 +430,486 @@ geometry_msgs/Twist twist
 <p>使用px6c可能会有这个问题，电脑上安装的mavros太旧了，更新一下即可<code>sudo apt install ros-$ROS_DISTRO-mavros  ros-$ROS_DISTRO-mavros-extras</code></p>
 </li>
 <li><p><strong>端口占用 busy</strong></p>
-<pre><code>[FATAL] [1705922606.620863352]: FCU: DeviceError:serial:open: Device or resource busy
-================================================================================REQUIRED process [mavros-2] has died!
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[FATAL] [1705922606.620863352]: FCU: DeviceError:serial:open: Device or resource busy</span><br><span class="line">================================================================================REQUIRED process [mavros-2] has died!</span><br></pre></td></tr></table></figure>
+
 <p>把QGC地面站关闭即可</p>
 </li>
 <li><p><code>rostopic echo /mavros/local_position/pose</code>没有消息或者xy为0，z有值的时候检查一下飞控参数中<code>EKF2_AID_MASK</code>是否设置为了24，<code>EKF2_HGT_MODE</code>是否设置为VISON</p>
 </li>
 </ul>
 
-        </article>
-        
-        <section class="post-near">
-            <ul>
-                
-                    <li>上一篇: <a href="/2022/12/08/08.uav/">组装一台四旋翼无人机</a></li>
-                
-                
-                    <li>下一篇: <a href="/2022/10/17/06.ros/">ros入门</a></li>
-                
-            </ul>
-        </section>
-        
-            <section class="post-tags">
-            <a class="-none-link" href="/tags/px4/" rel="tag">px4</a>
-            </section>
-        
-        <script src="https://giscus.app/client.js"
-        data-repo="qllokirin/hexo_blog_comments"
-        data-repo-id="R_kgDOI8fvWA"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOI8fvWM4CUIlh"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="preferred_color_scheme"
-        data-lang="zh-CN"
-        crossorigin="anonymous"
-        async>
-        </script>
-    
-        <section class="post-author">
-        
-            <figure class="author-avatar">
-                <img src="https://s2.loli.net/2022/09/27/6rzl4WOitu8pUqg.jpg" alt="qllokirin" />
-            </figure>
-        
-            <div class="author-info">
-                <h4>qllokirin</h4>
-                <p>你好，我是祈菱不是麒麟(qllokirin)，很高兴与你相遇</p>
-            </div>
-        </section>
-    
+      
     </div>
-</main>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/px4/" rel="tag">px4</a></li></ul>
 
-    <footer>
-    <div class="buttons">
-        <a class="to-top" href="#"></a>
+
+    </footer>
+  </div>
+  
+    
+  <nav id="article-nav" data-aos="fade-up">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          
+          
+            <img data-src="/covers/49.jpg" data-sizes="auto" alt="组装一台四旋翼无人机" class="lazyload">
+          
+        
+        <a href="/2022/12/08/08.uav/"></a>
+        <div class="article-nav-caption">次の記事</div>
+        <h3 class="article-nav-title">
+          
+            组装一台四旋翼无人机
+          
+        </h3>
+      </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/covers/34.jpg" data-sizes="auto" alt="ros入门" class="lazyload">
+        
+      
+      <a href="/2022/10/17/06.ros/"></a>
+      <div class="article-nav-caption">前の記事</div>
+      <h3 class="article-nav-title">
+        
+          ros入门
+        
+      </h3>
     </div>
-    <div class="wrap min">
-        <section class="widget">
-            <div class="row">
-                <div class="col-m-4">
-                    <h3 class="title-recent">最新文章：</h3>
-                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/7777/07/07/diary/">稀疏平常的生活</a></li><li class="post-list-item"><a class="post-list-link" href="/2024/08/06/26.vison_note/">一些视觉代码使用的记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2024/04/11/25.N100_op/">N100双网口小主机使用docker版openwrt做主路由（PPPoE拨号）超详细！！！！</a></li><li class="post-list-item"><a class="post-list-link" href="/2024/03/22/24.gitea+DroneCI/">gitea+Drone CI实现hexo博客自动部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2024/02/19/23.remote_control_switch/">宿舍遥控开关整改计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2024/02/14/22.home_network_upgrade/">家庭网络拓扑整改日记</a></li></ul>
-                </div>
-                <div class="col-m-4">
-                    <h3 class="title-date">时光机：</h3>
-                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/7777/07/">July 7777</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">August 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li></ul>
-                </div>
-                <div class="col-m-4">
-                    <h3 class="title-tags">标签云：</h3>
-                    <a href="/tags/Drone-CI/" style="font-size: 10px;">Drone CI</a> <a href="/tags/EasyConnect/" style="font-size: 10px;">EasyConnect</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/clash/" style="font-size: 10px;">clash</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/livehouse/" style="font-size: 10px;">livehouse</a> <a href="/tags/openwrt/" style="font-size: 20px;">openwrt</a> <a href="/tags/px4/" style="font-size: 10px;">px4</a> <a href="/tags/ros/" style="font-size: 20px;">ros</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/vocaloid/" style="font-size: 10px;">vocaloid</a> <a href="/tags/%E4%BA%91%E5%B4%BD/" style="font-size: 10px;">云崽</a> <a href="/tags/%E5%8F%8C%E7%AC%99/" style="font-size: 10px;">双笙</a> <a href="/tags/%E5%AE%B6%E5%BA%AD%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">家庭网络</a> <a href="/tags/%E6%97%85%E6%B8%B8/" style="font-size: 10px;">旅游</a> <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA%E7%BB%84%E8%A3%85/" style="font-size: 10px;">无人机组装</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 10px;">日记</a> <a href="/tags/%E6%AD%8C/" style="font-size: 10px;">歌</a> <a href="/tags/%E6%AF%94%E8%B5%9B/" style="font-size: 10px;">比赛</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%95%AA/" style="font-size: 10px;">番</a> <a href="/tags/%E7%AC%94%E8%AE%B0%E6%9C%AC%E4%BC%98%E5%8C%96/" style="font-size: 10px;">笔记本优化</a> <a href="/tags/%E8%A3%85%E6%9C%BA/" style="font-size: 10px;">装机</a> <a href="/tags/%E8%A7%86%E8%A7%89/" style="font-size: 10px;">视觉</a> <a href="/tags/%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">记录</a> <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a> <a href="/tags/%E9%81%A5%E6%8E%A7%E5%BC%80%E5%85%B3/" style="font-size: 10px;">遥控开关</a> <a href="/tags/%E9%87%8D%E8%A3%85/" style="font-size: 10px;">重装</a> <a href="/tags/%E9%AD%94%E6%B3%95/" style="font-size: 10px;">魔法</a>
-                </div>
-            </div>
-        </section>
-        <section class="sub-footer">
-            <p>© 2024 <a href="/">qllokirin</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
-        </section>
+    
+  </nav>
+
+
+  
+</article>
+
+
+
+
+
+  <div id="comments" class="gscomment giscus"></div>
+
+
+</section>
+          
+            <aside id="sidebar">
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">見出し</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">依赖安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ros%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">ros安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#mavros%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-number">3.</span> <span class="toc-text">mavros的安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#python"><span class="toc-number">4.</span> <span class="toc-text">python</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PX4%E9%85%8D%E7%BD%AE"><span class="toc-number">5.</span> <span class="toc-text">PX4配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8A%A5%E9%94%99"><span class="toc-number">6.</span> <span class="toc-text">报错</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#mavros%E7%AE%80%E4%BB%8B"><span class="toc-number">7.</span> <span class="toc-text">mavros简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E5%88%97%E8%A1%A8"><span class="toc-number">8.</span> <span class="toc-text">任务列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E9%A3%9E%E6%9C%BA%E9%A3%9E%E6%AD%A3%E6%96%B9%E5%BD%A2"><span class="toc-number">8.0.1.</span> <span class="toc-text">1、飞机飞正方形</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81move-base%E5%9C%A8%E6%97%A0%E4%BA%BA%E6%9C%BA%E4%B8%AD%E4%BD%BF%E7%94%A8"><span class="toc-number">8.0.2.</span> <span class="toc-text">2、move_base在无人机中使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81ego-planner%E4%BD%BF%E7%94%A8"><span class="toc-number">8.0.3.</span> <span class="toc-text">3、ego-planner使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E5%AD%A6%E4%B9%A0%E5%AD%A6%E9%95%BF-x2F-%E5%AD%A6%E5%A7%90%E4%BB%A3%E7%A0%81%E6%A1%86%E6%9E%B6"><span class="toc-number">8.0.4.</span> <span class="toc-text">4、学习学长&#x2F;学姐代码框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E5%A4%96%E8%AF%9D"><span class="toc-number">8.0.5.</span> <span class="toc-text">题外话</span></a></li></ol></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="qllokirin" class="lazyload">
+  <div class="sidebar-author-name">qllokirin</div>
+  <div class="sidebar-description">~\(≧▽≦)/~</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>投稿</div>
+    <div class="sidebar-state-number">27</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>カテゴリ</div>
+    <div class="sidebar-state-number">5</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>タグ</div>
+    <div class="sidebar-state-number">31</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="ホーム"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">ホーム</div>
     </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="アーカイブ"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">アーカイブ</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/about" aria-label="プロフィール"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">プロフィール</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="フレンド"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">フレンド</div>
+    </div>
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  
+</aside>
+
+          
+        </div>
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2024
+      <span class="footer-info-sep"></span>
+      qllokirin
+    </div>
+    
+      <div>
+        Powered by&nbsp;<a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        45.1k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        02:44
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">総閲覧数&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">総閲覧者数&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
 </footer>
 
+        <div class="sidebar-top">
+          <img src="/images/taichi.png" height="50" width="50" alt="backtop" />
+          <div class="arrow-up"></div>
+        </div>
+        <div id="mask"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">見出し</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">依赖安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ros%E5%AE%89%E8%A3%85"><span class="toc-number">2.</span> <span class="toc-text">ros安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#mavros%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-number">3.</span> <span class="toc-text">mavros的安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#python"><span class="toc-number">4.</span> <span class="toc-text">python</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PX4%E9%85%8D%E7%BD%AE"><span class="toc-number">5.</span> <span class="toc-text">PX4配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8A%A5%E9%94%99"><span class="toc-number">6.</span> <span class="toc-text">报错</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#mavros%E7%AE%80%E4%BB%8B"><span class="toc-number">7.</span> <span class="toc-text">mavros简介</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1%E5%88%97%E8%A1%A8"><span class="toc-number">8.</span> <span class="toc-text">任务列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E9%A3%9E%E6%9C%BA%E9%A3%9E%E6%AD%A3%E6%96%B9%E5%BD%A2"><span class="toc-number">8.0.1.</span> <span class="toc-text">1、飞机飞正方形</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81move-base%E5%9C%A8%E6%97%A0%E4%BA%BA%E6%9C%BA%E4%B8%AD%E4%BD%BF%E7%94%A8"><span class="toc-number">8.0.2.</span> <span class="toc-text">2、move_base在无人机中使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81ego-planner%E4%BD%BF%E7%94%A8"><span class="toc-number">8.0.3.</span> <span class="toc-text">3、ego-planner使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E5%AD%A6%E4%B9%A0%E5%AD%A6%E9%95%BF-x2F-%E5%AD%A6%E5%A7%90%E4%BB%A3%E7%A0%81%E6%A1%86%E6%9E%B6"><span class="toc-number">8.0.4.</span> <span class="toc-text">4、学习学长&#x2F;学姐代码框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E5%A4%96%E8%AF%9D"><span class="toc-number">8.0.5.</span> <span class="toc-text">题外话</span></a></li></ol></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="qllokirin" class="lazyload">
+  <div class="sidebar-author-name">qllokirin</div>
+  <div class="sidebar-description">~\(≧▽≦)/~</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>投稿</div>
+    <div class="sidebar-state-number">27</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>カテゴリ</div>
+    <div class="sidebar-state-number">5</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>タグ</div>
+    <div class="sidebar-state-number">31</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="ホーム"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">ホーム</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="アーカイブ"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">アーカイブ</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/about" aria-label="プロフィール"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">プロフィール</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="フレンド"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">フレンド</div>
+    </div>
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
 
-<script src="/static/kico.js"></script>
-<script src="/static/hingle.js"></script>
+    </div>
+    
+      <div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div class="reimu-search-input" id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png"/>
+        </div>
+      </div>
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"></script>
 
 
-<script>var hingle = new Paul_Hingle({"copyright":false,"night":false});</script>
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"></script>
 
-  </body>
-</html>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+<script type="module" data-pjax>
+  import PhotoSwipeLightbox from "https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js";
+  
+  const pswp = () => {
+    if (_$$('.article-entry a.article-gallery-item').length > 0) {
+      new PhotoSwipeLightbox({
+        gallery: '.article-entry',
+        children: 'a.article-gallery-item',
+        pswpModule: () => import("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js")
+      }).init();
+    }
+    if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+      new PhotoSwipeLightbox({
+        gallery: '.article-gallery',
+        children: 'a.article-gallery-item',
+        pswpModule: () => import("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js")
+      }).init();
+    }
+    window.lightboxStatus = 'done';
+    window.removeEventListener('lightbox:ready', pswp);
+  }
+  if(window.lightboxStatus === 'ready') {
+    pswp()
+  } else {
+    window.addEventListener('lightbox:ready', pswp);
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  <script src="https://giscus.app/client.js"
+          data-repo='qllokirin/hexo_blog_comments'
+          data-repo-id='R_kgDOI8fvWA'
+          data-category='Announcements'
+          data-category-id='DIC_kwDOI8fvWM4CUIlh'
+          data-mapping='mapping'
+          data-strict='0'
+          data-reactions-enabled='1'
+          data-emit-metadata='0'
+          data-input-position='bottom'
+          data-theme='preferred_color_scheme'
+          data-lang='zh-CN'
+          crossorigin="anonymous"
+          data-pjax
+          async>
+  </script>
+
+
+
+
+
+  <script>
+    var CONFIG = {
+      root: '/',
+      algolia: {
+        applicationID: "F2C7EFMFDR",
+        apiKey: "9e27cda9036ebeacc32e3250c4bfa398",
+        indexName: "my-hexo-blog",
+        hits: {
+          "per_page": parseInt("10")
+        },
+        labels: {
+          "input_placeholder": "搜索.....",
+          "hits_empty": "未发现与 「${query}」相关内容",
+          "hits_stats": "找到${hits}条结果（用时 ${time} ms）"
+        }
+      }
+    };
+  </script>
+  
+<script src="https://npm.webcache.cn/algoliasearch@4.17.1/dist/algoliasearch-lite.umd.js"></script>
+
+  
+<script src="https://npm.webcache.cn/instantsearch.js@4.56.1/dist/instantsearch.production.min.js" defer></script>
+
+  
+<script src="/js/algolia_search.js" defer></script>
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.4/dist/index.umd.js"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/quicklink@2.3.0/dist/quicklink.umd.js"></script>
+
+  <script data-pjax>
+    window.quicklink?.listen({
+      timeout: 3000,
+      priority: true,
+      ignores: []
+    });
+  </script>
+
+
+<div id="lazy-script">
+  <div>
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '0.3.2' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+  <!-- hexo injector body_end start -->
+<script src="/js/insert_highlight.js" data-pjax></script>
+<!-- hexo injector body_end end --></body>
+  </html>
+

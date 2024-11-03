@@ -1,67 +1,210 @@
-<!DOCTYPE html>
-<html>
+
+  <!DOCTYPE html>
+  <html lang="zh-Hans"  >
   <head>
-     
-    <meta charset="UTF-8">
-    <title>N100双网口小主机使用docker版openwrt做主路由（PPPoE拨号）超详细！！！！ - qllokirin</title>
-    <link rel="shortcut icon" href="/static/img/icon.png">
-    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
-    
-<link rel="stylesheet" href="/static/kico.css">
-<link rel="stylesheet" href="/static/hingle.css">
+  <meta charset="utf-8">
+  
 
-    
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
 
-    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
-    <meta property="og:site_name" content="qllokirin">
-    <meta property="og:title" content="N100双网口小主机使用docker版openwrt做主路由（PPPoE拨号）超详细！！！！"/>
+  
+
+  
+  <script>window.icon_font = '4552607_tq6stt6tcg';window.clipboard_tips = {"success":"复制成功～(∠・ω< )⌒☆","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};</script>
+  
+  
+  <title>
+    N100双网口小主机使用docker版openwrt做主路由（PPPoE拨号）超详细！！！！ |
     
+    qllokirin
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_tq6stt6tcg.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="踩了好多好多大坑，感觉用N100在docker中使用openwrt并且WAN口进行PPPoE拨号的教程不是太多，给我折磨完了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="N100双网口小主机使用docker版openwrt做主路由（PPPoE拨号）超详细！！！！">
+<meta property="og:url" content="http://example.com/2024/04/11/25.N100_op/index.html">
+<meta property="og:site_name" content="qllokirin">
+<meta property="og:description" content="踩了好多好多大坑，感觉用N100在docker中使用openwrt并且WAN口进行PPPoE拨号的教程不是太多，给我折磨完了">
+<meta property="og:locale">
+<meta property="og:image" content="https://s2.loli.net/2024/04/11/ovJMdKpPZEuaz5x.png">
+<meta property="og:image" content="https://s2.loli.net/2024/04/11/7lruCSX6k3WsJKM.png">
+<meta property="article:published_time" content="2024-04-11T15:59:49.000Z">
+<meta property="article:modified_time" content="2024-09-22T11:36:13.172Z">
+<meta property="article:author" content="qllokirin">
+<meta property="article:tag" content="openwrt">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2024/04/11/ovJMdKpPZEuaz5x.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="qllokirin" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.0.1/dist/aos.css">
+
+  
 <meta name="generator" content="Hexo 6.3.0"></head>
 
   <body>
-    <header>
-    <div class="head-title">
-        <h4>qllokirin</h4>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+          <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="#ff5252" />
+          <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+         M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="#ff5252" />
+        </svg>
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
     </div>
-    <div class="head-action">
-        <div class="toggle-btn"></div>
-        <div class="light-btn"></div>
-        <div class="search-btn"></div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      <span class="main-nav-link-wrap">
+        <div class="main-nav-icon icon-taichi"></div>
+        <a class="main-nav-link" href="/">ホーム</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class="main-nav-icon icon-taichi"></div>
+        <a class="main-nav-link" href="/archives">アーカイブ</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class="main-nav-icon icon-taichi"></div>
+        <a class="main-nav-link" href="/about">プロフィール</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class="main-nav-icon icon-taichi"></div>
+        <a class="main-nav-link" href="/friend">フレンド</a>
+      </span>
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSSフィード" target="_blank"></a>
+    
+    
+      <a id="nav-search-btn" class="nav-icon popup-trigger" title="検索"></a>
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    
+      <img fetchpriority="high" src="/images/luo.png" alt="N100双网口小主机使用docker版openwrt做主路由（PPPoE拨号）超详细！！！！">
+    
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">N100双网口小主机使用docker版openwrt做主路由（PPPoE拨号）超详细！！！！</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
     </div>
-    <form class="head-search" method="post">
-        <input type="text" name="s" placeholder="搜索什么？">
-    </form>
-    <nav class="head-menu">
-        <a href="/">首页</a>
-        <div class="has-child">
-            <a>分类</a>
-            <div class="sub-menu">
-                <a class="category-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><a class="category-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><a class="category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><a class="category-link" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a>
-            </div>
-        </div>
-        
-            <a href="/about">关于我</a>
-        
-            <a href="/friends">朋友们</a>
-        
-    </nav>
+  </div>
 </header>
 
-    <main>
-    <div class="wrap min">
-        <section class="post-title">
-            <h2>N100双网口小主机使用docker版openwrt做主路由（PPPoE拨号）超详细！！！！</h2>
-            <div class="post-meta">
-                <time class="date">2024.04.11</time>
-            
-                <span class="category"><a class="category-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a></span>
-            
-            </div>
-        </section>
-        <article class="post-content">
-        
-            <p>踩了好多好多大坑，感觉用N100在docker中使用openwrt并且WAN口进行PPPoE拨号的教程不是太多，给我折磨完了</p>
+        <div id="content">
+          
+          <section id="main"><article id="post-25.N100_op" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2024/04/11/25.N100_op/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2024-04-11T15:59:49.000Z" itemprop="datePublished">2024-04-11</time>
+    <time style="display: none;" id="post-update-time">2024-09-22</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%95%99%E7%A8%8B/" data-aos="zoom-in">教程</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <p>踩了好多好多大坑，感觉用N100在docker中使用openwrt并且WAN口进行PPPoE拨号的教程不是太多，给我折磨完了</p>
 <span id="more"></span>
 
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近入手了一个 699 双网口的 N100 小主机，自己有内存和硬盘，装上就开始酷酷捯饬，装上 Ubuntu22.04，双网口的第一步当然是 openwrt，启动！</p>
@@ -134,131 +277,50 @@
 <p>资源站：<a href="https://openwrt.ai/?target=x86/64&id=generic%EF%BC%88%E6%9C%80%E4%B8%8B%E9%9D%A2%EF%BC%89">https://openwrt.ai/?target=x86%2F64&amp;id=generic（最下面）</a></p>
 <blockquote>
 <p>选<code>xxx-rootfs.tar.gz</code>，是可解压固件,一般用于Docker</p>
-<pre><code>gunzip xxx-rootfs.tar.gz
-docker xxx-rootfs.tar openwrt:rootfs
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gunzip xxx-rootfs.tar.gz</span><br><span class="line">docker xxx-rootfs.tar openwrt:rootfs</span><br></pre></td></tr></table></figure>
+
 <p>如 <a target="_blank" rel="noopener" href="https://archive.openwrt.org/releases/23.05.3/targets/x86/64/openwrt-23.05.3-x86-64-rootfs.tar.gz">https://archive.openwrt.org/releases/23.05.3/targets/x86/64/openwrt-23.05.3-x86-64-rootfs.tar.gz</a></p>
 </blockquote>
 <p><strong>2.docker镜像拉取</strong></p>
 <p><code>docker pull sulinggg/openwrt:x86_64</code>，这个镜像虽然不维护了但是还是很棒，预装了很多插件，本教程使用这个进行演示</p>
 <p><strong>3.自己编译</strong></p>
 <h1 id="OP-启动！"><a href="#OP-启动！" class="headerlink" title="OP 启动！"></a>OP 启动！</h1><h3 id="一、开启网口混杂模式"><a href="#一、开启网口混杂模式" class="headerlink" title="一、开启网口混杂模式"></a>一、开启网口混杂模式</h3><p><strong>1.查看网口名字</strong></p>
-<pre><code>➜  ~ ifconfig
-enp2s0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
-        inet6 fe80::c07f:75dc:901a:49b6  prefixlen 64  scopeid 0x20&lt;link&gt;
-        ether 00:e0:4c:08:6a:4f  txqueuelen 1000  (以太网)
-        RX packets 0  bytes 0 (0.0 B)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 38  bytes 6249 (6.2 KB)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-        device memory 0x80c00000-80cfffff  
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">➜  ~ ifconfig</span><br><span class="line">enp2s0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet6 fe80::c07f:75dc:901a:49b6  prefixlen 64  scopeid 0x20&lt;link&gt;</span><br><span class="line">        ether 00:e0:4c:08:6a:4f  txqueuelen 1000  (以太网)</span><br><span class="line">        RX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 38  bytes 6249 (6.2 KB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line">        device memory 0x80c00000-80cfffff  </span><br><span class="line"></span><br><span class="line">enp4s0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet6 fe80::6bb:2302:767e:7b3d  prefixlen 64  scopeid 0x20&lt;link&gt;</span><br><span class="line">        ether 00:e0:4c:08:6a:50  txqueuelen 1000  (以太网)</span><br><span class="line">        RX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 35  bytes 5650 (5.6 KB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line">        device memory 0x80900000-809fffff  </span><br><span class="line"></span><br><span class="line">lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536</span><br><span class="line">        inet 127.0.0.1  netmask 255.0.0.0</span><br><span class="line">        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;</span><br><span class="line">        loop  txqueuelen 1000  (本地环回)</span><br><span class="line">        RX packets 474  bytes 36598 (36.5 KB)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 474  bytes 36598 (36.5 KB)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br><span class="line"></span><br><span class="line">wlp1s0: flags=4099&lt;UP,BROADCAST,MULTICAST&gt;  mtu 1500</span><br><span class="line">        ether f8:89:d2:69:42:df  txqueuelen 1000  (以太网)</span><br><span class="line">        RX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        RX errors 0  dropped 0  overruns 0  frame 0</span><br><span class="line">        TX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br></pre></td></tr></table></figure>
 
-enp4s0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
-        inet6 fe80::6bb:2302:767e:7b3d  prefixlen 64  scopeid 0x20&lt;link&gt;
-        ether 00:e0:4c:08:6a:50  txqueuelen 1000  (以太网)
-        RX packets 0  bytes 0 (0.0 B)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 35  bytes 5650 (5.6 KB)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-        device memory 0x80900000-809fffff  
-
-lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536
-        inet 127.0.0.1  netmask 255.0.0.0
-        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;
-        loop  txqueuelen 1000  (本地环回)
-        RX packets 474  bytes 36598 (36.5 KB)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 474  bytes 36598 (36.5 KB)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-
-wlp1s0: flags=4099&lt;UP,BROADCAST,MULTICAST&gt;  mtu 1500
-        ether f8:89:d2:69:42:df  txqueuelen 1000  (以太网)
-        RX packets 0  bytes 0 (0.0 B)
-        RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 0  bytes 0 (0.0 B)
-        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-</code></pre>
 <p>如上，我的网口是<code>enp2s0</code>和<code>enp4s0</code>，<code>wlp1s0</code>是无线网卡，先不管</p>
 <p>我这里选择<code>enp2s0</code>是LAN口负责本地分派IP，<code>enp4s0</code>为WAN口负责拨号上网</p>
 <p><strong>2.开启网口混杂</strong></p>
-<pre><code>sudo ip link set enp4s0 promisc on
-sudo ip link set enp2s0 promisc on
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo ip link set enp4s0 promisc on</span><br><span class="line">sudo ip link set enp2s0 promisc on</span><br></pre></td></tr></table></figure>
+
 <p>然后上面的<code>ifconfig</code>输出后面会新增<code>PROMISC</code>字段，就是开启成功</p>
-<pre><code>enp2s0: flags=4419&lt;UP,BROADCAST,RUNNING,PROMISC,MULTICAST&gt;  mtu 1500
-enp4s0: flags=4419&lt;UP,BROADCAST,RUNNING,PROMISC,MULTICAST&gt;  mtu 1500
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">enp2s0: flags=4419&lt;UP,BROADCAST,RUNNING,PROMISC,MULTICAST&gt;  mtu 1500</span><br><span class="line">enp4s0: flags=4419&lt;UP,BROADCAST,RUNNING,PROMISC,MULTICAST&gt;  mtu 1500</span><br></pre></td></tr></table></figure>
+
 <p><strong>3.开机自自动</strong></p>
 <p>一重启网口混杂就会消失，所以需要写进开机脚本，这里我用<code>systemctl</code>实现</p>
 <p>先写脚本，<code>vim /home/&#123;your_name&#125;/sh/network_op.sh</code>，写入下面的内容，<strong>your_name</strong>替换成你的</p>
-<pre><code>sudo ip link set enp4s0 promisc on
-sudo ip link set enp2s0 promisc on
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo ip link set enp4s0 promisc on</span><br><span class="line">sudo ip link set enp2s0 promisc on</span><br></pre></td></tr></table></figure>
+
 <p>再新建system，<code>sudo vim /etc/systemd/system/network_op.service</code>，写入下面的内容，<strong>your_name</strong>替换成你的</p>
-<pre><code>[Unit]
-Description=Enable op network
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Enable op network</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=oneshot</span><br><span class="line">ExecStart=/usr/bin/sh /home/&#123;your_name&#125;/sh/network_op.sh</span><br><span class="line">User=root</span><br><span class="line">Group=root</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
 
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/sh /home/&#123;your_name&#125;/sh/network_op.sh
-User=root
-Group=root
-
-[Install]
-WantedBy=multi-user.target
-</code></pre>
 <p>运行一次服务并设置开启自启动</p>
-<pre><code>sudo systemctl start network_op
-sudo systemctl enable network_op
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start network_op</span><br><span class="line">sudo systemctl enable network_op</span><br></pre></td></tr></table></figure>
+
 <h3 id="二、创建网络并启动OP"><a href="#二、创建网络并启动OP" class="headerlink" title="二、创建网络并启动OP"></a>二、创建网络并启动OP</h3><p>这里我们使用 docker 的 macvlan，从物理网口虚拟出一个新的网口，并且挂载进 openwrt 镜像中</p>
-<pre><code># 创建 LAN 口虚拟网络，指定网段为 100.x，网关是 100.1，设备使用 enp2s0，名字叫 op_lan
-# （如果要修改名字请看完上面的《三网口（卡）及以上需要注意顺序》）
-docker network create -d macvlan --subnet=192.168.100.0/24 --gateway=192.168.100.1 -o parent=enp2s0 op_lan
-# 创建 WAN 口网络，我是 PPPoE 拨号所以网关网段什么的都不指定了
-docker network create -d macvlan -o parent=enp4s0 op_wan
-# 启动 docker openwrt，我使用的是 sulinggg/openwrt:x86_64 镜像，设置自启动，名字叫 openwrt，把 op_lan 连接进去
-# 有些教程会在这里加上 --ip 直接设置成 .100.2，但我感觉 op 就是网关，所以这里不指定，直接在 op 里面设置，占住 100.1的 ip
-docker run --restart always --name openwrt -d --network op_lan --privileged sulinggg/openwrt:x86_64 /sbin/init
-# 再把 op_wan 也连接进去
-docker network connect op_wan openwrt
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 创建 LAN 口虚拟网络，指定网段为 100.x，网关是 100.1，设备使用 enp2s0，名字叫 op_lan</span><br><span class="line"># （如果要修改名字请看完上面的《三网口（卡）及以上需要注意顺序》）</span><br><span class="line">docker network create -d macvlan --subnet=192.168.100.0/24 --gateway=192.168.100.1 -o parent=enp2s0 op_lan</span><br><span class="line"># 创建 WAN 口网络，我是 PPPoE 拨号所以网关网段什么的都不指定了</span><br><span class="line">docker network create -d macvlan -o parent=enp4s0 op_wan</span><br><span class="line"># 启动 docker openwrt，我使用的是 sulinggg/openwrt:x86_64 镜像，设置自启动，名字叫 openwrt，把 op_lan 连接进去</span><br><span class="line"># 有些教程会在这里加上 --ip 直接设置成 .100.2，但我感觉 op 就是网关，所以这里不指定，直接在 op 里面设置，占住 100.1的 ip</span><br><span class="line">docker run --restart always --name openwrt -d --network op_lan --privileged sulinggg/openwrt:x86_64 /sbin/init</span><br><span class="line"># 再把 op_wan 也连接进去</span><br><span class="line">docker network connect op_wan openwrt</span><br></pre></td></tr></table></figure>
+
 <p>实际过程</p>
-<pre><code>(base) ➜  python_and_sh docker network create -d macvlan --subnet=192.168.100.0/24 --gateway=192.168.100.1 -o parent=enp2s0 op_lan
-e5c68630a0198f2985a7313c68dbcae0165a60b867e8efa6b9694fb39cc42ed2
-(base) ➜  python_and_sh docker network create -d macvlan -o parent=enp4s0 op_wan
-d284f0d8cde3ac57faae92ab2f2739b4aace7064f7f5bf0556077e51785969e2
-(base) ➜  python_and_sh docker run --restart always --name openwrt -d --network op_lan --privileged sulinggg/openwrt:x86_64 /sbin/init
-bbe19438aa00be18e2feb1d38ca860a7eeb42e90b756ebaf393f4ce11c7ceac6
-(base) ➜  python_and_sh docker network connect op_wan openwrt
-(base) ➜  python_and_sh docker network ls
-NETWORK ID     NAME      DRIVER    SCOPE
-97dae32aa936   bridge    bridge    local
-5fca31148366   host      host      local
-07b5461851d7   none      null      local
-e5c68630a019   op_lan    macvlan   local
-d284f0d8cde3   op_wan    macvlan   local
-(base) ➜  python_and_sh docker ps -a     
-CONTAINER ID   IMAGE                     COMMAND        CREATED          STATUS          PORTS     NAMES
-bbe19438aa00   sulinggg/openwrt:x86_64   &quot;/sbin/init&quot;   13 seconds ago   Up 12 seconds             openwrt
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">(base) ➜  python_and_sh docker network create -d macvlan --subnet=192.168.100.0/24 --gateway=192.168.100.1 -o parent=enp2s0 op_lan</span><br><span class="line">e5c68630a0198f2985a7313c68dbcae0165a60b867e8efa6b9694fb39cc42ed2</span><br><span class="line">(base) ➜  python_and_sh docker network create -d macvlan -o parent=enp4s0 op_wan</span><br><span class="line">d284f0d8cde3ac57faae92ab2f2739b4aace7064f7f5bf0556077e51785969e2</span><br><span class="line">(base) ➜  python_and_sh docker run --restart always --name openwrt -d --network op_lan --privileged sulinggg/openwrt:x86_64 /sbin/init</span><br><span class="line">bbe19438aa00be18e2feb1d38ca860a7eeb42e90b756ebaf393f4ce11c7ceac6</span><br><span class="line">(base) ➜  python_and_sh docker network connect op_wan openwrt</span><br><span class="line">(base) ➜  python_and_sh docker network ls</span><br><span class="line">NETWORK ID     NAME      DRIVER    SCOPE</span><br><span class="line">97dae32aa936   bridge    bridge    local</span><br><span class="line">5fca31148366   host      host      local</span><br><span class="line">07b5461851d7   none      null      local</span><br><span class="line">e5c68630a019   op_lan    macvlan   local</span><br><span class="line">d284f0d8cde3   op_wan    macvlan   local</span><br><span class="line">(base) ➜  python_and_sh docker ps -a     </span><br><span class="line">CONTAINER ID   IMAGE                     COMMAND        CREATED          STATUS          PORTS     NAMES</span><br><span class="line">bbe19438aa00   sulinggg/openwrt:x86_64   &quot;/sbin/init&quot;   13 seconds ago   Up 12 seconds             openwrt</span><br></pre></td></tr></table></figure>
+
 <h3 id="三、配置LAN-amp-WAN网络"><a href="#三、配置LAN-amp-WAN网络" class="headerlink" title="三、配置LAN&amp;WAN网络"></a>三、配置LAN&amp;WAN网络</h3><p>接下来要进入容器内修改配置</p>
-<pre><code># 进入openwrt镜像内部
-docker exec -it openwrt bash
-vim /etc/config/network
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 进入openwrt镜像内部</span><br><span class="line">docker exec -it openwrt bash</span><br><span class="line">vim /etc/config/network</span><br></pre></td></tr></table></figure>
+
 <p>把 lan 改为下面的参数，删掉多余的字段</p>
-<pre><code>config interface &#39;lan&#39;
-        option type &#39;bridge&#39;
-        option ifname &#39;eth0&#39;
-        option proto &#39;static&#39;
-        option netmask &#39;255.255.255.0&#39;
-        option ip6assign &#39;60&#39;
-        option ipaddr &#39;192.168.100.1&#39;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">config interface &#x27;lan&#x27;</span><br><span class="line">        option type &#x27;bridge&#x27;</span><br><span class="line">        option ifname &#x27;eth0&#x27;</span><br><span class="line">        option proto &#x27;static&#x27;</span><br><span class="line">        option netmask &#x27;255.255.255.0&#x27;</span><br><span class="line">        option ip6assign &#x27;60&#x27;</span><br><span class="line">        option ipaddr &#x27;192.168.100.1&#x27;</span><br></pre></td></tr></table></figure>
+
 <p>重启网络</p>
-<pre><code>/etc/init.d/network restart
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/network restart</span><br></pre></td></tr></table></figure>
+
 <p><strong>！！！！！然后第一个小坑，固件默认 lan 口不开启 DHCP，所以插上 lan 口需要自行设定 IP 和网关！！！！！</strong></p>
 <p><img src="https://s2.loli.net/2024/04/11/ovJMdKpPZEuaz5x.png" alt="1.png"></p>
 <p>然后浏览器输入<code>192.168.100.1</code>即可进入 openwrt 的后台管理页面</p>
@@ -276,81 +338,41 @@ vim /etc/config/network
 <p>如果卡住可以重启docker，<code>docker restart openwrt</code></p>
 <p>这时候 wan 口可以正常拨号获得 IP，LAN 口也会自动分配 ip 了，但是，<strong>宿主机是无法使用网络</strong>，我们需要给宿主机也分配一个<code>192.168.100.x</code>的地址</p>
 <h3 id="四、宿主机使用-openwrt-的网络"><a href="#四、宿主机使用-openwrt-的网络" class="headerlink" title="四、宿主机使用 openwrt 的网络"></a>四、宿主机使用 openwrt 的网络</h3><p>这里我们使用 ip 指令给网卡创建 macvlan，因为 macvlan 的安全机制，宿主机与容器内不能通过 macvlan 数据互通，但是 macvlan 之间可以互通</p>
-<pre><code># 先创建一个名叫 me_to_op 的 macvlan，使用设备 enp2s0
-sudo ip link add me_to_op link enp2s0 type macvlan mode bridge
-# 把宿主机的 ip 设置为 192.168.100.100
-sudo ip addr add 192.168.100.100 dev me_to_op
-# 启动 me_to_op
-sudo ip link set me_to_op up
-# 添加路由
-sudo ip route add 192.168.100.1 dev me_to_op
-# 修改默认路由
-sudo route add default gw 192.168.100.1 me_to_op
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 先创建一个名叫 me_to_op 的 macvlan，使用设备 enp2s0</span><br><span class="line">sudo ip link add me_to_op link enp2s0 type macvlan mode bridge</span><br><span class="line"># 把宿主机的 ip 设置为 192.168.100.100</span><br><span class="line">sudo ip addr add 192.168.100.100 dev me_to_op</span><br><span class="line"># 启动 me_to_op</span><br><span class="line">sudo ip link set me_to_op up</span><br><span class="line"># 添加路由</span><br><span class="line">sudo ip route add 192.168.100.1 dev me_to_op</span><br><span class="line"># 修改默认路由</span><br><span class="line">sudo route add default gw 192.168.100.1 me_to_op</span><br></pre></td></tr></table></figure>
+
 <p>配置完成之后就可以互相 ping</p>
 <p><strong>宿主机到 openwrt</strong>：<code>ping 192.168.100.1</code></p>
 <p><strong>openwrt 到宿主机</strong>：<code>docker exec -it openwrt bash -c &quot;ping 192.168.100.100 -c 3&quot;</code></p>
 <p>这时候路由正确（<code>route -n</code>）但是<strong>域名解析不对</strong>，能 ping ip 但是不能上网，我们接着配置 DNS</p>
-<pre><code>sudo sh -c &#39;echo &quot;nameserver 192.168.100.1&quot; &gt; /etc/resolv.conf&#39;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo sh -c &#x27;echo &quot;nameserver 192.168.100.1&quot; &gt; /etc/resolv.conf&#x27;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>改<code> /etc/systemd/resolved.conf</code>的 dns 字段是更加规范的操作，但是怕以后换网络环境忘记了，所以直接改<code>/etc/resolv.conf</code></p>
 </blockquote>
 <p>宿主机联网测试：<code>curl baidu.com</code></p>
-<pre><code>(base) ➜  ~ curl www.baidu.com
-&lt;!DOCTYPE html&gt;
-&lt;!--STATUS OK--&gt;&lt;html&gt; &lt;head&gt;&lt;meta http-equiv=content-type content=text/html;charset=utf-8&gt;&lt;meta http-equiv=X-UA-Compatible content=IE=Edge&gt;&lt;meta content=always name=referrer&gt;&lt;link rel=stylesheet type=text/css href=http://........................
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(base) ➜  ~ curl www.baidu.com</span><br><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;!--STATUS OK--&gt;&lt;html&gt; &lt;head&gt;&lt;meta http-equiv=content-type content=text/html;charset=utf-8&gt;&lt;meta http-equiv=X-UA-Compatible content=IE=Edge&gt;&lt;meta content=always name=referrer&gt;&lt;link rel=stylesheet type=text/css href=http://........................</span><br></pre></td></tr></table></figure>
+
 <p>为了使上面的修改重启后一直生效，修改<code>/home/&#123;your_name&#125;/sh/network_op.sh</code>文件为如下内容</p>
-<pre><code>sudo ip link set enp4s0 promisc on
-sudo ip link set enp2s0 promisc on
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo ip link set enp4s0 promisc on</span><br><span class="line">sudo ip link set enp2s0 promisc on</span><br><span class="line"></span><br><span class="line">sudo ip link add me_to_op link enp2s0 type macvlan mode bridge</span><br><span class="line">sudo ip addr add 192.168.100.100 dev me_to_op</span><br><span class="line">sudo ip link set me_to_op up</span><br><span class="line">sudo ip route add 192.168.100.1 dev me_to_op</span><br><span class="line">sudo route add default gw 192.168.100.1 me_to_op</span><br><span class="line"></span><br><span class="line">sudo sh -c &#x27;echo &quot;nameserver 192.168.100.1&quot; &gt; /etc/resolv.conf&#x27;</span><br></pre></td></tr></table></figure>
 
-sudo ip link add me_to_op link enp2s0 type macvlan mode bridge
-sudo ip addr add 192.168.100.100 dev me_to_op
-sudo ip link set me_to_op up
-sudo ip route add 192.168.100.1 dev me_to_op
-sudo route add default gw 192.168.100.1 me_to_op
-
-sudo sh -c &#39;echo &quot;nameserver 192.168.100.1&quot; &gt; /etc/resolv.conf&#39;
-</code></pre>
 <p><strong>Tips：两个怪问题</strong></p>
 <ul>
 <li><p>1.<strong>LAN 口不插东西宿主机就 ping 不通 192.168.100.1</strong>，就是这么的神奇，必须得要 LAN 口有一个设备，不然就是 ping 不通，我的理解是 LAN 口不插东西就没有被激活，所以上面设置的 macvlan 没有生效，比如接个电脑是可以的，接个交换机（交换机不接其他东西）也是可以的，只要 LAN 口灯亮着就是可以的，没亮就是不行的</p>
 <blockquote>
 <p>其实还有个方案是不用<code>enp2s0</code>而用<code>wlp1s0</code>，也就是用网卡开一个macvlan，然后就不用一直插一个东西了</p>
-<pre><code>sudo ip link set enp4s0 promisc on
-sudo ip link set enp2s0 promisc on
-sudo ip link set wlp1s0 promisc on
-sleep 10
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sudo ip link set enp4s0 promisc on</span><br><span class="line">sudo ip link set enp2s0 promisc on</span><br><span class="line">sudo ip link set wlp1s0 promisc on</span><br><span class="line">sleep 10</span><br><span class="line"></span><br><span class="line">sudo ip link del me_to_op</span><br><span class="line">sudo ip link add me_to_op link wlp1s0 type macvlan mode bridge</span><br><span class="line">sudo ip addr add 192.168.200.200 dev me_to_op</span><br><span class="line">sudo ip link set me_to_op up</span><br><span class="line">sudo ip route add 192.168.200.1 dev me_to_op</span><br><span class="line">sudo route add default gw 192.168.200.1 me_to_op</span><br><span class="line">sudo sh -c &#x27;echo &quot;nameserver 192.168.200.1&quot; &gt; /etc/resolv.conf&#x27;</span><br></pre></td></tr></table></figure>
 
-sudo ip link del me_to_op
-sudo ip link add me_to_op link wlp1s0 type macvlan mode bridge
-sudo ip addr add 192.168.200.200 dev me_to_op
-sudo ip link set me_to_op up
-sudo ip route add 192.168.200.1 dev me_to_op
-sudo route add default gw 192.168.200.1 me_to_op
-sudo sh -c &#39;echo &quot;nameserver 192.168.200.1&quot; &gt; /etc/resolv.conf&#39;
-</code></pre>
 <p>这里加了<code>sleep 10</code>是因为不知道为啥会设置不成功，加上就好了</p>
 </blockquote>
 </li>
 <li><p>2.<strong>LAN 口下的网络不能正常访问域名解析到 WAN 口 IP 上的内容</strong>，具体点来说是，我的 openwrt 的 80 端口转发到了宿主机<code>192.168.100.100</code>的 80 上，然后由 nginx 反代，<code>op.xx.xx</code>代理到 op 的管理页面，<code>files.xx.xx</code>代理到 GoWebDav 上，跟 WAN 口同网段的<code>10.x.x.x.</code>的设备可以正常使用，但是 LAN 口下的设备用域名不能访问，而直接端口 + IP 是可以的，需要做如下改动（是与桥接网络过滤器有关的内容，具体原因不是很清楚）</p>
-<pre><code>1.ssh连接openwrt系统后，编辑/etc/sysctl.d/11-br-netfilter.conf文件。
-net.bridge.bridge-nf-call-arptables=0
-net.bridge.bridge-nf-call-ip6tables=0
-net.bridge.bridge-nf-call-iptables=0
-确认后面的值是0，如果不是，需要改为0
-2.编辑/etc/sysctl.conf文件。文件内容可能是空的，把上面的内容复制进sysctl.conf文件，保存退出。
-3.ssh内输入sysctl -p命令，查看输出结果是不是上面提到的那三行内容。
-4.重启
-</code></pre>
-</li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1.ssh连接openwrt系统后，编辑/etc/sysctl.d/11-br-netfilter.conf文件。</span><br><span class="line">net.bridge.bridge-nf-call-arptables=0</span><br><span class="line">net.bridge.bridge-nf-call-ip6tables=0</span><br><span class="line">net.bridge.bridge-nf-call-iptables=0</span><br><span class="line">确认后面的值是0，如果不是，需要改为0</span><br><span class="line">2.编辑/etc/sysctl.conf文件。文件内容可能是空的，把上面的内容复制进sysctl.conf文件，保存退出。</span><br><span class="line">3.ssh内输入sysctl -p命令，查看输出结果是不是上面提到的那三行内容。</span><br><span class="line">4.重启</span><br></pre></td></tr></table></figure></li>
 </ul>
 <blockquote>
 <p>参考教程：<a target="_blank" rel="noopener" href="https://www.right.com.cn/forum/forum.php?mod=redirect&goto=findpost&ptid=8192269&pid=16637078">https://www.right.com.cn/forum/forum.php?mod=redirect&amp;goto=findpost&amp;ptid=8192269&amp;pid=16637078</a></p>
 <p>部分教程提及了 80 端口转发的<code>NAT 环回</code>，<strong>请勿关闭</strong></p>
-<pre><code>NAT环回（NAT loopback）是指在网络中使用网络地址转换（NAT）时，当内部主机尝试通过其外部公共IP地址访问在同一内部网络中的另一台主机时发生的情况。简单来说，当内部主机试图通过公共IP地址访问自己所在的内部网络中的另一台主机时，数据包被NAT路由器接收并重新发送给内部网络中的相应主机，这种情况就被称为NAT环回。这种行为可能会影响网络性能和行为，因此需要在NAT路由器上进行适当的配置来处理这种情况。
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NAT环回（NAT loopback）是指在网络中使用网络地址转换（NAT）时，当内部主机尝试通过其外部公共IP地址访问在同一内部网络中的另一台主机时发生的情况。简单来说，当内部主机试图通过公共IP地址访问自己所在的内部网络中的另一台主机时，数据包被NAT路由器接收并重新发送给内部网络中的相应主机，这种情况就被称为NAT环回。这种行为可能会影响网络性能和行为，因此需要在NAT路由器上进行适当的配置来处理这种情况。</span><br></pre></td></tr></table></figure>
+
 <p>一旦关闭<code>NAT 环回</code>，所有的访问到 WAN 的 IP 会直接打到 op 后台，不会被端口转发，宿主机上的 nginx 将无法生效</p>
 </blockquote>
 <h3 id="五、插件-amp-其他一些使用"><a href="#五、插件-amp-其他一些使用" class="headerlink" title="五、插件&amp;其他一些使用"></a>五、插件&amp;其他一些使用</h3><hr>
@@ -372,20 +394,8 @@ net.bridge.bridge-nf-call-iptables=0
 <p><strong>2.网络共享</strong></p>
 <p>Samba，好用，踩了点小坑，<strong>如果要在 WAN 口同网段下使用需要把 445 和 139 端口转发到内部 192.168.100.1 的 445 和 139</strong>，<a target="_blank" rel="noopener" href="https://www.cnblogs.com/chentiao/p/16696051.html">排错参考教程</a></p>
 <p>先进行命令行操作：</p>
-<pre><code># 更新源
-opkg update
-# 安装软件
-opkg install shadow-common
-opkg install shadow-useradd
-# 添加名叫smbkirin的用户
-useradd smbkirin
-# 为smbkirin设置密码
-passwd smbkirin
-# 添加smbkirin到Samba中
-smbpasswd -a smbkirin
-# 重启Samba
-service samba restart
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># 更新源</span><br><span class="line">opkg update</span><br><span class="line"># 安装软件</span><br><span class="line">opkg install shadow-common</span><br><span class="line">opkg install shadow-useradd</span><br><span class="line"># 添加名叫smbkirin的用户</span><br><span class="line">useradd smbkirin</span><br><span class="line"># 为smbkirin设置密码</span><br><span class="line">passwd smbkirin</span><br><span class="line"># 添加smbkirin到Samba中</span><br><span class="line">smbpasswd -a smbkirin</span><br><span class="line"># 重启Samba</span><br><span class="line">service samba restart</span><br></pre></td></tr></table></figure>
+
 <p>然后在网页控制界面中添加文件夹，名称随便取，路径看你定，用户用上面的，新文件0666（可读可写不可执行），目录0777</p>
 <p>Windows 下载资源管理器输入<code>\\&#123;IP&#125;</code>即可访问，可以映射到网络驱动器方便使用</p>
 <hr>
@@ -394,29 +404,19 @@ service samba restart
 <p>如果你的网络不发放 IPV6，改了也没有的</p>
 </blockquote>
 <p>在 openwrt 中安装组件</p>
-<pre><code>opkg update
-opkg install ipv6helper
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">opkg update</span><br><span class="line">opkg install ipv6helper</span><br></pre></td></tr></table></figure>
+
 <p>修改<code>vim /etc/config/network</code>追加如下内容</p>
-<pre><code>config interface &#39;wan6&#39;
-        option proto &#39;dhcpv6&#39;
-        option ifname &#39;pppoe-wan&#39;
-        option reqaddress &#39;try&#39;
-        option reqprefix &#39;auto&#39;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">config interface &#x27;wan6&#x27;</span><br><span class="line">        option proto &#x27;dhcpv6&#x27;</span><br><span class="line">        option ifname &#x27;pppoe-wan&#x27;</span><br><span class="line">        option reqaddress &#x27;try&#x27;</span><br><span class="line">        option reqprefix &#x27;auto&#x27;</span><br></pre></td></tr></table></figure>
+
+
+
 <p>详细解释 ipv6：<a target="_blank" rel="noopener" href="https://post.smzdm.com/p/awzodmpp/">https://post.smzdm.com/p/awzodmpp/</a></p>
 <blockquote>
 <p>如果要实现 ipv6 转发到 ipv4 端口，socat软件包能直接在<code>软件包</code>里面点一下安装，<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/559034124">socat 教程</a></p>
 <p>如果要监听 80 和 443 端口，因为被<code>uhttpd</code>占住了所以需要改一下设置，让<code>uhttpd</code>不监听 IPV6 地址</p>
-<pre><code># 查看uhttp监听情况
-netstat -tlnp | grep uhttpd
-# 修改配置，注释掉ipv6的监听
-vi /etc/config/uhttpd
-# 重启uhttpd
-/etc/init.d/uhttpd restart
-# 再次查看
-netstat -tlnp | grep uhttpd
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 查看uhttp监听情况</span><br><span class="line">netstat -tlnp | grep uhttpd</span><br><span class="line"># 修改配置，注释掉ipv6的监听</span><br><span class="line">vi /etc/config/uhttpd</span><br><span class="line"># 重启uhttpd</span><br><span class="line">/etc/init.d/uhttpd restart</span><br><span class="line"># 再次查看</span><br><span class="line">netstat -tlnp | grep uhttpd</span><br></pre></td></tr></table></figure>
+
 <p>如果要在 LAN 网络下使用 IPV6 域名解析，<code>网络</code>-&gt;<code>DHCP/DNS</code>-&gt;<code>高级设置</code>-&gt;<code>禁止解析 IPV6 DNS 记录</code></p>
 <p>测试端口通断<code>nmap -6 &#123;IPV6 地址&#125; -p 80,4438080,20000,30004 -Pn</code></p>
 <p>clash 开着会影响 ipv6 地址的访问，无敌了，后面发现原因是会域名代理，如果你买的机场的这个节点有 IPV6，甚至可以用代理脸上，即使你自己没有 IPV6 网络</p>
@@ -428,46 +428,23 @@ netstat -tlnp | grep uhttpd
 <p>最后从室友的泡水机上取了个 MT7921，无线发射带宽实测刚好 100M，能用还行</p>
 </blockquote>
 <p>有尝试使用 macvlan 等操作挂进 openwrt，不过想了想好像用处不大，最终的方法是直接开一个热点，把<code>192.168.100.100</code>获得的网络共享出去</p>
-<pre><code># 使用nmcli启用WiFi
-sudo nmcli device wifi hotspot ifname &#123;网卡名称，如wlp1s0&#125; con-name &#123;在nm中的名字&#125; ssid &#123;WiFi名字&#125; password &#123;密码&#125;
-# 如下
-# sudo nmcli device wifi hotspot ifname wlp1s0 con-name nmcli-wifi ssid n100-wifi password 123456789
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 使用nmcli启用WiFi</span><br><span class="line">sudo nmcli device wifi hotspot ifname &#123;网卡名称，如wlp1s0&#125; con-name &#123;在nm中的名字&#125; ssid &#123;WiFi名字&#125; password &#123;密码&#125;</span><br><span class="line"># 如下</span><br><span class="line"># sudo nmcli device wifi hotspot ifname wlp1s0 con-name nmcli-wifi ssid n100-wifi password 123456789</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>也是重启会失效，所以加入之前写的开机脚本里</p>
 </blockquote>
 <p><strong>最终的脚本内容</strong>，为了以防万一又加入了两句删除指令<code>sudo ip link del me_to_op</code>  和 <code>nmcli connection delete nmcli-wifi</code></p>
-<pre><code>sudo ip link set enp4s0 promisc on
-sudo ip link set enp2s0 promisc on
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">sudo ip link set enp4s0 promisc on</span><br><span class="line">sudo ip link set enp2s0 promisc on</span><br><span class="line"></span><br><span class="line">sudo ip link del me_to_op</span><br><span class="line">sudo ip link add me_to_op link enp2s0 type macvlan mode bridge</span><br><span class="line">sudo ip addr add 192.168.100.100 dev me_to_op</span><br><span class="line">sudo ip link set me_to_op up</span><br><span class="line">sudo ip route add 192.168.100.1 dev me_to_op</span><br><span class="line">sudo route add default gw 192.168.100.1 me_to_op</span><br><span class="line"></span><br><span class="line">sudo sh -c &#x27;echo &quot;nameserver 192.168.100.1&quot; &gt; /etc/resolv.conf&#x27;</span><br><span class="line"></span><br><span class="line">sudo nmcli connection delete nmcli-wifi</span><br><span class="line">sudo nmcli device wifi hotspot ifname wlp1s0 con-name nmcli-wifi ssid n100-wifi password 123456789</span><br></pre></td></tr></table></figure>
 
-sudo ip link del me_to_op
-sudo ip link add me_to_op link enp2s0 type macvlan mode bridge
-sudo ip addr add 192.168.100.100 dev me_to_op
-sudo ip link set me_to_op up
-sudo ip route add 192.168.100.1 dev me_to_op
-sudo route add default gw 192.168.100.1 me_to_op
-
-sudo sh -c &#39;echo &quot;nameserver 192.168.100.1&quot; &gt; /etc/resolv.conf&#39;
-
-sudo nmcli connection delete nmcli-wifi
-sudo nmcli device wifi hotspot ifname wlp1s0 con-name nmcli-wifi ssid n100-wifi password 123456789
-</code></pre>
 <p>因为使用的是热点，所以<code>ifconfig</code>中无线会变成一个<code>10.x</code>的网段，链接上WiFi的设备也会获得<code>10.x</code>的网段，不过跟我的 WAN 口地址不冲突，所以我也就不管了，应也该可以改网段的。<strong>（后记：这样似乎能连上但不能上网，我已经换成下面的方式了）</strong></p>
 <blockquote>
 <p><strong>如果要把 WiFi 挂进 openwrt 而非上面那样，则需操作如下</strong></p>
 <p><strong>先按上面的方法把 WiFi 打开后再使用下面的操作</strong></p>
-<pre><code>docker network create -d macvlan --subnet=192.168.200.0/24 --gateway=192.168.200.1 -o parent=wlp1s0 op_wifi
-docker network connect op_wifi openwrt
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker network create -d macvlan --subnet=192.168.200.0/24 --gateway=192.168.200.1 -o parent=wlp1s0 op_wifi</span><br><span class="line">docker network connect op_wifi openwrt</span><br></pre></td></tr></table></figure>
+
 <p>修改<code>/etc/config/network</code></p>
-<pre><code>config interface &#39;lanwifi&#39;
-     option type &#39;bridge&#39;
-     option ifname &#39;eth2&#39;
-     option proto &#39;static&#39;
-     option netmask &#39;255.255.255.0&#39;
-     option ip6assign &#39;60&#39;
-     option ipaddr &#39;192.168.200.1&#39;
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">config interface &#x27;lanwifi&#x27;</span><br><span class="line">     option type &#x27;bridge&#x27;</span><br><span class="line">     option ifname &#x27;eth2&#x27;</span><br><span class="line">     option proto &#x27;static&#x27;</span><br><span class="line">     option netmask &#x27;255.255.255.0&#x27;</span><br><span class="line">     option ip6assign &#x27;60&#x27;</span><br><span class="line">     option ipaddr &#x27;192.168.200.1&#x27;</span><br></pre></td></tr></table></figure>
+
 <p>同样设置防火墙到 LAN</p>
 <p>似乎这样做链接上 WIFI 的设备先会得到<code>10.x</code>的 IP，然后变成一个<code>192.168.200.x</code>的 IP，我感觉应该找一找 WiFi 热点能发送但是不分配 IP 的方案，然后直接让 op 来发 IP，跟 LAN 就一样的了，而且这样就不会像 LAN 一样还的插个东西才能工作。或许还可以考虑一下都分进 100 网段里面，两个 DHCP 服务器各发各的，或许也不会冲突？</p>
 </blockquote>
@@ -477,87 +454,478 @@ docker network connect op_wifi openwrt
 <p>最后看到这个视频<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1yr4meeENt/">【正片】面对校园网的多设备检测，「我」的解决方案是——</a> 真的很强啊</p>
 </blockquote>
 
-        </article>
-        
-        <section class="post-near">
-            <ul>
-                
-                    <li>上一篇: <a href="/2024/08/06/26.vison_note/">一些视觉代码使用的记录</a></li>
-                
-                
-                    <li>下一篇: <a href="/2024/03/22/24.gitea+DroneCI/">gitea+Drone CI实现hexo博客自动部署</a></li>
-                
-            </ul>
-        </section>
-        
-            <section class="post-tags">
-            <a class="-none-link" href="/tags/openwrt/" rel="tag">openwrt</a>
-            </section>
-        
-        <script src="https://giscus.app/client.js"
-        data-repo="qllokirin/hexo_blog_comments"
-        data-repo-id="R_kgDOI8fvWA"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOI8fvWM4CUIlh"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="preferred_color_scheme"
-        data-lang="zh-CN"
-        crossorigin="anonymous"
-        async>
-        </script>
-    
-        <section class="post-author">
-        
-            <figure class="author-avatar">
-                <img src="https://s2.loli.net/2022/09/27/6rzl4WOitu8pUqg.jpg" alt="qllokirin" />
-            </figure>
-        
-            <div class="author-info">
-                <h4>qllokirin</h4>
-                <p>你好，我是祈菱不是麒麟(qllokirin)，很高兴与你相遇</p>
-            </div>
-        </section>
-    
+      
     </div>
-</main>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/openwrt/" rel="tag">openwrt</a></li></ul>
 
-    <footer>
-    <div class="buttons">
-        <a class="to-top" href="#"></a>
+
+    </footer>
+  </div>
+  
+    
+  <nav id="article-nav" data-aos="fade-up">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          
+          
+            <img data-src="/covers/tg_23.jpg" data-sizes="auto" alt="一些视觉代码使用的记录" class="lazyload">
+          
+        
+        <a href="/2024/08/06/26.vison_note/"></a>
+        <div class="article-nav-caption">次の記事</div>
+        <h3 class="article-nav-title">
+          
+            一些视觉代码使用的记录
+          
+        </h3>
+      </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/covers/tg_12.jpg" data-sizes="auto" alt="gitea+Drone CI实现hexo博客自动部署" class="lazyload">
+        
+      
+      <a href="/2024/03/22/24.gitea+DroneCI/"></a>
+      <div class="article-nav-caption">前の記事</div>
+      <h3 class="article-nav-title">
+        
+          gitea+Drone CI实现hexo博客自动部署
+        
+      </h3>
     </div>
-    <div class="wrap min">
-        <section class="widget">
-            <div class="row">
-                <div class="col-m-4">
-                    <h3 class="title-recent">最新文章：</h3>
-                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/7777/07/07/diary/">稀疏平常的生活</a></li><li class="post-list-item"><a class="post-list-link" href="/2024/08/06/26.vison_note/">一些视觉代码使用的记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2024/04/11/25.N100_op/">N100双网口小主机使用docker版openwrt做主路由（PPPoE拨号）超详细！！！！</a></li><li class="post-list-item"><a class="post-list-link" href="/2024/03/22/24.gitea+DroneCI/">gitea+Drone CI实现hexo博客自动部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2024/02/19/23.remote_control_switch/">宿舍遥控开关整改计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2024/02/14/22.home_network_upgrade/">家庭网络拓扑整改日记</a></li></ul>
-                </div>
-                <div class="col-m-4">
-                    <h3 class="title-date">时光机：</h3>
-                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/7777/07/">July 7777</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">August 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li></ul>
-                </div>
-                <div class="col-m-4">
-                    <h3 class="title-tags">标签云：</h3>
-                    <a href="/tags/Drone-CI/" style="font-size: 10px;">Drone CI</a> <a href="/tags/EasyConnect/" style="font-size: 10px;">EasyConnect</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/clash/" style="font-size: 10px;">clash</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/livehouse/" style="font-size: 10px;">livehouse</a> <a href="/tags/openwrt/" style="font-size: 20px;">openwrt</a> <a href="/tags/px4/" style="font-size: 10px;">px4</a> <a href="/tags/ros/" style="font-size: 20px;">ros</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/vocaloid/" style="font-size: 10px;">vocaloid</a> <a href="/tags/%E4%BA%91%E5%B4%BD/" style="font-size: 10px;">云崽</a> <a href="/tags/%E5%8F%8C%E7%AC%99/" style="font-size: 10px;">双笙</a> <a href="/tags/%E5%AE%B6%E5%BA%AD%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">家庭网络</a> <a href="/tags/%E6%97%85%E6%B8%B8/" style="font-size: 10px;">旅游</a> <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA%E7%BB%84%E8%A3%85/" style="font-size: 10px;">无人机组装</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 10px;">日记</a> <a href="/tags/%E6%AD%8C/" style="font-size: 10px;">歌</a> <a href="/tags/%E6%AF%94%E8%B5%9B/" style="font-size: 10px;">比赛</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%95%AA/" style="font-size: 10px;">番</a> <a href="/tags/%E7%AC%94%E8%AE%B0%E6%9C%AC%E4%BC%98%E5%8C%96/" style="font-size: 10px;">笔记本优化</a> <a href="/tags/%E8%A3%85%E6%9C%BA/" style="font-size: 10px;">装机</a> <a href="/tags/%E8%A7%86%E8%A7%89/" style="font-size: 10px;">视觉</a> <a href="/tags/%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">记录</a> <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a> <a href="/tags/%E9%81%A5%E6%8E%A7%E5%BC%80%E5%85%B3/" style="font-size: 10px;">遥控开关</a> <a href="/tags/%E9%87%8D%E8%A3%85/" style="font-size: 10px;">重装</a> <a href="/tags/%E9%AD%94%E6%B3%95/" style="font-size: 10px;">魔法</a>
-                </div>
-            </div>
-        </section>
-        <section class="sub-footer">
-            <p>© 2024 <a href="/">qllokirin</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
-        </section>
+    
+  </nav>
+
+
+  
+</article>
+
+
+
+
+
+  <div id="comments" class="gscomment giscus"></div>
+
+
+</section>
+          
+            <aside id="sidebar">
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">見出し</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%95%9C%E5%83%8F%E9%80%89%E6%8B%A9"><span class="toc-number">2.</span> <span class="toc-text">镜像选择</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#OP-%E5%90%AF%E5%8A%A8%EF%BC%81"><span class="toc-number">3.</span> <span class="toc-text">OP 启动！</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%BC%80%E5%90%AF%E7%BD%91%E5%8F%A3%E6%B7%B7%E6%9D%82%E6%A8%A1%E5%BC%8F"><span class="toc-number">3.0.1.</span> <span class="toc-text">一、开启网口混杂模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%88%9B%E5%BB%BA%E7%BD%91%E7%BB%9C%E5%B9%B6%E5%90%AF%E5%8A%A8OP"><span class="toc-number">3.0.2.</span> <span class="toc-text">二、创建网络并启动OP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E9%85%8D%E7%BD%AELAN-amp-WAN%E7%BD%91%E7%BB%9C"><span class="toc-number">3.0.3.</span> <span class="toc-text">三、配置LAN&amp;WAN网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%AE%BF%E4%B8%BB%E6%9C%BA%E4%BD%BF%E7%94%A8-openwrt-%E7%9A%84%E7%BD%91%E7%BB%9C"><span class="toc-number">3.0.4.</span> <span class="toc-text">四、宿主机使用 openwrt 的网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%8F%92%E4%BB%B6-amp-%E5%85%B6%E4%BB%96%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8"><span class="toc-number">3.0.5.</span> <span class="toc-text">五、插件&amp;其他一些使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.0.5.1.</span> <span class="toc-text">系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1"><span class="toc-number">3.0.5.2.</span> <span class="toc-text">服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NAS"><span class="toc-number">3.0.5.3.</span> <span class="toc-text">NAS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E7%9A%84"><span class="toc-number">3.0.5.4.</span> <span class="toc-text">其他的</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%8E%E8%AE%B0"><span class="toc-number">4.</span> <span class="toc-text">后记</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="qllokirin" class="lazyload">
+  <div class="sidebar-author-name">qllokirin</div>
+  <div class="sidebar-description">~\(≧▽≦)/~</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>投稿</div>
+    <div class="sidebar-state-number">27</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>カテゴリ</div>
+    <div class="sidebar-state-number">5</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>タグ</div>
+    <div class="sidebar-state-number">31</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="ホーム"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">ホーム</div>
     </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="アーカイブ"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">アーカイブ</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/about" aria-label="プロフィール"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">プロフィール</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="フレンド"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">フレンド</div>
+    </div>
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  
+</aside>
+
+          
+        </div>
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2024
+      <span class="footer-info-sep"></span>
+      qllokirin
+    </div>
+    
+      <div>
+        Powered by&nbsp;<a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        45.1k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        02:44
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">総閲覧数&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">総閲覧者数&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
 </footer>
 
+        <div class="sidebar-top">
+          <img src="/images/taichi.png" height="50" width="50" alt="backtop" />
+          <div class="arrow-up"></div>
+        </div>
+        <div id="mask"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">見出し</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%95%9C%E5%83%8F%E9%80%89%E6%8B%A9"><span class="toc-number">2.</span> <span class="toc-text">镜像选择</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#OP-%E5%90%AF%E5%8A%A8%EF%BC%81"><span class="toc-number">3.</span> <span class="toc-text">OP 启动！</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%BC%80%E5%90%AF%E7%BD%91%E5%8F%A3%E6%B7%B7%E6%9D%82%E6%A8%A1%E5%BC%8F"><span class="toc-number">3.0.1.</span> <span class="toc-text">一、开启网口混杂模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%88%9B%E5%BB%BA%E7%BD%91%E7%BB%9C%E5%B9%B6%E5%90%AF%E5%8A%A8OP"><span class="toc-number">3.0.2.</span> <span class="toc-text">二、创建网络并启动OP</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E9%85%8D%E7%BD%AELAN-amp-WAN%E7%BD%91%E7%BB%9C"><span class="toc-number">3.0.3.</span> <span class="toc-text">三、配置LAN&amp;WAN网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%AE%BF%E4%B8%BB%E6%9C%BA%E4%BD%BF%E7%94%A8-openwrt-%E7%9A%84%E7%BD%91%E7%BB%9C"><span class="toc-number">3.0.4.</span> <span class="toc-text">四、宿主机使用 openwrt 的网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%8F%92%E4%BB%B6-amp-%E5%85%B6%E4%BB%96%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8"><span class="toc-number">3.0.5.</span> <span class="toc-text">五、插件&amp;其他一些使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.0.5.1.</span> <span class="toc-text">系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1"><span class="toc-number">3.0.5.2.</span> <span class="toc-text">服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#NAS"><span class="toc-number">3.0.5.3.</span> <span class="toc-text">NAS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E7%9A%84"><span class="toc-number">3.0.5.4.</span> <span class="toc-text">其他的</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%8E%E8%AE%B0"><span class="toc-number">4.</span> <span class="toc-text">后记</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="qllokirin" class="lazyload">
+  <div class="sidebar-author-name">qllokirin</div>
+  <div class="sidebar-description">~\(≧▽≦)/~</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>投稿</div>
+    <div class="sidebar-state-number">27</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>カテゴリ</div>
+    <div class="sidebar-state-number">5</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>タグ</div>
+    <div class="sidebar-state-number">31</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="ホーム"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">ホーム</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="アーカイブ"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">アーカイブ</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/about" aria-label="プロフィール"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">プロフィール</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="フレンド"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">フレンド</div>
+    </div>
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
 
-<script src="/static/kico.js"></script>
-<script src="/static/hingle.js"></script>
+    </div>
+    
+      <div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div class="reimu-search-input" id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png"/>
+        </div>
+      </div>
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"></script>
 
 
-<script>var hingle = new Paul_Hingle({"copyright":false,"night":false});</script>
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"></script>
 
-  </body>
-</html>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+<script type="module" data-pjax>
+  import PhotoSwipeLightbox from "https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js";
+  
+  const pswp = () => {
+    if (_$$('.article-entry a.article-gallery-item').length > 0) {
+      new PhotoSwipeLightbox({
+        gallery: '.article-entry',
+        children: 'a.article-gallery-item',
+        pswpModule: () => import("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js")
+      }).init();
+    }
+    if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+      new PhotoSwipeLightbox({
+        gallery: '.article-gallery',
+        children: 'a.article-gallery-item',
+        pswpModule: () => import("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js")
+      }).init();
+    }
+    window.lightboxStatus = 'done';
+    window.removeEventListener('lightbox:ready', pswp);
+  }
+  if(window.lightboxStatus === 'ready') {
+    pswp()
+  } else {
+    window.addEventListener('lightbox:ready', pswp);
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  <script src="https://giscus.app/client.js"
+          data-repo='qllokirin/hexo_blog_comments'
+          data-repo-id='R_kgDOI8fvWA'
+          data-category='Announcements'
+          data-category-id='DIC_kwDOI8fvWM4CUIlh'
+          data-mapping='mapping'
+          data-strict='0'
+          data-reactions-enabled='1'
+          data-emit-metadata='0'
+          data-input-position='bottom'
+          data-theme='preferred_color_scheme'
+          data-lang='zh-CN'
+          crossorigin="anonymous"
+          data-pjax
+          async>
+  </script>
+
+
+
+
+
+  <script>
+    var CONFIG = {
+      root: '/',
+      algolia: {
+        applicationID: "F2C7EFMFDR",
+        apiKey: "9e27cda9036ebeacc32e3250c4bfa398",
+        indexName: "my-hexo-blog",
+        hits: {
+          "per_page": parseInt("10")
+        },
+        labels: {
+          "input_placeholder": "搜索.....",
+          "hits_empty": "未发现与 「${query}」相关内容",
+          "hits_stats": "找到${hits}条结果（用时 ${time} ms）"
+        }
+      }
+    };
+  </script>
+  
+<script src="https://npm.webcache.cn/algoliasearch@4.17.1/dist/algoliasearch-lite.umd.js"></script>
+
+  
+<script src="https://npm.webcache.cn/instantsearch.js@4.56.1/dist/instantsearch.production.min.js" defer></script>
+
+  
+<script src="/js/algolia_search.js" defer></script>
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.4/dist/index.umd.js"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/quicklink@2.3.0/dist/quicklink.umd.js"></script>
+
+  <script data-pjax>
+    window.quicklink?.listen({
+      timeout: 3000,
+      priority: true,
+      ignores: []
+    });
+  </script>
+
+
+<div id="lazy-script">
+  <div>
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '0.3.2' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+  <!-- hexo injector body_end start -->
+<script src="/js/insert_highlight.js" data-pjax></script>
+<!-- hexo injector body_end end --></body>
+  </html>
+

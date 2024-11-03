@@ -1,69 +1,210 @@
-<!DOCTYPE html>
-<html>
+
+  <!DOCTYPE html>
+  <html lang="zh-Hans"  >
   <head>
-     
-    <meta charset="UTF-8">
-    <title>路由器安装openwrt - qllokirin</title>
-    <link rel="shortcut icon" href="/static/img/icon.png">
-    <link rel="icon" href="/static/img/icon.png" sizes="192x192"/>
-    
-<link rel="stylesheet" href="/static/kico.css">
-<link rel="stylesheet" href="/static/hingle.css">
+  <meta charset="utf-8">
+  
 
-    
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
 
-    <meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1"/>
-    <meta property="og:site_name" content="qllokirin">
-    <meta property="og:title" content="路由器安装openwrt"/>
+  
+
+  
+  <script>window.icon_font = '4552607_tq6stt6tcg';window.clipboard_tips = {"success":"复制成功～(∠・ω< )⌒☆","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};</script>
+  
+  
+  <title>
+    路由器安装openwrt |
     
+    qllokirin
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_tq6stt6tcg.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="路由器直接走代理，听着就很酷">
+<meta property="og:type" content="article">
+<meta property="og:title" content="路由器安装openwrt">
+<meta property="og:url" content="http://example.com/2023/03/20/14.openwrt/index.html">
+<meta property="og:site_name" content="qllokirin">
+<meta property="og:description" content="路由器直接走代理，听着就很酷">
+<meta property="og:locale">
+<meta property="og:image" content="https://s2.loli.net/2023/04/01/AmEVuGYWKIR4iln.png">
+<meta property="article:published_time" content="2023-03-20T10:57:16.000Z">
+<meta property="article:modified_time" content="2024-04-13T05:32:07.040Z">
+<meta property="article:author" content="qllokirin">
+<meta property="article:tag" content="路由器">
+<meta property="article:tag" content="openwrt">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/04/01/AmEVuGYWKIR4iln.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="qllokirin" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.0.1/dist/aos.css">
+
+  
 <meta name="generator" content="Hexo 6.3.0"></head>
 
   <body>
-    <header>
-    <div class="head-title">
-        <h4>qllokirin</h4>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+          <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="#ff5252" />
+          <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+         M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="#ff5252" />
+        </svg>
+      </div>
+      <div class="loading-word">少女祈祷中...</div>
     </div>
-    <div class="head-action">
-        <div class="toggle-btn"></div>
-        <div class="light-btn"></div>
-        <div class="search-btn"></div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      <span class="main-nav-link-wrap">
+        <div class="main-nav-icon icon-taichi"></div>
+        <a class="main-nav-link" href="/">ホーム</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class="main-nav-icon icon-taichi"></div>
+        <a class="main-nav-link" href="/archives">アーカイブ</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class="main-nav-icon icon-taichi"></div>
+        <a class="main-nav-link" href="/about">プロフィール</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class="main-nav-icon icon-taichi"></div>
+        <a class="main-nav-link" href="/friend">フレンド</a>
+      </span>
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSSフィード" target="_blank"></a>
+    
+    
+      <a id="nav-search-btn" class="nav-icon popup-trigger" title="検索"></a>
+    
+    
+  </nav>
+</div>
+<header id="header">
+  
+    
+      <img fetchpriority="high" src="/images/luo.png" alt="路由器安装openwrt">
+    
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">路由器安装openwrt</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
     </div>
-    <form class="head-search" method="post">
-        <input type="text" name="s" placeholder="搜索什么？">
-    </form>
-    <nav class="head-menu">
-        <a href="/">首页</a>
-        <div class="has-child">
-            <a>分类</a>
-            <div class="sub-menu">
-                <a class="category-link" href="/categories/%E5%88%86%E4%BA%AB/">分享</a><a class="category-link" href="/categories/%E6%95%99%E7%A8%8B/">教程</a><a class="category-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><a class="category-link" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a>
-            </div>
-        </div>
-        
-            <a href="/about">关于我</a>
-        
-            <a href="/friends">朋友们</a>
-        
-    </nav>
+  </div>
 </header>
 
-    <main>
-    <div class="wrap min">
-        <section class="post-title">
-            <h2>路由器安装openwrt</h2>
-            <div class="post-meta">
-                <time class="date">2023.03.20</time>
-            
-                <span class="category"><a class="category-link" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a></span>
-            
-            </div>
-        </section>
-        <article class="post-content">
-        
-            <blockquote>这篇文章上次修改于 553 天前，可能其部分内容已经发生变化，如有疑问可询问作者。</blockquote>
-        
-            <p>路由器直接走代理，听着就很酷</p>
+        <div id="content">
+          
+          <section id="main"><article id="post-14.openwrt" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2023/03/20/14.openwrt/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2023-03-20T10:57:16.000Z" itemprop="datePublished">2023-03-20</time>
+    <time style="display: none;" id="post-update-time">2024-04-13</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%B0%E5%BD%95/" data-aos="zoom-in">记录</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <p>路由器直接走代理，听着就很酷</p>
 <span id="more"></span>
 
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>基地的网络可以直接用魔法，刚入队的时候就感觉很神奇，现在终于有机会自己试试了。现在快退役了，丰富一下教程内容。</p>
@@ -158,133 +299,21 @@
 <p><a target="_blank" rel="noopener" href="https://github.com/vernesong/OpenClash/issues/6">https://github.com/vernesong/OpenClash/issues/6</a></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/vernesong/OpenClash/issues/2239">https://github.com/vernesong/OpenClash/issues/2239</a></p>
 <p>解决方法</p>
-<pre><code>DOMAIN-SUFFIX,msftconnecttest.com,🚀 节点选择
-DOMAIN-SUFFIX,msftncsi.com,🚀 节点选择
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DOMAIN-SUFFIX,msftconnecttest.com,🚀 节点选择</span><br><span class="line">DOMAIN-SUFFIX,msftncsi.com,🚀 节点选择</span><br></pre></td></tr></table></figure>
+
 <p>需要让这两个网站走代理，修改规则即可</p>
 </li>
 <li><p>重启 openclash 插件之后无法科学上网，打开谷歌或者有关提示 dns 解析错误或者 ip 找不到，有时候等待十几分钟或几个小时就好了</p>
 <p>最终的解决办法是在配置文件前面添加上dns字段。原因是订阅转换之后导致自带的dns字段被抹掉了，openclash日志显示会自动补全，但是可能自动补全的这个无法使用。但日志时不时输出一句更新内核失败，从 raw.github 什么什么的链接失败，可能也会有点影响，github 上有一个相关的 issue 可以解决那个问题</p>
 <p>下面是订阅转换之后的配置文件</p>
-<pre><code>port: 7890
-socks-port: 7891
-allow-lan: true
-mode: Rule
-log-level: info
-external-controller: :9090
-proxies:
-    ……………………
-    ……………………
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">port: 7890</span><br><span class="line">socks-port: 7891</span><br><span class="line">allow-lan: true</span><br><span class="line">mode: Rule</span><br><span class="line">log-level: info</span><br><span class="line">external-controller: :9090</span><br><span class="line">proxies:</span><br><span class="line">	……………………</span><br><span class="line">	……………………</span><br></pre></td></tr></table></figure>
+
 <p>只需要加上dns字段即可</p>
-<pre><code>port: 7890
-socks-port: 7891
-allow-lan: true
-mode: Rule
-log-level: info
-external-controller: :9090
-dns:
-  enable: true
-  ipv6: false
-  listen: 127.0.0.1:8853
-  enhanced-mode: fake-ip
-  nameserver:
-    - https://223.5.5.5/dns-query
-    - https://223.6.6.6/dns-query
-    - https://doh.pub/dns-query
-  fake-ip-filter:
-    - &quot;*.lan&quot;
-    - stun.*.*.*
-    - stun.*.*
-    - time.windows.com
-    - time.nist.gov
-    - time.apple.com
-    - time.asia.apple.com
-    - &quot;*.ntp.org.cn&quot;
-    - &quot;*.openwrt.pool.ntp.org&quot;
-    - time1.cloud.tencent.com
-    - time.ustc.edu.cn
-    - pool.ntp.org
-    - ntp.ubuntu.com
-    - ntp.aliyun.com
-    - ntp1.aliyun.com
-    - ntp2.aliyun.com
-    - ntp3.aliyun.com
-    - ntp4.aliyun.com
-    - ntp5.aliyun.com
-    - ntp6.aliyun.com
-    - ntp7.aliyun.com
-    - time1.aliyun.com
-    - time2.aliyun.com
-    - time3.aliyun.com
-    - time4.aliyun.com
-    - time5.aliyun.com
-    - time6.aliyun.com
-    - time7.aliyun.com
-    - &quot;*.time.edu.cn&quot;
-    - time1.apple.com
-    - time2.apple.com
-    - time3.apple.com
-    - time4.apple.com
-    - time5.apple.com
-    - time6.apple.com
-    - time7.apple.com
-    - time1.google.com
-    - time2.google.com
-    - time3.google.com
-    - time4.google.com
-    - music.163.com
-    - &quot;*.music.163.com&quot;
-    - &quot;*.126.net&quot;
-    - musicapi.taihe.com
-    - music.taihe.com
-    - songsearch.kugou.com
-    - trackercdn.kugou.com
-    - &quot;*.kuwo.cn&quot;
-    - api-jooxtt.sanook.com
-    - api.joox.com
-    - joox.com
-    - y.qq.com
-    - &quot;*.y.qq.com&quot;
-    - streamoc.music.tc.qq.com
-    - mobileoc.music.tc.qq.com
-    - isure.stream.qqmusic.qq.com
-    - dl.stream.qqmusic.qq.com
-    - aqqmusic.tc.qq.com
-    - amobile.music.tc.qq.com
-    - &quot;*.xiami.com&quot;
-    - &quot;*.music.migu.cn&quot;
-    - music.migu.cn
-    - &quot;*.msftconnecttest.com&quot;
-    - &quot;*.msftncsi.com&quot;
-    - localhost.ptlogin2.qq.com
-    - &quot;*.*.*.srv.nintendo.net&quot;
-    - &quot;*.*.stun.playstation.net&quot;
-    - xbox.*.*.microsoft.com
-    - &quot;*.ipv6.microsoft.com&quot;
-    - &quot;*.*.xboxlive.com&quot;
-    - speedtest.cros.wr.pvp.net
-proxies:
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line">port: 7890</span><br><span class="line">socks-port: 7891</span><br><span class="line">allow-lan: true</span><br><span class="line">mode: Rule</span><br><span class="line">log-level: info</span><br><span class="line">external-controller: :9090</span><br><span class="line">dns:</span><br><span class="line">  enable: true</span><br><span class="line">  ipv6: false</span><br><span class="line">  listen: 127.0.0.1:8853</span><br><span class="line">  enhanced-mode: fake-ip</span><br><span class="line">  nameserver:</span><br><span class="line">    - https://223.5.5.5/dns-query</span><br><span class="line">    - https://223.6.6.6/dns-query</span><br><span class="line">    - https://doh.pub/dns-query</span><br><span class="line">  fake-ip-filter:</span><br><span class="line">    - &quot;*.lan&quot;</span><br><span class="line">    - stun.*.*.*</span><br><span class="line">    - stun.*.*</span><br><span class="line">    - time.windows.com</span><br><span class="line">    - time.nist.gov</span><br><span class="line">    - time.apple.com</span><br><span class="line">    - time.asia.apple.com</span><br><span class="line">    - &quot;*.ntp.org.cn&quot;</span><br><span class="line">    - &quot;*.openwrt.pool.ntp.org&quot;</span><br><span class="line">    - time1.cloud.tencent.com</span><br><span class="line">    - time.ustc.edu.cn</span><br><span class="line">    - pool.ntp.org</span><br><span class="line">    - ntp.ubuntu.com</span><br><span class="line">    - ntp.aliyun.com</span><br><span class="line">    - ntp1.aliyun.com</span><br><span class="line">    - ntp2.aliyun.com</span><br><span class="line">    - ntp3.aliyun.com</span><br><span class="line">    - ntp4.aliyun.com</span><br><span class="line">    - ntp5.aliyun.com</span><br><span class="line">    - ntp6.aliyun.com</span><br><span class="line">    - ntp7.aliyun.com</span><br><span class="line">    - time1.aliyun.com</span><br><span class="line">    - time2.aliyun.com</span><br><span class="line">    - time3.aliyun.com</span><br><span class="line">    - time4.aliyun.com</span><br><span class="line">    - time5.aliyun.com</span><br><span class="line">    - time6.aliyun.com</span><br><span class="line">    - time7.aliyun.com</span><br><span class="line">    - &quot;*.time.edu.cn&quot;</span><br><span class="line">    - time1.apple.com</span><br><span class="line">    - time2.apple.com</span><br><span class="line">    - time3.apple.com</span><br><span class="line">    - time4.apple.com</span><br><span class="line">    - time5.apple.com</span><br><span class="line">    - time6.apple.com</span><br><span class="line">    - time7.apple.com</span><br><span class="line">    - time1.google.com</span><br><span class="line">    - time2.google.com</span><br><span class="line">    - time3.google.com</span><br><span class="line">    - time4.google.com</span><br><span class="line">    - music.163.com</span><br><span class="line">    - &quot;*.music.163.com&quot;</span><br><span class="line">    - &quot;*.126.net&quot;</span><br><span class="line">    - musicapi.taihe.com</span><br><span class="line">    - music.taihe.com</span><br><span class="line">    - songsearch.kugou.com</span><br><span class="line">    - trackercdn.kugou.com</span><br><span class="line">    - &quot;*.kuwo.cn&quot;</span><br><span class="line">    - api-jooxtt.sanook.com</span><br><span class="line">    - api.joox.com</span><br><span class="line">    - joox.com</span><br><span class="line">    - y.qq.com</span><br><span class="line">    - &quot;*.y.qq.com&quot;</span><br><span class="line">    - streamoc.music.tc.qq.com</span><br><span class="line">    - mobileoc.music.tc.qq.com</span><br><span class="line">    - isure.stream.qqmusic.qq.com</span><br><span class="line">    - dl.stream.qqmusic.qq.com</span><br><span class="line">    - aqqmusic.tc.qq.com</span><br><span class="line">    - amobile.music.tc.qq.com</span><br><span class="line">    - &quot;*.xiami.com&quot;</span><br><span class="line">    - &quot;*.music.migu.cn&quot;</span><br><span class="line">    - music.migu.cn</span><br><span class="line">    - &quot;*.msftconnecttest.com&quot;</span><br><span class="line">    - &quot;*.msftncsi.com&quot;</span><br><span class="line">    - localhost.ptlogin2.qq.com</span><br><span class="line">    - &quot;*.*.*.srv.nintendo.net&quot;</span><br><span class="line">    - &quot;*.*.stun.playstation.net&quot;</span><br><span class="line">    - xbox.*.*.microsoft.com</span><br><span class="line">    - &quot;*.ipv6.microsoft.com&quot;</span><br><span class="line">    - &quot;*.*.xboxlive.com&quot;</span><br><span class="line">    - speedtest.cros.wr.pvp.net</span><br><span class="line">proxies:</span><br></pre></td></tr></table></figure>
+
 <p>这里还有一份dns设置</p>
-<pre><code>mixed-port: 7890
-allow-lan: true
-bind-address: &#39;*&#39;
-mode: rule
-log-level: info
-external-controller: &#39;127.0.0.1:9090&#39;
-dns:
-    enable: true
-    ipv6: false
-    default-nameserver: [223.5.5.5, 119.29.29.29]
-    enhanced-mode: fake-ip
-    fake-ip-range: 198.18.0.1/16
-    use-hosts: true
-    nameserver: [&#39;https://doh.pub/dns-query&#39;, &#39;https://dns.alidns.com/dns-query&#39;]
-    fallback: [&#39;https://doh.dns.sb/dns-query&#39;, &#39;https://dns.cloudflare.com/dns-query&#39;, &#39;https://dns.twnic.tw/dns-query&#39;, &#39;tls://8.8.4.4:853&#39;]
-    fallback-filter: &#123; geoip: true, ipcidr: [240.0.0.0/4, 0.0.0.0/32] &#125;
-proxies:
-</code></pre>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mixed-port: 7890</span><br><span class="line">allow-lan: true</span><br><span class="line">bind-address: &#x27;*&#x27;</span><br><span class="line">mode: rule</span><br><span class="line">log-level: info</span><br><span class="line">external-controller: &#x27;127.0.0.1:9090&#x27;</span><br><span class="line">dns:</span><br><span class="line">    enable: true</span><br><span class="line">    ipv6: false</span><br><span class="line">    default-nameserver: [223.5.5.5, 119.29.29.29]</span><br><span class="line">    enhanced-mode: fake-ip</span><br><span class="line">    fake-ip-range: 198.18.0.1/16</span><br><span class="line">    use-hosts: true</span><br><span class="line">    nameserver: [&#x27;https://doh.pub/dns-query&#x27;, &#x27;https://dns.alidns.com/dns-query&#x27;]</span><br><span class="line">    fallback: [&#x27;https://doh.dns.sb/dns-query&#x27;, &#x27;https://dns.cloudflare.com/dns-query&#x27;, &#x27;https://dns.twnic.tw/dns-query&#x27;, &#x27;tls://8.8.4.4:853&#x27;]</span><br><span class="line">    fallback-filter: &#123; geoip: true, ipcidr: [240.0.0.0/4, 0.0.0.0/32] &#125;</span><br><span class="line">proxies:</span><br></pre></td></tr></table></figure>
+
 <p>应该都是可以的，我只试了前者。切换之后用了一会儿之后，再使用没有dns字段的配置文件也可以正常使用代理了，可能是，他自己记住了？也或许不是这个 dns 的问题</p>
 </li>
 </ul>
@@ -294,87 +323,478 @@ proxies:
 <p><a target="_blank" rel="noopener" href="https://supes.top/">https://supes.top</a></p>
 <p>op&#x2F;</p>
 
-        </article>
-        
-        <section class="post-near">
-            <ul>
-                
-                    <li>上一篇: <a href="/2023/03/22/15.vocaloid/">vocaloid歌曲展厅（不</a></li>
-                
-                
-                    <li>下一篇: <a href="/2023/02/05/13.shuangsheng/">第一次去livehouse</a></li>
-                
-            </ul>
-        </section>
-        
-            <section class="post-tags">
-            <a class="-none-link" href="/tags/openwrt/" rel="tag">openwrt</a><a class="-none-link" href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a>
-            </section>
-        
-        <script src="https://giscus.app/client.js"
-        data-repo="qllokirin/hexo_blog_comments"
-        data-repo-id="R_kgDOI8fvWA"
-        data-category="Announcements"
-        data-category-id="DIC_kwDOI8fvWM4CUIlh"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="preferred_color_scheme"
-        data-lang="zh-CN"
-        crossorigin="anonymous"
-        async>
-        </script>
-    
-        <section class="post-author">
-        
-            <figure class="author-avatar">
-                <img src="https://s2.loli.net/2022/09/27/6rzl4WOitu8pUqg.jpg" alt="qllokirin" />
-            </figure>
-        
-            <div class="author-info">
-                <h4>qllokirin</h4>
-                <p>你好，我是祈菱不是麒麟(qllokirin)，很高兴与你相遇</p>
-            </div>
-        </section>
-    
+      
     </div>
-</main>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/openwrt/" rel="tag">openwrt</a></li><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" rel="tag">路由器</a></li></ul>
 
-    <footer>
-    <div class="buttons">
-        <a class="to-top" href="#"></a>
+
+    </footer>
+  </div>
+  
+    
+  <nav id="article-nav" data-aos="fade-up">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          
+          
+            <img data-src="/covers/tg_8.png" data-sizes="auto" alt="vocaloid歌曲展厅（不" class="lazyload">
+          
+        
+        <a href="/2023/03/22/15.vocaloid/"></a>
+        <div class="article-nav-caption">次の記事</div>
+        <h3 class="article-nav-title">
+          
+            vocaloid歌曲展厅（不
+          
+        </h3>
+      </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/covers/tg_11.png" data-sizes="auto" alt="第一次去livehouse" class="lazyload">
+        
+      
+      <a href="/2023/02/05/13.shuangsheng/"></a>
+      <div class="article-nav-caption">前の記事</div>
+      <h3 class="article-nav-title">
+        
+          第一次去livehouse
+        
+      </h3>
     </div>
-    <div class="wrap min">
-        <section class="widget">
-            <div class="row">
-                <div class="col-m-4">
-                    <h3 class="title-recent">最新文章：</h3>
-                    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/7777/07/07/diary/">稀疏平常的生活</a></li><li class="post-list-item"><a class="post-list-link" href="/2024/08/06/26.vison_note/">一些视觉代码使用的记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2024/04/11/25.N100_op/">N100双网口小主机使用docker版openwrt做主路由（PPPoE拨号）超详细！！！！</a></li><li class="post-list-item"><a class="post-list-link" href="/2024/03/22/24.gitea+DroneCI/">gitea+Drone CI实现hexo博客自动部署</a></li><li class="post-list-item"><a class="post-list-link" href="/2024/02/19/23.remote_control_switch/">宿舍遥控开关整改计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2024/02/14/22.home_network_upgrade/">家庭网络拓扑整改日记</a></li></ul>
-                </div>
-                <div class="col-m-4">
-                    <h3 class="title-date">时光机：</h3>
-                    <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/7777/07/">July 7777</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/08/">August 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/04/">April 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/03/">March 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/02/">February 2024</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/08/">August 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/06/">June 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/04/">April 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/01/">January 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/12/">December 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/11/">November 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li></ul>
-                </div>
-                <div class="col-m-4">
-                    <h3 class="title-tags">标签云：</h3>
-                    <a href="/tags/Drone-CI/" style="font-size: 10px;">Drone CI</a> <a href="/tags/EasyConnect/" style="font-size: 10px;">EasyConnect</a> <a href="/tags/Ubuntu/" style="font-size: 10px;">Ubuntu</a> <a href="/tags/clash/" style="font-size: 10px;">clash</a> <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/hexo/" style="font-size: 20px;">hexo</a> <a href="/tags/livehouse/" style="font-size: 10px;">livehouse</a> <a href="/tags/openwrt/" style="font-size: 20px;">openwrt</a> <a href="/tags/px4/" style="font-size: 10px;">px4</a> <a href="/tags/ros/" style="font-size: 20px;">ros</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/vocaloid/" style="font-size: 10px;">vocaloid</a> <a href="/tags/%E4%BA%91%E5%B4%BD/" style="font-size: 10px;">云崽</a> <a href="/tags/%E5%8F%8C%E7%AC%99/" style="font-size: 10px;">双笙</a> <a href="/tags/%E5%AE%B6%E5%BA%AD%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">家庭网络</a> <a href="/tags/%E6%97%85%E6%B8%B8/" style="font-size: 10px;">旅游</a> <a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA%E7%BB%84%E8%A3%85/" style="font-size: 10px;">无人机组装</a> <a href="/tags/%E6%97%A5%E8%AE%B0/" style="font-size: 10px;">日记</a> <a href="/tags/%E6%AD%8C/" style="font-size: 10px;">歌</a> <a href="/tags/%E6%AF%94%E8%B5%9B/" style="font-size: 10px;">比赛</a> <a href="/tags/%E6%B5%8B%E8%AF%95/" style="font-size: 10px;">测试</a> <a href="/tags/%E7%95%AA/" style="font-size: 10px;">番</a> <a href="/tags/%E7%AC%94%E8%AE%B0%E6%9C%AC%E4%BC%98%E5%8C%96/" style="font-size: 10px;">笔记本优化</a> <a href="/tags/%E8%A3%85%E6%9C%BA/" style="font-size: 10px;">装机</a> <a href="/tags/%E8%A7%86%E8%A7%89/" style="font-size: 10px;">视觉</a> <a href="/tags/%E8%AE%B0%E5%BD%95/" style="font-size: 10px;">记录</a> <a href="/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/" style="font-size: 10px;">路由器</a> <a href="/tags/%E9%81%A5%E6%8E%A7%E5%BC%80%E5%85%B3/" style="font-size: 10px;">遥控开关</a> <a href="/tags/%E9%87%8D%E8%A3%85/" style="font-size: 10px;">重装</a> <a href="/tags/%E9%AD%94%E6%B3%95/" style="font-size: 10px;">魔法</a>
-                </div>
-            </div>
-        </section>
-        <section class="sub-footer">
-            <p>© 2024 <a href="/">qllokirin</a>. All Rights Reserved. Theme By <a href="https://github.com/Dreamer-Paul/Hingle" target="_blank" rel="nofollow">Hingle</a>.</p>
-        </section>
+    
+  </nav>
+
+
+  
+</article>
+
+
+
+
+
+  <div id="comments" class="gscomment giscus"></div>
+
+
+</section>
+          
+            <aside id="sidebar">
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">見出し</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BA%A2%E7%B1%B3-AC2100%E5%88%B7openwrt"><span class="toc-number">2.</span> <span class="toc-text">红米 AC2100刷openwrt</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%8B%E5%96%84-Nanopi-R2S-%E8%BD%AF%E8%B7%AF%E7%94%B1%E5%88%B7%E5%85%A5OpenWrt%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.</span> <span class="toc-text">友善 Nanopi R2S 软路由刷入OpenWrt系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#J1800-x86%E5%88%B7openwrt"><span class="toc-number">4.</span> <span class="toc-text">J1800 x86刷openwrt</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%90%AF%E8%A7%A3%E5%86%B3%E7%99%BE%E5%88%86%E4%B9%8B99%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%81%EF%BC%81%EF%BC%81%EF%BC%81"><span class="toc-number">4.0.1.</span> <span class="toc-text">重启解决百分之99的问题！！！！</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-number">5.</span> <span class="toc-text">命令行安装插件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#OpenClash%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">6.</span> <span class="toc-text">OpenClash的使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%95"><span class="toc-number">7.</span> <span class="toc-text">附录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Q-amp-A"><span class="toc-number">8.</span> <span class="toc-text">Q&amp;A</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="qllokirin" class="lazyload">
+  <div class="sidebar-author-name">qllokirin</div>
+  <div class="sidebar-description">~\(≧▽≦)/~</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>投稿</div>
+    <div class="sidebar-state-number">27</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>カテゴリ</div>
+    <div class="sidebar-state-number">5</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>タグ</div>
+    <div class="sidebar-state-number">31</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="ホーム"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">ホーム</div>
     </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="アーカイブ"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">アーカイブ</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/about" aria-label="プロフィール"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">プロフィール</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="フレンド"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">フレンド</div>
+    </div>
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  
+</aside>
+
+          
+        </div>
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2024
+      <span class="footer-info-sep"></span>
+      qllokirin
+    </div>
+    
+      <div>
+        Powered by&nbsp;<a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        45.1k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        02:44
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">総閲覧数&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">総閲覧者数&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
 </footer>
 
+        <div class="sidebar-top">
+          <img src="/images/taichi.png" height="50" width="50" alt="backtop" />
+          <div class="arrow-up"></div>
+        </div>
+        <div id="mask"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">見出し</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BA%A2%E7%B1%B3-AC2100%E5%88%B7openwrt"><span class="toc-number">2.</span> <span class="toc-text">红米 AC2100刷openwrt</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%8B%E5%96%84-Nanopi-R2S-%E8%BD%AF%E8%B7%AF%E7%94%B1%E5%88%B7%E5%85%A5OpenWrt%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.</span> <span class="toc-text">友善 Nanopi R2S 软路由刷入OpenWrt系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#J1800-x86%E5%88%B7openwrt"><span class="toc-number">4.</span> <span class="toc-text">J1800 x86刷openwrt</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E5%90%AF%E8%A7%A3%E5%86%B3%E7%99%BE%E5%88%86%E4%B9%8B99%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%81%EF%BC%81%EF%BC%81%EF%BC%81"><span class="toc-number">4.0.1.</span> <span class="toc-text">重启解决百分之99的问题！！！！</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="toc-number">5.</span> <span class="toc-text">命令行安装插件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#OpenClash%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">6.</span> <span class="toc-text">OpenClash的使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%84%E5%BD%95"><span class="toc-number">7.</span> <span class="toc-text">附录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Q-amp-A"><span class="toc-number">8.</span> <span class="toc-text">Q&amp;A</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="qllokirin" class="lazyload">
+  <div class="sidebar-author-name">qllokirin</div>
+  <div class="sidebar-description">~\(≧▽≦)/~</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>投稿</div>
+    <div class="sidebar-state-number">27</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>カテゴリ</div>
+    <div class="sidebar-state-number">5</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>タグ</div>
+    <div class="sidebar-state-number">31</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="ホーム"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">ホーム</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="アーカイブ"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">アーカイブ</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/about" aria-label="プロフィール"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">プロフィール</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="フレンド"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">フレンド</div>
+    </div>
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
 
-<script src="/static/kico.js"></script>
-<script src="/static/hingle.js"></script>
+    </div>
+    
+      <div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div class="reimu-search-input" id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png"/>
+        </div>
+      </div>
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"></script>
 
 
-<script>var hingle = new Paul_Hingle({"copyright":false,"night":false});</script>
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"></script>
 
-  </body>
-</html>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+<script type="module" data-pjax>
+  import PhotoSwipeLightbox from "https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js";
+  
+  const pswp = () => {
+    if (_$$('.article-entry a.article-gallery-item').length > 0) {
+      new PhotoSwipeLightbox({
+        gallery: '.article-entry',
+        children: 'a.article-gallery-item',
+        pswpModule: () => import("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js")
+      }).init();
+    }
+    if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+      new PhotoSwipeLightbox({
+        gallery: '.article-gallery',
+        children: 'a.article-gallery-item',
+        pswpModule: () => import("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js")
+      }).init();
+    }
+    window.lightboxStatus = 'done';
+    window.removeEventListener('lightbox:ready', pswp);
+  }
+  if(window.lightboxStatus === 'ready') {
+    pswp()
+  } else {
+    window.addEventListener('lightbox:ready', pswp);
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  <script src="https://giscus.app/client.js"
+          data-repo='qllokirin/hexo_blog_comments'
+          data-repo-id='R_kgDOI8fvWA'
+          data-category='Announcements'
+          data-category-id='DIC_kwDOI8fvWM4CUIlh'
+          data-mapping='mapping'
+          data-strict='0'
+          data-reactions-enabled='1'
+          data-emit-metadata='0'
+          data-input-position='bottom'
+          data-theme='preferred_color_scheme'
+          data-lang='zh-CN'
+          crossorigin="anonymous"
+          data-pjax
+          async>
+  </script>
+
+
+
+
+
+  <script>
+    var CONFIG = {
+      root: '/',
+      algolia: {
+        applicationID: "F2C7EFMFDR",
+        apiKey: "9e27cda9036ebeacc32e3250c4bfa398",
+        indexName: "my-hexo-blog",
+        hits: {
+          "per_page": parseInt("10")
+        },
+        labels: {
+          "input_placeholder": "搜索.....",
+          "hits_empty": "未发现与 「${query}」相关内容",
+          "hits_stats": "找到${hits}条结果（用时 ${time} ms）"
+        }
+      }
+    };
+  </script>
+  
+<script src="https://npm.webcache.cn/algoliasearch@4.17.1/dist/algoliasearch-lite.umd.js"></script>
+
+  
+<script src="https://npm.webcache.cn/instantsearch.js@4.56.1/dist/instantsearch.production.min.js" defer></script>
+
+  
+<script src="/js/algolia_search.js" defer></script>
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.4/dist/index.umd.js"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#ff5252","#ff7c7c","#ffafaf","#ffd0d0"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#ff0000"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/quicklink@2.3.0/dist/quicklink.umd.js"></script>
+
+  <script data-pjax>
+    window.quicklink?.listen({
+      timeout: 3000,
+      priority: true,
+      ignores: []
+    });
+  </script>
+
+
+<div id="lazy-script">
+  <div>
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #ff5252;')
+    console.log('%c Theme.Reimu v' + '0.3.2' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+  <!-- hexo injector body_end start -->
+<script src="/js/insert_highlight.js" data-pjax></script>
+<!-- hexo injector body_end end --></body>
+  </html>
+
