@@ -381,7 +381,7 @@
 
 
 
-  <div id="comments" class="gscomment giscus"></div>
+  <div id="comments" class="gscomment giscus" data-aos="fade-up"></div>
 
 
 </section>
@@ -658,21 +658,26 @@
 
 
 
-  <script src="https://giscus.app/client.js"
-          data-repo='qllokirin/hexo_blog_comments'
-          data-repo-id='R_kgDOI8fvWA'
-          data-category='Announcements'
-          data-category-id='DIC_kwDOI8fvWM4CUIlh'
-          data-mapping='mapping'
-          data-strict='0'
-          data-reactions-enabled='1'
-          data-emit-metadata='0'
-          data-input-position='bottom'
-          data-theme='preferred_color_scheme'
-          data-lang='zh-CN'
-          crossorigin="anonymous"
-          data-pjax
-          async>
+  <script data-pjax>
+    var giscusContainer = document.querySelector('.giscus');
+    if (giscusContainer) {
+      const giscusScript = document.createElement('script');
+      giscusScript.src = 'https://giscus.app/client.js';
+      giscusScript.setAttribute('data-repo', 'qllokirin/hexo_blog_comments');
+      giscusScript.setAttribute('data-repo-id', 'R_kgDOI8fvWA');
+      giscusScript.setAttribute('data-category', 'Announcements'); 
+      giscusScript.setAttribute('data-category-id', 'DIC_kwDOI8fvWM4CUIlh');
+      giscusScript.setAttribute('data-mapping', '0');
+      giscusScript.setAttribute('data-strict', '0');
+      giscusScript.setAttribute('data-reactions-enabled', '1');
+      giscusScript.setAttribute('data-emit-metadata', '0');
+      giscusScript.setAttribute('data-input-position', 'bottom');
+      giscusScript.setAttribute('data-theme', 'preferred_color_scheme');
+      giscusScript.setAttribute('data-lang', 'zh-CN');
+      giscusScript.setAttribute('crossorigin', 'anonymous');
+      giscusScript.async = true;
+      giscusContainer.appendChild(giscusScript);
+    }
   </script>
 
 
@@ -722,7 +727,7 @@
   \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
                                                   
 `,'color: #ff5252;')
-    console.log('%c Theme.Reimu v' + '0.3.2' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+    console.log('%c Theme.Reimu v' + '0.3.3' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
   </script>
   
 

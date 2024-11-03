@@ -194,11 +194,11 @@
       </div>
     
       <div class="archives-tag-list-item" data-aos="zoom-in">
-        <a class="archives-tag-list-link" href="/tags/tmux/">tmux</a>
+        <a class="archives-tag-list-link" href="/tags/ubuntu/">ubuntu</a>
       </div>
     
       <div class="archives-tag-list-item" data-aos="zoom-in">
-        <a class="archives-tag-list-link" href="/tags/ubuntu/">ubuntu</a>
+        <a class="archives-tag-list-link" href="/tags/tmux/">tmux</a>
       </div>
     
       <div class="archives-tag-list-item" data-aos="zoom-in">
@@ -214,23 +214,15 @@
       </div>
     
       <div class="archives-tag-list-item" data-aos="zoom-in">
-        <a class="archives-tag-list-link" href="/tags/番/">番</a>
-      </div>
-    
-      <div class="archives-tag-list-item" data-aos="zoom-in">
         <a class="archives-tag-list-link" href="/tags/EasyConnect/">EasyConnect</a>
       </div>
     
       <div class="archives-tag-list-item" data-aos="zoom-in">
+        <a class="archives-tag-list-link" href="/tags/番/">番</a>
+      </div>
+    
+      <div class="archives-tag-list-item" data-aos="zoom-in">
         <a class="archives-tag-list-link" href="/tags/docker/">docker</a>
-      </div>
-    
-      <div class="archives-tag-list-item" data-aos="zoom-in">
-        <a class="archives-tag-list-link" href="/tags/双笙/">双笙</a>
-      </div>
-    
-      <div class="archives-tag-list-item" data-aos="zoom-in">
-        <a class="archives-tag-list-link" href="/tags/livehouse/">livehouse</a>
       </div>
     
       <div class="archives-tag-list-item" data-aos="zoom-in">
@@ -242,11 +234,11 @@
       </div>
     
       <div class="archives-tag-list-item" data-aos="zoom-in">
-        <a class="archives-tag-list-link" href="/tags/vocaloid/">vocaloid</a>
+        <a class="archives-tag-list-link" href="/tags/双笙/">双笙</a>
       </div>
     
       <div class="archives-tag-list-item" data-aos="zoom-in">
-        <a class="archives-tag-list-link" href="/tags/歌/">歌</a>
+        <a class="archives-tag-list-link" href="/tags/livehouse/">livehouse</a>
       </div>
     
       <div class="archives-tag-list-item" data-aos="zoom-in">
@@ -255,6 +247,14 @@
     
       <div class="archives-tag-list-item" data-aos="zoom-in">
         <a class="archives-tag-list-link" href="/tags/openwrt/">openwrt</a>
+      </div>
+    
+      <div class="archives-tag-list-item" data-aos="zoom-in">
+        <a class="archives-tag-list-link" href="/tags/vocaloid/">vocaloid</a>
+      </div>
+    
+      <div class="archives-tag-list-item" data-aos="zoom-in">
+        <a class="archives-tag-list-link" href="/tags/歌/">歌</a>
       </div>
     
       <div class="archives-tag-list-item" data-aos="zoom-in">
@@ -290,15 +290,15 @@
       </div>
     
       <div class="archives-tag-list-item" data-aos="zoom-in">
-        <a class="archives-tag-list-link" href="/tags/日记/">日记</a>
-      </div>
-    
-      <div class="archives-tag-list-item" data-aos="zoom-in">
         <a class="archives-tag-list-link" href="/tags/Drone-CI/">Drone CI</a>
       </div>
     
       <div class="archives-tag-list-item" data-aos="zoom-in">
         <a class="archives-tag-list-link" href="/tags/遥控开关/">遥控开关</a>
+      </div>
+    
+      <div class="archives-tag-list-item" data-aos="zoom-in">
+        <a class="archives-tag-list-link" href="/tags/日记/">日记</a>
       </div>
     
       <div class="archives-tag-list-item" data-aos="zoom-in">
@@ -625,21 +625,26 @@
 
 
 
-  <script src="https://giscus.app/client.js"
-          data-repo='qllokirin/hexo_blog_comments'
-          data-repo-id='R_kgDOI8fvWA'
-          data-category='Announcements'
-          data-category-id='DIC_kwDOI8fvWM4CUIlh'
-          data-mapping='mapping'
-          data-strict='0'
-          data-reactions-enabled='1'
-          data-emit-metadata='0'
-          data-input-position='bottom'
-          data-theme='preferred_color_scheme'
-          data-lang='zh-CN'
-          crossorigin="anonymous"
-          data-pjax
-          async>
+  <script data-pjax>
+    var giscusContainer = document.querySelector('.giscus');
+    if (giscusContainer) {
+      const giscusScript = document.createElement('script');
+      giscusScript.src = 'https://giscus.app/client.js';
+      giscusScript.setAttribute('data-repo', 'qllokirin/hexo_blog_comments');
+      giscusScript.setAttribute('data-repo-id', 'R_kgDOI8fvWA');
+      giscusScript.setAttribute('data-category', 'Announcements'); 
+      giscusScript.setAttribute('data-category-id', 'DIC_kwDOI8fvWM4CUIlh');
+      giscusScript.setAttribute('data-mapping', '0');
+      giscusScript.setAttribute('data-strict', '0');
+      giscusScript.setAttribute('data-reactions-enabled', '1');
+      giscusScript.setAttribute('data-emit-metadata', '0');
+      giscusScript.setAttribute('data-input-position', 'bottom');
+      giscusScript.setAttribute('data-theme', 'preferred_color_scheme');
+      giscusScript.setAttribute('data-lang', 'zh-CN');
+      giscusScript.setAttribute('crossorigin', 'anonymous');
+      giscusScript.async = true;
+      giscusContainer.appendChild(giscusScript);
+    }
   </script>
 
 
@@ -689,7 +694,7 @@
   \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
                                                   
 `,'color: #ff5252;')
-    console.log('%c Theme.Reimu v' + '0.3.2' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
+    console.log('%c Theme.Reimu v' + '0.3.3' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #ff5252; padding:5px 0;', 'padding:4px;border:1px solid #ff5252;')
   </script>
   
 
