@@ -38,7 +38,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E7%94%BB%E9%9D%A2.png">
 <meta property="article:published_time" content="2022-10-10T03:37:54.000Z">
-<meta property="article:modified_time" content="2024-08-18T08:14:32.510Z">
+<meta property="article:modified_time" content="2024-11-04T06:30:27.594Z">
 <meta property="article:author" content="qllokirin">
 <meta property="article:tag" content="ubuntu">
 <meta name="twitter:card" content="summary">
@@ -148,6 +148,8 @@
     
     
     
+      <a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索"></a>
+    
   </nav>
 </div>
 <header id="header">
@@ -184,7 +186,7 @@
       <div class="article-date">
   <a href="/2022/10/10/05.ubuntu/" class="article-date-link" data-aos="zoom-in">
     <time datetime="2022-10-10T03:37:54.000Z" itemprop="datePublished">2022-10-10</time>
-    <time style="display: none;" id="post-update-time">2024-08-18</time>
+    <time style="display: none;" id="post-update-time">2024-11-04</time>
   </a>
 </div>
 
@@ -265,9 +267,7 @@
 <p>首推还是<a target="_blank" rel="noopener" href="https://shurufa.sogou.com/linux?r=pinyin">搜狗</a>，词库雀食是强大的  如果无法使用可以安装ibus的输出法，一定不会报错</p>
 </li>
 <li><p><a target="_blank" rel="noopener" href="https://typora.io/">typora</a></p>
-<p>Markdown语法文件即md为后缀的文件，用多了是真的好用，加上typora的适配，不过他开始收费了www 穷学生用不起正版还是偷偷用<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1MxeuYGiGLoqJSOQDIyThVQ?pwd=kiri">老版</a>了</p>
-<p>去下载老文件然后放到&#x2F;usr&#x2F;share里面就可以直接用</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp -r /typora /usr/share/</span><br></pre></td></tr></table></figure>
+<p>Markdown语法文件即md为后缀的文件，用多了是真的好用，加上typora的适配，不过他开始收费了www 穷学生用不起正版还是偷偷用老版了</p>
 </li>
 <li><p><strong><a target="_blank" rel="noopener" href="https://github.com/Fndroid/clash_for_windows_pkg/releases/">clash for windows</a></strong></p>
 <p>虽然是for Windows，但是有ubuntu版本，非常的不戳</p>
@@ -327,7 +327,7 @@
 <li><p>GitHub sshkey怎么生成都是鉴权失败</p>
 <p>可能是端口问题：<a target="_blank" rel="noopener" href="https://blog.csdn.net/alex_my/article/details/89336493">https://blog.csdn.net/alex_my/article/details/89336493</a></p>
 <blockquote>
-<p>基地的wifi有代理 可能会占用22端口</p>
+<p>基地的wifi有代理 部分机场会ban22端口（防ddos） 所以会鉴权失败</p>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gedit ~/.ssh/config</span><br><span class="line"><span class="comment"># 填入如下内容</span></span><br><span class="line">Host github.com</span><br><span class="line">Hostname ssh.github.com</span><br><span class="line">Port 443</span><br></pre></td></tr></table></figure>
 </li>
@@ -384,7 +384,7 @@
       
         
         
-          <img data-src="/covers/tg_22.jpg" data-sizes="auto" alt="tmux的学习记录" class="lazyload">
+          <img data-src="/covers/1.jpg" data-sizes="auto" alt="tmux的学习记录" class="lazyload">
         
       
       <a href="/2022/10/06/04.learn_tmux/"></a>
@@ -610,6 +610,22 @@
 
     </div>
     
+      <div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div class="reimu-search-input" id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png"/>
+        </div>
+      </div>
+    
     
 <script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"></script>
 
@@ -705,6 +721,10 @@
     }
   </script>
 
+
+
+  
+<script src="/js/generator_search.js" defer></script>
 
 
 

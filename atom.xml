@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>qllokirin</title>
+  <icon>http://example.com/icon.png</icon>
+  <subtitle>感谢与你相遇</subtitle>
+  <link href="http://example.com/atom.xml" rel="self"/>
+  
+  <link href="http://example.com/"/>
+  <updated>2024-11-03T10:58:48.382Z</updated>
+  <id>http://example.com/</id>
+  
+  <author>
+    <name>qllokirin</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>稀疏平常的生活</title>
+    <link href="http://example.com/7777/07/07/diary/"/>
+    <id>http://example.com/7777/07/07/diary/</id>
+    <published>7777-07-06T23:07:07.000Z</published>
+    <updated>2024-11-03T10:58:48.382Z</updated>
+    
+    
+    <summary type="html">我们所经历的日常..</summary>
+    
+    
+    
+    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+    <category term="日记" scheme="http://example.com/tags/%E6%97%A5%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>一些视觉代码使用的记录</title>
+    <link href="http://example.com/2024/08/06/26.vison_note/"/>
+    <id>http://example.com/2024/08/06/26.vison_note/</id>
+    <published>2024-08-06T08:32:05.918Z</published>
+    <updated>2024-08-06T08:37:56.142Z</updated>
+    
+    
+    <summary type="html">做了这么久的比赛，虽然已经离队了，不过还是总结一下与视觉联调的时候总结的一些小问题</summary>
+    
+    
+    
+    <category term="记录" scheme="http://example.com/categories/%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="视觉" scheme="http://example.com/tags/%E8%A7%86%E8%A7%89/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>N100双网口小主机使用docker版openwrt做主路由（PPPoE拨号）超详细！！！！</title>
+    <link href="http://example.com/2024/04/11/25.N100_op/"/>
+    <id>http://example.com/2024/04/11/25.N100_op/</id>
+    <published>2024-04-11T15:59:49.000Z</published>
+    <updated>2024-09-22T11:36:13.172Z</updated>
+    
+    
+    <summary type="html">踩了好多好多大坑，感觉用N100在docker中使用openwrt并且WAN口进行PPPoE拨号的教程不是太多，给我折磨完了</summary>
+    
+    
+    
+    <category term="教程" scheme="http://example.com/categories/%E6%95%99%E7%A8%8B/"/>
+    
+    
+    <category term="openwrt" scheme="http://example.com/tags/openwrt/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>gitea+Drone CI实现hexo博客自动部署</title>
+    <link href="http://example.com/2024/03/22/24.gitea+DroneCI/"/>
+    <id>http://example.com/2024/03/22/24.gitea+DroneCI/</id>
+    <published>2024-03-22T11:24:49.000Z</published>
+    <updated>2024-04-01T08:40:09.035Z</updated>
+    
+    
+    <summary type="html">基地的git仓库发生了一些变动，只有一个gitea仓库留下来了，博客仓库还在，故此番折腾完成从仓库自动更新博客网页</summary>
+    
+    
+    
+    <category term="教程" scheme="http://example.com/categories/%E6%95%99%E7%A8%8B/"/>
+    
+    
+    <category term="hexo" scheme="http://example.com/tags/hexo/"/>
+    
+    <category term="Drone CI" scheme="http://example.com/tags/Drone-CI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>宿舍遥控开关整改计划</title>
+    <link href="http://example.com/2024/02/19/23.remote_control_switch/"/>
+    <id>http://example.com/2024/02/19/23.remote_control_switch/</id>
+    <published>2024-02-19T11:24:49.000Z</published>
+    <updated>2024-11-03T10:51:32.261Z</updated>
+    
+    
+    <summary type="html">在宿舍上床之后总是想开灯玩手机和室友一起打会儿游戏，故做此改造</summary>
+    
+    
+    
+    <category term="教程" scheme="http://example.com/categories/%E6%95%99%E7%A8%8B/"/>
+    
+    
+    <category term="遥控开关" scheme="http://example.com/tags/%E9%81%A5%E6%8E%A7%E5%BC%80%E5%85%B3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>家庭网络拓扑整改日记</title>
+    <link href="http://example.com/2024/02/14/22.home_network_upgrade/"/>
+    <id>http://example.com/2024/02/14/22.home_network_upgrade/</id>
+    <published>2024-02-14T11:24:49.000Z</published>
+    <updated>2024-02-20T07:16:25.159Z</updated>
+    
+    
+    <summary type="html">千兆家庭宽带只能跑100兆，这是为什么呢，加之父母房间网络较卡，决定整改一番</summary>
+    
+    
+    
+    <category term="记录" scheme="http://example.com/categories/%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="家庭网络" scheme="http://example.com/tags/%E5%AE%B6%E5%BA%AD%E7%BD%91%E7%BB%9C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>华硕天选2笔记本优化</title>
+    <link href="http://example.com/2023/08/18/21.computer_optimize/"/>
+    <id>http://example.com/2023/08/18/21.computer_optimize/</id>
+    <published>2023-08-18T05:24:49.000Z</published>
+    <updated>2023-11-26T09:21:48.000Z</updated>
+    
+    
+    <summary type="html">无独显直连电脑性能优化 提高独立显卡调用，有时候看 b 站直播都能卡，受不了了现在终于解决了，很舒服</summary>
+    
+    
+    
+    <category term="记录" scheme="http://example.com/categories/%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="笔记本优化" scheme="http://example.com/tags/%E7%AC%94%E8%AE%B0%E6%9C%AC%E4%BC%98%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>第一次自组机！</title>
+    <link href="http://example.com/2023/08/14/20.new_computer/"/>
+    <id>http://example.com/2023/08/14/20.new_computer/</id>
+    <published>2023-08-14T09:15:45.000Z</published>
+    <updated>2023-08-17T12:09:48.000Z</updated>
+    
+    
+    <summary type="html">给家里装一台两千左右的电脑，圆我装机梦了</summary>
+    
+    
+    
+    <category term="记录" scheme="http://example.com/categories/%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="装机" scheme="http://example.com/tags/%E8%A3%85%E6%9C%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>img镜像制作与烧录</title>
+    <link href="http://example.com/2023/06/23/19.img/"/>
+    <id>http://example.com/2023/06/23/19.img/</id>
+    <published>2023-06-23T05:59:35.000Z</published>
+    <updated>2024-03-19T08:07:04.327Z</updated>
+    
+    
+    <summary type="html">之前有制作也有烧录过 nano 的镜像，这次又遇到了一个相关的问题，费了点时间解决了，小做记录</summary>
+    
+    
+    
+    <category term="记录" scheme="http://example.com/categories/%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="记录" scheme="http://example.com/tags/%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>海南之旅</title>
+    <link href="http://example.com/2023/06/12/18.travel-to-hainan/"/>
+    <id>http://example.com/2023/06/12/18.travel-to-hainan/</id>
+    <published>2023-06-11T16:59:35.000Z</published>
+    <updated>2023-06-23T06:59:26.000Z</updated>
+    
+    
+    <summary type="html">23年的中国机器人大赛微型无人机赛项决赛在海南举办，刚好有机会来海南参（lv）赛（you）</summary>
+    
+    
+    
+    <category term="记录" scheme="http://example.com/categories/%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="比赛" scheme="http://example.com/tags/%E6%AF%94%E8%B5%9B/"/>
+    
+    <category term="旅游" scheme="http://example.com/tags/%E6%97%85%E6%B8%B8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>对 ROS 中 callback 机制进行一点探索</title>
+    <link href="http://example.com/2023/06/09/17.callback/"/>
+    <id>http://example.com/2023/06/09/17.callback/</id>
+    <published>2023-06-08T16:20:32.000Z</published>
+    <updated>2024-08-05T11:55:52.238Z</updated>
+    
+    
+    <summary type="html">对 ROS 中 callback 机制进行一点探索</summary>
+    
+    
+    
+    <category term="教程" scheme="http://example.com/categories/%E6%95%99%E7%A8%8B/"/>
+    
+    <category term="记录" scheme="http://example.com/categories/%E6%95%99%E7%A8%8B/%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="ros" scheme="http://example.com/tags/ros/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>一篇有魔力的文章</title>
+    <link href="http://example.com/2023/04/25/16.clash/"/>
+    <id>http://example.com/2023/04/25/16.clash/</id>
+    <published>2023-04-25T12:08:20.000Z</published>
+    <updated>2024-11-03T07:09:08.180Z</updated>
+    
+    
+    <summary type="html">magic</summary>
+    
+    
+    
+    <category term="教程" scheme="http://example.com/categories/%E6%95%99%E7%A8%8B/"/>
+    
+    <category term="记录" scheme="http://example.com/categories/%E6%95%99%E7%A8%8B/%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="clash" scheme="http://example.com/tags/clash/"/>
+    
+    <category term="魔法" scheme="http://example.com/tags/%E9%AD%94%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vocaloid歌曲展厅（不</title>
+    <link href="http://example.com/2023/03/22/15.vocaloid/"/>
+    <id>http://example.com/2023/03/22/15.vocaloid/</id>
+    <published>2023-03-22T06:19:09.000Z</published>
+    <updated>2024-05-29T05:58:57.715Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;虚拟歌姬？很喜欢的啦&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="分享" scheme="http://example.com/categories/%E5%88%86%E4%BA%AB/"/>
+    
+    
+    <category term="vocaloid" scheme="http://example.com/tags/vocaloid/"/>
+    
+    <category term="歌" scheme="http://example.com/tags/%E6%AD%8C/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>路由器安装openwrt</title>
+    <link href="http://example.com/2023/03/20/14.openwrt/"/>
+    <id>http://example.com/2023/03/20/14.openwrt/</id>
+    <published>2023-03-20T10:57:16.000Z</published>
+    <updated>2024-04-13T05:32:07.040Z</updated>
+    
+    
+    <summary type="html">路由器直接走代理，听着就很酷</summary>
+    
+    
+    
+    <category term="记录" scheme="http://example.com/categories/%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="路由器" scheme="http://example.com/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/"/>
+    
+    <category term="openwrt" scheme="http://example.com/tags/openwrt/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>第一次去livehouse</title>
+    <link href="http://example.com/2023/02/05/13.shuangsheng/"/>
+    <id>http://example.com/2023/02/05/13.shuangsheng/</id>
+    <published>2023-02-04T16:33:33.000Z</published>
+    <updated>2023-03-20T05:18:30.000Z</updated>
+    
+    
+    <summary type="html">双笙的幻彩国巡演来西安啦，运气真好~</summary>
+    
+    
+    
+    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+    <category term="双笙" scheme="http://example.com/tags/%E5%8F%8C%E7%AC%99/"/>
+    
+    <category term="livehouse" scheme="http://example.com/tags/livehouse/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>重装Ubuntu</title>
+    <link href="http://example.com/2023/01/30/12.remake_ubuntu/"/>
+    <id>http://example.com/2023/01/30/12.remake_ubuntu/</id>
+    <published>2023-01-30T13:55:39.000Z</published>
+    <updated>2024-04-18T16:05:13.786Z</updated>
+    
+    
+    <summary type="html">简简单单重装一下</summary>
+    
+    
+    
+    <category term="记录" scheme="http://example.com/categories/%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="重装" scheme="http://example.com/tags/%E9%87%8D%E8%A3%85/"/>
+    
+    <category term="Ubuntu" scheme="http://example.com/tags/Ubuntu/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>docker学习</title>
+    <link href="http://example.com/2023/01/09/11.docker/"/>
+    <id>http://example.com/2023/01/09/11.docker/</id>
+    <published>2023-01-09T04:08:33.000Z</published>
+    <updated>2023-01-28T04:09:08.000Z</updated>
+    
+    
+    <summary type="html">最近的比赛要用到docker，去学习了下怎么用，感觉这玩意儿是真的强</summary>
+    
+    
+    
+    <category term="记录" scheme="http://example.com/categories/%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="docker" scheme="http://example.com/tags/docker/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Ubuntu20.04如何使用EasyConnect进入校园网</title>
+    <link href="http://example.com/2023/01/08/10.easyconnect/"/>
+    <id>http://example.com/2023/01/08/10.easyconnect/</id>
+    <published>2023-01-08T13:28:38.000Z</published>
+    <updated>2024-07-20T14:35:36.727Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;软件只适配到Ubuntu18.04，20.04需要弄一点东西&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="教程" scheme="http://example.com/categories/%E6%95%99%E7%A8%8B/"/>
+    
+    
+    <category term="EasyConnect" scheme="http://example.com/tags/EasyConnect/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>感谢与二次元情投</title>
+    <link href="http://example.com/2023/01/01/09.animation/"/>
+    <id>http://example.com/2023/01/01/09.animation/</id>
+    <published>2023-01-01T13:55:39.000Z</published>
+    <updated>2023-12-12T11:45:32.000Z</updated>
+    
+    
+    <summary type="html">感受一个个故事的悲欢离合</summary>
+    
+    
+    
+    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+    <category term="番" scheme="http://example.com/tags/%E7%95%AA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>组装一台四旋翼无人机</title>
+    <link href="http://example.com/2022/12/08/08.uav/"/>
+    <id>http://example.com/2022/12/08/08.uav/</id>
+    <published>2022-12-08T12:05:26.000Z</published>
+    <updated>2023-03-20T05:12:04.000Z</updated>
+    
+    
+    <summary type="html">最近实习课，可以造机器人，就选了造无人机</summary>
+    
+    
+    
+    <category term="教程" scheme="http://example.com/categories/%E6%95%99%E7%A8%8B/"/>
+    
+    
+    <category term="无人机组装" scheme="http://example.com/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA%E7%BB%84%E8%A3%85/"/>
+    
+  </entry>
+  
+</feed>
