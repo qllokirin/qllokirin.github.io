@@ -2,7 +2,7 @@
   background-color: rgba(37,37,37,0.9);
 }
 [data-theme="dark"] #loader .spinner-box .loading-word {
-  color: #ff5252;
+  color: #6cf;
 }
 #loader .loading-bg {
   position: fixed;

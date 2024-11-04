@@ -1,12 +1,12 @@
 :root {
-  --red-0: #f00;
-  --red-1: #ff5252;
-  --red-2: #ff7c7c;
-  --red-3: #ffafaf;
-  --red-4: #ffd0d0;
-  --red-5: #ffe4e4;
-  --red-5-5: #ffecec;
-  --red-6: #fff3f3;
+  --red-0: #6cf;
+  --red-1: #09c;
+  --red-2: #99e0ff;
+  --red-3: #ccefff;
+  --red-4: #e6f7ff;
+  --red-5: #f0fbff;
+  --red-5-5: #f7fcff;
+  --red-6: #f0f8ff;
   --grey-9: #999;
   --grey-7: #777;
   --color-archive-year: #000;
@@ -19,7 +19,7 @@
   --color-footer-background: #fff;
   --color-mobile-nav-background: #fff;
   --color-wrap: #fff;
-  --color-sticky: #ffecec;
+  --color-sticky: #6cf;
   --color-h2-border: #eee;
   --color-meta-shadow: var(--red-6);
   --color-hover-shadow: rgba(150,150,150,0.1);
@@ -44,14 +44,14 @@
   --cursor-text: url("../images/cursor/reimu-cursor-text.png"), text;
 }
 [data-theme="dark"]:root {
-  --red-0: #ff5252;
-  --red-1: #ff5252;
-  --red-2: #ff7c7c;
-  --red-3: #ffafaf;
-  --red-4: rgba(255,208,208,0.5);
-  --red-5: rgba(255,228,228,0.2);
-  --red-5-5: rgba(255,236,236,0.1);
-  --red-6: rgba(255,243,243,0.2);
+  --red-0: #6cf;
+  --red-1: #09c;
+  --red-2: #99e0ff;
+  --red-3: #ccefff;
+  --red-4: rgba(204,239,255,0.5);
+  --red-5: rgba(204,245,255,0.2);
+  --red-5-5: rgba(224,251,255,0.1);
+  --red-6: rgba(240,255,255,0.2);
   --grey-9: #999;
   --grey-7: #777;
   --color-archive-year: #999;
@@ -64,12 +64,12 @@
   --color-footer-background: #21252b;
   --color-mobile-nav-background: #21252b;
   --color-wrap: #272b30;
-  --color-sticky: #ffecec;
+  --color-sticky: #6cf;
   --color-h2-border: #47474a;
   --color-meta-shadow: rgba(0,0,0,0.2);
   --color-hover-shadow: rgba(0,0,0,0.2);
-  --color-h2-after: #ff5252;
-  --color-h2-after-shadow: rgba(255,78,106,0.7);
+  --color-h2-after: #6cf;
+  --color-h2-after-shadow: rgba(102,204,255,0.7);
   --highlight-nav: #2e353f;
   --highlight-scrollbar: #454d59;
   --highlight-background: #22272e;
@@ -2286,7 +2286,7 @@ pre .javascript .function {
 .sidebar-author .sidebar-author-name {
   font-weight: bold;
   font-size: 20px;
-  color: #f77;
+  color: #66b2ff;
   margin: 10px;
 }
 .sidebar-author .sidebar-description {
@@ -2356,7 +2356,7 @@ pre .javascript .function {
   transform: scale(1.2);
 }
 .icon-email {
-  color: #f77;
+  color: #66b2ff;
 }
 .icon-github {
   color: #191717;
