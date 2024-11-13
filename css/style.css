@@ -23,8 +23,8 @@
   --color-h2-border: #eee;
   --color-meta-shadow: var(--red-6);
   --color-hover-shadow: rgba(150,150,150,0.1);
-  --color-h2-after: rgba(255,0,0,0.6);
-  --color-h2-after-shadow: rgba(255,78,106,0.7);
+  --color-h2-after: rgba(0,200,255,0.6);
+  --color-h2-after-shadow: rgba(102,204,255,0.7);
   --highlight-nav: #e6e6e6;
   --highlight-scrollbar: #d6d6d6;
   --highlight-background: #f7f7f7;
@@ -1571,7 +1571,7 @@ a {
 }
 #page-nav a:hover {
   background: var(--red-2);
-  box-shadow: 0 0 10px rgba(255,78,106,0.55);
+  box-shadow: 0 0 10px rgba(100,200,255,0.55);
   color: #fff;
 }
 #page-nav .prev {
@@ -1596,7 +1596,7 @@ a {
   background: var(--red-1);
   color: #fff;
   font-weight: bold;
-  box-shadow: 0 0 10px rgba(255,78,106,0.55);
+  box-shadow: 0 0 10px rgba(100,200,255,0.55);
 }
 @media screen and (max-width: 479px) {
   #page-nav .current {
@@ -2383,7 +2383,7 @@ pre .javascript .function {
 }
 .reimu-pagination a:hover {
   background: var(--red-2);
-  box-shadow: 0 0 6px rgba(255,78,106,0.55);
+  box-shadow: 0 0 6px rgba(100,200,255,0.55);
   color: #fff;
 }
 .reimu-pagination .pagination-item {
@@ -2398,7 +2398,7 @@ pre .javascript .function {
   color: #fff;
   background: var(--red-1);
   font-weight: bold;
-  box-shadow: 0 0 6px rgba(255,78,106,0.55);
+  box-shadow: 0 0 6px rgba(100,200,255,0.55);
 }
 .reimu-pagination .disabled-item {
   display: none;
@@ -2480,7 +2480,7 @@ pre .javascript .function {
   opacity: 0;
   object-fit: cover;
   margin: 20px;
-  box-shadow: 0 0 15px 5px rgba(255,78,106,0.55);
+  box-shadow: 0 0 15px 5px rgba(100,200,255,0.55);
   will-change: transform;
   transition: 0.3s;
 }
@@ -2660,7 +2660,7 @@ pre .javascript .function {
   display: flex;
   position: relative;
   justify-content: center;
-  border: 10px rgba(255,88,88,0.3) double;
+  border: 10px rgba(99,199,255,0.3) double;
   transition: border 0.5s;
 }
 .sidebar-menu-link-wrap:hover {
@@ -2695,7 +2695,7 @@ pre .javascript .function {
 .link-active {
   background: var(--red-0);
   border: 10px var(--color-wrap) double;
-  box-shadow: 0 0 10px 3px rgba(255,78,106,0.55);
+  box-shadow: 0 0 10px 3px rgba(100,200,255,0.55);
   opacity: 0.8;
 }
 .link-active:hover {
@@ -2818,7 +2818,7 @@ pre .javascript .function {
   background: var(--red-3);
   color: #fff;
   font-weight: bold;
-  box-shadow: 0 0 10px rgba(255,78,106,0.55);
+  box-shadow: 0 0 10px rgba(100,200,255,0.55);
   border-radius: 5px;
   margin: 20px;
   transition: 0.3s;

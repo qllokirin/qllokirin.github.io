@@ -32,7 +32,7 @@
 }
 #loader .spinner-box .loading-word {
   position: absolute;
-  color: rgba(255,0,0,0.65);
+  color: rgba(0,200,255,0.65);
   top: calc(50% + 110px);
   left: 50%;
   transform: translate(-50%, -50%);
