@@ -36,16 +36,16 @@
 <meta property="og:site_name" content="qllokirin">
 <meta property="og:description" content="我们所经历的日常..">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/03/02/bDm7O2nWCr3UZQo.png">
 <meta property="og:image" content="https://s2.loli.net/2022/12/17/AGzoInhDa8FElNe.jpg">
 <meta property="og:image" content="https://s2.loli.net/2022/12/17/f8yjSmDGoNAC6tW.jpg">
 <meta property="og:image" content="https://s2.loli.net/2022/12/17/wGW4KmTEd6M2hDy.png">
-<meta property="og:image" content="https://s2.loli.net/2023/03/02/bDm7O2nWCr3UZQo.png">
 <meta property="article:published_time" content="7777-07-06T23:07:07.000Z">
-<meta property="article:modified_time" content="2024-11-28T04:08:55.823Z">
+<meta property="article:modified_time" content="2024-12-06T09:53:08.036Z">
 <meta property="article:author" content="qllokirin">
 <meta property="article:tag" content="日记">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s2.loli.net/2022/12/17/AGzoInhDa8FElNe.jpg">
+<meta name="twitter:image" content="https://s2.loli.net/2023/03/02/bDm7O2nWCr3UZQo.png">
   
   
     <link rel="alternate" href="/atom.xml" title="qllokirin" type="application/atom+xml">
@@ -189,7 +189,7 @@
       <div class="article-date">
   <a href="/7777/07/07/diary/" class="article-date-link" data-aos="zoom-in">
     <time datetime="7777-07-06T23:07:07.000Z" itemprop="datePublished">7777-07-07</time>
-    <time style="display: none;" id="post-update-time">2024-11-28</time>
+    <time style="display: none;" id="post-update-time">2024-12-06</time>
   </a>
 </div>
 
@@ -209,6 +209,76 @@
         <p>我们所经历的日常..</p>
 <span id="more"></span>
 
+<h1 id="2024"><a href="#2024" class="headerlink" title="2024"></a>2024</h1><p><strong>一月</strong></p>
+<p>把windows powershell设置为预测历史指令自动补全</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#寻找最新版本</span></span><br><span class="line"><span class="built_in">Find-Module</span> PSReadLine <span class="literal">-AllVersions</span> | <span class="built_in">Select-Object</span> <span class="literal">-First</span> <span class="number">5</span></span><br><span class="line"><span class="comment">#我这里最新是2.3.4</span></span><br><span class="line"><span class="built_in">Install-Module</span> <span class="literal">-Name</span> PSReadLine <span class="literal">-RequiredVersion</span> <span class="number">2.3</span>.<span class="number">4</span></span><br><span class="line"><span class="comment">#把预测源目设置成历史</span></span><br><span class="line"><span class="built_in">Set-PSReadLineOption</span> <span class="literal">-PredictionSource</span> <span class="built_in">History</span></span><br><span class="line"><span class="comment">#重启powershell即可</span></span><br></pre></td></tr></table></figure>
+
+<p>第一次重启后可能存在psreadline模块无法加载的情况参考<a target="_blank" rel="noopener" href="https://www.miyil.com/vue/940.html">这个</a></p>
+<p><strong>二月</strong></p>
+<p>跟朋友试试这个仓库 <a target="_blank" rel="noopener" href="https://github.com/LC044/WeChatMsg">https://github.com/LC044/WeChatMsg</a></p>
+<p><del>感觉挺有意思</del></p>
+<p><strong>三月</strong></p>
+<p><a target="_blank" rel="noopener" href="https://greasyfork.org/zh-CN/scripts/472925">网盘不限速</a>，不过已经不维护了，估计快失效了</p>
+<blockquote>
+<p>2024.6 <a target="_blank" rel="noopener" href="http://1.94.138.197/bangumi">这个</a>好用，满速下载</p>
+</blockquote>
+<p><strong>四月</strong></p>
+<p><del>真不想学专业课了，想摆了（</del></p>
+<blockquote>
+<p>好耶 现在都结束了</p>
+</blockquote>
+<p><strong>五月</strong></p>
+<p>最涨教训的一天，<u>五月一号</u></p>
+<p><code>win+r</code>输入<code>shell:startup</code>，创建<code>mount_nfs.bat</code>，写入<code>net use Z: \\&#123;smb服务器地址&#125;\&#123;共享文件夹名称&#125; /user:&#123;用户名&#125; &#123;密码&#125; </code>，这样挂载共享文件夹不会自动创建<code>system volume information</code>这个恶心人的文件夹</p>
+<p>我自己买了个域名解析到<code>10.xx</code>的保留地址（学校内网）上了，一般的clash规则会这么写<code>\- IP-CIDR,10.0.0.0/8,🎯 全球直连</code>，所以我的域名相关网站不会解析为代理，但是用的订阅转换规则一般喜欢用<code>\- IP-CIDR,10.0.0.0/8,🎯 全球直连,no-resolve</code>，no-resolve也就是不解析域名，所以我的域名没有被解析出来，他也就不知道这是一个<code>10.xx</code>的内网地址。加这个字段的目的应该是为了防止一些域名污染，解析到内网地址从而代理不了，但很困扰我，不过我找到一个解决办法：<code>配置</code>-&gt;<code>右键自己的代理</code>-&gt;<code>配置文件预处理</code>加上下面的字段，每次更新订阅是会自动追加规则</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">parsers:</span><br><span class="line">  - url: &#123;你的订阅链接&#125;</span><br><span class="line">    yaml:</span><br><span class="line">      # 代表在原规则前面追加规则</span><br><span class="line">      prepend-rules:</span><br><span class="line">        # 以jetbrains.com结尾的请求都走DIRECT [也可以填你的策略组名]</span><br><span class="line">        - DOMAIN-SUFFIX,jetbrains.com,DIRECT  </span><br></pre></td></tr></table></figure>
+
+<p>potplayer竟然可以打开摄像头，主要是可以很方便的查看usb摄像头支持的最大画面，爽！<code>打开 - &gt;设备设置 - &gt;摄像头</code></p>
+<p><strong>六月</strong></p>
+<p>来点windwos软件推荐，雀食好用</p>
+<p><a target="_blank" rel="noopener" href="https://maruko.appinn.me/">小丸工具箱</a> 压制视频的神</p>
+<p><a target="_blank" rel="noopener" href="http://www.pcfreetime.com/formatfactory/cn/index.html">格式工程</a> 格式转换的神</p>
+<p><a target="_blank" rel="noopener" href="https://www.voidtools.com/zh-cn/downloads/">everything</a> 搜索文件的神</p>
+<p><a target="_blank" rel="noopener" href="https://geekuninstaller.com/download">geek</a> 卸载软件的神</p>
+<p><a target="_blank" rel="noopener" href="http://1.94.138.197/bangumi">http://1.94.138.197/bangumi</a> 百度网盘不限速的神</p>
+<p>我是不是早已与往日不同了呢</p>
+<p><strong>七月</strong></p>
+<p><a target="_blank" rel="noopener" href="https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors">阿里docker镜像</a> 神！</p>
+<blockquote>
+<p>感觉不如1panel一根</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /etc/docker</span><br><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;EOF</span><br><span class="line">&#123;</span><br><span class="line"> &quot;registry-mirrors&quot;: [</span><br><span class="line">     &quot;https://docker.1panel.live&quot;</span><br><span class="line"> ]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>用qt写cmake项目时经常会出现改了ui但是编译运行的时候还是没变，只需要找一个cpp打一个空格然后不保存编译就行了（让他自动保存）</p>
+<p><strong>八月</strong></p>
+<p>最难受的一集，给nuc装系统的时候，硬盘没有初始化，直接选了erase and install，结果给我启动盘擦了，g</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wf19930209/article/details/100012611">Clonezilla再生龙</a>，硬盘对拷&#x2F;硬盘打包镜像，最好用的一集，250g ubuntu，两分钟拷贝完成，我猜是自动摒弃了空余空间</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_56641176/article/details/130912273">ubuntu 串口别名</a>，雀食好用</p>
+<p>typora+smms图床设置，第一 设置下代理服务器，网页能上传但是api不一定行，第二 相同图片不能上传会报错（即使名字不同），测试的时候多整几张图</p>
+<p><strong>九月</strong></p>
+<p><a target="_blank" rel="noopener" href="https://immersivetranslate.com/zh-Hans/">沉浸式翻译</a>最好用的一集，秒杀谷歌翻译</p>
+<p>洛天依全息演唱会 爽！</p>
+<p><strong>十月</strong></p>
+<p>抓包的时候发现要开启<a target="_blank" rel="noopener" href="https://blog.csdn.net/zy_281870667/article/details/89788640">这个</a>，可以抓到重定向之前的URL，模拟请求的时候也要请求重定向之前的URL，否则会鉴权失败</p>
+<p>14889+5696</p>
+<p><code>termux</code>配置python环境跑个小程序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;s@^\(deb.*stable main\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/termux-packages-24 stable main@&#x27; $PREFIX/etc/apt/sources.list</span><br><span class="line"></span><br><span class="line">sed -i &#x27;s@^\(deb.*games stable\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/game-packages-24 games stable@&#x27; $PREFIX/etc/apt/sources.list.d/game.list</span><br><span class="line"></span><br><span class="line">sed -i &#x27;s@^\(deb.*science stable\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/science-packages-24 science stable@&#x27; $PREFIX/etc/apt/sources.list.d/science.list</span><br><span class="line"></span><br><span class="line">pkg update</span><br><span class="line">pkg install python3</span><br><span class="line"># 不安装openssl pip装东西的时候会报错</span><br><span class="line">pkg install openssl</span><br><span class="line">pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line">pip install requests</span><br></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://www.123684.com/s/CVqajv-jYVWd">2024跑步打卡教程</a></p>
+<p><strong>十一月</strong></p>
+<p>最近遇到一个有意思的连锁反应，N100小主机无法使用ToDesk远屏幕操控→研究其他远程控制方式→发现有个叫moonlight和sunlight的可以低延迟串流→解锁新姿势-在床上玩电脑steam游戏→但是局域网才可以，学校网皎月连直接打不通→研究ipv6→宿舍的TPLINK路由器无法关闭ipv6防火墙→想买个小米路由器，既可以直接关闭ipv6防火墙又可以刷op，还可以双wan聚合，网速翻倍，爽！</p>
+<p>但是转念一想会发现这一切没什么用，首先小主机根本没有远程控制屏幕的需求，全用命令行就行了，而且买路由器不能解决n100无法远程屏幕控制的问题，其次买新路由器的话是可以随时随地ipv6串流了，但问题是，为什么不用更加方便的ToDesk呢，哈哈哈，放弃了，还是等会儿去研究下n100为什么不行然后换一个方法远程操控。</p>
+<p>研究了半天最后在UPnP里面发现有一台别人的电脑把sunshine默认端口已经在转发使用了，所以我设置的端口转发一直生效不了，（不过话说也挺神奇的，竟然能越过路由器的设置自动打通端口）然后我把我的sunshine换了一个端口就解决了，折腾，爽！</p>
+<p><a target="_blank" rel="noopener" href="https://account.jetbrains.com/licenses%E7%9A%84%60Renew">https://account.jetbrains.com/licenses的`Renew</a> my Education Pack&#96;</p>
+<p><a target="_blank" rel="noopener" href="https://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/naming.html">Google风格C++编程规范</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">小写下划线：变量名 文件名 函数 命名空间</span><br><span class="line">大驼峰：类名 结构体</span><br><span class="line">类数据成员后面带一个下划线，结构体和普通变量后面不接下划线</span><br><span class="line">常量以k开头 如kEnumName</span><br><span class="line">宏如 MY_MACRO_THAT_SCARES_SMALL_CHILDREN</span><br><span class="line">枚举与常量一致</span><br></pre></td></tr></table></figure>
+
+<p><strong>十二月</strong></p>
+<p>代理软件切换为 <a target="_blank" rel="noopener" href="https://github.com/mihomo-party-org/mihomo-party">mihomo-party</a>  和  <a target="_blank" rel="noopener" href="https://github.com/MetaCubeX/ClashMetaForAndroid">ClashMetaForAndroid</a></p>
+<p><a target="_blank" rel="noopener" href="https://jamcz.com/">晨钟酱</a>的搞机工具箱和投屏控制器有点意思</p>
+<p>感觉可以再整个windows软件推荐？</p>
+<blockquote>
+<p>磁铁美化<br>底部栏透明<br>geek<br>spacesniffer<br>diskgenius<br>qbittorrent<br>potplayer<br>Linux Reader<br>BBdown</p>
+</blockquote>
 <h1 id="2022"><a href="#2022" class="headerlink" title="2022"></a>2022</h1><p><strong>九月</strong></p>
 <ul>
 <li><p>百（社）团大战有马儿跳wwwww</p>
@@ -231,7 +301,83 @@
 <p>虽然队列长度设置为1并没有按照我们所想的那样进行读取发送</p>
 <p>但是把相机输入由30帧变为10帧就好了（？）</p>
 </li>
-<li><p>光鲜亮丽的世界<br>予我黑夜</p>
+<li><p>光鲜亮丽的世界</p>
+</li>
+</ul>
+<h1 id="2023"><a href="#2023" class="headerlink" title="2023"></a>2023</h1><p><strong>一月</strong></p>
+<ul>
+<li><p>做了件任性的事，不知道有没有伤害到你们呢</p>
+<blockquote>
+<p>笑死 自己再看此句依然忘了干了什么了</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>二月</strong></p>
+<ul>
+<li><p>记录下来往花费时间，方便后面查</p>
+<p>学校校车.老校区——新校区：1h</p>
+<p>学校的车:新校区——机场：1h多一点</p>
+<p>拼车.机场——新校区（50rmb）：</p>
+<p>拼车.仁村——新校区（10rmb）：30mins</p>
+<p>新校区——西安国际医学中心：都是黑车司机，谨慎</p>
+<p>地铁+拼车&#x2F;公交：机场——新校区：3h往上</p>
+</li>
+<li><p>双笙幻彩国巡演.西安站，一次美好的还愿</p>
+</li>
+<li><p>到校第一天，没找到我的自行车，以为是天太黑了没看到，就准备第二天找</p>
+<p>第二天还愿去了</p>
+<p>第三天把我经常停的那个地方转了又转也没见着</p>
+<p>第四天找了找周边的几个宿舍门口也是无果，看见好多自行车都锁了，但我的车是一直没锁，有一丝这样的念头：“学校都是坏人www 再也不停外面了 再也不要不锁车了”，不过再转念想想，第一那没锁的车也挺多，为什么是我，第二我的车应该是那里面比较烂的，还有这么多好车，为什么是我，想来想去再学校里被偷车还是有点奇怪</p>
+<p>第五天还在找，感觉没希望了，都快准备放弃了，见着一只不知名的鸟，而且还飞的离我很近，我当时突然想到了《久保同学》里面的剧情，“今天见到了白石同学，运气会很好”，那我今天见到了这只鸟，运气会变好吗 会找到我的车吗，我又多多看了它几眼，期盼着会有好事发生</p>
+<p>的确，我在食堂门口附近找到了我的车，锁车？不可能的</p>
+</li>
+<li><p>你就像星子，洒落在我梦里</p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1GM411i7is">啥都不想做</a> </p>
+</li>
+<li><p>再不学开学考试就要g了www 快学 学不完了</p>
+</li>
+<li><p>弄了下评论区，参考链接</p>
+<p><a target="_blank" rel="noopener" href="https://vuepress-theme-hope.github.io/v2/comment/zh/guide/giscus.html">https://vuepress-theme-hope.github.io/v2/comment/zh/guide/giscus.html</a></p>
+</li>
+<li><p>弄了下windows美化</p>
+<p>微软自带磁铁 但是只有图片 点了没效果 有点弱</p>
+<p><a target="_blank" rel="noopener" href="https://apps.microsoft.com/store/detail/tile-genie/9WZDNCRFJ215?hl=en-us&gl=us">https://apps.microsoft.com/store/detail/tile-genie/9WZDNCRFJ215?hl=en-us&amp;gl=us</a></p>
+<p><code>使用全屏开始屏幕</code> 个性化-&gt;开始</p>
+<p>某位up自制磁铁，可以把软件改磁铁背景</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1t741187nz/?spm_id_from=333.999.0.0">https://www.bilibili.com/video/BV1t741187nz/?spm_id_from=333.999.0.0</a></p>
+<p><img src="https://s2.loli.net/2023/03/02/bDm7O2nWCr3UZQo.png" alt="image.png"></p>
+</li>
+</ul>
+<p><strong>三月</strong></p>
+<ul>
+<li>大二下，绩点排名专业百分之五十，有点迷茫，周围都是百分之十百分之五或者是专业前几的稳定保研人，学长劝我再好好学，还有机会，不过考虑到我语文和英语的薄弱基础，感觉希望很微妙，聊着聊着一个双非学化学的哥们说自己还挂科了，你酒吧舞还emo。我们到时候应是都会找到自己的工作开始赚钱的吧，如果是那样的话，忧虑或许能降低一点，心中总想着，一切都会过去的</li>
+</ul>
+<blockquote>
+<p>奋斗了一年，竟然保上研，回望真是感叹啊</p>
+</blockquote>
+<ul>
+<li>也曾想成为“特别”的人，不过思来想去学到现在，所学的东西当然不够特别，总有学的更好更多的在身边，不过之前萌生了做个视频的想法，思路和构思感觉有了，不知道做完之后，能否对“特别”有再深层一次的理解呢</li>
+</ul>
+<p><strong>五月</strong></p>
+<ul>
+<li>7295+6678+2429</li>
+</ul>
+<p><strong>六月</strong></p>
+<ul>
+<li>github学生认证：录取通知书+一卡通+小纸条写github name</li>
+</ul>
+<p><strong>十二月</strong></p>
+<ul>
+<li><p>太神奇了，<a target="_blank" rel="noopener" href="https://developer.aliyun.com/ask/104139"><code>QQ邮箱不行 其他邮箱 使用 smtp 加密端口号 465</code></a>      <a target="_blank" rel="noopener" href="https://blog.csdn.net/u013412790/article/details/72904038"><code>由于阿里云禁用了25端口所以替换成465端口并修改协议为ssl才能发送邮件</code></a>   </p>
+<p>最近是用的一个<a target="_blank" rel="noopener" href="https://github.com/cheanus/Automation/blob/main/GradesMonitorLinux">自动监测成绩脚本</a>，里面发送邮件相关的函数是<code>smtp_obj.connect(&#39;smtp.qq.com&#39;, 25)</code>，使用的是25端口，阿里云把它给封了，用<code>telnet smtp.qq.com 25</code>无法连通，但是<code>telnet smtp.qq.com 465</code>是可以的，换了几次关键词上面两个相似的博客，最终还是问的GPT【<strong>smtp_obj.connect(‘smtp.qq.com’, 25)修改为使用465端口 并 修改协议为ssl</strong>】直接成功拿下，用如下代码即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smtp_obj = smtplib.SMTP_SSL(mail_host, mail_port)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>转眼六个月没更新日记了，哈哈 发生了什么呢</p>
+</blockquote>
+</li>
+<li><p>予我黑夜</p>
 <p>远方 忽有孤灯闪烁</p>
 </li>
 <li><p>本想定位飞机忽然下坠的问题（可能是pid的问题，飞控或者代码</p>
@@ -399,143 +545,6 @@
 </ul>
 </li>
 </ul>
-<h1 id="2023"><a href="#2023" class="headerlink" title="2023"></a>2023</h1><p><strong>一月</strong></p>
-<ul>
-<li><p>做了件任性的事，不知道有没有伤害到你们呢</p>
-<blockquote>
-<p>笑死 自己再看此句依然忘了干了什么了</p>
-</blockquote>
-</li>
-</ul>
-<p><strong>二月</strong></p>
-<ul>
-<li><p>记录下来往花费时间，方便后面查</p>
-<p>学校校车.老校区——新校区：1h</p>
-<p>学校的车:新校区——机场：1h多一点</p>
-<p>拼车.机场——新校区（50rmb）：</p>
-<p>拼车.仁村——新校区（10rmb）：30mins</p>
-<p>新校区——西安国际医学中心：都是黑车司机，谨慎</p>
-<p>地铁+拼车&#x2F;公交：机场——新校区：3h往上</p>
-</li>
-<li><p>双笙幻彩国巡演.西安站，一次美好的还愿</p>
-</li>
-<li><p>到校第一天，没找到我的自行车，以为是天太黑了没看到，就准备第二天找</p>
-<p>第二天还愿去了</p>
-<p>第三天把我经常停的那个地方转了又转也没见着</p>
-<p>第四天找了找周边的几个宿舍门口也是无果，看见好多自行车都锁了，但我的车是一直没锁，有一丝这样的念头：“学校都是坏人www 再也不停外面了 再也不要不锁车了”，不过再转念想想，第一那没锁的车也挺多，为什么是我，第二我的车应该是那里面比较烂的，还有这么多好车，为什么是我，想来想去再学校里被偷车还是有点奇怪</p>
-<p>第五天还在找，感觉没希望了，都快准备放弃了，见着一只不知名的鸟，而且还飞的离我很近，我当时突然想到了《久保同学》里面的剧情，“今天见到了白石同学，运气会很好”，那我今天见到了这只鸟，运气会变好吗 会找到我的车吗，我又多多看了它几眼，期盼着会有好事发生</p>
-<p>的确，我在食堂门口附近找到了我的车，锁车？不可能的</p>
-</li>
-<li><p>你就像星子，洒落在我梦里</p>
-</li>
-<li><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1GM411i7is">啥都不想做</a> </p>
-</li>
-<li><p>再不学开学考试就要g了www 快学 学不完了</p>
-</li>
-<li><p>弄了下评论区，参考链接</p>
-<p><a target="_blank" rel="noopener" href="https://vuepress-theme-hope.github.io/v2/comment/zh/guide/giscus.html">https://vuepress-theme-hope.github.io/v2/comment/zh/guide/giscus.html</a></p>
-</li>
-<li><p>弄了下windows美化</p>
-<p>微软自带磁铁 但是只有图片 点了没效果 有点弱</p>
-<p><a target="_blank" rel="noopener" href="https://apps.microsoft.com/store/detail/tile-genie/9WZDNCRFJ215?hl=en-us&gl=us">https://apps.microsoft.com/store/detail/tile-genie/9WZDNCRFJ215?hl=en-us&amp;gl=us</a></p>
-<p><code>使用全屏开始屏幕</code> 个性化-&gt;开始</p>
-<p>某位up自制磁铁，可以把软件改磁铁背景</p>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1t741187nz/?spm_id_from=333.999.0.0">https://www.bilibili.com/video/BV1t741187nz/?spm_id_from=333.999.0.0</a></p>
-<p><img src="https://s2.loli.net/2023/03/02/bDm7O2nWCr3UZQo.png" alt="image.png"></p>
-</li>
-</ul>
-<p><strong>三月</strong></p>
-<ul>
-<li>大二下，绩点排名专业百分之五十，有点迷茫，周围都是百分之十百分之五或者是专业前几的稳定保研人，学长劝我再好好学，还有机会，不过考虑到我语文和英语的薄弱基础，感觉希望很微妙，聊着聊着一个双非学化学的哥们说自己还挂科了，你酒吧舞还emo。我们到时候应是都会找到自己的工作开始赚钱的吧，如果是那样的话，忧虑或许能降低一点，心中总想着，一切都会过去的</li>
-</ul>
-<blockquote>
-<p>奋斗了一年，竟然保上研，回望真是感叹啊</p>
-</blockquote>
-<ul>
-<li>也曾想成为“特别”的人，不过思来想去学到现在，所学的东西当然不够特别，总有学的更好更多的在身边，不过之前萌生了做个视频的想法，思路和构思感觉有了，不知道做完之后，能否对“特别”有再深层一次的理解呢</li>
-</ul>
-<p><strong>五月</strong></p>
-<ul>
-<li>7295+6678+2429</li>
-</ul>
-<p><strong>六月</strong></p>
-<ul>
-<li>github学生认证：录取通知书+一卡通+小纸条写github name</li>
-</ul>
-<p><strong>十二月</strong></p>
-<ul>
-<li><p>太神奇了，<a target="_blank" rel="noopener" href="https://developer.aliyun.com/ask/104139"><code>QQ邮箱不行 其他邮箱 使用 smtp 加密端口号 465</code></a>      <a target="_blank" rel="noopener" href="https://blog.csdn.net/u013412790/article/details/72904038"><code>由于阿里云禁用了25端口所以替换成465端口并修改协议为ssl才能发送邮件</code></a>   </p>
-<p>最近是用的一个<a target="_blank" rel="noopener" href="https://github.com/cheanus/Automation/blob/main/GradesMonitorLinux">自动监测成绩脚本</a>，里面发送邮件相关的函数是<code>smtp_obj.connect(&#39;smtp.qq.com&#39;, 25)</code>，使用的是25端口，阿里云把它给封了，用<code>telnet smtp.qq.com 25</code>无法连通，但是<code>telnet smtp.qq.com 465</code>是可以的，换了几次关键词上面两个相似的博客，最终还是问的GPT【<strong>smtp_obj.connect(‘smtp.qq.com’, 25)修改为使用465端口 并 修改协议为ssl</strong>】直接成功拿下，用如下代码即可</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smtp_obj = smtplib.SMTP_SSL(mail_host, mail_port)</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>转眼六个月没更新日记了，哈哈 发生了什么呢</p>
-</blockquote>
-</li>
-</ul>
-<h1 id="2024"><a href="#2024" class="headerlink" title="2024"></a>2024</h1><p><strong>一月</strong></p>
-<p>把windows powershell设置为预测历史指令自动补全</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#寻找最新版本</span></span><br><span class="line"><span class="built_in">Find-Module</span> PSReadLine <span class="literal">-AllVersions</span> | <span class="built_in">Select-Object</span> <span class="literal">-First</span> <span class="number">5</span></span><br><span class="line"><span class="comment">#我这里最新是2.3.4</span></span><br><span class="line"><span class="built_in">Install-Module</span> <span class="literal">-Name</span> PSReadLine <span class="literal">-RequiredVersion</span> <span class="number">2.3</span>.<span class="number">4</span></span><br><span class="line"><span class="comment">#把预测源目设置成历史</span></span><br><span class="line"><span class="built_in">Set-PSReadLineOption</span> <span class="literal">-PredictionSource</span> <span class="built_in">History</span></span><br><span class="line"><span class="comment">#重启powershell即可</span></span><br></pre></td></tr></table></figure>
-
-<p>第一次重启后可能存在psreadline模块无法加载的情况参考<a target="_blank" rel="noopener" href="https://www.miyil.com/vue/940.html">这个</a></p>
-<p><strong>二月</strong></p>
-<p>跟朋友试试这个仓库 <a target="_blank" rel="noopener" href="https://github.com/LC044/WeChatMsg">https://github.com/LC044/WeChatMsg</a></p>
-<p><del>感觉挺有意思</del></p>
-<p><strong>三月</strong></p>
-<p><a target="_blank" rel="noopener" href="https://greasyfork.org/zh-CN/scripts/472925">网盘不限速</a>，不过已经不维护了，估计快失效了</p>
-<blockquote>
-<p>2024.6 <a target="_blank" rel="noopener" href="http://1.94.138.197/bangumi">这个</a>好用，满速下载</p>
-</blockquote>
-<p><strong>四月</strong></p>
-<p><del>真不想学专业课了，想摆了（</del></p>
-<blockquote>
-<p>好耶 现在都结束了</p>
-</blockquote>
-<p><strong>五月</strong></p>
-<p>最涨教训的一天，<u>五月一号</u></p>
-<p><code>win+r</code>输入<code>shell:startup</code>，创建<code>mount_nfs.bat</code>，写入<code>net use Z: \\&#123;smb服务器地址&#125;\&#123;共享文件夹名称&#125; /user:&#123;用户名&#125; &#123;密码&#125; </code>，这样挂载共享文件夹不会自动创建<code>system volume information</code>这个恶心人的文件夹</p>
-<p>我自己买了个域名解析到<code>10.xx</code>的保留地址（学校内网）上了，一般的clash规则会这么写<code>\- IP-CIDR,10.0.0.0/8,🎯 全球直连</code>，所以我的域名相关网站不会解析为代理，但是用的订阅转换规则一般喜欢用<code>\- IP-CIDR,10.0.0.0/8,🎯 全球直连,no-resolve</code>，no-resolve也就是不解析域名，所以我的域名没有被解析出来，他也就不知道这是一个<code>10.xx</code>的内网地址。加这个字段的目的应该是为了防止一些域名污染，解析到内网地址从而代理不了，但很困扰我，不过我找到一个解决办法：<code>配置</code>-&gt;<code>右键自己的代理</code>-&gt;<code>配置文件预处理</code>加上下面的字段，每次更新订阅是会自动追加规则</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">parsers:</span><br><span class="line">  - url: &#123;你的订阅链接&#125;</span><br><span class="line">    yaml:</span><br><span class="line">      # 代表在原规则前面追加规则</span><br><span class="line">      prepend-rules:</span><br><span class="line">        # 以jetbrains.com结尾的请求都走DIRECT [也可以填你的策略组名]</span><br><span class="line">        - DOMAIN-SUFFIX,jetbrains.com,DIRECT  </span><br></pre></td></tr></table></figure>
-
-<p>potplayer竟然可以打开摄像头，主要是可以很方便的查看usb摄像头支持的最大画面，爽！<code>打开 - &gt;设备设置 - &gt;摄像头</code></p>
-<p><strong>六月</strong></p>
-<p>来点windwos软件推荐，雀食好用</p>
-<p><a target="_blank" rel="noopener" href="https://maruko.appinn.me/">小丸工具箱</a> 压制视频的神</p>
-<p><a target="_blank" rel="noopener" href="http://www.pcfreetime.com/formatfactory/cn/index.html">格式工程</a> 格式转换的神</p>
-<p><a target="_blank" rel="noopener" href="https://www.voidtools.com/zh-cn/downloads/">everything</a> 搜索文件的神</p>
-<p><a target="_blank" rel="noopener" href="https://geekuninstaller.com/download">geek</a> 卸载软件的神</p>
-<p><a target="_blank" rel="noopener" href="http://1.94.138.197/bangumi">http://1.94.138.197/bangumi</a> 百度网盘不限速的神</p>
-<p>我是不是早已与往日不同了呢</p>
-<p><strong>七月</strong></p>
-<p><a target="_blank" rel="noopener" href="https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors">阿里docker镜像</a> 神！</p>
-<blockquote>
-<p>感觉不如1panel一根</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /etc/docker</span><br><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;EOF</span><br><span class="line">&#123;</span><br><span class="line">    &quot;registry-mirrors&quot;: [</span><br><span class="line">        &quot;https://docker.1panel.live&quot;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>用qt写cmake项目时经常会出现改了ui但是编译运行的时候还是没变，只需要找一个cpp打一个空格然后不保存编译就行了（让他自动保存）</p>
-<p><strong>八月</strong></p>
-<p>最难受的一集，给nuc装系统的时候，硬盘没有初始化，直接选了erase and install，结果给我启动盘擦了，g</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wf19930209/article/details/100012611">Clonezilla再生龙</a>，硬盘对拷&#x2F;硬盘打包镜像，最好用的一集，250g ubuntu，两分钟拷贝完成，我猜是自动摒弃了空余空间</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_56641176/article/details/130912273">ubuntu 串口别名</a>，雀食好用</p>
-<p>typora+smms图床设置，第一 设置下代理服务器，网页能上传但是api不一定行，第二 相同图片不能上传会报错（即使名字不同），测试的时候多整几张图</p>
-<p><strong>九月</strong></p>
-<p><a target="_blank" rel="noopener" href="https://immersivetranslate.com/zh-Hans/">沉浸式翻译</a>最好用的一集，秒杀谷歌翻译</p>
-<p>洛天依全息演唱会 爽！</p>
-<p><strong>十月</strong></p>
-<p>抓包的时候发现要开启<a target="_blank" rel="noopener" href="https://blog.csdn.net/zy_281870667/article/details/89788640">这个</a>，可以抓到重定向之前的URL，模拟请求的时候也要请求重定向之前的URL，否则会鉴权失败</p>
-<p>14889+5696</p>
-<p><code>termux</code>配置python环境跑个小程序</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">sed -i &#x27;s@^\(deb.*stable main\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/termux-packages-24 stable main@&#x27; $PREFIX/etc/apt/sources.list</span><br><span class="line"></span><br><span class="line">sed -i &#x27;s@^\(deb.*games stable\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/game-packages-24 games stable@&#x27; $PREFIX/etc/apt/sources.list.d/game.list</span><br><span class="line"></span><br><span class="line">sed -i &#x27;s@^\(deb.*science stable\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/science-packages-24 science stable@&#x27; $PREFIX/etc/apt/sources.list.d/science.list</span><br><span class="line"></span><br><span class="line">pkg update</span><br><span class="line">pkg install python3</span><br><span class="line"># 不安装openssl pip装东西的时候会报错</span><br><span class="line">pkg install openssl</span><br><span class="line">pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line">pip install requests</span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://www.123684.com/s/CVqajv-jYVWd">2024跑步打卡教程</a></p>
-<p><strong>十一月</strong></p>
-<p>最近遇到一个有意思的连锁反应，N100小主机无法使用ToDesk远屏幕操控→研究其他远程控制方式→发现有个叫moonlight和sunlight的可以低延迟串流→解锁新姿势-在床上玩电脑steam游戏→但是局域网才可以，学校网皎月连直接打不通→研究ipv6→宿舍的TPLINK路由器无法关闭ipv6防火墙→想买个小米路由器，既可以直接关闭ipv6防火墙又可以刷op，还可以双wan聚合，网速翻倍，爽！</p>
-<p>但是转念一想会发现这一切没什么用，首先小主机根本没有远程控制屏幕的需求，全用命令行就行了，而且买路由器不能解决n100无法远程屏幕控制的问题，其次买新路由器的话是可以随时随地ipv6串流了，但问题是，为什么不用更加方便的ToDesk呢，哈哈哈，放弃了，还是等会儿去研究下n100为什么不行然后换一个方法远程操控。</p>
-<p>研究了半天最后在UPnP里面发现有一台别人的电脑把sunshine默认端口已经在转发使用了，所以我设置的端口转发一直生效不了，（不过话说也挺神奇的，竟然能越过路由器的设置自动打通端口）然后我把我的sunshine换了一个端口就解决了，折腾，爽！</p>
-<p><a target="_blank" rel="noopener" href="https://account.jetbrains.com/licenses%E7%9A%84%60Renew">https://account.jetbrains.com/licenses的`Renew</a> my Education Pack&#96;</p>
-<p><a target="_blank" rel="noopener" href="https://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/naming.html">Google风格C++编程规范</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">小写下划线：变量名 文件名 函数 命名空间</span><br><span class="line">大驼峰：类名 结构体</span><br><span class="line">类数据成员后面带一个下划线，结构体和普通变量后面不接下划线</span><br><span class="line">常量以k开头 如kEnumName</span><br><span class="line">宏如 MY_MACRO_THAT_SCARES_SMALL_CHILDREN</span><br><span class="line">枚举与常量一致</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -562,10 +571,10 @@
       
         
         
-          <img data-src="/covers/tg_12.jpg" data-sizes="auto" alt="一些视觉代码使用的记录" class="lazyload">
+          <img data-src="/covers/48.jpg" data-sizes="auto" alt="一些视觉代码使用的记录" class="lazyload">
         
       
-      <a href="/2024/08/06/26.vison_note/"></a>
+      <a href="/2024/08/05/26.vison_note/"></a>
       <div class="article-nav-caption">后一篇</div>
       <h3 class="article-nav-title">
         
@@ -597,7 +606,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2022"><span class="toc-number">1.</span> <span class="toc-text">2022</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2023"><span class="toc-number">2.</span> <span class="toc-text">2023</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2024"><span class="toc-number">3.</span> <span class="toc-text">2024</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2024"><span class="toc-number">1.</span> <span class="toc-text">2024</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2022"><span class="toc-number">2.</span> <span class="toc-text">2022</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2023"><span class="toc-number">3.</span> <span class="toc-text">2023</span></a></li></ol>
       
   </div>
 </div>
@@ -610,7 +619,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">27</div>
+    <div class="sidebar-state-number">25</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -618,7 +627,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">31</div>
+    <div class="sidebar-state-number">28</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -688,10 +697,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        45.6k
+        43.5k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        02:45
+        02:39
       </div>
     
     
@@ -721,7 +730,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2022"><span class="toc-number">1.</span> <span class="toc-text">2022</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2023"><span class="toc-number">2.</span> <span class="toc-text">2023</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2024"><span class="toc-number">3.</span> <span class="toc-text">2024</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2024"><span class="toc-number">1.</span> <span class="toc-text">2024</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2022"><span class="toc-number">2.</span> <span class="toc-text">2022</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2023"><span class="toc-number">3.</span> <span class="toc-text">2023</span></a></li></ol>
       
   </div>
 </div>
@@ -734,7 +743,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">27</div>
+    <div class="sidebar-state-number">25</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -742,7 +751,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">31</div>
+    <div class="sidebar-state-number">28</div>
   </div>
 </div>
 <div class="sidebar-social">

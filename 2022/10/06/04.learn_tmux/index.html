@@ -37,7 +37,7 @@
 <meta property="og:description" content="浅浅记录tmux学习内容">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-06T10:10:55.000Z">
-<meta property="article:modified_time" content="2024-07-02T13:35:46.992Z">
+<meta property="article:modified_time" content="2024-12-06T09:25:36.332Z">
 <meta property="article:author" content="qllokirin">
 <meta property="article:tag" content="tmux">
 <meta name="twitter:card" content="summary">
@@ -184,7 +184,7 @@
       <div class="article-date">
   <a href="/2022/10/06/04.learn_tmux/" class="article-date-link" data-aos="zoom-in">
     <time datetime="2022-10-06T10:10:55.000Z" itemprop="datePublished">2022-10-06</time>
-    <time style="display: none;" id="post-update-time">2024-07-02</time>
+    <time style="display: none;" id="post-update-time">2024-12-06</time>
   </a>
 </div>
 
@@ -215,6 +215,10 @@
 <p>使用方法：新建一个<code>tmux.sh</code>的文件，将内容写入，执行<code>chmod +x tmux.sh</code>变为可执行文件，<code>./tmux.sh</code>运行</p>
 <h3 id="tmux设置鼠标启动"><a href="#tmux设置鼠标启动" class="headerlink" title="tmux设置鼠标启动"></a>tmux设置鼠标启动</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;set-option -g mouse on&quot; &gt;&gt; ~/.tmux.conf</span><br><span class="line">tmux source-file ~/.tmux.conf</span><br></pre></td></tr></table></figure>
 
+<h2 id="使用systemctl开机启动tmux界面时"><a href="#使用systemctl开机启动tmux界面时" class="headerlink" title="使用systemctl开机启动tmux界面时"></a>使用systemctl开机启动tmux界面时</h2><p>请注意一定要使用<code>Type=forking</code>，不然进程会被杀死，forking才运行创建的子进程存活</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=开机任务执行脚本</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">ExecStart=/bin/bash /home/qllokirin/python_and_sh/tmux.sh</span><br><span class="line">User=qllokirin</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
     <footer class="article-footer">
@@ -239,14 +243,14 @@
         
           
           
-            <img data-src="/covers/tg1.jpg" data-sizes="auto" alt="ubuntu使用" class="lazyload">
+            <img data-src="/covers/43.jpg" data-sizes="auto" alt="ros入门" class="lazyload">
           
         
-        <a href="/2022/10/10/05.ubuntu/"></a>
+        <a href="/2022/10/17/06.ros/"></a>
         <div class="article-nav-caption">前一篇</div>
         <h3 class="article-nav-title">
           
-            ubuntu使用
+            ros入门
           
         </h3>
       </div>
@@ -256,7 +260,7 @@
       
         
         
-          <img data-src="/covers/tg_18.jpg" data-sizes="auto" alt="云崽机器人搭建" class="lazyload">
+          <img data-src="/covers/tg_13.jpg" data-sizes="auto" alt="云崽机器人搭建" class="lazyload">
         
       
       <a href="/2022/09/28/03.yunzai/"></a>
@@ -291,7 +295,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#tmux%E7%9A%84%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">tmux的学习记录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4%E8%AE%B0%E5%BD%95"><span class="toc-number">1.1.</span> <span class="toc-text">基本操作指令记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-number">1.2.</span> <span class="toc-text">快捷键</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#tmux%E8%84%9A%E6%9C%AC"><span class="toc-number">1.2.1.</span> <span class="toc-text">tmux脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tmux%E8%AE%BE%E7%BD%AE%E9%BC%A0%E6%A0%87%E5%90%AF%E5%8A%A8"><span class="toc-number">1.2.2.</span> <span class="toc-text">tmux设置鼠标启动</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#tmux%E7%9A%84%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">tmux的学习记录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4%E8%AE%B0%E5%BD%95"><span class="toc-number">1.1.</span> <span class="toc-text">基本操作指令记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-number">1.2.</span> <span class="toc-text">快捷键</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#tmux%E8%84%9A%E6%9C%AC"><span class="toc-number">1.2.1.</span> <span class="toc-text">tmux脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tmux%E8%AE%BE%E7%BD%AE%E9%BC%A0%E6%A0%87%E5%90%AF%E5%8A%A8"><span class="toc-number">1.2.2.</span> <span class="toc-text">tmux设置鼠标启动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8systemctl%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8tmux%E7%95%8C%E9%9D%A2%E6%97%B6"><span class="toc-number">1.3.</span> <span class="toc-text">使用systemctl开机启动tmux界面时</span></a></li></ol></li></ol>
       
   </div>
 </div>
@@ -304,7 +308,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">27</div>
+    <div class="sidebar-state-number">25</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -312,7 +316,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">31</div>
+    <div class="sidebar-state-number">28</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -382,10 +386,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        45.6k
+        43.5k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        02:45
+        02:39
       </div>
     
     
@@ -415,7 +419,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#tmux%E7%9A%84%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">tmux的学习记录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4%E8%AE%B0%E5%BD%95"><span class="toc-number">1.1.</span> <span class="toc-text">基本操作指令记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-number">1.2.</span> <span class="toc-text">快捷键</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#tmux%E8%84%9A%E6%9C%AC"><span class="toc-number">1.2.1.</span> <span class="toc-text">tmux脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tmux%E8%AE%BE%E7%BD%AE%E9%BC%A0%E6%A0%87%E5%90%AF%E5%8A%A8"><span class="toc-number">1.2.2.</span> <span class="toc-text">tmux设置鼠标启动</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#tmux%E7%9A%84%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">tmux的学习记录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4%E8%AE%B0%E5%BD%95"><span class="toc-number">1.1.</span> <span class="toc-text">基本操作指令记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="toc-number">1.2.</span> <span class="toc-text">快捷键</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#tmux%E8%84%9A%E6%9C%AC"><span class="toc-number">1.2.1.</span> <span class="toc-text">tmux脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tmux%E8%AE%BE%E7%BD%AE%E9%BC%A0%E6%A0%87%E5%90%AF%E5%8A%A8"><span class="toc-number">1.2.2.</span> <span class="toc-text">tmux设置鼠标启动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8systemctl%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8tmux%E7%95%8C%E9%9D%A2%E6%97%B6"><span class="toc-number">1.3.</span> <span class="toc-text">使用systemctl开机启动tmux界面时</span></a></li></ol></li></ol>
       
   </div>
 </div>
@@ -428,7 +432,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">27</div>
+    <div class="sidebar-state-number">25</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -436,7 +440,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">31</div>
+    <div class="sidebar-state-number">28</div>
   </div>
 </div>
 <div class="sidebar-social">

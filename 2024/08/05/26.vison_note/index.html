@@ -1,0 +1,757 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-CN"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  
+  <script>window.icon_font = '4552607_tq6stt6tcg';window.clipboard_tips = {"success":"复制成功～(∠・ω< )⌒☆","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};</script>
+  
+  
+  <title>
+    一些视觉代码使用的记录 |
+    
+    qllokirin
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_tq6stt6tcg.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="做了这么久的比赛，虽然已经离队了，不过还是总结一下与视觉联调的时候总结的一些小问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一些视觉代码使用的记录">
+<meta property="og:url" content="http://example.com/2024/08/05/26.vison_note/index.html">
+<meta property="og:site_name" content="qllokirin">
+<meta property="og:description" content="做了这么久的比赛，虽然已经离队了，不过还是总结一下与视觉联调的时候总结的一些小问题">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-08-05T10:56:49.000Z">
+<meta property="article:modified_time" content="2024-12-01T06:17:21.023Z">
+<meta property="article:author" content="qllokirin">
+<meta property="article:tag" content="视觉">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="qllokirin" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.0.1/dist/aos.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+          <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="#66ccff" />
+          <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+         M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="#66ccff" />
+        </svg>
+      </div>
+      <div class="loading-word">天依再吃俩包子(๑＞⌔＜๑)8</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      <span class="main-nav-link-wrap">
+        <div class="main-nav-icon icon-taichi"></div>
+        <a class="main-nav-link" href="/">首页</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class="main-nav-icon icon-taichi"></div>
+        <a class="main-nav-link" href="/archives">归档</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class="main-nav-icon icon-taichi"></div>
+        <a class="main-nav-link" href="/about">关于</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class="main-nav-icon icon-taichi"></div>
+        <a class="main-nav-link" href="/friend">友链</a>
+      </span>
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+      <a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索"></a>
+    
+  </nav>
+</div>
+<header id="header">
+  
+    
+      <img fetchpriority="high" src="/images/luo.png" alt="一些视觉代码使用的记录">
+    
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">一些视觉代码使用的记录</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content">
+          
+          <section id="main"><article id="post-26.vison_note" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2024/08/05/26.vison_note/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2024-08-05T10:56:49.000Z" itemprop="datePublished">2024-08-05</time>
+    <time style="display: none;" id="post-update-time">2024-12-01</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%B0%E5%BD%95/" data-aos="zoom-in">记录</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <p>做了这么久的比赛，虽然已经离队了，不过还是总结一下与视觉联调的时候总结的一些小问题</p>
+<span id="more"></span>
+
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>此篇仅做记录，对视觉算法等等涉入尚欠，想必会有很多纰漏与错误。比赛中主要的任务就是识别圆与神经网络分类，故从这两个任务进行记录。</p>
+<blockquote>
+<p>感谢Sigmoid学弟的补充</p>
+</blockquote>
+<h1 id="识别圆"><a href="#识别圆" class="headerlink" title="识别圆"></a>识别圆</h1><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p>具体使用与调参我也不懂，只是近日看学弟的代码发现六七个参数就能有比较好的效果了，微做感叹。</p>
+<blockquote>
+<p>以下由Sigmoid所述</p>
+</blockquote>
+<p>主要使用的算法是霍夫变换, 不用自己手搓, OpenCV 有内置的 <code>cv2.HoughCircles</code>,   对识别效果影响比较大的是 <code>dp</code>、<code>param1</code>、<code>param2</code> 这三个参数, 具体的作用就不细说了, 展开说细节还挺多的, 推荐视觉组的队员看一下霍夫变换的具体技术细节(网上有很多这种文章), 对霍夫变换检测圆的调参会有很大的帮助。</p>
+<p>主要说一下在具体任务场景中调参的原则:</p>
+<ol>
+<li><p>固定 dp, 个人经验一般先把 dp 固定为 1, 即原图输入</p>
+</li>
+<li><p>固定 param2, param2的范围一般在 50-100, 一般将其设置为中位值 75</p>
+</li>
+<li><p>调整 param1, 在 50-150 范围内调整 param1, 调的越低越容易检测出圆。</p>
+</li>
+<li><p>如果 param1 降到了 50 还没有识别出圆或者效果依然不理想, 降低 param2, 重复步骤 3</p>
+</li>
+<li><p>一般情况下把 param1 和 param2 调整好了之后的效果就非常理想了, 如果还不理想, 就降低 dp 重复重复步骤 2 和 3</p>
+</li>
+</ol>
+<p>必须要注意的一个点是, 在使用<code>cv2.HoughCircles</code>时, 不要把 RGB 图转成的 灰度图直接作为 src 输入, 灰度图一定一定要经过滤波(我一般都是高斯滤波, 比较普适)！因为霍夫变换的原理中是要检测轮廓的, 比赛中地面铺的那种板子有很多小纹路, 板子与板子之间也有拼接的缝隙, 如果不经过滤波, 这些奇怪的轮廓不仅会影响圆的识别效果, 而且会增大巨多开销。  </p>
+<p>在我们组所参加的机器人比赛中, 霍夫变换检测圆基本已经能满足需求了, 并且它是一种传统的视觉算法, 开销相比神经网络小了很多, 所以在有限算力的平台上实现圆的识别一定要把霍夫变换检测圆作为首选来考虑, 不要为了追求更高的稳定性而去选择神经网络, 性价比不高。</p>
+<h3 id="标定"><a href="#标定" class="headerlink" title="标定"></a>标定</h3><blockquote>
+<p>参考<a target="_blank" rel="noopener" href="http://wiki.ros.org/camera_calibration/Tutorials/MonocularCalibration">官方教程</a>，<a target="_blank" rel="noopener" href="https://blog.csdn.net/heyijia0327/article/details/43538695">补充</a></p>
+</blockquote>
+<p>这主要是需要使用相机内参矩阵计算<strong>圆心距离无人机中心水平坐标差</strong>，不过说起来，其实每次标定计算内参的时候，浮动还挺大的，上下浮动几十吧，不清楚到底是什么问题，不过用起来还可以，挺好的。以前总以为越清晰越好，现在感觉，就咱这识别任务，480p足以，糊一点还免的高斯模糊了（不是）</p>
+<p>1.安装usb_cam包</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install ros-noetic-usb-cam</span><br></pre></td></tr></table></figure>
+
+<p>2.启动相机</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">roslaunch usb_cam usb_cam-test.launch</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>若是使用自己的笔记本（有摄像头的话），大概率需要修改<code>/dev/video0</code>为<code>/dev/video2</code>或者<code>/dev/video4</code>，把下面的内容写入<code>usb_cam.launch</code>后使用<code>roslaunch ./usb_cam.launch</code>启动即可，或者<code>sudo vim /opt/ros/noetic/share/usb_cam/launch/usb_cam-test.launch</code>直接修改原launch也可以</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;launch&gt;</span><br><span class="line">  &lt;node name=&quot;usb_cam&quot; pkg=&quot;usb_cam&quot; type=&quot;usb_cam_node&quot; output=&quot;screen&quot; &gt;</span><br><span class="line">    &lt;param name=&quot;video_device&quot; value=&quot;/dev/video0&quot; /&gt;</span><br><span class="line">    &lt;param name=&quot;image_width&quot; value=&quot;640&quot; /&gt;</span><br><span class="line">    &lt;param name=&quot;image_height&quot; value=&quot;480&quot; /&gt;</span><br><span class="line">    &lt;param name=&quot;pixel_format&quot; value=&quot;yuyv&quot; /&gt;</span><br><span class="line">    &lt;param name=&quot;color_format&quot; value=&quot;yuv422p&quot; /&gt;</span><br><span class="line">    &lt;param name=&quot;camera_frame_id&quot; value=&quot;usb_cam&quot; /&gt;</span><br><span class="line">    &lt;param name=&quot;io_method&quot; value=&quot;mmap&quot;/&gt;</span><br><span class="line">  &lt;/node&gt;</span><br><span class="line">  &lt;node name=&quot;image_view&quot; pkg=&quot;image_view&quot; type=&quot;image_view&quot; respawn=&quot;false&quot; output=&quot;screen&quot;&gt;</span><br><span class="line">    &lt;remap from=&quot;image&quot; to=&quot;/usb_cam/image_raw&quot;/&gt;</span><br><span class="line">    &lt;param name=&quot;autosize&quot; value=&quot;true&quot; /&gt;</span><br><span class="line">  &lt;/node&gt;</span><br><span class="line">&lt;/launch&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<p>3.准备<a href="https://wiki.ros.org/camera_calibration/Tutorials/MonocularCalibration?action=AttachFile&do=view&target=check-108.pdf">标定板</a>，我使用的是A4纸打印的，矩形的边长是0.0244m，所以是<code>--square 0.0244 </code></p>
+<blockquote>
+<p>图片是9x7的格子，标定使用的是8x6个内角点，所以下面是<code>--size 8x6</code></p>
+</blockquote>
+<p> 4.启动标定程序</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rosrun camera_calibration cameracalibrator.py --size 8x6 --square 0.0244 image:=/usb_cam/image_raw camera:=/usb_cam</span><br></pre></td></tr></table></figure>
+
+<p>静置相机，把标定板粘贴在硬纸板&#x2F;硬书上（防止弯曲），左右（x）、上下（y）、前后（size）、旋转（skew），各个距离都完善后进度条都变绿时点击CALIBRATE即可得出相机内参。</p>
+<blockquote>
+<p>旋转需要有各个角度，俯仰、偏航的旋转，而非竖直旋转</p>
+</blockquote>
+<h3 id="相机内参使用"><a href="#相机内参使用" class="headerlink" title="相机内参使用"></a>相机内参使用</h3><p>有一个坐标系的事情需要说明，相机中的坐标系是右x下y，比赛的无人机一般是把相机水平朝下放置，而ROS一般坐标系是前x左y上z，所以<strong>视觉的-x才是策略里的y，-y才是策略里的x</strong>，可能这么说有点绕，看看下面的代码会好理解的多。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 相机内参</span></span><br><span class="line">cx = ...</span><br><span class="line">cy = ...</span><br><span class="line">fx = ...</span><br><span class="line">fy = ...</span><br><span class="line"><span class="comment"># 识别圆获得的像素坐标</span></span><br><span class="line">pixel_x = ...</span><br><span class="line">pixel_y = ...</span><br><span class="line"><span class="comment"># 计算策略代码中需要的圆目标xy</span></span><br><span class="line">target_x = - (pixel_y - cy) / fy</span><br><span class="line">target_y = - (pixel_x - cx) / fx</span><br></pre></td></tr></table></figure>
+
+<p>策略获得target_x、target_y后再<strong>乘以相机离地面的高度</strong>即可计算出圆的相对水平距离</p>
+<h1 id="YOLO"><a href="#YOLO" class="headerlink" title="YOLO"></a>YOLO</h1><blockquote>
+<p>以下由Sigmoid所述</p>
+</blockquote>
+<p>虽然人工智能大赛每年要求分类的数据集一直在变(去年是<code>minist</code>, 今年是 <code>cifar100</code>), 这些标准数据集有一个共同的特点就是分辨率很低(<code>minist</code> 是28x28, <code>cifar100</code> 是32x32)。但在训练的时候不要一味的追求输入高分辨率(比如直接放大10倍), 你可能觉得图像分辨率高了信息就多, 但是这种做法的缺陷很大, 一是源数据集量很大, 模型体量不足以让你把这样大分辨率的数据集很好的拟合上去; 二是分辨率高了以后信息量确实是多了, 但是这会导致原来两个类别但是相似的两张图片使得模型更加难以区分, 效果适得其反。根据个人经验, 放大2倍或者直接不放大的效果应该是最好的。</p>
+<p>第二个需要注意的点是, 不要去数据集的 benchmark 上找 SOTA 来用, 据我尝试过的 <code>cifar100</code> SOTA的经验来看, 这些 SOTA 为了提高测试集的准确度用了很多 trick, 从而使得预测结果的置信度最高才 0.2几并且在实际的任务场景中模型效果非常非常不理想, 因此建议不要这样做。</p>
+<p>关于 YOLO, 听说现在都出到十几代了, 但是常用的几个版本是 v5 和 v8,  v8带来的 <code>ultralytics</code>极大地简化了 YOLO 的训练的训练和部署, 在模型框架里 v8 移除了 v5 中一些 “冗余” 的层, 之所以加引号, 因为我们也不好说这些被移除的层到底有没有用, 视觉组的队员还是要从 v5 开始训练部署一遍的。</p>
+<p>不得不说, 虽然 YOLO 并不是某些常用数据集的 SOTA, 但是它强大的泛化能力和简便操作使得我们今天依然将它作为比赛首选, 之前我还专门看了一下 YOLO 的数据增强的代码, 用了很多方法来增强泛化性, 使得训练出的模型在实际场景中效果表现很好。目前 v8 兼具目标检测、图像分类、图像分割等多种模型, 我们可以根据需要进行搭配或者选择。总结一句话, 不管是检测任务还是分类任务, 一定先用 YOLO 跑，YOLO 不行再寻找别的模型。</p>
+<p>关于 YOLO v8 的使用, 直接看<a target="_blank" rel="noopener" href="https://docs.ultralytics.com/">官网</a>就可以, 操作巨简便, 几行代码就能训练自己的数据集。</p>
+<blockquote>
+<p>以下由我所述</p>
+</blockquote>
+<p>使用神经网络时的问题在于，我们的上位机使用的是NUC，用cpu硬跑yolov5能跑到10帧多，但是由于ros callback的机制原因，你可能会发现画面有非常大的延迟，详见<a target="_blank" rel="noopener" href="https://qllokirin.github.io/2023/06/09/17.callback/">此处</a></p>
+<h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>不优雅，但能用，将输入给yolo的数据控制在10Hz，因为计算一帧的时间小于0.1s，所以能比较实时的输出结果，至少没有大延迟。</p>
+<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>使用<code>while not rospy.is_shutdown()</code>，目测rospy会自动开一个线程及时调用回调函数，不论while中运行的是什么，花费了多少时间，参照下面的写法即可</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">imgmsg_to_cv2</span>(<span class="params">img_msg</span>):</span><br><span class="line">    <span class="comment"># ros图像转cv图像</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="comment"># 获取图像和消息的时间戳</span></span><br><span class="line">    <span class="keyword">return</span> image_opencv, img_msg.header.seq  </span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">task</span>(<span class="params">img_origin</span>):</span><br><span class="line">    <span class="comment"># 输入图片，使用模型进行推理的代码放在此处</span></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">img_ros_data = <span class="literal">None</span></span><br><span class="line">seq_current = <span class="literal">None</span></span><br><span class="line"><span class="comment"># 这个回调函数会实时调用，来了一个消息就会调用，不会被主线程卡住，只负责更新图像变量</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">image_callback</span>(<span class="params">data</span>):</span><br><span class="line">    <span class="keyword">global</span> img_ros_data, seq_current</span><br><span class="line">    img_ros_data, seq_current = imgmsg_to_cv2(data)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    rospy.init_node(<span class="string">&#x27;yolo_node&#x27;</span>, anonymous=<span class="literal">True</span>)</span><br><span class="line">    <span class="comment"># YoloTypeAndCoordinate 是自定义消息</span></span><br><span class="line">    info_pub = rospy.Publisher(<span class="string">&#x27;/yolo/detect&#x27;</span>, YoloTypeAndCoordinate, queue_size=<span class="number">1</span>)</span><br><span class="line">    img_pub = rospy.Publisher(<span class="string">&#x27;/yolo/detect_img&#x27;</span>, Image, queue_size=<span class="number">1</span>)</span><br><span class="line">    rospy.Subscriber(<span class="string">&#x27;/usb_cam/image_raw&#x27;</span>, Image, image_callback)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取上一次的时间戳，当时间戳相同（没有新图像发布）时不推理（不发布结果消息）</span></span><br><span class="line">    seq_last_time = <span class="literal">None</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">not</span> rospy.is_shutdown():</span><br><span class="line">        <span class="comment"># img_ros_data和seq_current都不是None也就是最开始启动的时候没有图像消息时也不推理（不发布结果消息）</span></span><br><span class="line">        <span class="keyword">if</span> (img_ros_data <span class="keyword">or</span> seq_current) <span class="keyword">is</span> <span class="keyword">not</span> <span class="literal">None</span> <span class="keyword">and</span> seq_current != seq_last_time:</span><br><span class="line">            seq_last_time = seq_current</span><br><span class="line">            task(img_ros_data)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>yolo训练过程相信视觉的朋友都会，但后续我打算补一个详细流程，方便我自己以后可能用（</p>
+</blockquote>
+<h1 id="降低开销"><a href="#降低开销" class="headerlink" title="降低开销"></a>降低开销</h1><blockquote>
+<p>以下由Sigmoid所述</p>
+</blockquote>
+<p>在比赛中, 开销最大的就是视觉模块, 除了上面的降低帧率来达到图像的实时处理之外, 可以从根本上降低模型的推理时间或者优化传统视觉算法的开销来解决这个问题(虽然现在还是没有优化到这个程度)。</p>
+<h3 id="传统视觉算法"><a href="#传统视觉算法" class="headerlink" title="传统视觉算法"></a>传统视觉算法</h3><p>比赛代码传统视觉算法部分开销最大的就是霍夫圆检测的开销, 直接在这给出结论 <code>dp</code> 越高, 开销越小; param1 越高开销越小; param2 越高开销越小。 所以在调整霍夫圆的参数时, 要同时结合上面的5个原则和这里的结论。</p>
+<p>还有就是图像输入前的滤波处理, 这一部分也很重要, 之前做过一个实验, 没有滤波的时候检测圆比有滤波的时候慢了一倍。</p>
+<p>其实优化传统视觉算法的提升空间很小, 在这里提这个优化传统视觉算法的原因是, 在实际的视觉任务中, 会发现传统视觉开销和模型推理开销并不是独立作用叠加的。举个简单的例子, 单独测试传统视觉的开销是 0.06s 一帧, 单独测试模型推理开销是 0.10s 一帧, 但是把这两个模块集成起来你会发现可能会变成 0.80s 一帧, 个人感觉应该是产生了资源竞争(内存频繁的置换)导致了这种现象的出现。但是如果把传统视觉开销优化到 0.03s 一帧, 你会发现两个模块集成起来的开销就成了 0.13s 一帧 。</p>
+<p>在实际的任务中, 优化传统视觉算法有时候会带来意想不到的效果。</p>
+<h3 id="神经网络模型"><a href="#神经网络模型" class="headerlink" title="神经网络模型"></a>神经网络模型</h3><p>这部分有很多学问, 最直接的就是优化模型网络结构, 减少参数量, 会显著提高推理速度。v8 的目标检测模型有 n&#x2F;s&#x2F;m&#x2F;l, 模型复杂程度依次增大, 在我们比赛的任务中, 其实 n 和 s 就已经够用了。</p>
+<p>此外, 还有很多提高推理速度的方法, 比如 C++ 和 TensorRT 部署模型加速推理, 进行量化处理等等, 记得在先进视觉比赛用过 TensorRT 部署, 但是模型转化后的识别效果直接砍了一半, 也可能是部署做法上有些细节没做到位, 值得研究的内容。</p>
+<h1 id="题外话"><a href="#题外话" class="headerlink" title="题外话"></a>题外话</h1><h3 id="ros如何在a功能包中使用b功能包定义的数据类型"><a href="#ros如何在a功能包中使用b功能包定义的数据类型" class="headerlink" title="ros如何在a功能包中使用b功能包定义的数据类型"></a>ros如何在a功能包中使用b功能包定义的数据类型</h3><p>比如视觉自定义了一个消息类型传输结果内容，策略如何导入这个消息，以前一直在用<code>../../</code>什么的，当文件夹位置变化时需要修改，比较麻烦，建议用下面的方法，还可以防止<code>catkin_make</code>多线程编译报错</p>
+<p>1.在自己的功能包的 <code>CMakeLists.txt</code>添加对b包的依赖</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">find_package(catkin REQUIRED COMPONENTS</span><br><span class="line">  roscpp</span><br><span class="line">  rospy</span><br><span class="line">  std_msgs</span><br><span class="line">  b_package</span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2.在 <code>package.xml</code> 文件中添加对 b包的依赖。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;depend&gt;b_package&lt;/depend&gt;</span><br></pre></td></tr></table></figure>
+
+<p>3.导入头文件</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;b_package/YourMessageType.h&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> b_package.msg <span class="keyword">import</span> YourMessageType</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E8%A7%86%E8%A7%89/" rel="tag">视觉</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+    
+  <nav id="article-nav" data-aos="fade-up">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          
+          
+            <img data-src="/covers/45.jpg" data-sizes="auto" alt="稀疏平常的生活" class="lazyload">
+          
+        
+        <a href="/7777/07/07/diary/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            稀疏平常的生活
+          
+        </h3>
+      </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="https://s2.loli.net/2022/09/27/kRHy7SBqtUiLO6b.jpg" data-sizes="auto" alt="N100双网口小主机使用docker版openwrt做主路由（PPPoE拨号）超详细！！！！" class="lazyload">
+        
+      
+      <a href="/2024/04/11/25.N100_op/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          N100双网口小主机使用docker版openwrt做主路由（PPPoE拨号）超详细！！！！
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+  
+</article>
+
+
+
+
+
+  <div id="comments" class="gscomment giscus" data-aos="fade-up"></div>
+
+
+</section>
+          
+            <aside id="sidebar">
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%86%E5%88%AB%E5%9C%86"><span class="toc-number">2.</span> <span class="toc-text">识别圆</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E6%B3%95"><span class="toc-number">2.0.1.</span> <span class="toc-text">算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E5%AE%9A"><span class="toc-number">2.0.2.</span> <span class="toc-text">标定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E6%9C%BA%E5%86%85%E5%8F%82%E4%BD%BF%E7%94%A8"><span class="toc-number">2.0.3.</span> <span class="toc-text">相机内参使用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#YOLO"><span class="toc-number">3.</span> <span class="toc-text">YOLO</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80"><span class="toc-number">3.0.1.</span> <span class="toc-text">方法一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C"><span class="toc-number">3.0.2.</span> <span class="toc-text">方法二</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%8D%E4%BD%8E%E5%BC%80%E9%94%80"><span class="toc-number">4.</span> <span class="toc-text">降低开销</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E7%BB%9F%E8%A7%86%E8%A7%89%E7%AE%97%E6%B3%95"><span class="toc-number">4.0.1.</span> <span class="toc-text">传统视觉算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B"><span class="toc-number">4.0.2.</span> <span class="toc-text">神经网络模型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%98%E5%A4%96%E8%AF%9D"><span class="toc-number">5.</span> <span class="toc-text">题外话</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ros%E5%A6%82%E4%BD%95%E5%9C%A8a%E5%8A%9F%E8%83%BD%E5%8C%85%E4%B8%AD%E4%BD%BF%E7%94%A8b%E5%8A%9F%E8%83%BD%E5%8C%85%E5%AE%9A%E4%B9%89%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">5.0.1.</span> <span class="toc-text">ros如何在a功能包中使用b功能包定义的数据类型</span></a></li></ol></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="qllokirin" class="lazyload">
+  <div class="sidebar-author-name">qllokirin</div>
+  <div class="sidebar-description">~\(≧▽≦)/~</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">25</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">5</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">28</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">首页</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">归档</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">关于</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">友链</div>
+    </div>
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  
+</aside>
+
+          
+        </div>
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2024
+      <span class="footer-info-sep"></span>
+      qllokirin
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        43.5k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        02:39
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        <div class="sidebar-top">
+          <img src="/images/taichi.png" height="50" width="50" alt="backtop" />
+          <div class="arrow-up"></div>
+        </div>
+        <div id="mask"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%86%E5%88%AB%E5%9C%86"><span class="toc-number">2.</span> <span class="toc-text">识别圆</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AE%97%E6%B3%95"><span class="toc-number">2.0.1.</span> <span class="toc-text">算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E5%AE%9A"><span class="toc-number">2.0.2.</span> <span class="toc-text">标定</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E6%9C%BA%E5%86%85%E5%8F%82%E4%BD%BF%E7%94%A8"><span class="toc-number">2.0.3.</span> <span class="toc-text">相机内参使用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#YOLO"><span class="toc-number">3.</span> <span class="toc-text">YOLO</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80"><span class="toc-number">3.0.1.</span> <span class="toc-text">方法一</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C"><span class="toc-number">3.0.2.</span> <span class="toc-text">方法二</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%99%8D%E4%BD%8E%E5%BC%80%E9%94%80"><span class="toc-number">4.</span> <span class="toc-text">降低开销</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E7%BB%9F%E8%A7%86%E8%A7%89%E7%AE%97%E6%B3%95"><span class="toc-number">4.0.1.</span> <span class="toc-text">传统视觉算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B"><span class="toc-number">4.0.2.</span> <span class="toc-text">神经网络模型</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%A2%98%E5%A4%96%E8%AF%9D"><span class="toc-number">5.</span> <span class="toc-text">题外话</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ros%E5%A6%82%E4%BD%95%E5%9C%A8a%E5%8A%9F%E8%83%BD%E5%8C%85%E4%B8%AD%E4%BD%BF%E7%94%A8b%E5%8A%9F%E8%83%BD%E5%8C%85%E5%AE%9A%E4%B9%89%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">5.0.1.</span> <span class="toc-text">ros如何在a功能包中使用b功能包定义的数据类型</span></a></li></ol></li></ol></li></ol>
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="qllokirin" class="lazyload">
+  <div class="sidebar-author-name">qllokirin</div>
+  <div class="sidebar-description">~\(≧▽≦)/~</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">25</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">5</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">28</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">首页</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">归档</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">关于</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">友链</div>
+    </div>
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    
+      <div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div class="reimu-search-input" id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png"/>
+        </div>
+      </div>
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+<script type="module" data-pjax>
+  import PhotoSwipeLightbox from "https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js";
+  
+  const pswp = () => {
+    if (_$$('.article-entry a.article-gallery-item').length > 0) {
+      new PhotoSwipeLightbox({
+        gallery: '.article-entry',
+        children: 'a.article-gallery-item',
+        pswpModule: () => import("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js")
+      }).init();
+    }
+    if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+      new PhotoSwipeLightbox({
+        gallery: '.article-gallery',
+        children: 'a.article-gallery-item',
+        pswpModule: () => import("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js")
+      }).init();
+    }
+    window.lightboxStatus = 'done';
+    window.removeEventListener('lightbox:ready', pswp);
+  }
+  if(window.lightboxStatus === 'ready') {
+    pswp()
+  } else {
+    window.addEventListener('lightbox:ready', pswp);
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  <script data-pjax>
+    var giscusContainer = document.querySelector('.giscus');
+    if (giscusContainer) {
+      const giscusScript = document.createElement('script');
+      giscusScript.src = 'https://giscus.app/client.js';
+      giscusScript.setAttribute('data-repo', 'qllokirin/hexo_blog_comments');
+      giscusScript.setAttribute('data-repo-id', 'R_kgDOI8fvWA');
+      giscusScript.setAttribute('data-category', 'Announcements'); 
+      giscusScript.setAttribute('data-category-id', 'DIC_kwDOI8fvWM4CUIlh');
+      giscusScript.setAttribute('data-mapping', '0');
+      giscusScript.setAttribute('data-strict', '0');
+      giscusScript.setAttribute('data-reactions-enabled', '1');
+      giscusScript.setAttribute('data-emit-metadata', '0');
+      giscusScript.setAttribute('data-input-position', 'bottom');
+      giscusScript.setAttribute('data-theme', 'preferred_color_scheme');
+      giscusScript.setAttribute('data-lang', 'zh-CN');
+      giscusScript.setAttribute('crossorigin', 'anonymous');
+      giscusScript.async = true;
+      giscusContainer.appendChild(giscusScript);
+    }
+  </script>
+
+
+
+  
+<script src="/js/generator_search.js" defer></script>
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.4/dist/index.umd.js"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#66ccff","#99e0ff","#ccefff","#e6f7ff"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#0099cc"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/quicklink@2.3.0/dist/quicklink.umd.js"></script>
+
+  <script data-pjax>
+    window.quicklink?.listen({
+      timeout: 3000,
+      priority: true,
+      ignores: []
+    });
+  </script>
+
+
+<div id="lazy-script">
+  <div>
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #66ccff;')
+    console.log('%c Theme.Reimu v' + '0.3.3' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #66ccff; padding:5px 0;', 'padding:4px;border:1px solid #66ccff;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+  <!-- hexo injector body_end start -->
+<script src="/js/insert_highlight.js" data-pjax></script>
+<!-- hexo injector body_end end --></body>
+  </html>
+

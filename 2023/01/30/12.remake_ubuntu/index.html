@@ -14,7 +14,7 @@
   
   
   <title>
-    重装Ubuntu |
+    ubuntu使用&amp;重装Ubuntu |
     
     qllokirin
   </title>
@@ -29,22 +29,23 @@
 
   
   
-    <meta name="description" content="简简单单重装一下">
+    <meta name="description" content="浅浅记录个人使用ubuntu所遇之事">
 <meta property="og:type" content="article">
-<meta property="og:title" content="重装Ubuntu">
+<meta property="og:title" content="ubuntu使用&amp;重装Ubuntu">
 <meta property="og:url" content="http://example.com/2023/01/30/12.remake_ubuntu/index.html">
 <meta property="og:site_name" content="qllokirin">
-<meta property="og:description" content="简简单单重装一下">
+<meta property="og:description" content="浅浅记录个人使用ubuntu所遇之事">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E7%94%BB%E9%9D%A2.png">
 <meta property="og:image" content="https://s2.loli.net/2023/01/28/k7SmWnJ3etpQiOV.png">
 <meta property="og:image" content="https://s2.loli.net/2023/01/29/EbYqw5DRXLVcpkl.png">
 <meta property="article:published_time" content="2023-01-30T13:55:39.000Z">
-<meta property="article:modified_time" content="2024-04-18T16:05:13.786Z">
+<meta property="article:modified_time" content="2024-12-06T09:53:01.022Z">
 <meta property="article:author" content="qllokirin">
 <meta property="article:tag" content="重装">
 <meta property="article:tag" content="Ubuntu">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s2.loli.net/2023/01/28/k7SmWnJ3etpQiOV.png">
+<meta name="twitter:image" content="http://example.com/images/%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E7%94%BB%E9%9D%A2.png">
   
   
     <link rel="alternate" href="/atom.xml" title="qllokirin" type="application/atom+xml">
@@ -157,7 +158,7 @@
 <header id="header">
   
     
-      <img fetchpriority="high" src="/images/luo.png" alt="重装Ubuntu">
+      <img fetchpriority="high" src="/images/luo.png" alt="ubuntu使用&amp;重装Ubuntu">
     
   
   <div id="header-outer">
@@ -166,7 +167,7 @@
         
         
           <a href="/" id="logo">
-            <h1 data-aos="slide-up">重装Ubuntu</h1>
+            <h1 data-aos="slide-up">ubuntu使用&amp;重装Ubuntu</h1>
           </a>
         
       
@@ -188,7 +189,7 @@
       <div class="article-date">
   <a href="/2023/01/30/12.remake_ubuntu/" class="article-date-link" data-aos="zoom-in">
     <time datetime="2023-01-30T13:55:39.000Z" itemprop="datePublished">2023-01-30</time>
-    <time style="display: none;" id="post-update-time">2024-04-19</time>
+    <time style="display: none;" id="post-update-time">2024-12-06</time>
   </a>
 </div>
 
@@ -205,54 +206,74 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
       
-        <p>之前只分了120G，不太够，现在已经爆满了，只好重装一下</p>
+        <p>浅浅记录个人使用ubuntu所遇之事</p>
 <span id="more"></span>
 
-<p><img src="https://s2.loli.net/2023/01/28/k7SmWnJ3etpQiOV.png" alt="_H_X_2_K~W_1O_0Q___1_1X.png"></p>
-<div align="center">危</div>
-
-<h1 id="安装-x2F-卸载系统"><a href="#安装-x2F-卸载系统" class="headerlink" title="安装&#x2F;卸载系统"></a>安装&#x2F;卸载系统</h1><p>推荐这个<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1554y1n7zv">教程</a>，感觉讲的比较细致</p>
+<h1 id="ubuntu安装"><a href="#ubuntu安装" class="headerlink" title="ubuntu安装"></a>ubuntu安装</h1><p>安装的话大致流程就是</p>
+<p>在Windows下分盘-&gt;制作启动盘-&gt;u盘启动安装-&gt;下一步下一步下一步（可能分盘会麻烦一点，但是可以只分一个&#x2F;</p>
+<p>推荐这个<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1554y1n7zv">教程</a>，感觉讲的比较细致</p>
 <blockquote>
+<p>单Ubuntu分两个区 一个500MB的efi区 剩下的全部给<code>/</code></p>
+<p>双系统新装Ubuntu直接一个<code>/</code></p>
 <p>想扩容一下的，发现可压缩空间比空闲内存小的多，按照<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV12L4y1A72s">这个</a>评论区置顶操作一下就好了</p>
 </blockquote>
-<h1 id="初期准备"><a href="#初期准备" class="headerlink" title="初期准备"></a>初期准备</h1><ul>
-<li><p>换源 更新源</p>
+<h1 id="安装完之后马上要做的事"><a href="#安装完之后马上要做的事" class="headerlink" title="安装完之后马上要做的事"></a>安装完之后马上要做的事</h1><ul>
+<li><p><strong>网卡</strong>  检测网卡是否正常，如果可以直接开始上网，那就是非常的不戳</p>
+<p>有可能开机之后没有wifi选项，解决办法是：先连网线或者手机usb数据共享，换源然后<code>sudo apt update</code>和<code>sudo apt upgrade</code>，如果还是不行就去网上源码编译一下网卡驱动（去windows下面找到自己的网卡型号然后去搜一搜）就ok了</p>
+<p>但是不排除究极螃蟹网卡（对 我说的是mt7921 会时好时坏）最后我直接换了ax210</p>
+<p>又遇到一个逆天网卡AX101，Ubuntu22.04能有WiFi图标但有时能用有时不行，能用的时候带宽也只有50兆，感觉可能是网卡型号读错了然后不是很适配</p>
+<p>自己安装网卡驱动方法</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://www.intel.cn/content/www/cn/zh/support/articles/000005511/wireless.html">Intel官网</a>，确保内核版本大于要求版本，解压之后放入<code> /lib/firmware</code>即可</li>
+<li>更新内核，<a target="_blank" rel="noopener" href="https://wireless.wiki.kernel.org/en/users/Drivers/iwlwifi">这里</a>可以看到Intel网卡与内核版本的关系   <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/686362507">内核图形化更新方法</a></li>
+</ol>
+<p>AX211在<a target="_blank" rel="noopener" href="http://archive.ubuntu.com/ubuntu/pool/universe/b/backport-iwlwifi-dkms/">这里</a>下这个<code>backport-iwlwifi-dkms_9858-0ubuntu3_all.deb</code>，说实话很奇怪，不知道这个包是怎么来的干什么的</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/HRex39/rtl8852be">rtl8852be</a>的安装依赖如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install make gcc linux-headers-$(uname -r) build-essential git</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>显卡驱动   这次比较爽  我用的是提供的附加驱动  直接点一下安装就成功了</p>
-<blockquote>
-<p>不过我显卡那一直写的是off，不知道会不会有影响</p>
-</blockquote>
+<li><p><strong>换源</strong>  选择一个国内源安装软件会更快，在<code>软件更新</code>这个软件里点点就行&#x2F;命令行更换</p>
+<p>然后打开一个终端<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>T</kbd> ，输入<code>sudo apt update</code>和<code>sudo apt upgrade</code>更新源和更新软件</p>
 </li>
-<li><p>同步windows和Ubuntu时间</p>
+<li><p><del><strong>显卡驱动</strong></del>  (<strong>很容易给ubunut安装到打不开，不熟可先跳过</strong>)</p>
+<p>安装显卡驱动（如果有显卡的话），首选方法是在<code>软件更新</code>这个软件里面点一下安装，建议选择<strong>sever版本</strong></p>
+<ul>
+<li><p>如果重启电脑正常启动，那恭喜你非常的顺利</p>
+</li>
+<li><p>如果重启无法进入ubuntu，就在开机时候选第二个找一个恢复模式启动，再去<code>软件更新</code>里把显卡驱动卸载掉（点到最后一个就是卸载显卡驱动）</p>
+</li>
+<li><p>如果还是要装显卡驱动可以去官网下载，有一些二选一需要做，可以参考<a target="_blank" rel="noopener" href="https://qii404.me/2021/07/03/ubuntu-install-nvidia-driver.html">这篇文章</a>，不过我的<code>X configuration</code>那个必须选no才能安装成功</p>
+<p>但如果安装之后还是<strong>无法进入ubuntu</strong>，则需要开机选第二个然后选第一个再选root进入命令行找到显卡驱动文件执行<code>./xxxxx  --uninstall</code>进行卸载</p>
+</li>
+</ul>
+</li>
+<li><p><strong>同步windows和Ubuntu时间</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install ntpdate</span><br><span class="line">sudo ntpdate time.windows.com</span><br><span class="line">sudo hwclock --localtime --systohc</span><br></pre></td></tr></table></figure>
 
 <blockquote>
 <p>因为Ubuntu使用的是UTC机制，即把bios时间设置为格林尼治时间，显示时间时加八个小时<br>而Windows的bios和显示保持一致，所以会差八小时</p>
 </blockquote>
 </li>
-<li><p>更改默认启动项（可选）</p>
+<li><p><strong>更改默认启动项（可选）</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo gedit /etc/default/grub</span><br><span class="line"><span class="comment"># 修改GRUB_DEFAULT=</span></span><br><span class="line"><span class="comment"># 0代表第一个 windows一般在2</span></span><br><span class="line">sudo update-grub</span><br></pre></td></tr></table></figure></li>
 </ul>
-<h1 id="软件推荐"><a href="#软件推荐" class="headerlink" title="软件推荐"></a>软件推荐</h1><ul>
-<li><p><a target="_blank" rel="noopener" href="http://shurufa.sogou.com/linux"><strong>搜狗输入法</strong></a></p>
-<p>值得注意的是 如果你选的是英文界面（系统）设置的region&amp; language界面中  manage install language上面要只留下Chinese才能使用搜狗 ，别问 问就是捯饬了半天才试出来</p>
+<h1 id="非常好用的工具"><a href="#非常好用的工具" class="headerlink" title="非常好用的工具"></a>非常好用的工具</h1><ul>
+<li><p><strong><a target="_blank" rel="noopener" href="https://www.google.com/">谷歌搜索引擎</a></strong></p>
+<p>谷歌搜索引擎用多了只会觉得百度很垃（</p>
+<p>没有梯子时建议使用必应</p>
 </li>
-<li><p><strong><a target="_blank" rel="noopener" href="https://www.google.cn/chrome/?hl=zh-CN&standalone=1">谷歌浏览器</a></strong></p>
+<li><p><a target="_blank" rel="noopener" href="https://www.jetbrains.com/clion/download/#section=linux"><strong>clion编译器</strong></a></p>
+<p>好用且配置方便，<del>爆杀vscode</del>（先选三十天试用，学生可以通过学信网认证免费使用</p>
+<p><code>sudo snap install clion --classic</code>直接安装，然后输入<code>clion</code>运行即可</p>
+<blockquote>
+<p>如果是下载的压缩包，则需运行里面的clion.sh脚本</p>
+<p>在.bashrc&#x2F;.zshrc中写入<code>alias clion=xxx/bin/clion.sh</code> 之后就也可以输入clion命令打开了</p>
+</blockquote>
 </li>
-<li><p><strong><a target="_blank" rel="noopener" href="https://github.com/Fndroid/clash_for_windows_pkg/releases">clash</a></strong></p>
-<p>梯子必须火速安排上，然后登录谷歌账号，一同步 爽</p>
+<li><p><strong>输入法</strong></p>
+<p>首推还是<a target="_blank" rel="noopener" href="https://shurufa.sogou.com/linux?r=pinyin">搜狗</a>，词库雀食是强大的  如果无法使用可以安装ibus的输出法，一定不会报错</p>
+<p>值得注意的是 如果你选的是英文界面（系统）设置的region&amp; language界面中  manage install language上面要<strong>只留下Chinese</strong>才能使用搜狗 ，别问 问就是捯饬了半天才试出来</p>
 </li>
-<li><p><strong><a target="_blank" rel="noopener" href="https://telegram.org/">telegram</a></strong></p>
-</li>
-<li><p>clion</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo snap install clion --classic</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong><a target="_blank" rel="noopener" href="https://downloads.nomachine.com/linux/?id=1">nomachine</a></strong></p>
-</li>
-<li><p><strong><a target="_blank" rel="noopener" href="https://blog.zzsqwq.cn/posts/141/">ubuntu优化</a></strong></p>
-<p>战老师yyds！</p>
-</li>
-<li><p>zsh</p>
+<li><p><strong>zsh</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install git zsh curl</span><br><span class="line">sh -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)</span>&quot;</span></span><br><span class="line"><span class="comment"># 切换 重启之后生效</span></span><br><span class="line">chsh -s /bin/zsh</span><br><span class="line"><span class="comment"># 自动补全插件</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-autosuggestions <span class="variable">$&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;</span>/plugins/zsh-autosuggestions</span><br><span class="line"><span class="comment"># 语法高亮</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/zsh-users/zsh-syntax-highlighting.git <span class="variable">$&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;</span>/plugins/zsh-syntax-highlighting</span><br><span class="line"><span class="comment"># 进.zshrc改为</span></span><br><span class="line"><span class="comment"># plugins=(git zsh-syntax-highlighting zsh-autosuggestions)</span></span><br></pre></td></tr></table></figure>
 
 <p>主题agnoster简洁不用安装，直接修改<code>.zshrc</code>即可</p>
@@ -262,45 +283,82 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> --depth=1 https://gitee.com/romkatv/powerlevel10k.git <span class="variable">$&#123;ZSH_CUSTOM:-<span class="variable">$HOME</span>/.oh-my-zsh/custom&#125;</span>/themes/powerlevel10k</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZSH_THEME=&quot;powerlevel10k/powerlevel10k&quot;</span><br></pre></td></tr></table></figure>
-
 </li>
-<li><p><a target="_blank" rel="noopener" href="https://mirrors.bfsu.edu.cn/anaconda/archive/">conda</a></p>
+<li><p><strong><a target="_blank" rel="noopener" href="https://mirrors.bfsu.edu.cn/anaconda/archive/">conda</a></strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://mirrors.bfsu.edu.cn/anaconda/archive/Anaconda3-2022.10-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>似乎使用miniconda更加河里</p>
-</blockquote>
 </li>
-<li><p>typora我发现<a target="_blank" rel="noopener" href="https://typora.io/releases/all">下载1.0</a>版本的也不会弹出收费推荐，舒服</p>
+<li><p><strong>typora</strong></p>
+<p>我发现<a target="_blank" rel="noopener" href="https://typora.io/releases/all">下载1.0</a>版本的也不会弹出收费推荐，舒服</p>
 <p>这还有篇文章给了<a target="_blank" rel="noopener" href="https://k0tk0t.github.io/2021/03/31/%E5%9C%A8Ubuntu%E4%B8%8A%E5%AE%89%E8%A3%85Typora/">0.9版本</a>的哈哈</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://download.typora.io/linux/typora_1.0.3_amd64.deb</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><strong><a target="_blank" rel="noopener" href="http://wiki.ros.org/cn/noetic/Installation/Ubuntu">ros-noetic</a></strong></p>
-</li>
-<li><p><strong><a target="_blank" rel="noopener" href="https://yeasy.gitbook.io/docker_practice/install/ubuntu">docker</a></strong></p>
-</li>
-<li><p><strong><a target="_blank" rel="noopener" href="https://www.realvnc.com/en/connect/download/viewer/">vnc</a></strong></p>
-<blockquote>
-<p>主要是为了easyconnect的<a target="_blank" rel="noopener" href="https://github.com/Hagb/docker-easyconnect">docker版</a>的使用</p>
-</blockquote>
+<li><p><strong>神——<a target="_blank" rel="noopener" href="https://yeasy.gitbook.io/docker_practice/install/ubuntu">docker</a></strong></p>
 </li>
 <li><p><strong>命令行走代理</strong>——<a target="_blank" rel="noopener" href="https://m-ouse.github.io/post/proxychains%E9%85%8D%E7%BD%AE/"><strong>proxychains</strong></a></p>
 </li>
-<li><p><strong>截屏软件</strong>——火狐截屏</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install flameshot</span><br></pre></td></tr></table></figure>
-
-<p>设置-&gt;Keyboard Shortcuts-&gt;最下面新建一个快捷键，command填<code>flameshot gui</code></p>
-</li>
 <li><p><strong>录屏软件</strong>——kamaz</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install kazam</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install kazam</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong><a target="_blank" rel="noopener" href="https://blog.zzsqwq.cn/posts/141/">ubuntu优化</a></strong></p>
+<p>战老师yyds！</p>
+<blockquote>
+<p>可以设置主题+图标+开机启动项背景+鼠标样式等</p>
+<p>我用的是</p>
+<p>应用程序 Orchis-Green-Light</p>
+<p>光标 Nordic-cursors            </p>
+<p>图标 Zafiro-icons-Light-Blue-f</p>
+<p>shell WhiteSur-light</p>
+<p>开机启动选项 Hoshimati_Suisei_motify</p>
+<p>然后自己魔改了张开机启动背景</p>
+</blockquote>
+<p><img src="/images/%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E7%94%BB%E9%9D%A2.png"></p>
+</li>
 </ul>
+<hr>
+<p>选择性安装软件</p>
+<ul>
+<li><p><strong>ros（不是</strong></p>
+<p>做机器人相关项目才会需要</p>
+<blockquote>
+<p>要不什么时候写个<a target="_blank" rel="noopener" href="https://70lokirin.github.io/2022/10/17/ros/">教程</a>？</p>
+</blockquote>
+</li>
+<li><p><strong><a target="_blank" rel="noopener" href="https://downloads.nomachine.com/linux/?id=1">nomachine</a></strong></p>
+<p>远程桌面链接软件，配合3.5元的HDMI欺诈器能很好的图形化控制nuc等上位机</p>
+<blockquote>
+<p>记得选下面的x86&#x2F;adm64即<strong>64位</strong>的软件，上面是32位</p>
+</blockquote>
+<p><strong>如果不是无网络局域网，感觉不如ToDesk或者向日葵</strong></p>
+</li>
+<li><p><strong><a target="_blank" rel="noopener" href="https://blog.csdn.net/yaxuan88521/article/details/118481936">scp</a></strong></p>
+<p>对远端服务器直接进行复制粘贴</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r -P 316 ./xxx root@xx.xx.xx.xx:/home/xx</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h1 id="可能会遇到的问题"><a href="#可能会遇到的问题" class="headerlink" title="可能会遇到的问题"></a>可能会遇到的问题</h1><ul>
+<li><p><strong>GitHub sshkey怎么生成都是鉴权失败</strong></p>
+<p>可能是端口问题：<a target="_blank" rel="noopener" href="https://blog.csdn.net/alex_my/article/details/89336493">https://blog.csdn.net/alex_my/article/details/89336493</a></p>
+<blockquote>
+<p>基地的wifi有代理 部分机场会ban22端口（防ddos） 所以会鉴权失败</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gedit ~/.ssh/config</span><br><span class="line"><span class="comment"># 填入如下内容</span></span><br><span class="line">Host github.com</span><br><span class="line">Hostname ssh.github.com</span><br><span class="line">Port 443</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>usb端口突然没有，比如&#x2F;dev&#x2F;video0（笔记本相机）端口没有了</strong></p>
+<p>进入bios关闭<strong>Secure boot</strong>即可</p>
+<blockquote>
+<p>虽然你可能会说你肯定之前关闭了，但你再看一眼，就会发现很神奇的是enable</p>
+</blockquote>
+</li>
+<li><p><strong>ros拥有多个工作空间，在<code>.bashrc</code>中写了source但是没有用</strong></p>
+<p>source需要按照工作空间创建顺序进行source</p>
+<p><del>在每一次source之后都加入–extend</del> <strong>千万不要在后面加extend</strong> 虽然source的时候是觉得方便了，但是你如果想通过取消掉这个source，可不只是简单的注释就行了</p>
+</li>
+</ul>
+<p><img src="https://s2.loli.net/2023/01/28/k7SmWnJ3etpQiOV.png" alt="_H_X_2_K~W_1O_0Q___1_1X.png"></p>
+<div align="center">危</div>
+
+<p>一波简简单单的重装</p>
 <p><img src="https://s2.loli.net/2023/01/29/EbYqw5DRXLVcpkl.png" alt="653a9e7181c31465875b376e1949932b.png"></p>
 <div align="center">舒服了</div>
-
-<p>感觉可以再整个windows软件推荐？</p>
-<blockquote>
-<p>磁铁美化<br>底部栏透明<br>geek<br>spacesniffer<br>diskgenius<br>qbittorrent<br>potplayer<br>Linux Reader<br>BBdown</p>
-</blockquote>
 
       
     </div>
@@ -326,7 +384,7 @@
         
           
           
-            <img data-src="/covers/tg_16.jpg" data-sizes="auto" alt="第一次去livehouse" class="lazyload">
+            <img data-src="/covers/tg_5.jpg" data-sizes="auto" alt="第一次去livehouse" class="lazyload">
           
         
         <a href="/2023/02/05/13.shuangsheng/"></a>
@@ -343,7 +401,7 @@
       
         
         
-          <img data-src="/covers/tg_5.jpg" data-sizes="auto" alt="docker学习" class="lazyload">
+          <img data-src="/covers/39.jpg" data-sizes="auto" alt="docker学习" class="lazyload">
         
       
       <a href="/2023/01/09/11.docker/"></a>
@@ -378,7 +436,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-x2F-%E5%8D%B8%E8%BD%BD%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.</span> <span class="toc-text">安装&#x2F;卸载系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="toc-number">2.</span> <span class="toc-text">初期准备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90"><span class="toc-number">3.</span> <span class="toc-text">软件推荐</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ubuntu%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">ubuntu安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%AE%8C%E4%B9%8B%E5%90%8E%E9%A9%AC%E4%B8%8A%E8%A6%81%E5%81%9A%E7%9A%84%E4%BA%8B"><span class="toc-number">2.</span> <span class="toc-text">安装完之后马上要做的事</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%9E%E5%B8%B8%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7"><span class="toc-number">3.</span> <span class="toc-text">非常好用的工具</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%AF%E8%83%BD%E4%BC%9A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text">可能会遇到的问题</span></a></li></ol>
       
   </div>
 </div>
@@ -391,7 +449,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">27</div>
+    <div class="sidebar-state-number">25</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -399,7 +457,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">31</div>
+    <div class="sidebar-state-number">28</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -469,10 +527,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        45.6k
+        43.5k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        02:45
+        02:39
       </div>
     
     
@@ -502,7 +560,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-x2F-%E5%8D%B8%E8%BD%BD%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.</span> <span class="toc-text">安装&#x2F;卸载系统</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%88%9D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="toc-number">2.</span> <span class="toc-text">初期准备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E6%8E%A8%E8%8D%90"><span class="toc-number">3.</span> <span class="toc-text">软件推荐</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ubuntu%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">ubuntu安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E5%AE%8C%E4%B9%8B%E5%90%8E%E9%A9%AC%E4%B8%8A%E8%A6%81%E5%81%9A%E7%9A%84%E4%BA%8B"><span class="toc-number">2.</span> <span class="toc-text">安装完之后马上要做的事</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%9E%E5%B8%B8%E5%A5%BD%E7%94%A8%E7%9A%84%E5%B7%A5%E5%85%B7"><span class="toc-number">3.</span> <span class="toc-text">非常好用的工具</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%AF%E8%83%BD%E4%BC%9A%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text">可能会遇到的问题</span></a></li></ol>
       
   </div>
 </div>
@@ -515,7 +573,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">27</div>
+    <div class="sidebar-state-number">25</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -523,7 +581,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">31</div>
+    <div class="sidebar-state-number">28</div>
   </div>
 </div>
 <div class="sidebar-social">
