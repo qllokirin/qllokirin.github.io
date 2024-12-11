@@ -38,7 +38,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2023/06/23/fJ7PaKn3ArSM8xg.png">
 <meta property="article:published_time" content="2023-06-23T05:59:35.000Z">
-<meta property="article:modified_time" content="2024-03-19T08:07:04.327Z">
+<meta property="article:modified_time" content="2024-12-11T11:49:48.887Z">
 <meta property="article:author" content="qllokirin">
 <meta property="article:tag" content="记录">
 <meta name="twitter:card" content="summary">
@@ -186,7 +186,7 @@
       <div class="article-date">
   <a href="/2023/06/23/19.img/" class="article-date-link" data-aos="zoom-in">
     <time datetime="2023-06-23T05:59:35.000Z" itemprop="datePublished">2023-06-23</time>
-    <time style="display: none;" id="post-update-time">2024-03-19</time>
+    <time style="display: none;" id="post-update-time">2024-12-11</time>
   </a>
 </div>
 
@@ -254,11 +254,16 @@
 <p>此外如果使用 jetson 的 emmc + ssd 的组合，向 ssd 中烧录镜像后需要将 emmc 也烧录一个与保存镜像那个 ssd 对应的 emmc 版本，核心版本一样</p>
 <h1 id="近期遇到的一个问题"><a href="#近期遇到的一个问题" class="headerlink" title="近期遇到的一个问题"></a>近期遇到的一个问题</h1><p>由于某些情况我得到了一份 sd 卡的镜像，是 <code>xxx.gz</code>，我需要查看里面的内容，但是我手里没有 sd 卡，无法烧录，但是镜像是可以挂在的，所以我现将这个压缩包解压得到一个 120g 的无后缀名文件，我兴高采烈的一手双击，提示没有选择打开方式，我反手改后缀名为 img，我心想就这，不是轻松解决，但是他提示：<code>Cannot mount block device /dev/loop read-only</code>，搜索到相关问题是<a target="_blank" rel="noopener" href="https://serverfault.com/questions/839898/cannot-mount-block-device-dev-loop-read-only?newreg=a92584edac764f9b97f9a65c41592794">这个</a>，但报错还是一样</p>
 <p>其实一般情况下 .img&#x2F;iso 镜像应该是可以直接双击挂载的，不知道这个为什么不行，接下来我的搜索关键词一直是<strong>挂载 镜像</strong>，试了半天最后看了一眼标题，<strong>Ubuntu挂载ISO文件</strong>，我再看了一眼 dd 制作的镜像，g，原来是 img，加上关键词 img，很容易搜到<a target="_blank" rel="noopener" href="https://zhou-yuxin.github.io/articles/2015/Linux%E6%8C%82%E8%BD%BDimg%E7%A3%81%E7%9B%98%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6/index.html">这篇文章</a>，原来主要是要指定 offset 的值，不过也好，解决了就行</p>
+<h1 id="使用再生龙PE系统进行烧录"><a href="#使用再生龙PE系统进行烧录" class="headerlink" title="使用再生龙PE系统进行烧录"></a>使用再生龙PE系统进行烧录</h1><p>当硬盘总体积小时，可以用上面的方法将镜像全部打包，然后用dd烧录；或者逐个分区进行烧录（或许还要修分区表什么的？未尝试过）但如果镜像比目标硬盘大或者整体大小偏大，使用再生龙进行烧录是个不错的选择，一个安装了基础ros px4环境的镜像只有4g左右，烧录起来也十分的快。</p>
+<p>下载再生龙镜像：<a target="_blank" rel="noopener" href="https://clonezilla.nchc.org.tw/clonezilla-live/download/">https://clonezilla.nchc.org.tw/clonezilla-live/download/</a></p>
+<p>烧录进行推荐使用<a target="_blank" rel="noopener" href="https://etcher.balena.io/">balenaEtcher</a>或者ventoy</p>
+<p>再生龙有device-device和device-image等众多模式，可以把硬盘系统保存到镜像文件、把镜像烧录到新硬盘中，操作和普通pe差不多，说明非常详细</p>
+<p>如果要将一个系统进行打包，ubuntu的话使用系统自带的disks调整硬盘空间，把没有使用的空间都变为free space，这将直接决定到打包后的镜像到底能刷入多大的硬盘之中，只能大于等于已经使用过的分区。所以如果你有一个1t的ubuntu，把不用的空间压缩打包， 是可以刷入一个512甚至256的硬盘中的</p>
 <blockquote>
-<p>此外说说最近找到的有点用的东西</p>
-<p>一个是 ssh 链接客户端：<a target="_blank" rel="noopener" href="https://termius.com/">termius</a>，只能说这个ui真的是太舒服了，以前都是靠 zsh 记忆或者 Windows 下就用 Xshell，或者 finalshell（Ubuntu 或者 Windows 都可以，就是ui比较简陋），付费功能可以用学生认证代替付费，可以先认证 github 的学生身份，不过那个有点坑，交了好几次照片，最后是把录取通知书、一卡通、一张小纸条（写 My github’s name is qllokirin）才通过</p>
-<p>另外一个是百度网盘不限速：<a target="_blank" rel="noopener" href="https://wiki.tttt.ee/wiki/wyb.html">TT快下</a> 2023.6.20 仍有效，直接冲到我带宽上限50 了，你说为什么只有 50 ？，哈哈，校园网，懂得都懂</p>
+<p>ubuntu自己不能操作自己的分区，因为正在被使用，windwos操作不用ubuntu的分区，因为会报错</p>
+<p>所以只能用启动盘使用try ubuntu进行操作，或者把要操作的硬盘外接入另一个ubuntu中</p>
 </blockquote>
+<p>打包好镜像后，烧录的时候值得注意的一点是（我使用的是还原镜像文件到本机硬盘，还原到分区我没有使用过），有一个k0和k1模式，k0是一比一等比克隆，也就是如果本来的镜像（指去除free space的大小，而非硬盘大小）只占用200g内存，复制完也会只有200g，多的就是free space；k1的话就会自动扩充free space，把free space纳入<code>/</code>分区，非常好用</p>
 
       
     </div>
@@ -284,7 +289,7 @@
         
           
           
-            <img data-src="/covers/wallhaven-4oy1rp.jpg" data-sizes="auto" alt="第一次自组机！" class="lazyload">
+            <img data-src="/covers/1.jpg" data-sizes="auto" alt="第一次自组机！" class="lazyload">
           
         
         <a href="/2023/08/14/20.new_computer/"></a>
@@ -301,7 +306,7 @@
       
         
         
-          <img data-src="/covers/31.jpg" data-sizes="auto" alt="对 ROS 中 callback 机制进行一点探索" class="lazyload">
+          <img data-src="/covers/tg3.jpg" data-sizes="auto" alt="对 ROS 中 callback 机制进行一点探索" class="lazyload">
         
       
       <a href="/2023/06/09/17.callback/"></a>
@@ -336,7 +341,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8dd%E8%BF%9B%E8%A1%8C%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">使用dd进行镜像制作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8dd%E7%83%A7%E5%86%99%E9%95%9C%E5%83%8F"><span class="toc-number">3.</span> <span class="toc-text">使用dd烧写镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%91%E6%9C%9F%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text">近期遇到的一个问题</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8dd%E8%BF%9B%E8%A1%8C%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">使用dd进行镜像制作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8dd%E7%83%A7%E5%86%99%E9%95%9C%E5%83%8F"><span class="toc-number">3.</span> <span class="toc-text">使用dd烧写镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%91%E6%9C%9F%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text">近期遇到的一个问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%86%8D%E7%94%9F%E9%BE%99PE%E7%B3%BB%E7%BB%9F%E8%BF%9B%E8%A1%8C%E7%83%A7%E5%BD%95"><span class="toc-number">5.</span> <span class="toc-text">使用再生龙PE系统进行烧录</span></a></li></ol>
       
   </div>
 </div>
@@ -427,10 +432,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        43.4k
+        43.8k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        02:38
+        02:39
       </div>
     
     
@@ -460,7 +465,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8dd%E8%BF%9B%E8%A1%8C%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">使用dd进行镜像制作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8dd%E7%83%A7%E5%86%99%E9%95%9C%E5%83%8F"><span class="toc-number">3.</span> <span class="toc-text">使用dd烧写镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%91%E6%9C%9F%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text">近期遇到的一个问题</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8dd%E8%BF%9B%E8%A1%8C%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">使用dd进行镜像制作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8dd%E7%83%A7%E5%86%99%E9%95%9C%E5%83%8F"><span class="toc-number">3.</span> <span class="toc-text">使用dd烧写镜像</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%91%E6%9C%9F%E9%81%87%E5%88%B0%E7%9A%84%E4%B8%80%E4%B8%AA%E9%97%AE%E9%A2%98"><span class="toc-number">4.</span> <span class="toc-text">近期遇到的一个问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%86%8D%E7%94%9F%E9%BE%99PE%E7%B3%BB%E7%BB%9F%E8%BF%9B%E8%A1%8C%E7%83%A7%E5%BD%95"><span class="toc-number">5.</span> <span class="toc-text">使用再生龙PE系统进行烧录</span></a></li></ol>
       
   </div>
 </div>

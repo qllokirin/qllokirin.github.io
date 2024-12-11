@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-12-07T03:34:03.742Z</updated>
+  <updated>2024-12-10T08:55:15.136Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://example.com/7777/07/07/diary/"/>
     <id>http://example.com/7777/07/07/diary/</id>
     <published>7777-07-06T23:07:07.000Z</published>
-    <updated>2024-12-07T03:34:03.742Z</updated>
+    <updated>2024-12-10T08:55:15.136Z</updated>
     
     
     <summary type="html">我们所经历的日常..</summary>
@@ -175,7 +175,7 @@
     <link href="http://example.com/2023/06/23/19.img/"/>
     <id>http://example.com/2023/06/23/19.img/</id>
     <published>2023-06-23T05:59:35.000Z</published>
-    <updated>2024-03-19T08:07:04.327Z</updated>
+    <updated>2024-12-11T11:49:48.887Z</updated>
     
     
     <summary type="html">之前有制作也有烧录过 nano 的镜像，这次又遇到了一个相关的问题，费了点时间解决了，小做记录</summary>
