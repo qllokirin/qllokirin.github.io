@@ -55,6 +55,27 @@
   </entry>
   
   <entry>
+    <title>小米root与钉钉虚拟打卡记录</title>
+    <link href="http://example.com/2024/08/05/27.xiaomi_root/"/>
+    <id>http://example.com/2024/08/05/27.xiaomi_root/</id>
+    <published>2024-08-05T10:56:49.000Z</published>
+    <updated>2024-12-17T16:56:10.621Z</updated>
+    
+    
+    <summary type="html">玩玩借来的旧手机，好玩，爱玩！</summary>
+    
+    
+    
+    <category term="记录" scheme="http://example.com/categories/%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="小米root" scheme="http://example.com/tags/%E5%B0%8F%E7%B1%B3root/"/>
+    
+    <category term="Fake Location" scheme="http://example.com/tags/Fake-Location/"/>
+    
+  </entry>
+  
+  <entry>
     <title>N100双网口小主机使用docker版openwrt做主路由（PPPoE拨号）超详细！！！！</title>
     <link href="http://example.com/2024/04/11/25.N100_op/"/>
     <id>http://example.com/2024/04/11/25.N100_op/</id>
@@ -390,25 +411,6 @@
     
     
     <category term="无人机组装" scheme="http://example.com/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA%E7%BB%84%E8%A3%85/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ubuntu20.04安装PX4</title>
-    <link href="http://example.com/2022/11/20/07.px4-autopilot/"/>
-    <id>http://example.com/2022/11/20/07.px4-autopilot/</id>
-    <published>2022-11-20T10:10:55.000Z</published>
-    <updated>2024-12-06T09:52:38.653Z</updated>
-    
-    
-    <summary type="html">px4_firmware编译老报错，记录一下遇到的问题</summary>
-    
-    
-    
-    <category term="教程" scheme="http://example.com/categories/%E6%95%99%E7%A8%8B/"/>
-    
-    
-    <category term="px4" scheme="http://example.com/tags/px4/"/>
     
   </entry>
   
