@@ -36,6 +36,27 @@
   </entry>
   
   <entry>
+    <title>小米root与钉钉虚拟打卡记录</title>
+    <link href="http://example.com/2024/11/05/27.xiaomi_root/"/>
+    <id>http://example.com/2024/11/05/27.xiaomi_root/</id>
+    <published>2024-11-05T10:56:49.000Z</published>
+    <updated>2024-12-17T17:06:46.620Z</updated>
+    
+    
+    <summary type="html">玩玩借来的旧手机，好玩，爱玩！</summary>
+    
+    
+    
+    <category term="记录" scheme="http://example.com/categories/%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="小米root" scheme="http://example.com/tags/%E5%B0%8F%E7%B1%B3root/"/>
+    
+    <category term="Fake Location" scheme="http://example.com/tags/Fake-Location/"/>
+    
+  </entry>
+  
+  <entry>
     <title>一些视觉代码使用的记录</title>
     <link href="http://example.com/2024/08/05/26.vison_note/"/>
     <id>http://example.com/2024/08/05/26.vison_note/</id>
@@ -51,27 +72,6 @@
     
     
     <category term="视觉" scheme="http://example.com/tags/%E8%A7%86%E8%A7%89/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>小米root与钉钉虚拟打卡记录</title>
-    <link href="http://example.com/2024/08/05/27.xiaomi_root/"/>
-    <id>http://example.com/2024/08/05/27.xiaomi_root/</id>
-    <published>2024-08-05T10:56:49.000Z</published>
-    <updated>2024-12-17T16:56:10.621Z</updated>
-    
-    
-    <summary type="html">玩玩借来的旧手机，好玩，爱玩！</summary>
-    
-    
-    
-    <category term="记录" scheme="http://example.com/categories/%E8%AE%B0%E5%BD%95/"/>
-    
-    
-    <category term="小米root" scheme="http://example.com/tags/%E5%B0%8F%E7%B1%B3root/"/>
-    
-    <category term="Fake Location" scheme="http://example.com/tags/Fake-Location/"/>
     
   </entry>
   
