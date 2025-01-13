@@ -1,0 +1,702 @@
+
+  <!DOCTYPE html>
+  <html lang="zh-CN"  >
+  <head>
+  <meta charset="utf-8">
+  
+
+  
+
+  
+
+  
+  <script>window.icon_font = '4552607_tq6stt6tcg';window.clipboard_tips = {"success":"复制成功～(∠・ω< )⌒☆","fail":"复制失败 (ﾟ⊿ﾟ)ﾂ","copyright":{"enable":false,"count":50,"content":"本文版权：本博客所有文章除特别声明外，均采用 BY-NC-SA 许可协议。转载请注明出处！"}};</script>
+  
+  
+  <title>
+    记一次家电自行参悟维修过程 |
+    
+    qllokirin
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin><link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Mulish:400,400italic,700,700italic%7CNoto%20Serif%20SC:400,400italic,700,700italic&display=swap" media="print" onload="this.media&#x3D;&#39;all&#39;">
+  
+    <link rel="preload" href="//at.alicdn.com/t/c/font_4552607_tq6stt6tcg.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  
+  
+    
+<link rel="stylesheet" href="/css/loader.css">
+
+  
+  
+    <meta name="description" content="主打一个参悟，电路理解全靠悟！（其实是靠纯猜x）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一次家电自行参悟维修过程">
+<meta property="og:url" content="http://example.com/2025/01/13/28.repair_electrical_appliances/index.html">
+<meta property="og:site_name" content="qllokirin">
+<meta property="og:description" content="主打一个参悟，电路理解全靠悟！（其实是靠纯猜x）">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2025/01/13/P4hCcAmxNwTiyFD.png">
+<meta property="og:image" content="https://s2.loli.net/2025/01/13/yZxIC9lBiJHprOk.png">
+<meta property="og:image" content="https://s2.loli.net/2025/01/13/P9akHpoNmcj1uBD.png">
+<meta property="og:image" content="https://s2.loli.net/2025/01/13/IXwf4aheNVR21sc.png">
+<meta property="og:image" content="https://s2.loli.net/2025/01/13/6ZTYePVExqB9R3k.png">
+<meta property="og:image" content="https://s2.loli.net/2025/01/13/uX1ez8ySDGPsxkf.png">
+<meta property="og:image" content="https://s2.loli.net/2025/01/13/HtyYT7PaO4dxhAs.png">
+<meta property="article:published_time" content="2025-01-13T10:56:49.000Z">
+<meta property="article:modified_time" content="2025-01-13T11:14:50.465Z">
+<meta property="article:author" content="qllokirin">
+<meta property="article:tag" content="维修">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2025/01/13/P4hCcAmxNwTiyFD.png">
+  
+  
+    <link rel="alternate" href="/atom.xml" title="qllokirin" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  <link rel="preload" href="https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  
+  
+  
+  
+    
+<script src="https://npm.webcache.cn/pace-js@1.2.4/pace.min.js"></script>
+
+  
+  
+    
+<link rel="stylesheet" href="https://npm.webcache.cn/@reimujs/aos@0.0.1/dist/aos.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  <body>
+    
+  <div id='loader'>
+    <div class="loading-left-bg loading-bg"></div>
+    <div class="loading-right-bg loading-bg"></div>
+    <div class="spinner-box">
+      <div class="loading-taichi">
+        <svg width="150" height="150" viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="https://www.w3.org/2000/svg" shape-rendering="geometricPrecision">
+          <path d="M303.5 432A80 80 0 0 1 291.5 592A80 80 0 0 1 303.5 432z" fill="#66ccff" />
+          <path d="M512 65A447 447 0 0 1 512 959L512 929A417 417 0 0 0 512 95A417 417 0 0 0 512 929L512 959A447 447 0 0 1 512 65z 
+         M512 95A417 417 0 0 1 929 512A208.5 208.5 0 0 1 720.5 720.5L720.5 592A80 80 0 0 0 720.5 432A80 80 0 0 0 720.5 592L720.5 720.5A208.5 208.5 0 0 1 512 512A208.5 208.5 0 0 0 303.5 303.5A208.5 208.5 0 0 0 95 512A417 417 0 0 1 512 95z" fill="#66ccff" />
+        </svg>
+      </div>
+      <div class="loading-word">天依再吃俩包子(๑＞⌔＜๑)8</div>
+    </div>
+  </div>
+  </div>
+  <script>
+    var time = null;
+    var startLoading = () => {
+      time = Date.now();
+      document.getElementById('loader').classList.remove("loading");
+    }
+    var endLoading = () => {
+      if (!time) {
+        document.body.style.overflow = 'auto';
+        document.getElementById('loader').classList.add("loading");
+      } else {
+        if (Date.now() - time > 500) {
+          time = null;
+          document.body.style.overflow = 'auto';
+          document.getElementById('loader').classList.add("loading");
+        } else {
+          setTimeout(endLoading, 500 - (Date.now() - time));
+          time = null;
+        }
+      }
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+    document.getElementById('loader').addEventListener('click', endLoading);
+  </script>
+
+<div id="copy-tooltip" style="pointer-events: none; opacity: 0; transition: all 0.2s ease; position: fixed;top: 50%;left: 50%;z-index: 999;transform: translate(-50%, -50%);color: white;background: rgba(0, 0, 0, 0.5);padding: 10px 15px;border-radius: 10px;">
+</div>
+
+
+    <div id="container">
+      <div id="wrap">
+        <div id="header-nav">
+  <nav id="main-nav">
+    
+      <span class="main-nav-link-wrap">
+        <div class="main-nav-icon icon-taichi"></div>
+        <a class="main-nav-link" href="/">首页</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class="main-nav-icon icon-taichi"></div>
+        <a class="main-nav-link" href="/archives">归档</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class="main-nav-icon icon-taichi"></div>
+        <a class="main-nav-link" href="/about">关于</a>
+      </span>
+    
+      <span class="main-nav-link-wrap">
+        <div class="main-nav-icon icon-taichi"></div>
+        <a class="main-nav-link" href="/friend">友链</a>
+      </span>
+    
+    <a id="main-nav-toggle" class="nav-icon"></a>
+  </nav>
+  <nav id="sub-nav">
+    
+      <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅" target="_blank"></a>
+    
+    
+    
+      <a id="nav-search-btn" class="nav-icon popup-trigger" title="搜索"></a>
+    
+  </nav>
+</div>
+<header id="header">
+  
+    
+      <img fetchpriority="high" src="/images/luo.png" alt="记一次家电自行参悟维修过程">
+    
+  
+  <div id="header-outer">
+    <div id="header-title">
+      
+        
+        
+          <a href="/" id="logo">
+            <h1 data-aos="slide-up">记一次家电自行参悟维修过程</h1>
+          </a>
+        
+      
+      
+        
+        <h2 id="subtitle-wrap" data-aos="slide-down">
+          
+        </h2>
+      
+    </div>
+  </div>
+</header>
+
+        <div id="content">
+          
+          <section id="main"><article id="post-28.repair_electrical_appliances" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-inner" data-aos="fade-up">
+    <div class="article-meta">
+      <div class="article-date">
+  <a href="/2025/01/13/28.repair_electrical_appliances/" class="article-date-link" data-aos="zoom-in">
+    <time datetime="2025-01-13T10:56:49.000Z" itemprop="datePublished">2025-01-13</time>
+    <time style="display: none;" id="post-update-time">2025-01-13</time>
+  </a>
+</div>
+
+      
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E8%AE%B0%E5%BD%95/" data-aos="zoom-in">记录</a>
+  </div>
+
+
+    </div>
+    <div class="hr-line"></div>
+    
+
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+      
+        <p>主打一个参悟，电路理解全靠悟！（其实是靠纯猜x）</p>
+<span id="more"></span>
+
+<h1 id="电视机遥控器"><a href="#电视机遥控器" class="headerlink" title="电视机遥控器"></a>电视机遥控器</h1><p>放寒假了，刚回到家捯饬了一下用电视机看webdav挂载的番剧，发现遥控器右键不太灵，框框一顿拆发现就是一个很简单的按钮，边上一圈是一个触点，中间凸起的是一个触点，按下按钮时中间凸起的凹陷下去接触电路板也就连通了，所以只要调整下位置，擦擦油就好了，ee又zz啊。</p>
+<p><img src="https://s2.loli.net/2025/01/13/P4hCcAmxNwTiyFD.png" alt="744fe516-4e29-46e7-ab79-f625815f51dd.png"></p>
+<h1 id="遥控开关"><a href="#遥控开关" class="headerlink" title="遥控开关"></a>遥控开关</h1><p>不是很灵敏了，也很简单，纽扣电池没电了而已了；然后这个面板固定是用的不可逆的卡扣，但是右下角卡扣的绷断了，所以部分按钮不好使了，刚好家里人之前买过一把胶枪，打个胶固定一下也好了。</p>
+<img src="https://s2.loli.net/2025/01/13/yZxIC9lBiJHprOk.png" style="height:300px; width:auto;">
+
+<h1 id="电烤火炉"><a href="#电烤火炉" class="headerlink" title="电烤火炉"></a>电烤火炉</h1><p>然后妈又告诉我家里的一个电烤火炉也坏了，还是框框一顿拆！</p>
+<img src="https://s2.loli.net/2025/01/13/P9akHpoNmcj1uBD.png" style="height:300px; width:auto;">
+
+<p>稍显复杂，手里只有一支测电笔，也可以测通断，简单理一下发现是这样的，火线经过控制器按时间变化输出或不输出电压（原理在后面分析出来的），零线直接接电热丝，地线接设备外壳</p>
+<p><img src="https://s2.loli.net/2025/01/13/IXwf4aheNVR21sc.png" alt="image-20250113145816857"></p>
+<p>用电笔测电热丝是通路，看了下电笔的参数是小于50欧就会响，电热丝电阻不高，应该是好的，所以大概率是控制器一直不输出电压，那还说什么，拆！先是参悟了一下旋钮开关，上面有一个六角螺母，刚好家里有老虎钳，轻松取下控制器，控制器有一个金属壳，而且一个元器件从内部有一颗螺丝把金属壳锁住了，研究了半天最后参悟出来应该是先把元器件用螺丝拧到金属壳上，然后用焊锡焊在板子上就封上了，话不多说，买个电烙铁和万用表，等个快递先。</p>
+<img src="https://s2.loli.net/2025/01/13/6ZTYePVExqB9R3k.png" style="height:350px; width:auto;">
+
+<p>框框一顿拆，然后用拍照搜商品、看板子上的标识、看元件身上的标识，找到了所有元件的tb链接。可恶，买的万用表的欧姆档是坏的，就测不了哪个元件是好的，重新买了还没到，算了，之前全部买一份先，不超过十块一共，还有几个电阻，我相信他们应该没坏。</p>
+<img src="https://s2.loli.net/2025/01/13/uX1ez8ySDGPsxkf.png" style="height:400px; width:auto;">
+
+<p>然后先研究研究原理，看板子后面的焊点我其实有点懵，比如右侧的那两个点是连锡的，我觉得这可能会有问题？（我是小白，啥也不懂ww，大佬的话应该知道这是为什么，不过我后面参悟出来了），下面那块连锡也很严重，而且有烧焦痕迹，可能就是那个元件坏了。</p>
+<blockquote>
+<p>参悟了很久之后突然发现为什么这个板子上这么多长方形的焊点，明明没有那么多元器件，最后突然发现板子的绿色有深有浅，我才意识到，一块浅色的代表他们是互相通的，所以图示的连锡没有一点的问题</p>
+</blockquote>
+<p>我想着先了解一下各个元件都是干什么用的，第一个是BTA16-800B双向可控硅，耐受16A、800V，有三个引脚，T1、T2、G，当G对T1、T2有触发电压&#x2F;电流时，T1到T2会导通，简而言之是一个开关</p>
+<p>第二个是DB3双向触发二极管，字面意思，是双向二极管，双向可导通，导通电压是30多伏</p>
+<p>第三个是WH138单联电位器带开关，也是三个引脚，ABC，AC之间是一个固定电阻，如图是500K欧，B随着旋钮选择而变化阻值，从0变化到500K欧，也就是一个滑动变阻器，还没看懂电路的时候，发现这里面的AB角是一直通的，我就在想是不是这个坏了，拆了半天研究了一下发现其实没问题，因BC之间的滑动变阻还是能正常用的，而这个电路只用了BC，没问题啊，没问题啊</p>
+<p>我要非常感谢这个视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Z7411974o">【电路实战-双向可控硅调压电路，结合示波器、实物、电路图讲解！】 </a></p>
+<p>非常清晰易懂，而且和我手里的这块控制板非常像，基本一致，用示波器的那块直接恍然大悟，解释了这到底是如何控制用电器功率大小的，我一开始一直以为是串联一个可变电阻就可以了hhhh，其实是单项可控硅按时间进行导通，220V 50Hz交流电每个周期内导通时间长与短就决定了用电器的有效时间，从而控制功率大小</p>
+<p>理一下电路板，然后学了一下嘉立创的画图功能，电路图如下，万事俱备，就等快递到了</p>
+<img src="https://s2.loli.net/2025/01/13/HtyYT7PaO4dxhAs.png" style="height:450px; width:auto;">
+
+
+
+<p>当K1开关闭合时，C1电容逐渐进行充电，充电速度取决于电位器的阻值大小，阻值最小时是51k欧，最大是51k+1M和500k并联，阻值越小充电速度越快，在一个交流电的周期中有效输出时间会更长，当电容充电电压达到30多v足以让DB3双向触发二极管导通时，双向可控硅G1与T1有触发电压&#x2F;电流，T1、T2导通，电器正常控制；当交流电电压归零时双向可控硅又截止，循环往复。从而实现通过电阻大小来控制一个周期中的导通时间，来控制电热丝的功率</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+      
+      
+      
+      
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item" data-aos="zoom-in"><a class="article-tag-list-link" href="/tags/%E7%BB%B4%E4%BF%AE/" rel="tag">维修</a></li></ul>
+
+
+    </footer>
+  </div>
+  
+    
+  <nav id="article-nav" data-aos="fade-up">
+    
+      <div class="article-nav-link-wrap article-nav-link-left">
+        
+          
+          
+            <img data-src="/covers/tg_18.jpg" data-sizes="auto" alt="稀疏平常的生活" class="lazyload">
+          
+        
+        <a href="/7777/07/07/diary/"></a>
+        <div class="article-nav-caption">前一篇</div>
+        <h3 class="article-nav-title">
+          
+            稀疏平常的生活
+          
+        </h3>
+      </div>
+    
+    
+    <div class="article-nav-link-wrap article-nav-link-right">
+      
+        
+        
+          <img data-src="/covers/41.jpg" data-sizes="auto" alt="小米root与钉钉虚拟打卡记录" class="lazyload">
+        
+      
+      <a href="/2024/11/05/27.xiaomi_root/"></a>
+      <div class="article-nav-caption">后一篇</div>
+      <h3 class="article-nav-title">
+        
+          小米root与钉钉虚拟打卡记录
+        
+      </h3>
+    </div>
+    
+  </nav>
+
+
+  
+</article>
+
+
+
+
+
+  <div id="comments" class="gscomment giscus" data-aos="fade-up"></div>
+
+
+</section>
+          
+            <aside id="sidebar">
+  <div class="sidebar-wrapper wrap-sticky">
+    <div class="sidebar-wrap" data-aos="fade-up">
+      
+        <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%B5%E8%A7%86%E6%9C%BA%E9%81%A5%E6%8E%A7%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">电视机遥控器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%81%A5%E6%8E%A7%E5%BC%80%E5%85%B3"><span class="toc-number">2.</span> <span class="toc-text">遥控开关</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%B5%E7%83%A4%E7%81%AB%E7%82%89"><span class="toc-number">3.</span> <span class="toc-text">电烤火炉</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+        <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="qllokirin" class="lazyload">
+  <div class="sidebar-author-name">qllokirin</div>
+  <div class="sidebar-description">~\(≧▽≦)/~</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">27</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">5</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">31</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">首页</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">归档</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">关于</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">友链</div>
+    </div>
+  
+</div>
+</div>
+      
+      
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      
+    </div>
+  </div>
+
+  
+</aside>
+
+          
+        </div>
+        <footer id="footer">
+  <div style="width: 100%; overflow: hidden">
+    <div class="footer-line"></div>
+  </div>
+  <div id="footer-info">
+    
+    <div>
+      <span class="icon-copyright"></span>
+      2020-2025
+      <span class="footer-info-sep"></span>
+      qllokirin
+    </div>
+    
+      <div>
+        基于&nbsp;<a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a>&nbsp;
+        Theme.<a href="https://github.com/D-Sketon/hexo-theme-reimu" rel="noopener" target="_blank">Reimu</a>
+      </div>
+    
+    
+      <div>
+        <span class="icon-brush"></span>
+        46.4k
+        &nbsp;|&nbsp;
+        <span class="icon-coffee"></span>
+        02:47
+      </div>
+    
+    
+    
+    
+      <div>
+        <span class="icon-eye"></span>
+        <span id="busuanzi_container_site_pv">总访问量&nbsp;<span id="busuanzi_value_site_pv"></span></span>
+        &nbsp;|&nbsp;
+        <span class="icon-user"></span>
+        <span id="busuanzi_container_site_uv">总访客量&nbsp;<span id="busuanzi_value_site_uv"></span></span>
+      </div>
+    
+  </div>
+</footer>
+
+        <div class="sidebar-top">
+          <img src="/images/taichi.png" height="50" width="50" alt="backtop" />
+          <div class="arrow-up"></div>
+        </div>
+        <div id="mask"></div>
+      </div>
+      <nav id="mobile-nav">
+  <div class="sidebar-wrap">
+    
+      <div class="sidebar-toc-sidebar"><div class="sidebar-toc">
+  <h3 class="toc-title">文章目录</h3>
+  <div class="sidebar-toc-wrapper toc-div-class" >
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%B5%E8%A7%86%E6%9C%BA%E9%81%A5%E6%8E%A7%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">电视机遥控器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%81%A5%E6%8E%A7%E5%BC%80%E5%85%B3"><span class="toc-number">2.</span> <span class="toc-text">遥控开关</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%B5%E7%83%A4%E7%81%AB%E7%82%89"><span class="toc-number">3.</span> <span class="toc-text">电烤火炉</span></a></li></ol>
+      
+  </div>
+</div>
+</div>
+      <div class="sidebar-common-sidebar hidden"><div class="sidebar-author">
+  <img data-src="/avatar/avatar.webp" data-sizes="auto" alt="qllokirin" class="lazyload">
+  <div class="sidebar-author-name">qllokirin</div>
+  <div class="sidebar-description">~\(≧▽≦)/~</div>
+</div>
+<div class="sidebar-state">
+  <div class="sidebar-state-article">
+    <div>文章</div>
+    <div class="sidebar-state-number">27</div>
+  </div>
+  <div class="sidebar-state-category">
+    <div>分类</div>
+    <div class="sidebar-state-number">5</div>
+  </div>
+  <div class="sidebar-state-tag">
+    <div>标签</div>
+    <div class="sidebar-state-number">31</div>
+  </div>
+</div>
+<div class="sidebar-social">
+  
+</div>
+<div class="sidebar-menu">
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/" aria-label="首页"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">首页</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/archives" aria-label="归档"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">归档</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/about" aria-label="关于"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">关于</div>
+    </div>
+  
+    <div class="sidebar-menu-link-wrap">
+      <a class="sidebar-menu-link-dummy" href="/friend" aria-label="友链"></a>
+      <div class="sidebar-menu-icon icon-taichi"></div>
+      <div class="sidebar-menu-link">友链</div>
+    </div>
+  
+</div>
+</div>
+    
+  </div>
+  
+    <div class="sidebar-btn-wrapper">
+      <div class="sidebar-toc-btn current"></div>
+      <div class="sidebar-common-btn"></div>
+    </div>
+  
+</nav>
+
+    </div>
+    
+      <div class="site-search">
+        <div class="reimu-popup popup">
+          <div class="reimu-search">
+            <div class="reimu-search-input-icon"></div>
+            <div class="reimu-search-input" id="reimu-search-input"></div>
+            <div class="popup-btn-close"></div>
+          </div>
+          <div class="reimu-results">
+            <div id="reimu-stats"></div>
+            <div id="reimu-hits"></div>
+            <div id="reimu-pagination" class="reimu-pagination"></div>
+          </div>
+          <img class="reimu-bg" src="/images/reimu.png"/>
+        </div>
+      </div>
+    
+    
+<script src="https://npm.webcache.cn/lazysizes@5.3.2/lazysizes.min.js"></script>
+
+
+<script src="https://npm.webcache.cn/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+  
+<script src="/js/aos.js"></script>
+
+  <script>
+    var aosInit = () => {
+      AOS.init({
+        duration: 1000,
+        easing: "ease",
+        once: true,
+        offset: 50,
+      });
+    };
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', aosInit);
+    } else {
+      aosInit();
+    }
+  </script>
+
+
+
+<script src="/js/pjax_script.js" data-pjax></script>
+
+
+<script type="module" data-pjax>
+  import PhotoSwipeLightbox from "https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe-lightbox.esm.min.js";
+  
+  const pswp = () => {
+    if (_$$('.article-entry a.article-gallery-item').length > 0) {
+      new PhotoSwipeLightbox({
+        gallery: '.article-entry',
+        children: 'a.article-gallery-item',
+        pswpModule: () => import("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js")
+      }).init();
+    }
+    if(_$$('.article-gallery a.article-gallery-item').length > 0) {
+      new PhotoSwipeLightbox({
+        gallery: '.article-gallery',
+        children: 'a.article-gallery-item',
+        pswpModule: () => import("https://npm.webcache.cn/photoswipe@5.4.4/dist/photoswipe.esm.min.js")
+      }).init();
+    }
+    window.lightboxStatus = 'done';
+    window.removeEventListener('lightbox:ready', pswp);
+  }
+  if(window.lightboxStatus === 'ready') {
+    pswp()
+  } else {
+    window.addEventListener('lightbox:ready', pswp);
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  <script data-pjax>
+    var giscusContainer = document.querySelector('.giscus');
+    if (giscusContainer) {
+      const giscusScript = document.createElement('script');
+      giscusScript.src = 'https://giscus.app/client.js';
+      giscusScript.setAttribute('data-repo', 'qllokirin/hexo_blog_comments');
+      giscusScript.setAttribute('data-repo-id', 'R_kgDOI8fvWA');
+      giscusScript.setAttribute('data-category', 'Announcements'); 
+      giscusScript.setAttribute('data-category-id', 'DIC_kwDOI8fvWM4CUIlh');
+      giscusScript.setAttribute('data-mapping', '0');
+      giscusScript.setAttribute('data-strict', '0');
+      giscusScript.setAttribute('data-reactions-enabled', '1');
+      giscusScript.setAttribute('data-emit-metadata', '0');
+      giscusScript.setAttribute('data-input-position', 'bottom');
+      giscusScript.setAttribute('data-theme', 'preferred_color_scheme');
+      giscusScript.setAttribute('data-lang', 'zh-CN');
+      giscusScript.setAttribute('crossorigin', 'anonymous');
+      giscusScript.async = true;
+      giscusContainer.appendChild(giscusScript);
+    }
+  </script>
+
+
+
+  
+<script src="/js/generator_search.js" defer></script>
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/mouse-firework@0.0.4/dist/index.umd.js"></script>
+
+  <script>
+    window.firework && window.firework(JSON.parse('{"excludeElements":["a","button"],"particles":[{"shape":"circle","move":["emit"],"easing":"easeOutExpo","colors":["#66ccff","#99e0ff","#ccefff","#e6f7ff"],"number":20,"duration":[1200,1800],"shapeOptions":{"radius":[16,32],"alpha":[0.3,0.5]}},{"shape":"circle","move":["diffuse"],"easing":"easeOutExpo","colors":["#0099cc"],"number":1,"duration":[1200,1800],"shapeOptions":{"radius":20,"alpha":[0.2,0.5],"lineWidth":6}}]}'))
+  </script>
+
+
+
+
+
+
+
+  
+<script src="https://npm.webcache.cn/quicklink@2.3.0/dist/quicklink.umd.js"></script>
+
+  <script data-pjax>
+    window.quicklink?.listen({
+      timeout: 3000,
+      priority: true,
+      ignores: []
+    });
+  </script>
+
+
+<div id="lazy-script">
+  <div>
+    
+  </div>
+</div>
+
+
+  <script>
+    console.log(String.raw`%c 
+ ______     ______     __     __    __     __  __    
+/\  == \   /\  ___\   /\ \   /\ "-./  \   /\ \/\ \   
+\ \  __<   \ \  __\   \ \ \  \ \ \-./\ \  \ \ \_\ \  
+ \ \_\ \_\  \ \_____\  \ \_\  \ \_\ \ \_\  \ \_____\ 
+  \/_/ /_/   \/_____/   \/_/   \/_/  \/_/   \/_____/ 
+                                                  
+`,'color: #66ccff;')
+    console.log('%c Theme.Reimu v' + '0.3.3' + ' %c https://github.com/D-Sketon/hexo-theme-reimu ', 'color: white; background: #66ccff; padding:5px 0;', 'padding:4px;border:1px solid #66ccff;')
+  </script>
+  
+
+
+
+  
+<script src="https://npm.webcache.cn/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then((registrations) => {
+      for (let registration of registrations) {
+        registration.unregister();
+      }
+    });
+  }
+</script>
+
+  <!-- hexo injector body_end start -->
+<script src="/js/insert_highlight.js" data-pjax></script>
+<!-- hexo injector body_end end --></body>
+  </html>
+

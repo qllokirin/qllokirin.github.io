@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-12-10T08:55:15.136Z</updated>
+  <updated>2024-12-29T17:41:37.240Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://example.com/7777/07/07/diary/"/>
     <id>http://example.com/7777/07/07/diary/</id>
     <published>7777-07-06T23:07:07.000Z</published>
-    <updated>2024-12-10T08:55:15.136Z</updated>
+    <updated>2024-12-29T17:41:37.240Z</updated>
     
     
     <summary type="html">我们所经历的日常..</summary>
@@ -32,6 +32,25 @@
     
     
     <category term="日记" scheme="http://example.com/tags/%E6%97%A5%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>记一次家电自行参悟维修过程</title>
+    <link href="http://example.com/2025/01/13/28.repair_electrical_appliances/"/>
+    <id>http://example.com/2025/01/13/28.repair_electrical_appliances/</id>
+    <published>2025-01-13T10:56:49.000Z</published>
+    <updated>2025-01-13T11:14:50.465Z</updated>
+    
+    
+    <summary type="html">主打一个参悟，电路理解全靠悟！（其实是靠纯猜x）</summary>
+    
+    
+    
+    <category term="记录" scheme="http://example.com/categories/%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="维修" scheme="http://example.com/tags/%E7%BB%B4%E4%BF%AE/"/>
     
   </entry>
   
@@ -392,25 +411,6 @@
     
     
     <category term="番" scheme="http://example.com/tags/%E7%95%AA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>组装一台四旋翼无人机</title>
-    <link href="http://example.com/2022/12/08/08.uav/"/>
-    <id>http://example.com/2022/12/08/08.uav/</id>
-    <published>2022-12-08T12:05:26.000Z</published>
-    <updated>2023-03-20T05:12:04.000Z</updated>
-    
-    
-    <summary type="html">最近实习课，可以造机器人，就选了造无人机</summary>
-    
-    
-    
-    <category term="教程" scheme="http://example.com/categories/%E6%95%99%E7%A8%8B/"/>
-    
-    
-    <category term="无人机组装" scheme="http://example.com/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA%E7%BB%84%E8%A3%85/"/>
     
   </entry>
   

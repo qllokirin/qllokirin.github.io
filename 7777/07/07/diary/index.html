@@ -41,7 +41,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/12/17/f8yjSmDGoNAC6tW.jpg">
 <meta property="og:image" content="https://s2.loli.net/2022/12/17/wGW4KmTEd6M2hDy.png">
 <meta property="article:published_time" content="7777-07-06T23:07:07.000Z">
-<meta property="article:modified_time" content="2024-12-10T08:55:15.136Z">
+<meta property="article:modified_time" content="2024-12-29T17:41:37.240Z">
 <meta property="article:author" content="qllokirin">
 <meta property="article:tag" content="日记">
 <meta name="twitter:card" content="summary">
@@ -189,7 +189,7 @@
       <div class="article-date">
   <a href="/7777/07/07/diary/" class="article-date-link" data-aos="zoom-in">
     <time datetime="7777-07-06T23:07:07.000Z" itemprop="datePublished">7777-07-07</time>
-    <time style="display: none;" id="post-update-time">2024-12-10</time>
+    <time style="display: none;" id="post-update-time">2024-12-30</time>
   </a>
 </div>
 
@@ -250,7 +250,7 @@
 <p><strong>七月</strong></p>
 <p><a target="_blank" rel="noopener" href="https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors">阿里docker镜像</a> 神！</p>
 <blockquote>
-<p>感觉不如1panel一根</p>
+<p>感觉不如<a target="_blank" rel="noopener" href="https://1panel.cn/docs/user_manual/containers/setting/">1panel</a>一根</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /etc/docker</span><br><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;EOF</span><br><span class="line">&#123;</span><br><span class="line"> &quot;registry-mirrors&quot;: [</span><br><span class="line">     &quot;https://docker.1panel.live&quot;</span><br><span class="line"> ]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
 </blockquote>
 <p>用qt写cmake项目时经常会出现改了ui但是编译运行的时候还是没变，只需要找一个cpp打一个空格然后不保存编译就行了（让他自动保存）</p>
@@ -280,6 +280,18 @@
 <p><strong>十二月</strong></p>
 <p>代理软件切换为 <a target="_blank" rel="noopener" href="https://github.com/mihomo-party-org/mihomo-party">mihomo-party</a>  和  <a target="_blank" rel="noopener" href="https://github.com/MetaCubeX/ClashMetaForAndroid">ClashMetaForAndroid</a>，感觉是真好用</p>
 <p><a target="_blank" rel="noopener" href="https://jamcz.com/">晨钟酱</a>的搞机工具箱和投屏控制器有点意思</p>
+<p>**<a target="_blank" rel="noopener" href="https://github.com/EstrellaXD/Auto_Bangumi">Auto_Bangumi</a>**订阅番剧、Alis挂载磁盘、potplayer添加专辑用webdav播放、手机用Nplayer播放</p>
+<p>原来docker之间是互通的，看了ip之后就可以在a容器里面设置b容器的端口为代理了</p>
+<p>在 <code>ssh</code> 命令中，使用 <code>-p</code> 来指定端口；在 <code>scp</code> 或 <code>sftp</code> 命令中，使用 <code>-P</code> 来指定端口</p>
+<p>密钥登录：客户端使用<code>ssh-keygen -o</code>生成密钥，<code>cat ~/.ssh/id_rsa.pub</code>查看公钥，放入服务器中的<code>~/.ssh/authorized_keys</code>，一行一个；<code>sudo vim /etc/ssh/sshd_config</code>修改配置</p>
+<blockquote>
+<p>一定注意是sshd不是ssh，害我浪费半天</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#禁用密码验证</span><br><span class="line">PasswordAuthentication no</span><br><span class="line">#启用密钥验证</span><br><span class="line">PubkeyAuthentication yes</span><br><span class="line">#重启ssh服务</span><br><span class="line">sudo service ssh restart</span><br></pre></td></tr></table></figure>
+
+
+
+
 <h1 id="2023"><a href="#2023" class="headerlink" title="2023"></a>2023</h1><p><strong>一月</strong></p>
 <ul>
 <li><p>做了件任性的事，不知道有没有伤害到你们呢</p>
@@ -572,14 +584,14 @@
       
         
         
-          <img data-src="/covers/1.jpg" data-sizes="auto" alt="小米root与钉钉虚拟打卡记录" class="lazyload">
+          <img data-src="/covers/tg_19.jpg" data-sizes="auto" alt="记一次家电自行参悟维修过程" class="lazyload">
         
       
-      <a href="/2024/11/05/27.xiaomi_root/"></a>
+      <a href="/2025/01/13/28.repair_electrical_appliances/"></a>
       <div class="article-nav-caption">后一篇</div>
       <h3 class="article-nav-title">
         
-          小米root与钉钉虚拟打卡记录
+          记一次家电自行参悟维修过程
         
       </h3>
     </div>
@@ -620,7 +632,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">26</div>
+    <div class="sidebar-state-number">27</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -628,7 +640,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">30</div>
+    <div class="sidebar-state-number">31</div>
   </div>
 </div>
 <div class="sidebar-social">
@@ -685,7 +697,7 @@
     
     <div>
       <span class="icon-copyright"></span>
-      2020-2024
+      2020-2025
       <span class="footer-info-sep"></span>
       qllokirin
     </div>
@@ -698,10 +710,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        44.8k
+        46.4k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        02:42
+        02:47
       </div>
     
     
@@ -744,7 +756,7 @@
 <div class="sidebar-state">
   <div class="sidebar-state-article">
     <div>文章</div>
-    <div class="sidebar-state-number">26</div>
+    <div class="sidebar-state-number">27</div>
   </div>
   <div class="sidebar-state-category">
     <div>分类</div>
@@ -752,7 +764,7 @@
   </div>
   <div class="sidebar-state-tag">
     <div>标签</div>
-    <div class="sidebar-state-number">30</div>
+    <div class="sidebar-state-number">31</div>
   </div>
 </div>
 <div class="sidebar-social">
