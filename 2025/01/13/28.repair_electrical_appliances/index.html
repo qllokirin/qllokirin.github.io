@@ -43,8 +43,13 @@
 <meta property="og:image" content="https://s2.loli.net/2025/01/13/6ZTYePVExqB9R3k.png">
 <meta property="og:image" content="https://s2.loli.net/2025/01/13/uX1ez8ySDGPsxkf.png">
 <meta property="og:image" content="https://s2.loli.net/2025/01/13/HtyYT7PaO4dxhAs.png">
+<meta property="og:image" content="https://s2.loli.net/2025/01/20/j1DvmsQ6WrF3Jnq.png">
+<meta property="og:image" content="https://s2.loli.net/2025/01/20/oAZqFHKGTmIBxpt.png">
+<meta property="og:image" content="https://s2.loli.net/2025/01/20/q65B8DOkAQRrlwZ.png">
+<meta property="og:image" content="https://s2.loli.net/2025/01/20/vFy59hnIBkWwZs6.png">
+<meta property="og:image" content="https://s2.loli.net/2025/01/20/JlHAs2YhxIpcvGV.jpg">
 <meta property="article:published_time" content="2025-01-13T10:56:49.000Z">
-<meta property="article:modified_time" content="2025-01-13T11:14:50.465Z">
+<meta property="article:modified_time" content="2025-01-20T08:44:18.199Z">
 <meta property="article:author" content="qllokirin">
 <meta property="article:tag" content="维修">
 <meta name="twitter:card" content="summary">
@@ -192,7 +197,7 @@
       <div class="article-date">
   <a href="/2025/01/13/28.repair_electrical_appliances/" class="article-date-link" data-aos="zoom-in">
     <time datetime="2025-01-13T10:56:49.000Z" itemprop="datePublished">2025-01-13</time>
-    <time style="display: none;" id="post-update-time">2025-01-13</time>
+    <time style="display: none;" id="post-update-time">2025-01-20</time>
   </a>
 </div>
 
@@ -212,7 +217,7 @@
         <p>主打一个参悟，电路理解全靠悟！（其实是靠纯猜x）</p>
 <span id="more"></span>
 
-<h1 id="电视机遥控器"><a href="#电视机遥控器" class="headerlink" title="电视机遥控器"></a>电视机遥控器</h1><p>放寒假了，刚回到家捯饬了一下用电视机看webdav挂载的番剧，发现遥控器右键不太灵，框框一顿拆发现就是一个很简单的按钮，边上一圈是一个触点，中间凸起的是一个触点，按下按钮时中间凸起的凹陷下去接触电路板也就连通了，所以只要调整下位置，擦擦油就好了，ee又zz啊。</p>
+<h1 id="电视机遥控器"><a href="#电视机遥控器" class="headerlink" title="电视机遥控器"></a>电视机遥控器</h1><p>放寒假了，刚回到家捯饬了一下用电视机看 webdav 挂载的番剧，发现遥控器右键不太灵，框框一顿拆发现就是一个很简单的按钮，边上一圈是一个触点，中间凸起的是一个触点，按下按钮时中间凸起的凹陷下去接触电路板也就连通了，所以只要调整下位置，擦擦油就好了，ee 又 zz 啊。</p>
 <p><img src="https://s2.loli.net/2025/01/13/P4hCcAmxNwTiyFD.png" alt="744fe516-4e29-46e7-ab79-f625815f51dd.png"></p>
 <h1 id="遥控开关"><a href="#遥控开关" class="headerlink" title="遥控开关"></a>遥控开关</h1><p>不是很灵敏了，也很简单，纽扣电池没电了而已了；然后这个面板固定是用的不可逆的卡扣，但是右下角卡扣的绷断了，所以部分按钮不好使了，刚好家里人之前买过一把胶枪，打个胶固定一下也好了。</p>
 <img src="https://s2.loli.net/2025/01/13/yZxIC9lBiJHprOk.png" style="height:300px; width:auto;">
@@ -232,18 +237,36 @@
 <blockquote>
 <p>参悟了很久之后突然发现为什么这个板子上这么多长方形的焊点，明明没有那么多元器件，最后突然发现板子的绿色有深有浅，我才意识到，一块浅色的代表他们是互相通的，所以图示的连锡没有一点的问题</p>
 </blockquote>
-<p>我想着先了解一下各个元件都是干什么用的，第一个是BTA16-800B双向可控硅，耐受16A、800V，有三个引脚，T1、T2、G，当G对T1、T2有触发电压&#x2F;电流时，T1到T2会导通，简而言之是一个开关</p>
-<p>第二个是DB3双向触发二极管，字面意思，是双向二极管，双向可导通，导通电压是30多伏</p>
-<p>第三个是WH138单联电位器带开关，也是三个引脚，ABC，AC之间是一个固定电阻，如图是500K欧，B随着旋钮选择而变化阻值，从0变化到500K欧，也就是一个滑动变阻器，还没看懂电路的时候，发现这里面的AB角是一直通的，我就在想是不是这个坏了，拆了半天研究了一下发现其实没问题，因BC之间的滑动变阻还是能正常用的，而这个电路只用了BC，没问题啊，没问题啊</p>
+<p>我想着先了解一下各个元件都是干什么用的，第一个是 BTA16-800B 双向可控硅，耐受 16A、800V，有三个引脚，T1、T2、G，当 G 对 T1、T2 有触发电压&#x2F;电流时，T1到T2会导通，简而言之是一个开关</p>
+<p>第二个是 DB3 双向触发二极管，字面意思，是双向二极管，双向可导通，导通电压是30多伏</p>
+<p>第三个是 WH138 单联电位器带开关，也是三个引脚，ABC，AC 之间是一个固定电阻，如图是 500K 欧，B 随着旋钮选择而变化阻值，从 0 变化到 500K 欧，也就是一个滑动变阻器，还没看懂电路的时候，发现这里面的 AB 角是一直通的，我就在想是不是这个坏了，拆了半天研究了一下发现其实没问题，因 BC 之间的滑动变阻还是能正常用的，而这个电路只用了 BC，没问题啊，没问题啊</p>
 <p>我要非常感谢这个视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Z7411974o">【电路实战-双向可控硅调压电路，结合示波器、实物、电路图讲解！】 </a></p>
-<p>非常清晰易懂，而且和我手里的这块控制板非常像，基本一致，用示波器的那块直接恍然大悟，解释了这到底是如何控制用电器功率大小的，我一开始一直以为是串联一个可变电阻就可以了hhhh，其实是单项可控硅按时间进行导通，220V 50Hz交流电每个周期内导通时间长与短就决定了用电器的有效时间，从而控制功率大小</p>
+<p>非常清晰易懂，而且和我手里的这块控制板非常像，基本一致，用示波器的那块直接恍然大悟，解释了这到底是如何控制用电器功率大小的，我一开始一直以为是串联一个可变电阻就可以了hhhh，其实是单项可控硅按时间进行导通，220V 50Hz 交流电每个周期内导通时间长与短就决定了用电器的有效时间，从而控制功率大小</p>
 <p>理一下电路板，然后学了一下嘉立创的画图功能，电路图如下，万事俱备，就等快递到了</p>
 <img src="https://s2.loli.net/2025/01/13/HtyYT7PaO4dxhAs.png" style="height:450px; width:auto;">
 
-
-
+<blockquote>
+<p>输入输出和T1 T2相对位置好像错了，算了，问题不太大</p>
+</blockquote>
 <p>当K1开关闭合时，C1电容逐渐进行充电，充电速度取决于电位器的阻值大小，阻值最小时是51k欧，最大是51k+1M和500k并联，阻值越小充电速度越快，在一个交流电的周期中有效输出时间会更长，当电容充电电压达到30多v足以让DB3双向触发二极管导通时，双向可控硅G1与T1有触发电压&#x2F;电流，T1、T2导通，电器正常控制；当交流电电压归零时双向可控硅又截止，循环往复。从而实现通过电阻大小来控制一个周期中的导通时间，来控制电热丝的功率</p>
+<p>激动的心，颤抖的手，用电烙铁换上双向可控硅，没盖盖板先试了一下，oh，已经热了，看起来已经修好了，然后放下来又试了试，看到按钮装的不是很正，就想从下面用手再怼一怼，可没曾想，没上盖板，直接碰到了上面图片电路板的背面焊点（电路图中的 T1 T2，基本上就是 220v 火线），直接手一麻，本能的快速收回，才意识到被交流 220 电了，唉唉，<strong>这才是切实体会到什么叫注意安全</strong>，手麻麻的，吃饭的时候都还有点感觉。</p>
+<blockquote>
+<p>个人猜测被电了但是没跳漏保大概率是因为漏电电流不够大，没到漏保的阈值</p>
+</blockquote>
+<p>然后就感觉把背面的盖板上好，插上电还是能用的，刚好之前买过一根电笔，可以测与地的电压，我就想看看哪个点位有电，我就戳到盖板里面，没想到，<strong>直接爆了一个小火花</strong>，bangji 一声，家里灯也灭了，就知道跳闸了，哈人，我看弱电箱漏保和客厅的空开一起跳了，拔了电器，跳漏保之后要按一下按钮才能推上去，都打开家里电是正常了，但点烤火炉已经爆了个元件，还好，双向可控硅我买了两个，还能重新换上去。</p>
+<img src="https://s2.loli.net/2025/01/20/j1DvmsQ6WrF3Jnq.png" style="height:450px; width:auto;">
 
+<img src="https://s2.loli.net/2025/01/20/oAZqFHKGTmIBxpt.png" style="height:380px; width:auto;">
+
+<p>不过换上去之后电烤火炉没有并没有好，那就只能是还炸坏了其他东西，买了万用表，测了电阻，电位器，电容都是没有问题的，只有一个双向触发二极管不好测，因为导通电压有 30 多 v，不过问题不大，这个我也买了几个，换一个上去，终于成功拿下！</p>
+<img src="https://s2.loli.net/2025/01/20/q65B8DOkAQRrlwZ.png" style="height:400px; width:auto;">
+
+<p>跳闸和爆火花的原因大概率是因为我用电笔的前端把双向可控硅的 T1 G 之间连通了，击穿了双向触发二极管，双向可控硅有无法承受这么强大的电流，直接爆了，零火短路空开也显然会跳闸，只能说 心有余悸 雀食哈人，注意安全吧，后面再通电测试的时候，每一步都很小心，通电试的时候，做每一步之前都要先思考思考再行动。</p>
+<h1 id="洗衣机"><a href="#洗衣机" class="headerlink" title="洗衣机"></a>洗衣机</h1><p>这个也是 ee 又 zz 啊，他有一个略微神奇的现象，就是开启后滚筒不旋转，但是用手拨一下滚筒，他就开始一直转了哈哈哈。了解了一下这种电机需要一个叫启动电容的东西，图中靠右下的长方体一黄一红连线元件，当这个电容坏的时候，就是这种表现状况。</p>
+<img src="https://s2.loli.net/2025/01/20/vFy59hnIBkWwZs6.png" style="height:450px; width:auto;">
+
+<p>观察一下他使用的是CBB61 5uF的电容，万用表测一下只有0.1uF，网上买一个换上，轻松秒杀，包个热缩管，安安又全全</p>
+<img src="https://s2.loli.net/2025/01/20/JlHAs2YhxIpcvGV.jpg" style="height:450px; width:auto;">
       
     </div>
     <footer class="article-footer">
@@ -268,7 +291,7 @@
         
           
           
-            <img data-src="/covers/tg_18.jpg" data-sizes="auto" alt="稀疏平常的生活" class="lazyload">
+            <img data-src="/covers/26.jpg" data-sizes="auto" alt="稀疏平常的生活" class="lazyload">
           
         
         <a href="/7777/07/07/diary/"></a>
@@ -285,7 +308,7 @@
       
         
         
-          <img data-src="/covers/41.jpg" data-sizes="auto" alt="小米root与钉钉虚拟打卡记录" class="lazyload">
+          <img data-src="/covers/tg_11.jpg" data-sizes="auto" alt="小米root与钉钉虚拟打卡记录" class="lazyload">
         
       
       <a href="/2024/11/05/27.xiaomi_root/"></a>
@@ -320,7 +343,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%B5%E8%A7%86%E6%9C%BA%E9%81%A5%E6%8E%A7%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">电视机遥控器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%81%A5%E6%8E%A7%E5%BC%80%E5%85%B3"><span class="toc-number">2.</span> <span class="toc-text">遥控开关</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%B5%E7%83%A4%E7%81%AB%E7%82%89"><span class="toc-number">3.</span> <span class="toc-text">电烤火炉</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%B5%E8%A7%86%E6%9C%BA%E9%81%A5%E6%8E%A7%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">电视机遥控器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%81%A5%E6%8E%A7%E5%BC%80%E5%85%B3"><span class="toc-number">2.</span> <span class="toc-text">遥控开关</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%B5%E7%83%A4%E7%81%AB%E7%82%89"><span class="toc-number">3.</span> <span class="toc-text">电烤火炉</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B4%97%E8%A1%A3%E6%9C%BA"><span class="toc-number">4.</span> <span class="toc-text">洗衣机</span></a></li></ol>
       
   </div>
 </div>
@@ -411,10 +434,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        46.4k
+        47.1k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        02:47
+        02:50
       </div>
     
     
@@ -444,7 +467,7 @@
   <h3 class="toc-title">文章目录</h3>
   <div class="sidebar-toc-wrapper toc-div-class" >
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%B5%E8%A7%86%E6%9C%BA%E9%81%A5%E6%8E%A7%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">电视机遥控器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%81%A5%E6%8E%A7%E5%BC%80%E5%85%B3"><span class="toc-number">2.</span> <span class="toc-text">遥控开关</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%B5%E7%83%A4%E7%81%AB%E7%82%89"><span class="toc-number">3.</span> <span class="toc-text">电烤火炉</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%B5%E8%A7%86%E6%9C%BA%E9%81%A5%E6%8E%A7%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text">电视机遥控器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%81%A5%E6%8E%A7%E5%BC%80%E5%85%B3"><span class="toc-number">2.</span> <span class="toc-text">遥控开关</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%B5%E7%83%A4%E7%81%AB%E7%82%89"><span class="toc-number">3.</span> <span class="toc-text">电烤火炉</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B4%97%E8%A1%A3%E6%9C%BA"><span class="toc-number">4.</span> <span class="toc-text">洗衣机</span></a></li></ol>
       
   </div>
 </div>
