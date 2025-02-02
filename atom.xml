@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-12-29T17:41:37.240Z</updated>
+  <updated>2025-02-01T10:51:43.803Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://example.com/7777/07/07/diary/"/>
     <id>http://example.com/7777/07/07/diary/</id>
     <published>7777-07-06T23:07:07.000Z</published>
-    <updated>2024-12-29T17:41:37.240Z</updated>
+    <updated>2025-02-01T10:51:43.803Z</updated>
     
     
     <summary type="html">我们所经历的日常..</summary>
@@ -341,7 +341,7 @@
     <link href="http://example.com/2023/01/30/12.remake_ubuntu/"/>
     <id>http://example.com/2023/01/30/12.remake_ubuntu/</id>
     <published>2023-01-30T13:55:39.000Z</published>
-    <updated>2024-12-06T09:53:01.022Z</updated>
+    <updated>2025-01-24T05:35:08.090Z</updated>
     
     
     <summary type="html">浅浅记录个人使用ubuntu所遇之事</summary>
@@ -400,7 +400,7 @@
     <link href="http://example.com/2023/01/01/09.animation/"/>
     <id>http://example.com/2023/01/01/09.animation/</id>
     <published>2023-01-01T13:55:39.000Z</published>
-    <updated>2023-12-12T11:45:32.000Z</updated>
+    <updated>2025-02-01T15:16:29.783Z</updated>
     
     
     <summary type="html">感受一个个故事的悲欢离合</summary>

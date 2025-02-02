@@ -40,7 +40,7 @@
 <meta property="og:image" content="https://s2.loli.net/2023/01/28/k7SmWnJ3etpQiOV.png">
 <meta property="og:image" content="https://s2.loli.net/2023/01/29/EbYqw5DRXLVcpkl.png">
 <meta property="article:published_time" content="2023-01-30T13:55:39.000Z">
-<meta property="article:modified_time" content="2024-12-06T09:53:01.022Z">
+<meta property="article:modified_time" content="2025-01-24T05:35:08.090Z">
 <meta property="article:author" content="qllokirin">
 <meta property="article:tag" content="重装">
 <meta property="article:tag" content="Ubuntu">
@@ -189,7 +189,7 @@
       <div class="article-date">
   <a href="/2023/01/30/12.remake_ubuntu/" class="article-date-link" data-aos="zoom-in">
     <time datetime="2023-01-30T13:55:39.000Z" itemprop="datePublished">2023-01-30</time>
-    <time style="display: none;" id="post-update-time">2024-12-06</time>
+    <time style="display: none;" id="post-update-time">2025-01-24</time>
   </a>
 </div>
 
@@ -227,9 +227,13 @@
 <li><a target="_blank" rel="noopener" href="https://www.intel.cn/content/www/cn/zh/support/articles/000005511/wireless.html">Intel官网</a>，确保内核版本大于要求版本，解压之后放入<code> /lib/firmware</code>即可</li>
 <li>更新内核，<a target="_blank" rel="noopener" href="https://wireless.wiki.kernel.org/en/users/Drivers/iwlwifi">这里</a>可以看到Intel网卡与内核版本的关系   <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/686362507">内核图形化更新方法</a></li>
 </ol>
-<p>AX211在<a target="_blank" rel="noopener" href="http://archive.ubuntu.com/ubuntu/pool/universe/b/backport-iwlwifi-dkms/">这里</a>下这个<code>backport-iwlwifi-dkms_9858-0ubuntu3_all.deb</code>，说实话很奇怪，不知道这个包是怎么来的干什么的</p>
+<p>AX211或AX201在<a target="_blank" rel="noopener" href="http://archive.ubuntu.com/ubuntu/pool/universe/b/backport-iwlwifi-dkms/">这里</a>下这个<code>backport-iwlwifi-dkms_9858-0ubuntu3_all.deb</code>，说实话很奇怪，不知道这个包是怎么来的干什么的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://archive.ubuntu.com/ubuntu/pool/universe/b/backport-iwlwifi-dkms/backport-iwlwifi-dkms_9858-0ubuntu3_all.deb</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install ./backport-iwlwifi-dkms_9858-0ubuntu3_all.deb</span><br></pre></td></tr></table></figure>
+
 <p><a target="_blank" rel="noopener" href="https://github.com/HRex39/rtl8852be">rtl8852be</a>的安装依赖如下</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install make gcc linux-headers-$(uname -r) build-essential git</span><br></pre></td></tr></table></figure>
+
+<p><code>lspci | grep -i net</code>找到形如<code>8086:51f1</code>的信息，输入到后面这个网址查询 <a target="_blank" rel="noopener" href="https://admin.pci-ids.ucw.cz/mods/PC/10de?action=help?help=pci">查看网卡型号</a></p>
 </li>
 <li><p><strong>换源</strong>  选择一个国内源安装软件会更快，在<code>软件更新</code>这个软件里点点就行&#x2F;命令行更换</p>
 <p>然后打开一个终端<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>T</kbd> ，输入<code>sudo apt update</code>和<code>sudo apt upgrade</code>更新源和更新软件</p>
@@ -293,6 +297,12 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://download.typora.io/linux/typora_1.0.3_amd64.deb</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>神——<a target="_blank" rel="noopener" href="https://yeasy.gitbook.io/docker_practice/install/ubuntu">docker</a></strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL get.docker.com -o get-docker.sh</span><br><span class="line">sudo sh get-docker.sh --mirror Aliyun</span><br></pre></td></tr></table></figure>
+
+<p>如果curl不下来脚本，可以复制下来自己创建一个</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /etc/docker</span><br><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;EOF</span><br><span class="line">&#123;</span><br><span class="line"> &quot;registry-mirrors&quot;: [</span><br><span class="line">     &quot;https://docker.1panel.live&quot;</span><br><span class="line"> ]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo curl -L &quot;https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose</span><br><span class="line">sudo chmod +x /usr/local/bin/docker-compose</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>命令行走代理</strong>——<a target="_blank" rel="noopener" href="https://m-ouse.github.io/post/proxychains%E9%85%8D%E7%BD%AE/"><strong>proxychains</strong></a></p>
 </li>
@@ -384,7 +394,7 @@
         
           
           
-            <img data-src="/covers/46.jpg" data-sizes="auto" alt="第一次去livehouse" class="lazyload">
+            <img data-src="/covers/47.jpg" data-sizes="auto" alt="第一次去livehouse" class="lazyload">
           
         
         <a href="/2023/02/05/13.shuangsheng/"></a>
@@ -401,7 +411,7 @@
       
         
         
-          <img data-src="/covers/38.jpg" data-sizes="auto" alt="docker学习" class="lazyload">
+          <img data-src="/covers/7.jpg" data-sizes="auto" alt="docker学习" class="lazyload">
         
       
       <a href="/2023/01/09/11.docker/"></a>
@@ -527,10 +537,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        47.1k
+        47.6k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        02:50
+        02:51
       </div>
     
     
