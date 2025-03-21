@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2025-03-09T05:59:21.423Z</updated>
+  <updated>2025-03-14T03:20:27.248Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://example.com/7777/07/07/diary/"/>
     <id>http://example.com/7777/07/07/diary/</id>
     <published>7777-07-06T23:07:07.000Z</published>
-    <updated>2025-03-09T05:59:21.423Z</updated>
+    <updated>2025-03-14T03:20:27.248Z</updated>
     
     
     <summary type="html">我们所经历的日常..</summary>
@@ -36,11 +36,32 @@
   </entry>
   
   <entry>
+    <title>Ubuntu&amp;Windows&amp;Android使用大杂烩</title>
+    <link href="http://example.com/6666/06/06/ubuntu_windows_android/"/>
+    <id>http://example.com/6666/06/06/ubuntu_windows_android/</id>
+    <published>6666-06-06T13:55:39.000Z</published>
+    <updated>2025-03-21T09:20:37.560Z</updated>
+    
+    
+    <summary type="html">浅浅记录个人使用ubuntu所遇之事</summary>
+    
+    
+    
+    <category term="记录" scheme="http://example.com/categories/%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="重装" scheme="http://example.com/tags/%E9%87%8D%E8%A3%85/"/>
+    
+    <category term="Ubuntu" scheme="http://example.com/tags/Ubuntu/"/>
+    
+  </entry>
+  
+  <entry>
     <title>记一次家电自行参悟维修过程</title>
     <link href="http://example.com/2025/01/13/28.repair_electrical_appliances/"/>
     <id>http://example.com/2025/01/13/28.repair_electrical_appliances/</id>
     <published>2025-01-13T10:56:49.000Z</published>
-    <updated>2025-01-20T08:44:18.199Z</updated>
+    <updated>2025-03-21T08:34:43.296Z</updated>
     
     
     <summary type="html">主打一个参悟，电路理解全靠悟！（其实是靠纯猜x）</summary>
@@ -333,27 +354,6 @@
     <category term="双笙" scheme="http://example.com/tags/%E5%8F%8C%E7%AC%99/"/>
     
     <category term="livehouse" scheme="http://example.com/tags/livehouse/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ubuntu使用&amp;重装Ubuntu</title>
-    <link href="http://example.com/2023/01/30/12.remake_ubuntu/"/>
-    <id>http://example.com/2023/01/30/12.remake_ubuntu/</id>
-    <published>2023-01-30T13:55:39.000Z</published>
-    <updated>2025-02-17T11:10:25.789Z</updated>
-    
-    
-    <summary type="html">浅浅记录个人使用ubuntu所遇之事</summary>
-    
-    
-    
-    <category term="记录" scheme="http://example.com/categories/%E8%AE%B0%E5%BD%95/"/>
-    
-    
-    <category term="重装" scheme="http://example.com/tags/%E9%87%8D%E8%A3%85/"/>
-    
-    <category term="Ubuntu" scheme="http://example.com/tags/Ubuntu/"/>
     
   </entry>
   

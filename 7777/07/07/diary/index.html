@@ -41,7 +41,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/12/17/f8yjSmDGoNAC6tW.jpg">
 <meta property="og:image" content="https://s2.loli.net/2022/12/17/wGW4KmTEd6M2hDy.png">
 <meta property="article:published_time" content="7777-07-06T23:07:07.000Z">
-<meta property="article:modified_time" content="2025-03-09T05:59:21.423Z">
+<meta property="article:modified_time" content="2025-03-14T03:20:27.248Z">
 <meta property="article:author" content="qllokirin">
 <meta property="article:tag" content="日记">
 <meta name="twitter:card" content="summary">
@@ -189,7 +189,7 @@
       <div class="article-date">
   <a href="/7777/07/07/diary/" class="article-date-link" data-aos="zoom-in">
     <time datetime="7777-07-06T23:07:07.000Z" itemprop="datePublished">7777-07-07</time>
-    <time style="display: none;" id="post-update-time">2025-03-09</time>
+    <time style="display: none;" id="post-update-time">2025-03-14</time>
   </a>
 </div>
 
@@ -209,10 +209,26 @@
         <p>我们所经历的日常..</p>
 <span id="more"></span>
 
-<h1 id="2025"><a href="#2025" class="headerlink" title="2025"></a>2025</h1><p><strong>一月</strong></p>
-<p><a target="_blank" rel="noopener" href="https://iriun.com/">https://iriun.com/</a> 手机摄像头变成电脑摄像头</p>
-<p>1p可以申请通配证书，好用</p>
-<p><a target="_blank" rel="noopener" href="https://vitepress.dev/zh/">vitepress</a>写文档挺好看的  <a target="_blank" rel="noopener" href="https://docs.bugdesigner.cn/docs/Tutorial/vitepress.html">别人的教程</a></p>
+<p>日记从上到下，从新到旧</p>
+<h1 id="2025"><a href="#2025" class="headerlink" title="2025"></a>2025</h1><p><strong>三月</strong></p>
+<p>qBittorrent&#x2F;alist正则表达式重命名番剧通用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.*?\[(\d&#123;2&#125;)\].*?\.mkv$</span><br><span class="line">番剧名称 S01E$1.mkv</span><br></pre></td></tr></table></figure>
+
+<p>搭建了NAS相册，使用的是<a target="_blank" rel="noopener" href="https://github.com/immich-app/immich">immich</a>，<a target="_blank" rel="noopener" href="https://www.himiku.com/archives/immich.html">这篇教程</a>很详细</p>
+<p>关于<code>机器学习的</code>这块的设置还是有点坑的</p>
+<p>第一个是默认URL是<code>http://immich_machine_learning:3003</code>，如果你使用的是官方教程<strong>请勿修改这个URL</strong>，因为immich_machine_learning其实是容器名，让immich_sever找immich_machine_learning容器的3003端口，没问题。我一直以为是什么下载模型的网站什么的，整了半天</p>
+<p>如果要修改默认模型下载网站可以在<code>.env</code>中添加<code>HF_ENDPOINT=https://hf-mirror.com</code>，这样不设置代理也可以成功下载模型，可以为后面剩下一步坑。</p>
+<p>如果不修改模型下载网站就需要给docker设置代理或者下载好模型放进去，设置代理我使用的是这样的办法</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">services:</span><br><span class="line">…………………………………………</span><br><span class="line">  immich-machine-learning:</span><br><span class="line">…………………………………………</span><br><span class="line">    volumes:</span><br><span class="line">      - ./model-cache:/cache</span><br><span class="line">    networks:</span><br><span class="line">      - clash_clash-network</span><br><span class="line">    environment:</span><br><span class="line">      - http_proxy=http://172.28.0.10:7890</span><br><span class="line">      - https_proxy=http://172.28.0.10:7890</span><br><span class="line">      - no_proxy=localhost,127.0.0.1,.mycompany.local</span><br><span class="line">…………………………………………</span><br><span class="line">networks:</span><br><span class="line">  clash_clash-network:</span><br><span class="line">    external: true</span><br></pre></td></tr></table></figure>
+
+<p>clash docker</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">services:</span><br><span class="line">  clash-client:</span><br><span class="line">    image: dreamacro/clash</span><br><span class="line">    container_name: clash-client</span><br><span class="line">    restart: always</span><br><span class="line">    ports:</span><br><span class="line">      - &quot;127.0.0.1:7890:7890&quot;  # 转发本地 7890 端口到容器的 7890 端口</span><br><span class="line">      - &quot;127.0.0.1:9090:9090&quot;  # 转发本地 9090 端口到容器的 9090 端口</span><br><span class="line">    volumes:</span><br><span class="line">      - ./xfltd.yaml:/root/.config/clash/config.yaml</span><br><span class="line">      - ./ui:/ui</span><br><span class="line">    networks:</span><br><span class="line">      clash-network:</span><br><span class="line">        ipv4_address: 172.28.0.10  # 设置固定 IP 地址</span><br><span class="line"></span><br><span class="line">networks:</span><br><span class="line">  clash-network:</span><br><span class="line">    driver: bridge  # 使用 bridge 网络驱动</span><br><span class="line">    ipam:</span><br><span class="line">      driver: default</span><br><span class="line">      config:</span><br><span class="line">        - subnet: &quot;172.28.0.0/16&quot;  # 定义子网范围</span><br></pre></td></tr></table></figure>
+
+<p>但是这样还要改配置，有点麻烦，所以直接在命令行下载好是个不错的选择。这里可以看到<code>immich-machine-learning</code>容器的挂载是<code>model-cache:/cache</code>，所以需要将模型放入当前路径下的model-cache中，问题就在到底应该是怎么样的路径结构，这个我弄了很久（其实还有很大一部分原因是我刚开始把URL改了，导致我这个无论怎么改都都不会正常运行hhh）我使用的是官方教程，model-cache中结构目录如下即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── clip</span><br><span class="line">│   └── XLM-Roberta-Large-Vit-B-16Plus</span><br><span class="line">└── facial-recognition</span><br><span class="line">    └── antelopev2</span><br></pre></td></tr></table></figure>
+
+<p>可以通过<code>docker logs</code>查看容器的报错</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sinat_36164818/article/details/139755591">immich上传库中删除本地照片后前台页面仍显示照片的问题解决方法</a></p>
 <p><strong>二月</strong></p>
 <p>nplayer 字体重建非常难受 pass了，目前在用reex看之前alist挂载的番剧</p>
 <p><a target="_blank" rel="noopener" href="https://wgxls.site/posts/rclone-mount-webdav/">Rclone挂载WebDav为本地磁盘</a> 开机自启动<a target="_blank" rel="noopener" href="https://www.bilibili.com/opus/924962456114036736">参考</a></p>
@@ -222,10 +238,10 @@
 <p>openwrt Nikki 和 mihomo有时候规则集可能会更新失败，需要自己删掉rule之后再次更新</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">openwrt:/etc/nikki/run/ruleset</span><br><span class="line">windows:C:\Users\qllokirin\AppData\Roaming\mihomo-party\work\ruleset</span><br></pre></td></tr></table></figure>
 
-<p><strong>三月</strong></p>
-<p>qBittorrent&#x2F;alist正则表达式重命名番剧通用</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">.*?\[(\d&#123;2&#125;)\].*?\.mkv$</span><br><span class="line">番剧名称 S01E$1.mkv</span><br></pre></td></tr></table></figure>
-
+<p><strong>一月</strong></p>
+<p><a target="_blank" rel="noopener" href="https://iriun.com/">https://iriun.com/</a> 手机摄像头变成电脑摄像头</p>
+<p>1p可以申请通配证书，好用</p>
+<p><a target="_blank" rel="noopener" href="https://vitepress.dev/zh/">vitepress</a>写文档挺好看的  <a target="_blank" rel="noopener" href="https://docs.bugdesigner.cn/docs/Tutorial/vitepress.html">别人的教程</a></p>
 <h1 id="2024"><a href="#2024" class="headerlink" title="2024"></a>2024</h1><p><strong>一月</strong></p>
 <p>把windows powershell设置为预测历史指令自动补全</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#寻找最新版本</span></span><br><span class="line"><span class="built_in">Find-Module</span> PSReadLine <span class="literal">-AllVersions</span> | <span class="built_in">Select-Object</span> <span class="literal">-First</span> <span class="number">5</span></span><br><span class="line"><span class="comment">#我这里最新是2.3.6</span></span><br><span class="line"><span class="built_in">Install-Module</span> <span class="literal">-Name</span> PSReadLine <span class="literal">-RequiredVersion</span> <span class="number">2.3</span>.<span class="number">6</span></span><br><span class="line"><span class="comment">#把预测源目设置成历史</span></span><br><span class="line"><span class="built_in">Set-PSReadLineOption</span> <span class="literal">-PredictionSource</span> <span class="built_in">History</span></span><br><span class="line"><span class="comment">#重启powershell即可</span></span><br></pre></td></tr></table></figure>
@@ -252,28 +268,6 @@
 
 <p>potplayer竟然可以打开摄像头，主要是可以很方便的查看usb摄像头支持的最大画面，爽！<code>打开 - &gt;设备设置 - &gt;摄像头</code></p>
 <p><strong>六月</strong></p>
-<p>来点windwos软件推荐，雀食好用</p>
-<p><a target="_blank" rel="noopener" href="https://im.qq.com/index/">QQ</a></p>
-<p><a target="_blank" rel="noopener" href="https://weixin.qq.com/">微信</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/mihomo-party-org/mihomo-party/releases/latest">mihomo-party</a></p>
-<p><a target="_blank" rel="noopener" href="https://music.163.com/#/download">网易云音乐</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.wps.cn/">WPS</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.google.com/intl/zh-CN/chrome/">谷歌浏览器</a></p>
-<p><a target="_blank" rel="noopener" href="https://cn.bandisoft.com/bandizip/">BandZip</a> 解压缩的神</p>
-<p><a target="_blank" rel="noopener" href="https://www.tbtool.cn/">图吧工具箱</a> 无需多言 真正的神</p>
-<p><a target="_blank" rel="noopener" href="https://maruko.appinn.me/">小丸工具箱</a> 压制视频的神</p>
-<p><a target="_blank" rel="noopener" href="http://www.pcfreetime.com/formatfactory/cn/index.html">格式工程</a> 格式转换的神</p>
-<p><a target="_blank" rel="noopener" href="https://www.voidtools.com/zh-cn/downloads/">everything</a> 搜索文件的神</p>
-<p><a target="_blank" rel="noopener" href="https://geekuninstaller.com/download">geek</a> 卸载软件的神</p>
-<p><a target="_blank" rel="noopener" href="http://1.94.138.197/bangumi">http://1.94.138.197/bangumi</a> 百度网盘不限速的神</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/redtrillix/SpaceSniffer/releases/tag/v1.3.0.2">spacesniffer</a> 磁盘分析工具</p>
-<p><a target="_blank" rel="noopener" href="https://potplayer.daum.net/">potplayer</a>   视频播放的神</p>
-<p><a target="_blank" rel="noopener" href="https://www.diskinternals.com/linux-reader/">DiskInternals Linux Reader</a>   查看ubuntu的文件</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/nilaoda/BBDown">BBdown</a>   下载b站视频&#x2F;音频</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/BluePointLilac/ContextMenuManager">右键菜单管理</a> 非常好用</p>
-<p><a target="_blank" rel="noopener" href="https://termius.com/download/windows">Termuis</a> ssh链接软件，多端同步很好用</p>
-<p><a target="_blank" rel="noopener" href="https://www.microsoft.com/store/apps/9PF4KZ2VN4W9">TranslucentTB</a> 底部栏透明 微软商店就有</p>
-<p>Microsoft To Do 做todolist 多端同步很好用</p>
 <p>我是不是早已与往日不同了呢</p>
 <p><strong>七月</strong></p>
 <p><a target="_blank" rel="noopener" href="https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors">阿里docker镜像</a> 神！</p>
@@ -610,14 +604,14 @@
       
         
         
-          <img data-src="/covers/tg3.jpg" data-sizes="auto" alt="记一次家电自行参悟维修过程" class="lazyload">
+          <img data-src="/covers/25.jpg" data-sizes="auto" alt="Ubuntu&amp;Windows&amp;Android使用大杂烩" class="lazyload">
         
       
-      <a href="/2025/01/13/28.repair_electrical_appliances/"></a>
+      <a href="/6666/06/06/ubuntu_windows_android/"></a>
       <div class="article-nav-caption">后一篇</div>
       <h3 class="article-nav-title">
         
-          记一次家电自行参悟维修过程
+          Ubuntu&amp;Windows&amp;Android使用大杂烩
         
       </h3>
     </div>
@@ -736,10 +730,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        47.8k
+        49.3k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        02:52
+        02:59
       </div>
     
     
