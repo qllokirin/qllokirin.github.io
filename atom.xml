@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2025-04-05T12:20:34.392Z</updated>
+  <updated>2025-05-26T03:28:03.742Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://example.com/7777/07/07/diary/"/>
     <id>http://example.com/7777/07/07/diary/</id>
     <published>7777-07-06T23:07:07.000Z</published>
-    <updated>2025-04-05T12:20:34.392Z</updated>
+    <updated>2025-05-26T03:28:03.742Z</updated>
     
     
     <summary type="html">我们所经历的日常..</summary>
@@ -40,7 +40,7 @@
     <link href="http://example.com/6666/06/06/ubuntu_windows_android/"/>
     <id>http://example.com/6666/06/06/ubuntu_windows_android/</id>
     <published>6666-06-06T13:55:39.000Z</published>
-    <updated>2025-03-21T09:20:37.560Z</updated>
+    <updated>2025-05-26T03:28:05.575Z</updated>
     
     
     <summary type="html">浅浅记录个人使用ubuntu所遇之事</summary>
@@ -53,6 +53,25 @@
     <category term="重装" scheme="http://example.com/tags/%E9%87%8D%E8%A3%85/"/>
     
     <category term="Ubuntu" scheme="http://example.com/tags/Ubuntu/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>75元自制85w宿舍小冰箱</title>
+    <link href="http://example.com/2025/05/26/29.small_fridge/"/>
+    <id>http://example.com/2025/05/26/29.small_fridge/</id>
+    <published>2025-05-26T10:56:49.000Z</published>
+    <updated>2025-05-26T05:13:47.137Z</updated>
+    
+    
+    <summary type="html">夏日炎炎，饮水机没有制冷功能又想喝凉水怎么办，那就浅浅自制一个~</summary>
+    
+    
+    
+    <category term="记录" scheme="http://example.com/categories/%E8%AE%B0%E5%BD%95/"/>
+    
+    
+    <category term="维修" scheme="http://example.com/tags/%E7%BB%B4%E4%BF%AE/"/>
     
   </entry>
   
@@ -392,25 +411,6 @@
     
     
     <category term="EasyConnect" scheme="http://example.com/tags/EasyConnect/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>感谢与二次元情投</title>
-    <link href="http://example.com/2023/01/01/09.animation/"/>
-    <id>http://example.com/2023/01/01/09.animation/</id>
-    <published>2023-01-01T13:55:39.000Z</published>
-    <updated>2025-02-01T15:16:29.783Z</updated>
-    
-    
-    <summary type="html">感受一个个故事的悲欢离合</summary>
-    
-    
-    
-    <category term="生活" scheme="http://example.com/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-    <category term="番" scheme="http://example.com/tags/%E7%95%AA/"/>
     
   </entry>
   
