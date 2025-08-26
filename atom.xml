@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2025-08-19T06:24:55.411Z</updated>
+  <updated>2025-08-26T07:34:34.555Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://example.com/7777/07/07/diary/"/>
     <id>http://example.com/7777/07/07/diary/</id>
     <published>7777-07-06T23:07:07.000Z</published>
-    <updated>2025-08-19T06:24:55.411Z</updated>
+    <updated>2025-08-26T07:34:34.555Z</updated>
     
     
     <summary type="html">我们所经历的日常..</summary>
@@ -80,7 +80,7 @@
     <link href="http://example.com/2025/01/13/28.repair_electrical_appliances/"/>
     <id>http://example.com/2025/01/13/28.repair_electrical_appliances/</id>
     <published>2025-01-13T10:56:49.000Z</published>
-    <updated>2025-08-19T11:10:21.705Z</updated>
+    <updated>2025-08-26T07:41:18.921Z</updated>
     
     
     <summary type="html">主打一个参悟，电路理解全靠悟！（其实是靠纯猜x）</summary>
