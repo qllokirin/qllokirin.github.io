@@ -41,7 +41,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/12/17/f8yjSmDGoNAC6tW.jpg">
 <meta property="og:image" content="https://s2.loli.net/2022/12/17/wGW4KmTEd6M2hDy.png">
 <meta property="article:published_time" content="7777-07-06T23:07:07.000Z">
-<meta property="article:modified_time" content="2025-08-26T07:34:34.555Z">
+<meta property="article:modified_time" content="2025-08-27T09:10:21.941Z">
 <meta property="article:author" content="qllokirin">
 <meta property="article:tag" content="日记">
 <meta name="twitter:card" content="summary">
@@ -189,7 +189,7 @@
       <div class="article-date">
   <a href="/7777/07/07/diary/" class="article-date-link" data-aos="zoom-in">
     <time datetime="7777-07-06T23:07:07.000Z" itemprop="datePublished">7777-07-07</time>
-    <time style="display: none;" id="post-update-time">2025-08-26</time>
+    <time style="display: none;" id="post-update-time">2025-08-27</time>
   </a>
 </div>
 
@@ -311,7 +311,17 @@
 <p><a target="_blank" rel="noopener" href="https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors">阿里docker镜像</a> 神！</p>
 <blockquote>
 <p>感觉不如<a target="_blank" rel="noopener" href="https://1panel.cn/docs/user_manual/containers/setting/">1panel</a>一根</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /etc/docker</span><br><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;EOF</span><br><span class="line">&#123;</span><br><span class="line"> &quot;registry-mirrors&quot;: [</span><br><span class="line">     &quot;https://docker.1panel.live&quot;</span><br><span class="line"> ]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /etc/docker</span><br><span class="line">sudo tee /etc/docker/daemon.json &lt;&lt;EOF</span><br><span class="line">&#123;</span><br><span class="line">&quot;registry-mirrors&quot;: [</span><br><span class="line">  &quot;https://docker.1panel.live&quot;</span><br><span class="line">]</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+<p>感觉不如<a target="_blank" rel="noopener" href="https://1ms.run/">毫秒镜像</a>一根</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo &#x27;&#123;&quot;registry-mirrors&quot;:[&quot;https://docker.1ms.run&quot;],&quot;dns&quot;: [&quot;8.8.8.8&quot;, &quot;114.114.114.114&quot;]&#125;&#x27; | sudo tee /etc/docker/daemon.json &gt; /dev/null</span><br><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+<p>设置docker代理</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir -p /etc/systemd/system/docker.service.d</span><br><span class="line">sudo vim /etc/systemd/system/docker.service.d/http-proxy.conf</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[Service]</span><br><span class="line">Environment=&quot;HTTP_PROXY=http://127.0.0.1:7890&quot;</span><br><span class="line">Environment=&quot;HTTPS_PROXY=http://127.0.0.1:7890&quot;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
 </blockquote>
 <p>用qt写cmake项目时经常会出现改了ui但是编译运行的时候还是没变，只需要找一个cpp打一个空格然后不保存编译就行了（让他自动保存）</p>
 <p><strong>八月</strong></p>
@@ -642,7 +652,7 @@
       
         
         
-          <img data-src="/covers/tg_4.jpg" data-sizes="auto" alt="Ubuntu&amp;Windows&amp;Android使用大杂烩" class="lazyload">
+          <img data-src="/covers/33.jpg" data-sizes="auto" alt="Ubuntu&amp;Windows&amp;Android使用大杂烩" class="lazyload">
         
       
       <a href="/6666/06/06/ubuntu_windows_android/"></a>
@@ -768,10 +778,10 @@
     
       <div>
         <span class="icon-brush"></span>
-        53.5k
+        53.6k
         &nbsp;|&nbsp;
         <span class="icon-coffee"></span>
-        03:14
+        03:15
       </div>
     
     
