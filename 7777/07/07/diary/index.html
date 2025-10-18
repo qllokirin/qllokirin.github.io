@@ -41,7 +41,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/12/17/f8yjSmDGoNAC6tW.jpg">
 <meta property="og:image" content="https://s2.loli.net/2022/12/17/wGW4KmTEd6M2hDy.png">
 <meta property="article:published_time" content="7777-07-06T23:07:07.000Z">
-<meta property="article:modified_time" content="2025-09-13T09:46:03.744Z">
+<meta property="article:modified_time" content="2025-10-18T08:27:04.682Z">
 <meta property="article:author" content="qllokirin">
 <meta property="article:tag" content="日记">
 <meta name="twitter:card" content="summary">
@@ -189,7 +189,7 @@
       <div class="article-date">
   <a href="/7777/07/07/diary/" class="article-date-link" data-aos="zoom-in">
     <time datetime="7777-07-06T23:07:07.000Z" itemprop="datePublished">7777-07-07</time>
-    <time style="display: none;" id="post-update-time">2025-09-13</time>
+    <time style="display: none;" id="post-update-time">2025-10-18</time>
   </a>
 </div>
 
@@ -210,7 +210,9 @@
 <span id="more"></span>
 
 <p>日记从上到下，从新到旧</p>
-<h1 id="2025"><a href="#2025" class="headerlink" title="2025"></a>2025</h1><p><strong>九月</strong></p>
+<h1 id="2025"><a href="#2025" class="headerlink" title="2025"></a>2025</h1><p><strong>十月</strong></p>
+<p><a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows/wsl/tutorials/wsl-vscode">wsl-vscode</a>在Windows下使用wsl，打开vscode时使用wsl里面的Linux环境</p>
+<p><strong>九月</strong></p>
 <p>**<a target="_blank" rel="noopener" href="https://github.com/spencerwooo/mihoro">mihoro</a>**命令行运行代理，玩玩，若提示&#96;&#96;GLIBC_2.33’ not found&#96;，在release中下载musl版本即可</p>
 <blockquote>
 <p>感觉和直接用<a target="_blank" rel="noopener" href="https://wiki.metacubex.one/startup/">mihomo</a>也差不了太多</p>
@@ -248,7 +250,7 @@
 <blockquote>
 <p>现在<code>启用或关闭Windows功能</code>里面勾选<code>适用于Linux的Windows子系统</code>和<code>虚拟机平台</code>，重启</p>
 </blockquote>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看可安装的镜像</span></span><br><span class="line">wsl <span class="literal">--list</span> <span class="literal">--online</span></span><br><span class="line"><span class="comment"># 安装Ubuntu20.04</span></span><br><span class="line">wsl <span class="literal">--install</span> Ubuntu<span class="literal">-20</span>.<span class="number">04</span></span><br><span class="line"><span class="comment"># 安装失败则需wsl --update安装内核</span></span><br><span class="line"><span class="comment"># 查看目前有哪些已经下载的</span></span><br><span class="line">wsl <span class="literal">--list</span> <span class="literal">-v</span></span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">wsl <span class="literal">-d</span> Ubuntu<span class="literal">-20</span>.<span class="number">04</span></span><br><span class="line"><span class="comment"># 关机</span></span><br><span class="line">wsl <span class="literal">--shutdown</span></span><br><span class="line"><span class="comment"># 删除</span></span><br><span class="line">wsl <span class="literal">--unregister</span> Ubuntu</span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看可安装的镜像 如果提示需要升级就升级一下</span></span><br><span class="line">wsl <span class="literal">--list</span> <span class="literal">--online</span></span><br><span class="line"><span class="comment"># 安装Ubuntu20.04</span></span><br><span class="line">wsl <span class="literal">--install</span> Ubuntu<span class="literal">-20</span>.<span class="number">04</span></span><br><span class="line"><span class="comment"># 安装失败则需wsl --update安装内核</span></span><br><span class="line"><span class="comment"># 查看目前有哪些已经下载的</span></span><br><span class="line">wsl <span class="literal">--list</span> <span class="literal">-v</span></span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">wsl <span class="literal">-d</span> Ubuntu<span class="literal">-20</span>.<span class="number">04</span></span><br><span class="line"><span class="comment"># 关机</span></span><br><span class="line">wsl <span class="literal">--shutdown</span></span><br><span class="line"><span class="comment"># 删除</span></span><br><span class="line">wsl <span class="literal">--unregister</span> Ubuntu</span><br></pre></td></tr></table></figure>
 
 <p>wsl使用gazebo卡顿可以参考<a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv6266330%E6%8A%8A%60C:/Program">https://www.bilibili.com/read/cv6266330把`C:\Program</a> Files\WSL&#96;里面的exe都放进去选择高性能</p>
 <p>说起来也巧，妈妈的红米经常自动无限重启，可能是经典电源键问题或者cpu虚焊，故说是给妈妈新买一个，但是妈觉得太贵没必要就一直不去线下店试试小屏机习不习惯，就当我准备直接买的时候，妈的手机直接屏幕摔坏了，是好消息也是坏消息哈哈哈，成功去试了一下线下店，直接给妈买了个oppo findx8s+（其实我是想买一加13的，但是我妈之前做过电信营业厅的销售，显然是不知道一加的，所以觉得不是大品牌，故还是买ov吧）</p>
@@ -662,7 +664,7 @@
       
         
         
-          <img data-src="/covers/30.jpg" data-sizes="auto" alt="Ubuntu&amp;Windows&amp;Android使用大杂烩" class="lazyload">
+          <img data-src="/covers/tg_11.jpg" data-sizes="auto" alt="Ubuntu&amp;Windows&amp;Android使用大杂烩" class="lazyload">
         
       
       <a href="/6666/06/06/ubuntu_windows_android/"></a>
