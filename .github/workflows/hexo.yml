@@ -1,7 +1,7 @@
 name: automaticly update blogs
-on: 
- branches:
-  - main # master分支
+on:
+  push:
+    branches: ["main"]
 jobs:
   # 生成静态文件
   build:
