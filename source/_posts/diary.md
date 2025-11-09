@@ -23,6 +23,8 @@ sticky: true
 
 又折腾了一下我的nx30pro路由器，因为老实无征兆死机，甚至插拔电源线也不一定能活过来，于是乎重刷了一下官方的Immortalwrt固件，但是预留的overlay分区很小，装不下我想要的nikki，折腾了很久扩分区，最后用的方法是自己编译固件把nikki打包进去，目前感觉良好，非常不错，自编译固件还挺好的，就是有一点点费时间，操作跟着README就行了
 
+把博客编译放到github action上了，这样方便修改，多台设备直接修改github上面的markdown就行了
+
 **十月**
 
 [wsl-vscode](https://learn.microsoft.com/zh-cn/windows/wsl/tutorials/wsl-vscode)在Windows下使用wsl，打开vscode时使用wsl里面的Linux环境
