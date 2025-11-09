@@ -1,0 +1,24 @@
+<aside id="sidebar">
+  <div class="sidebar-wrapper <% if (is_post()) { %>wrap-sticky<% } %>">
+    <div class="sidebar-wrap" data-aos="<%= theme.animation.options.home.sidebar %>">
+      <% if (is_post()) { %>
+        <div class="sidebar-toc-sidebar"><%- partial('sidebar/toc-sidebar') %></div>
+        <div class="sidebar-common-sidebar hidden"><%- partial('sidebar/common-sidebar') %></div>
+      <% } else { %>
+        <%- partial('sidebar/common-sidebar') %>
+      <% } %>
+      <% if (is_post()) { %>
+        <div class="sidebar-btn-wrapper" style="position:static">
+          <div class="sidebar-toc-btn current"></div>
+          <div class="sidebar-common-btn"></div>
+        </div>
+      <% } %>
+    </div>
+  </div>
+
+  <% if (!is_post() && theme.widgets) { %>
+    <% theme.widgets.forEach((widget) => { %>
+      <%- partial('_widget/' + widget) %>
+    <% }) %>
+  <% } %>
+</aside>

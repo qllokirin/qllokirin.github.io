@@ -1,0 +1,149 @@
+{
+  "main": {
+    "id": "d27ab855b35fd864",
+    "type": "split",
+    "children": [
+      {
+        "id": "d677a3538e372e86",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8831bc73a0f03536",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "ubuntu.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "c4bd016d925851de",
+    "type": "split",
+    "children": [
+      {
+        "id": "a497c00b8bbecc89",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "0f07a240189b8417",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "f584168279b55d17",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "c72964ddde4df463",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "f0d64e7a705de4cc",
+    "type": "split",
+    "children": [
+      {
+        "id": "53dde035caaa324b",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9a0db6b6100e43a3",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "ubuntu.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "536cb237b618f59b",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "ubuntu.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "50bb2b1057721ead",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "40c9c06b46fd1bf9",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "ubuntu.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "ribbon": {
+    "mostRecentAction": ""
+  },
+  "active": "8831bc73a0f03536",
+  "lastOpenFiles": [
+    "ros.md",
+    "ubuntu.md",
+    "hexo-use.md",
+    "first-md.md"
+  ]
+}
