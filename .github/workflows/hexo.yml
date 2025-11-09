@@ -25,6 +25,8 @@ jobs:
       
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3 # 上传public目录内容
+        with:
+          path: ./public
   # 部署博客  
   deploy:
     needs: build   # 依赖上一个build操作
