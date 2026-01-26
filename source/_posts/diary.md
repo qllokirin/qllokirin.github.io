@@ -25,6 +25,8 @@ sticky: true
 
 > 这篇文章论述的非常详尽[深入探究 Windows 系统代理设置](https://myth.cx/p/windows-proxy/)
 
+发现一个小经验，如果需要让环境变量生效，在vscode终端新开一个终端是没有用的，需要把vsocde重启一下才行
+
 # 2025
 
 **十一月**
