@@ -11,27 +11,10 @@ var debounce = (func, delay) => {
   };
 };
 
-var throttle = (func, limit) => {
-  let lastFunc, lastRan;
-
-  return (...args) => {
-    const context = this;
-    if (!lastRan || Date.now() - lastRan >= limit) {
-      func.apply(context, args);
-      lastRan = Date.now();
-    } else {
-      clearTimeout(lastFunc);
-      lastFunc = setTimeout(() => {
-        func.apply(context, args);
-        lastRan = Date.now();
-      }, limit - (Date.now() - lastRan));
-    }
-  };
-};
-
 var __aosScrollHandler;
 var __aosResizeHandler;
 var __observer;
+var __aosBodyResizeObserver;
 
 (() => {
   let options = {
@@ -239,6 +222,14 @@ var __observer;
     window.on("scroll", __aosScrollHandler);
 
     observe(refreshHard);
+
+    if (window.ResizeObserver && _$("#main")) {
+      __aosBodyResizeObserver?.disconnect?.();
+      __aosBodyResizeObserver = new ResizeObserver(
+        debounce(() => refresh(), options.debounceDelay)
+      );
+      __aosBodyResizeObserver.observe(_$("#main"));
+    }
 
     return $aosElements;
   };

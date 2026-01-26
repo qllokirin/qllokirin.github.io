@@ -1,9 +1,13 @@
-<%- js(vendorCdn(theme.vendor.js.lazysizes)) %>
-<%- js(vendorCdn(theme.vendor.js.clipboard)) %>
+<%- js({ src: vendorCdn(theme.vendor.js.lazysizes)[0], integrity: vendorCdnIntegrity(theme.vendor.js.lazysizes)[0], crossorigin: "anonymous"}) %>
+<%- js({ src: vendorCdn(theme.vendor.js.clipboard)[0], integrity: vendorCdnIntegrity(theme.vendor.js.clipboard)[0], crossorigin: "anonymous"}) %>
+
+<%_ if (theme.material_theme.enable) { _%>
+  <%- js({src: vendorCdn(theme.vendor.js.material_theme)[0], integrity: vendorCdnIntegrity(theme.vendor.js.material_theme)[0], crossorigin: "anonymous"}) %>
+<%_ } _%>
 
 <%- js('js/script.js') %>
 
-<% if (theme.animation.enable) { %>
+<%_ if (theme.animation.enable) { _%>
   <%- js('js/aos.js') %>
   <script>
     var aosInit = () => {
@@ -20,153 +24,18 @@
       aosInit();
     }
   </script>
-<% } %>
+<%_ } _%>
 
 <%- js({src: 'js/pjax_script.js', 'data-pjax': true}) %>
 
-<script type="module" data-pjax>
-  import PhotoSwipeLightbox from "<%- vendorCdn(theme.vendor.js.photoswipe_lightbox) %>";
-  
-  const pswp = () => {
-    if (_$$('.article-entry a.article-gallery-item').length > 0) {
-      new PhotoSwipeLightbox({
-        gallery: '.article-entry',
-        children: 'a.article-gallery-item',
-        pswpModule: () => import("<%- vendorCdn(theme.vendor.js.photoswipe) %>")
-      }).init();
-    }
-    if(_$$('.article-gallery a.article-gallery-item').length > 0) {
-      new PhotoSwipeLightbox({
-        gallery: '.article-gallery',
-        children: 'a.article-gallery-item',
-        pswpModule: () => import("<%- vendorCdn(theme.vendor.js.photoswipe) %>")
-      }).init();
-    }
-    window.lightboxStatus = 'done';
-    window.removeEventListener('lightbox:ready', pswp);
-  }
-  if(window.lightboxStatus === 'ready') {
-    pswp()
-  } else {
-    window.addEventListener('lightbox:ready', pswp);
-  }
-</script>
-
-<% if (theme.valine.enable && theme.valine.appId && theme.valine.appKey) { %>
-  <%- js({src: vendorCdn(theme.vendor.js.valine)[0], 'data-pjax': true}) %>
-  <script data-pjax>
-    var GUEST_INFO = ['nick', 'mail', 'link'];
-    var guest_info = '<%= theme.valine.guest_info %>'.split(',').filter((item) => {
-      return GUEST_INFO.indexOf(item) > -1
-    });
-    var recordIP = JSON.parse('<%= theme.valine.recordIP %>');
-    var highlight = JSON.parse('<%= theme.valine.highlight %>');
-    var visitor = JSON.parse('<%= theme.valine.visitor %>');
-
-    new Valine({
-      el: '.vcomment',
-      appId: "<%= theme.valine.appId %>",
-      appKey: "<%= theme.valine.appKey %>",
-      placeholder: "<%= theme.valine.placeholder %>",
-      pageSize: '<%= theme.valine.pageSize %>',
-      avatar: '<%= theme.valine.avatar %>',
-      lang: '<%= theme.valine.lang %>',
-      recordIP: recordIP,
-      highlight: highlight,
-      visitor: visitor,
-      requiredFields: guest_info,
-      path: window.location.pathname
-    });
-  </script>
-<% } %>
-
-<% if (theme.waline.enable && theme.waline.serverURL) { %>
-  <script data-pjax type="module">
-    import { init } from "<%= vendorCdn(theme.vendor.js.waline)[0] %>";
-    if(_$('.wcomment')) {
-      window.walineInstance = init({
-        el: '.wcomment',
-        serverURL: '<%= theme.waline.serverURL %>',
-        lang: '<%= theme.waline.lang %>',
-        locale: <%- JSON.stringify(theme.waline.locale) %>,
-        emoji: <%- JSON.stringify(theme.waline.emoji) %>,
-        meta: <%- JSON.stringify(theme.waline.meta) %>,
-        requiredMeta: <%-JSON.stringify(theme.waline.requiredMeta) %>,
-        wordLimit: JSON.parse('<%= theme.waline.wordLimit %>'),
-        comment: true,
-        pageSize: JSON.parse('<%= theme.waline.pageSize %>'),
-        dark: 'html[data-theme="dark"]',
-        pageview: JSON.parse('<%= theme.waline.pageview %>'),
-    });
-    }
-  </script>
-<% } %>
-
-<% if (theme.gitalk.enable && theme.gitalk.clientID && theme.gitalk.clientSecret) { %>
-  <%- js({src: vendorCdn(theme.vendor.js.gitalk)[0], 'data-pjax': true}) %>
-  <% if (theme.gitalk.md5) { %>
-    <%- js({src: vendorCdn(theme.vendor.js.md5)[0], 'data-pjax': true}) %>
-  <% } %>
-  <script data-pjax>
-    var gitalkId = <%= theme.gitalk.md5 ? 'md5(location.pathname)' : 'location.pathname' %>;
-    var gitalk = new Gitalk({
-      clientID: '<%= theme.gitalk.clientID %>',
-      clientSecret: '<%= theme.gitalk.clientSecret %>',
-      repo: '<%= theme.gitalk.repo %>',
-      owner: '<%= theme.gitalk.owner %>',
-      admin: <%- JSON.stringify(theme.gitalk.admin) %>,
-      id: gitalkId, // Ensure uniqueness and length less than 50
-      distractionFreeMode: false // Facebook-like distraction free mode
-    })
-    if (document.getElementById('comments')) {
-      gitalk.render('comments')
-    }
-  </script>
-<% } %>
-
-<% if (theme.twikoo.enable && theme.twikoo.envId) { %>
-  <%- js({src: vendorCdn(theme.vendor.js.twikoo)[0], 'data-pjax': true}) %>
-  <script data-pjax>
-    twikoo.init({
-      envId: '<%= theme.twikoo.envId %>',
-      el: '.tcomment',
-      region: '<%= theme.twikoo.region %>',
-    })
-  </script>
-<% } %>
-
-<% if (theme.giscus.enable && page.comments !== false) { %>
-  <script data-pjax>
-    var giscusContainer = document.querySelector('.giscus');
-    if (giscusContainer) {
-      const giscusScript = document.createElement('script');
-      giscusScript.src = 'https://giscus.app/client.js';
-      giscusScript.setAttribute('data-repo', '<%= theme.giscus.repo %>');
-      giscusScript.setAttribute('data-repo-id', '<%= theme.giscus.repoId %>');
-      giscusScript.setAttribute('data-category', '<%= theme.giscus.category %>'); 
-      giscusScript.setAttribute('data-category-id', '<%= theme.giscus.categoryId %>');
-      giscusScript.setAttribute('data-mapping', '<%= theme.giscus.strict %>');
-      giscusScript.setAttribute('data-strict', '<%= theme.giscus.strict %>');
-      giscusScript.setAttribute('data-reactions-enabled', '<%= theme.giscus.reactionsEnabled %>');
-      giscusScript.setAttribute('data-emit-metadata', '<%= theme.giscus.emitMetadata %>');
-      giscusScript.setAttribute('data-input-position', '<%= theme.giscus.inputPosition %>');
-      giscusScript.setAttribute('data-theme', '<%= theme.giscus.commentTheme %>');
-      giscusScript.setAttribute('data-lang', '<%= theme.giscus.lang %>');
-      giscusScript.setAttribute('crossorigin', 'anonymous');
-      giscusScript.async = true;
-      giscusContainer.appendChild(giscusScript);
-    }
-  </script>
-<% } %>
-
-<% if (theme.generator_search.enable) { %>
+<%_ if (theme.generator_search.enable) { _%>
   <%- js({src: 'js/generator_search.js', defer: true}) %>
-<% } %>
+<%_ } _%>
 
-<% if (theme.algolia_search.enable) { %>
+<%_ if (theme.algolia_search.enable) { _%>
   <script>
-    var CONFIG = {
-      root: '/',
+    var ALGOLIA_CONFIG = {
+      logo: "<%- url_for('/images/algolia_logo.svg', { relative: false }) %>",
       algolia: {
         applicationID: "<%= config.algolia.appId %>",
         apiKey: "<%= config.algolia.apiKey %>",
@@ -175,101 +44,49 @@
           "per_page": parseInt("<%= theme.algolia_search.hits.per_page %>")
         },
         labels: {
-          "input_placeholder": "<%= theme.algolia_search.labels.input_placeholder %>",
-          "hits_empty": "<%= theme.algolia_search.labels.hits_empty %>",
-          "hits_stats": "<%= theme.algolia_search.labels.hits_stats %>"
+          "input_placeholder": "<%= __('algolia.input_placeholder') %>",
+          "hits_empty": "<%= __('algolia.hits_empty') %>",
+          "hits_stats": "<%= __('algolia.hits_stats') %>"
         }
       }
     };
   </script>
-  <%- js(vendorCdn(theme.vendor.js.algolia)) %>
-  <%- js({src: vendorCdn(theme.vendor.js.instantsearch)[0], defer: true}) %>
+  <%- js({src: vendorCdn(theme.vendor.js.algolia)[0], integrity: vendorCdnIntegrity(theme.vendor.js.algolia)[0], crossorigin: "anonymous", defer: true}) %>
+  <%- js({src: vendorCdn(theme.vendor.js.instantsearch)[0], integrity: vendorCdnIntegrity(theme.vendor.js.instantsearch)[0], crossorigin: "anonymous", defer: true}) %>
   <%- js({src: 'js/algolia_search.js', defer: true}) %>
-<% } %>
+<%_ } _%>
 
-<% if (theme.firework.enable) { %>
-  <%- js(vendorCdn(theme.vendor.js.firework)) %>
+<%_ if (theme.firework.enable) { _%>
   <script>
-    window.firework && window.firework(JSON.parse('<%- JSON.stringify(theme.firework.options) %>'))
-  </script>
-<% } %>
-
-<% if (theme.pjax.enable) { %>
-  <%- js(vendorCdn(theme.vendor.js.pjax)) %>
-  <script>
-    function loadScripts(scripts, index) {
-      if (index < scripts.length) {
-        const script = scripts[index];
-        const src = script.getAttribute('src');
-
-        if (src) {
-          fetch(src)
-            .then(response => {
-              if (!response.ok) {
-                throw new Error('Network response was not ok ' + response.statusText);
-              }
-              return response.text();
-            })
-            .then(scriptContent => {
-              const scriptElement = document.createElement('script');
-              scriptElement.text = scriptContent;
-              document.head.appendChild(scriptElement);
-              loadScripts(scripts, index + 1);
-            })
-            .catch(error => {
-              console.error('Failed to load script:', src, error);
-            });
-        } else {
-          // Inline script, directly evaluate
-          eval(script.textContent);
-          loadScripts(scripts, index + 1);
-        }
+    var setupFirework = () => {
+      if (!<%= theme.firework.disable_on_mobile %> || !window.matchMedia('(max-width: 768px)').matches) {
+        window.firework && window.firework(JSON.parse('<%- JSON.stringify(theme.firework.options) %>'));
       }
     }
-    window.Pjax && new window.Pjax({
-      selectors: [
-        "#header img",
-        "head title",
-        "#header-title",
-        "#subtitle-wrap",
-        "#content",
-        '#mobile-nav',
-        '#lazy-script'
-      ],
-      switches: {
-        "#header-title": Pjax.switches.outerHTML,
-        "#subtitle-wrap": Pjax.switches.outerHTML,
-        "#content": function(oldEl, newEl, options) {
-          const scripts = [...newEl.querySelectorAll('script')];
-          loadScripts(scripts, 0);
-          oldEl.outerHTML = newEl.outerHTML
-          this.onSwitch()
-        },
-        "#mobile-nav": Pjax.switches.outerHTML,
-        '#lazy-script': function(oldEl, newEl, options) {
-          const scripts = [...newEl.querySelectorAll('script')];
-          loadScripts(scripts, 0);
-          oldEl.innerHTML = newEl.innerHTML
-          this.onSwitch()
-        },
-      },
-      cacheBust: false
-    })
   </script>
-  <%- js('js/pjax.js') %>
-<% } %>
+  <%- js({src: vendorCdn(theme.vendor.js.firework)[0], integrity: vendorCdnIntegrity(theme.vendor.js.firework)[0], crossorigin: "anonymous", onload: "setupFirework()", defer: true}) %>
+<%_ } _%>
 
-<% if (theme.live2d.enable) { %>
+<%_ if (theme.pjax.enable) { _%>
+  <%- js({src: vendorCdn(theme.vendor.js.pjax)[0], integrity: vendorCdnIntegrity(theme.vendor.js.pjax)[0], crossorigin: "anonymous"}) %>
+  <%- js('js/pjax.js') %>
+<%_ } _%>
+
+<%_ if (theme.live2d.enable) { _%>
   <script>
-    function initLive2d() {
+    var setupLive2d = () => {
       live2d.init("<%- vendorCdn(theme.vendor.js.live2d.base)[0] %>", {themeTipsPath: ""});
     }
   </script>
-  <%- js({src: vendorCdn(theme.vendor.js.live2d.js)[0], onload: "initLive2d && initLive2d()", async: true})%>
-<% } %>
+  <%- js({src: vendorCdn(theme.vendor.js.live2d.js)[0], onload: "setupLive2d()", async: true})%>
+<%_ } _%>
 
-<% if (theme.quicklink.enable) { %>
-  <%- js(vendorCdn(theme.vendor.js.quicklink)) %>
+<%_ if (theme.live2d_widgets.enable) { _%>
+  <%- js({src: vendorCdn(theme.vendor.js.live2d_widgets)[0], integrity: vendorCdnIntegrity(theme.vendor.js.live2d_widgets)[0], crossorigin: "anonymous"}) %>
+<%_ } _%>
+
+<%_ if (theme.quicklink.enable) { _%>
+  <%- js({src: vendorCdn(theme.vendor.js.quicklink)[0], integrity: vendorCdnIntegrity(theme.vendor.js.quicklink)[0], crossorigin: "anonymous"}) %>
   <script data-pjax>
     window.quicklink?.listen({
       timeout: <%= theme.quicklink.timeout %>,
@@ -277,98 +94,167 @@
       ignores: <%- JSON.stringify(theme.quicklink.ignores) %>
     });
   </script>
-<% } %>
+<%_ } _%>
 
 <div id="lazy-script">
   <div>
-    <% if (theme.mermaid.enable && page.mermaid) { %>
-      <%- js({src: vendorCdn(theme.vendor.js.mermaid)[0], 'data-pjax': true}) %>
+    <%_ if (post?.permalink) { _%>
+      <% let content = stripHtml(post.content).slice(0, 250).replace(/\s/g, " ") %>
+      <% let excerpt = stripHtml(post.excerpt).replace(/\s/g, " ") %>
+      <script data-pjax>
+        window.REIMU_POST = {
+          author: "<%= post.author || config.author %>",
+          title: "<%= post.title %>",
+          url: "<%= post.permalink %>",
+          excerpt: "<%= excerpt %>",
+          description: "<%= post.description %>",
+          stripContent: "<%= content %>",
+          date: "<%= post.date %>",
+          updated: "<%= post.updated %>",
+          cover: "<%- post.cover && !post.cover.startsWith('rgb') ? url_for(post.cover, {relative: false}) : url_for(theme.banner, {relative: false}) %>",
+        };
+      </script>
+    <%_ } _%>   
+    <%_ if (theme.mermaid.enable && page.mermaid) { _%>
+      <%- js({src: vendorCdn(theme.vendor.js.mermaid)[0], integrity: vendorCdnIntegrity(theme.vendor.js.mermaid)[0], crossorigin: "anonymous", 'data-pjax': true}) %>
+      <%- js({src: vendorCdn(theme.vendor.js.dompurify)[0], integrity: vendorCdnIntegrity(theme.vendor.js.dompurify)[0], crossorigin: "anonymous"}) %>
+      <%_ if (theme.mermaid.zoom) { _%>
+        <%- js({src: vendorCdn(theme.vendor.js.svg_pan_zoom)[0], integrity: vendorCdnIntegrity(theme.vendor.js.svg_pan_zoom)[0], crossorigin: "anonymous"}) %>
+      <%_ } _%>
       <script data-pjax>
         if (window.mermaid) {
           // https://github.com/mermaid-js/mermaid/issues/1945
           const elementCode = '.mermaid'
-          const saveOriginalData = () => {
+          const processElements = (callback) => {
+            const els = _$$(elementCode);
+            if (!els.length) return Promise.resolve();
+            
             return new Promise((resolve, reject) => {
               try {
-                var els = _$$(elementCode),
-                    count = els.length;
-                els.forEach(element => {
-                  if (element.getAttribute('data-original-code') == null){
-                    element.setAttribute('data-original-code', element.innerHTML)
-                  }
-                  count--
-                  if(count == 0){
-                    resolve()
-                  }
-                });
+                els.forEach(callback);
+                resolve();
               } catch (error) {
-              reject(error) 
+                reject(error);
               }
-            })
-          }
-          const resetProcessed = () => {
-            return new Promise((resolve, reject) => {
-              try {
-                var els = _$$(elementCode),
-                    count = els.length;
-                els.forEach(element => {
-                  if(element.getAttribute('data-original-code') != null){
-                    element.removeAttribute('data-processed')
-                    element.innerHTML = element.getAttribute('data-original-code')
-                  }
-                  count--
-                  if(count == 0){
-                    resolve()
-                  }
-                });
-              } catch (error) {
-              reject(error) 
+            });
+          };
+          const saveOriginalData = () => processElements(el => {
+            if (!el.getAttribute('data-original-code')) {
+              el.setAttribute('data-original-code', el.innerHTML);
+            }
+          });
+
+          const resetProcessed = () => processElements(el => {
+            const originalCode = el.getAttribute('data-original-code');
+            if (originalCode) {
+              el.removeAttribute('data-processed');
+              el.innerHTML = DOMPurify.sanitize(originalCode);
+            }
+          });
+          const loadMermaid = async (theme) => {
+            window.mermaid.initialize({theme, startOnLoad: false})
+            await window.mermaid.run({querySelector: elementCode, suppressErrors: true})
+            if (window.svgPanZoom) {
+              window.__panZoomList?.forEach(panZoom => {try {panZoom.destroy()} catch {}});
+              window.__panZoomList = [];
+              _$$('.mermaid > svg').forEach(el => {
+                const bbox = el.getBBox();
+                el.setAttribute('height', Math.max(bbox.height, 80));
+                window.__panZoomList.push(window.svgPanZoom(el, {
+                  zoomEnabled: true,
+                  controlIconsEnabled: true,
+                  fit: true,
+                  center: true
+                }));
+              });
+              if (window.__resizeMermaidSvg) {
+                window.removeEventListener('resize', window.__resizeMermaidSvg);
               }
-            })
-          } 
-          const loadMermaid = (theme) => {
-            window.mermaid.initialize({theme})
-            window.mermaid.init({theme}, _$$(elementCode))
+              window.__resizeMermaidSvg = () => {
+                try {
+                  window.__panZoomList.forEach(panZoom => {
+                    panZoom.resize();
+                    panZoom.fit();
+                    panZoom.center();
+                  });
+                } catch {
+                  window.removeEventListener('resize', window.__resizeMermaidSvg);
+                  window.__panZoomList = [];
+                }
+              }
+              window.addEventListener('resize', window.__resizeMermaidSvg);
+            }
           }
-          document.body.addEventListener('dark-theme-set', () => {
-            saveOriginalData()
-            .then(resetProcessed())
-            .then(loadMermaid('dark'))
-            .catch(console.error)
-          })
-          document.body.addEventListener('light-theme-set', () => {
-            saveOriginalData()
-            .then(resetProcessed())
-            .then(loadMermaid('default'))
-            .catch(console.error)
-          })
-          if(localStorage.getItem('dark_mode') == 'true') {
-            saveOriginalData()
-            .then(resetProcessed())
-            .then(loadMermaid('dark'))
-            .catch(console.error)
+          const initMermaid = async (theme) => {
+            try {
+              await saveOriginalData();
+              await resetProcessed();
+              await loadMermaid(theme);
+            } catch (error) {
+              console.error(error);
+            }
+          };
+          
+          document.body.addEventListener('reimu:theme-set', (e) => {
+            const isDark = e.detail.isDark;
+            initMermaid(isDark ? 'dark' : 'default');
+          });
+
+          const mode = localStorage.getItem('dark_mode');
+          if (mode === 'auto') {
+            const osMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            initMermaid(osMode ? 'dark' : 'default');
           } else {
-            saveOriginalData()
-            .then(resetProcessed())
-            .then(loadMermaid('default'))
-            .catch(console.error)
+            initMermaid(mode === 'true' ? 'dark' : 'default');
           }
         }
       </script>
-    <% } %>
+    <%_ } _%>
+    <%_ if (is_post() || is_page()) { _%>
+      <%_ if (config.highlight.enable || config.syntax_highlighter === "highlight.js") { _%>
+        <%- js({ src: "js/insert_highlight.js", "data-pjax": true }) %>
+      <%_ } _%>
+      <%- js({ src: 'js/tabs.js', 'data-pjax': true, defer: true }) %>
+      <%_ if (Array.isArray(theme.share) && theme.share.includes("weixin")) { _%>
+        <%- js({src: vendorCdn(theme.vendor.js.snapdom)[0], integrity: vendorCdnIntegrity(theme.vendor.js.snapdom)[0], crossorigin: "anonymous", defer: true, 'data-pjax': true}) %>
+        <%- js({src: vendorCdn(theme.vendor.js.qrcode)[0], integrity: vendorCdnIntegrity(theme.vendor.js.qrcode)[0], crossorigin: "anonymous", defer: true, 'data-pjax': true}) %>
+      <%_ } _%>
+      <script type="module" data-pjax>
+        (async () => {
+          const PhotoSwipeLightbox = (await safeImport("<%- vendorCdn(theme.vendor.js.photoswipe_lightbox) %>", "<%- vendorCdnIntegrity(theme.vendor.js.photoswipe_lightbox) %>")).default;
+          const initPswp = (gallery, children) => {
+            if (_$$(`${gallery} ${children}`).length > 0) {
+              new PhotoSwipeLightbox({
+                gallery,
+                children,
+                pswpModule: () => safeImport("<%- vendorCdn(theme.vendor.js.photoswipe) %>", "<%- vendorCdnIntegrity(theme.vendor.js.photoswipe) %>")
+              }).init();
+            }
+          }
+          const pswp = () => {
+            initPswp('.article-entry', 'a.article-gallery-item');
+            initPswp('.article-gallery', 'a.article-gallery-item');
+          }
+          pswp();
+        })();
+      </script>
+      <%_ if (page.comments !== false) { _%>
+        <%- partial('post/comment', null, { cache: true }) %>
+      <%_ } _%>
+    <%_ } _%>
   </div>
 </div>
 
 <%- copyright() %>
 <%- outdate() %>
 
-<% if (theme.footer.busuanzi) { %>
-  <%- js({src: vendorCdn(theme.vendor.js.busuanzi)[0], async: true}) %>
-<% } %>
+<%_ if (theme.footer.busuanzi) { _%>
+  <%- js({src: vendorCdn(theme.vendor.js.busuanzi)[0], integrity: vendorCdnIntegrity(theme.vendor.js.busuanzi)[0], crossorigin: "anonymous", async: true}) %>
+<%_ } _%>
 
-<% if (theme.service_worker.enable) { %>
+<%_ if (theme.service_worker.enable) { _%>
   <%- js('js/service_worker.js') %>
-<% } else { %>
+<%_ } else { _%>
 <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.getRegistrations().then((registrations) => {
@@ -378,4 +264,90 @@
     });
   }
 </script>
-<% } %>
+<%_ } _%>
+
+<%_ if (theme.math.enable) { _%>
+  <%_ if (theme.math.katex.enable && theme.math.katex.autoRender) { _%>
+    <%- js({src: vendorCdn(theme.vendor.js.katex)[0], integrity: vendorCdnIntegrity(theme.vendor.js.katex)[0], crossorigin: "anonymous", defer: true, 'data-pjax': true}) %>
+    <%- js({src: vendorCdn(theme.vendor.js.katex_auto_render)[0], integrity: vendorCdnIntegrity(theme.vendor.js.katex_auto_render)[0], crossorigin: "anonymous", defer: true, onload: "renderMathInElement(_$('article'), {delimiters: [{left: '$$', right: '$$', display: true},{left: '$', right: '$', display: false}]});", 'data-pjax': true}) %>
+  <% } else if (theme.math.mathjax.enable) { %>
+    <%- js({src: vendorCdn(theme.vendor.js.mathjax)[0], integrity: vendorCdnIntegrity(theme.vendor.js.mathjax)[0], crossorigin: "anonymous", defer: true, 'data-pjax': true}) %>
+    <script data-pjax>
+      window.MathJax = <%- JSON.stringify(theme.math.mathjax.options) %>;
+    </script>
+  <%_ } _%>
+<%_ } _%>
+
+<%_ if (theme.player.aplayer.enable) { _%>
+  <%_ if (!theme.player.meting.enable) { _%>
+    <script>
+    var setupAPlayer = () => {
+      if (!<%= theme.player.disable_on_mobile %> || !window.matchMedia('(max-width: 768px)').matches) {
+        if (window.matchMedia('(max-width: 959px)').matches) {
+          const aplayer = _$('#aplayer');
+          if (aplayer) {
+            const aside = aplayer.parentNode?.parentNode;
+            if (aside?.tagName === 'ASIDE') {
+              aplayer.removeAttribute('data-aos');
+              aplayer.parentNode.removeChild(aplayer);
+              document.body.appendChild(aplayer);
+            }
+          }
+        }
+        new APlayer({
+          theme: "var(--color-link)",
+          container: document.getElementById('aplayer'),
+          audio: <%- JSON.stringify(theme.player.aplayer.options.audio) %> || [],
+          fixed: isMobile ? true : (<%= JSON.stringify(theme.player.aplayer.options.fixed) %> || false),
+          autoplay: <%= JSON.stringify(theme.player.aplayer.options.autoplay) %> || false,
+          loop: '<%= theme.player.aplayer.options.loop %>' || 'all',
+          order: '<%= theme.player.aplayer.options.order %>' || 'list',
+          preload: '<%= theme.player.aplayer.options.preload %>' || 'auto',
+          volume: <%= JSON.stringify(theme.player.aplayer.options.volume) %> || 0.7,
+          mutex: <%= JSON.stringify(theme.player.aplayer.options.mutex) %> || true,
+          listFolded: <%= JSON.stringify(theme.player.aplayer.options.listFolded) %> || false,
+          lrcType: <%= JSON.stringify(theme.player.aplayer.options.lrcType) %> || 0,
+        });
+      }
+    }
+    </script>
+  <%_ } else { _%>
+    <script>
+      var setupAPlayer = () => {
+        if (!<%= theme.player.disable_on_mobile %> || !window.matchMedia('(max-width: 768px)').matches) {
+          if (window.matchMedia('(max-width: 959px)').matches) {
+            const meting = _$('meting-js');
+            if (meting) {
+              meting.setAttribute('fixed', 'true');
+              const aside = meting.parentNode?.parentNode;
+              if (aside?.tagName === 'ASIDE') {
+                meting.parentNode.removeChild(meting);
+                document.body.appendChild(meting);
+              }
+            }
+          }
+        }
+      };
+      <%_ if (theme.player.meting.meting_api) { _%>
+        var meting_api = "<%- theme.player.meting.meting_api %>";
+      <%_ } _%>
+    </script>
+  <%_ } _%>
+  <%- js({src: vendorCdn(theme.vendor.js.aplayer)[0], integrity: vendorCdnIntegrity(theme.vendor.js.aplayer)[0], crossorigin: "anonymous", defer: true, onload: "setupAPlayer()"}) %>
+  <%_ if (theme.player.meting.enable) { _%>
+    <%- js({src: vendorCdn(theme.vendor.js.meting)[0], integrity: vendorCdnIntegrity(theme.vendor.js.meting)[0], crossorigin: "anonymous", defer: true}) %>
+  <%_ } _%>
+<%_ } _%>
+
+<%_ if (theme.pangu.enable) { _%>
+  <%- js({src: vendorCdn(theme.vendor.js.pangu)[0], integrity: vendorCdnIntegrity(theme.vendor.js.pangu)[0], crossorigin: "anonymous", defer: true}) %>
+  <script data-pjax>
+    if (document.readyState === "loading") {
+      document.addEventListener('DOMContentLoaded', () => {
+        pangu?.spacingPage();
+      });
+    } else {
+      pangu?.spacingPage();
+    }
+  </script>
+<%_ } _%>

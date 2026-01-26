@@ -1,5 +1,5 @@
 // service worker
-if ("serviceWorker" in navigator && window.swPath) {
+if ("serviceWorker" in navigator && window.REIMU_CONFIG.swPath) {
   _$("#notification-update-btn").onclick = () => {
     try {
       navigator.serviceWorker.getRegistration().then((reg) => {
@@ -12,14 +12,14 @@ if ("serviceWorker" in navigator && window.swPath) {
 
   _$("#notification-close-btn").onclick = () => {
     _$(".notification-wrapper").classList.remove("show");
-  }
+  };
 
   function emitUpdate() {
     _$(".notification-wrapper").classList.add("show");
   }
 
   navigator.serviceWorker
-    .register(swPath)
+    .register(window.REIMU_CONFIG.swPath)
     .then((registration) => {
       console.log("Service Worker 注册成功: ", registration);
       if (registration.waiting) {

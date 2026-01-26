@@ -1,65 +1,84 @@
 // 改自 https://github.com/willin/hexo-wordcount
-const util = require("hexo-util");
-const stripHTML = util.stripHTML;
+const { stripHTML, Cache } = require("hexo-util");
 
-const counter = (content) => {
+const cachedWordCount = new Cache();
+
+const CN_REGEXP =
+  /[\u4E00-\u9FFF\u3400-\u4DBF\uF900-\uFAFF\u3040-\u309F\u30A0-\u30FF\u31F0-\u31FF\uAC00-\uD7AF\u3130-\u318F]/g;
+const EN_REGEXP =
+  /[\w\u00C0-\u024F\u1E00-\u1EFF]+|[\u0392-\u03c9\u0400-\u04FF]+/g;
+
+const counter = (content = "") => {
+  content = content
+    .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "")
+    .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, "")
+    .replace(/<svg\b[^>]*>[\s\S]*?<\/svg>/gi, "");
   content = stripHTML(content);
-  const cn = (content.match(/[\u4E00-\u9FA5]/g) || []).length;
-  const en = (
-    content
-      .replace(/[\u4E00-\u9FA5]/g, "")
-      .match(
-        /[a-zA-Z0-9_\u0392-\u03c9\u0400-\u04FF]+|[\u4E00-\u9FFF\u3400-\u4dbf\uf900-\ufaff\u3040-\u309f\uac00-\ud7af\u0400-\u04FF]+|[\u00E4\u00C4\u00E5\u00C5\u00F6\u00D6]+|\w+/g
-      ) || []
-  ).length;
+  if (!content) return [0, 0];
+  const cn = (content.match(CN_REGEXP) || []).length;
+  const en = (content.match(EN_REGEXP) || []).length;
+
   return [cn, en];
 };
 
-const countFn = (content) => {
-  let len = counter(content);
-  return len[0] + len[1];
-};
-const changeHourMinuteStr = (str) => {
-  if (str !== "0" && str !== "" && str !== null) {
-    return (
-      (Math.floor(str / 60).toString().length < 2
-        ? "0" + Math.floor(str / 60).toString()
-        : Math.floor(str / 60).toString()) +
-      ":" +
-      ((str % 60).toString().length < 2
-        ? "0" + (str % 60).toString()
-        : (str % 60).toString())
-    );
-  } else {
-    return "";
-  }
-};
-const timeFn = (content, { cn = 300, en = 160 } = {}) => {
-  let len = counter(content);
-  let readingTime = len[0] / cn + len[1] / en;
-  return readingTime < 1 ? 1 : parseInt(readingTime, 10);
+const getCountsWithCache = (content, id) => {
+  if (!id) return counter(content);
+  return cachedWordCount.apply(id, () => counter(content));
 };
 
-hexo.extend.helper.register(
-  "min2read",
-  (content, { cn = 300, en = 160 } = {}) => {
-    return timeFn(content, { cn, en });
-  }
-);
+const countFn = (content, id) => {
+  const [cn, en] = getCountsWithCache(content, id);
+  return cn + en;
+};
 
-hexo.extend.helper.register("wordcount", (content) => {
-  let count = countFn(content);
+const timeFn = (content, { cn = 300, en = 160 } = {}, id) => {
+  const [cnCount, enCount] = getCountsWithCache(content, id);
+  const reading = cnCount / cn + enCount / en;
+  return Math.max(1, Math.ceil(reading));
+};
+
+const formatMinutesHHMM = (min) => {
+  if (!min) return "";
+  const h = Math.floor(min / 60);
+  const m = min % 60;
+  return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+};
+
+hexo.extend.helper.register("min2read", (content, opts = {}, id) => {
+  return timeFn(content, opts, id);
+});
+
+hexo.extend.helper.register("raw_wordcount", (content, id) => {
+  return countFn(content, id);
+});
+
+hexo.extend.helper.register("wordcount", (content, id) => {
+  const count = countFn(content, id);
   return count < 1000 ? count : Math.round(count / 100) / 10 + "k";
 });
 
-hexo.extend.helper.register("totalcount", (site) => {
-  let count = 0;
-  site.posts.forEach((post) => (count += countFn(post.content)));
-  return count < 1000 ? count : Math.round(count / 100) / 10 + "k";
+let cachedTotalCount;
+let cachedTotalMin2Read;
+
+hexo.extend.helper.register("totalcount", function () {
+  if (cachedTotalCount === undefined) {
+    let count = 0;
+    hexo.locals
+      .get("posts")
+      .each((post) => (count += countFn(post.content, post._id)));
+    cachedTotalCount =
+      count < 1000 ? count : Math.round(count / 100) / 10 + "k";
+  }
+  return cachedTotalCount;
 });
 
-hexo.extend.helper.register("totalmin2read", (site) => {
-  let readingTime = 0;
-  site.posts.forEach((post) => (readingTime += timeFn(post.content)));
-  return changeHourMinuteStr(readingTime.toString());
+hexo.extend.helper.register("totalmin2read", function () {
+  if (cachedTotalMin2Read === undefined) {
+    let readingTime = 0;
+    hexo.locals
+      .get("posts")
+      .each((post) => (readingTime += timeFn(post.content, {}, post._id)));
+    cachedTotalMin2Read = formatMinutesHHMM(readingTime);
+  }
+  return cachedTotalMin2Read;
 });

@@ -50,22 +50,18 @@ prismjs:
   preprocess: true
   line_number: true
   tab_replace: ''
-
-algolia:
-  appId: "F2C7EFMFDR"
-  apiKey: "9e27cda9036ebeacc32e3250c4bfa398"
-  adminApiKey: "b9029c310fbd98d0f2b5fcba0ca07ec9"
-  indexName: "my-hexo-blog"
-  chunkSize: 5000
-  fields:
-    - content:strip:truncate,0,500
-    - excerpt:strip
-    - gallery
-    - permalink
-    - photos
-    - slug
-    - tags
-    - title
+feed:
+  enable: true
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content:
+  content_limit: 140
+  content_limit_delim: ' '
+  order_by: -date
+  icon: icon.png
+  autodiscovery: true
 search:
   path: search.json # 文件名必须为search.json
   field: post
