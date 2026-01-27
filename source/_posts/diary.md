@@ -27,6 +27,14 @@ sticky: true
 
 发现一个小经验，如果需要让环境变量生效，在vscode终端新开一个终端是没有用的，需要把vsocde重启一下才行
 
+一直有意识到Microsoft to do这款软件在开启代理时会无法同步，我一直以为是代理规则的问题，于是打算认真研究一下，启动同步时clash会有这样的日志
+
+```
+[TCP] 127.0.0.1:6007(RuntimeBroker.exe) --> collections.md.mp.microsoft.com:443 match RuleSet(Microsoft) using DIRECT
+```
+
+说明规则和分流是没问题的，走的是直连，百思不得其解，网上搜搜，[快速解决办法](https://blog.a152.top/archives/65.html)，[较为详细的教程&解释](https://zhuanlan.zhihu.com/p/55906778)。大致原因就是Windows对于UWP应用有特殊的管理机制，导致开启代理后UWP应用无法链接到代理上
+
 # 2025
 
 **十一月**
