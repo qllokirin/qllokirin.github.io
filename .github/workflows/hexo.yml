@@ -27,6 +27,14 @@ jobs:
         uses: actions/upload-pages-artifact@v3 # 上传public目录内容
         with:
           path: ./public
+      - name: SCP Deploy to Remote Server # scp到远端服务器
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.DOCKER_IP_DEV }} >> ~/.ssh/known_hosts
+          scp -r .public root@${{ secrets.DOCKER_IP_DEV }}:/root/blog
+        
   # 部署博客  
   deploy:
     needs: build   # 依赖上一个build操作
