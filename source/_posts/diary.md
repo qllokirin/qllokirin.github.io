@@ -17,6 +17,84 @@ sticky: true
 
 # 2026
 
+**三月**
+
+在docker中使用mihomo核心是我目前服务器的代理方式，推荐[教程](https://windowbr.top/2024/11/02/mihomo-docker/)，下面贴一下我的docker配置
+我的网页面板用的是软路由上面的nikki，感觉ui很好看
+
+```
+# docker-compose.yml
+version: '3'
+
+services:
+  meta:
+    container_name: mihomo
+    image: metacubex/mihomo:latest
+    restart: always
+    pid: host
+    ipc: host
+    network_mode: host
+    cap_add:
+      - ALL
+    volumes:
+      - ./config.yaml:/root/.config/mihomo/config.yaml
+      - /dev/net/tun:/dev/net/tun
+```
+
+```
+# config.yaml
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: rule
+ipv6: true
+log-level: error
+secret: "xxxxx" # 强烈建议设置一个密码！！！否则暴露端口会被他人使用代理
+external-controller: 0.0.0.0:9090
+unified-delay: true
+lan-allowed-ips: # 只允许本地和docker容器使用代理
+  - 172.0.0.0/8
+  - 127.0.0.0/8
+dns:
+    enable: true
+    ipv6: false
+    default-nameserver: [223.5.5.5, 119.29.29.29]
+    enhanced-mode: fake-ip
+    fake-ip-range: 198.18.0.1/16
+    use-hosts: true
+    nameserver: ['https://doh.pub/dns-query', 'https://dns.alidns.com/dns-query']
+    fallback: ['https://doh-pure.onedns.net/dns-query', 'https://ada.openbld.net/dns-query', 'https://223.5.5.5/dns-query', 'https://223.6.6.6/dns-query']
+    fallback-filter: { geoip: true, ipcidr: [240.0.0.0/4, 0.0.0.0/32] }
+proxies:
+# 下面就是代理中的节点、组和规则
+```
+
+如果使用`lan-allowed-ips`允许docker容器使用代理的话，在docker compose中还需要配合上设置环境变量（如下），`对外ip`例如有192.168.1.x之类的，连接wifi分配的ip，由于容器的安全网络机制，是无法直连本地127.0.0.1的，并且在[这个issue](https://github.com/MetaCubeX/metacubexd/discussions/638)提到的`host.docker.internal`只对Windows的docker生效，在Linux是用不了的
+
+```
+    environment:
+      - http_proxy=http://{你的对外ip}:7890
+      - https_proxy=http://{你的对外ip}:7890
+```
+
+最近发现其实可以在面板里面打开tun模式，直接接管本机全部流量，docker内也可以走代理，很好用，用下面这个可以测试docker内部是否可以使用代理
+
+```
+services:
+  curl_test:
+    container_name: curl-test
+    image: ghcr.io/curl/curl-container/curl:master
+    pull_policy: always
+    command: "curl --head https://www.google.com/"
+    network_mode: bridge
+```
+
+**二月**
+
+喜茶可以上传手绘贴纸，群u一起研究了神秘方法上传了图片，非常好用，图片生成网站https://heytea.suink.cn/
+
+[早柚核心](https://docs.sayu-bot.com/) 部署了一个鸣潮和瓦的机器人，有点意思，也是开辟了除了nb、koishi等机器人框架的，第三方兼容框架？兼容大部分机器人框架的框架hhh，不过其实属性比较明确，方面制作一些专门的插件
+
 **一月**
 
 最近一直在干项目，后期是做实验，感觉会比前期整体轻松一点，因为有时候做不了实验或者不需要我们的时候，是纯粹的放松时间，但是我是真的有亿点点晕船xD
@@ -99,12 +177,6 @@ $env:HTTP_PROXY="http://127.0.0.1:7890"; $env:HTTPS_PROXY="http://127.0.0.1:7890
 ```
 
 但是克隆ssh的仓库，似乎不太管用，目前找到的办法就是关闭系统代理，打开虚拟网卡即可
-
-**二月**
-
-喜茶可以上传手绘贴纸，群u一起研究了神秘方法上传了图片，非常好用，图片生成网站https://heytea.suink.cn/
-
-[早柚核心](https://docs.sayu-bot.com/) 部署了一个鸣潮和瓦的机器人，有点意思，也是开辟了除了nb、koishi等机器人框架的，第三方兼容框架？兼容大部分机器人框架的框架hhh，不过其实属性比较明确，方面制作一些专门的插件
 
 # 2025
 
