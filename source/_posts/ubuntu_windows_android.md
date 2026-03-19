@@ -169,7 +169,7 @@ wsl --unregister Ubuntu
 
   语法高亮
 
-  ````
+  ```
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
   ```
 
@@ -187,21 +187,21 @@ wsl --unregister Ubuntu
 
   输入`source ~/.zshrc`或重启终端即可生效
 
-  若有字体乱码需要下载字体
-
-  ```
-  sudo apt-get install fonts-powerline
-  ```
-
-  主题powerlevel10k支持多种形式，可自行选择
-
-  ```bash
-  git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-  ```
-
-  ```text
-  ZSH_THEME="powerlevel10k/powerlevel10k"
-  ```
+  > 若有字体乱码需要下载字体
+  >
+  > ```
+  > sudo apt-get install fonts-powerline
+  > ```
+  >
+  > 此外还有主题powerlevel10k支持多种形式，可自行选择
+  >
+  > ```bash
+  > git clone --depth=1 https://gitee.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+  > ```
+  >
+  > ```text
+  > ZSH_THEME="powerlevel10k/powerlevel10k"
+  > ```
 
 * **[conda](https://mirrors.bfsu.edu.cn/anaconda/archive/)**
 
