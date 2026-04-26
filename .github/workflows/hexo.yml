@@ -19,7 +19,8 @@ jobs:
         run: |
           npm install
           npm install -g hexo-cli
- 
+          npm uninstall hexo-renderer-marked --save # 卸载默认的markdown渲染器
+          npm install @reimujs/hexo-renderer-markdown-it-plus --save # 安装markdown-it-plus插件
       - name: Run build
         run: npm run build # 运行编译操作
       
