@@ -236,7 +236,7 @@ math:
   # If you don't want to use it, please set `autoRender` to true to enable browser rendering
   katex:
     enable: true
-    autoRender: false # whether to render the math in the browser, disabled by default
+    autoRender: true # whether to render the math in the browser, disabled by default
   mathjax:
     enable: false
     options: # see https://docs.mathjax.org/en/latest/web/configuration.html
