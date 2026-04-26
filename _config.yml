@@ -113,3 +113,6 @@ theme: reimu
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: ''
+
+markdown_it_plus:
+  rawLaTeX: true
