@@ -20,6 +20,16 @@ sticky: true
 
 **四月**
 
+在mihomo的配置文件中有这样的两个字段，显然是用来控制是否使用ipv6的，在使用gscore的插件的时候，发现一些指令一直报错，经过查看zashboard的流量日志后发现，访问`https://q1.qlogo.cn/g?b=qq&nk={qq}&s=640`时进行的是ipv6的fake ip映射，但是提示失败了，但是在命令行使用`curl -v "https://q1.qlogo.cn/g?b=qq&nk={qq}&s=640" -o /tmp/qq.jpg`的话一切正常，日志显示也是ipv4地址，其实可以对比测试一下代码是如何调用的，但排查这么久之后实在是懒得操作于是把mihomo的ipv6全关了（如下）
+
+> 此外如果把tun模式关闭的话，运行是正常的，但是打开tun模式时，就会有这个问题
+
+```
+ipv6: false
+dns:
+    ipv6: false
+```
+
 [Reqable + Proxifier强制代理抓包](https://reqable.com/zh-CN/blog/2024/07/03/post)，某些软件强制抓包后发现`ssr://`是直接传输的，无加密，那就很好说了，但还有个问题是有过期时间，大概是一天，或许在openwrt路由器设置定时任务获取节点再每天重启一下核心应该是能做到的？
 
 了解了一下uv，浅浅体验了一下确实还不错，不过到底该怎么看论文呢（已发疯啊啊啊啊啊）六级也搁置挺久了其实
