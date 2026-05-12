@@ -20,7 +20,7 @@ sticky: true
 
 **四月**
 
-下载[latex清华源](https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/)等时，把链接放进motrix等软件速度会比浏览器快的多得多
+下载[latex清华源](https://mirrors.tuna.tsinghua.edu.cn/CTAN/systems/texlive/Images/)等时，把链接放进motrix等软件速度会比浏览器快的多得多，又看了一些项目，感觉 Typst 模板是对的，这个渲染无需等待真有点丝滑了
 
 在mihomo的配置文件中有这样的两个字段，显然是用来控制是否使用ipv6的，在使用gscore的插件的时候，发现一些指令一直报错，经过查看zashboard的流量日志后发现，访问`https://q1.qlogo.cn/g?b=qq&nk={qq}&s=640`时进行的是ipv6的fake ip映射，但是提示失败了，但是在命令行使用`curl -v "https://q1.qlogo.cn/g?b=qq&nk={qq}&s=640" -o /tmp/qq.jpg`的话一切正常，日志显示也是ipv4地址，其实可以对比测试一下代码是如何调用的，但排查这么久之后实在是懒得操作于是把mihomo的ipv6全关了（如下）
 
