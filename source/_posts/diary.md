@@ -17,6 +17,10 @@ sticky: true
 
 # 2026
 
+**六月**
+
+注册美区Apple ID一定记得注册[免税州](https://usaddressgen.com/tax-free-address/)地区的
+
 **五月**
 
 不知道有没有人注意到在没有登录的状态下（或无痕模式）点进b站个人主页[t.bilibili.com](https://t.bilibili.com/)，第一篇帖子就是哔哩哔哩番剧的[酷爱电影的庞波小姐](https://www.bilibili.com/bangumi/play/ss42910)，很早之前就注意到了但是看一看，今天终于补上看完了，剧情紧凑连贯，人物都很可爱，整个观影体验非常舒畅，值得一看，最后的90mins也是非常有趣的呼应😊
