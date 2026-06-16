@@ -133,7 +133,7 @@ wsl --unregister Ubuntu
 
 * [**clion编译器**](https://www.jetbrains.com/clion/download/#section=linux)
 
-  好用且配置方便，~~爆杀vscode~~（先选三十天试用，学生可以通过学信网认证免费使用
+  好用且配置方便，不过我现在其实用VSCode比较多
 
   `sudo snap install clion --classic`直接安装，然后输入`clion`运行即可
 
@@ -173,7 +173,13 @@ wsl --unregister Ubuntu
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
   ```
 
-  进`.zshrc`把73行的`plugins=(git)`改为
+  进`.zshrc`
+
+  ```
+  vim ~/.zshrc
+  ```
+
+  把73行的`plugins=(git)`改为
 
   ```
   plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
@@ -203,13 +209,158 @@ wsl --unregister Ubuntu
   > ZSH_THEME="powerlevel10k/powerlevel10k"
   > ```
 
+* **[mihomo](https://wiki.metacubex.one/startup/)**
+
+  先在[GitHub Release](https://github.com/MetaCubeX/mihomo/releases)或[官网](https://wiki.metacubex.one/startup/)下载二进制包
+
+  常规版本的Ubuntu直接下载deb即可
+
+  ```
+  wget https://gh-proxy.org/https://github.com/MetaCubeX/mihomo/releases/download/v1.19.27/mihomo-linux-amd64-v1.19.27.deb
+  ```
+
+  > release里面提供的编译版本有很多，linux-amd64之后还有不同的版本，常规下载就直接搜索`mihomo-linux-amd64-v1.`即可
+
+  安装deb包，或者下载`.gz`压缩包之后解压，直接把二进制文件更名为`mihomo`放入`/usr/local/bin/`也可以
+
+  ```
+  sudo dpkg -i mihomo-linux-amd64-v1.19.27.deb
+  ```
+
+  使用systemd创建服务
+
+  ```
+  sudo vim /etc/systemd/system/mihomo.service
+  ```
+
+  ```
+  [Unit]
+  Description=mihomo Daemon, Another Clash Kernel.
+  After=network.target NetworkManager.service systemd-networkd.service iwd.service
+  
+  [Service]
+  Type=simple
+  LimitNPROC=500
+  LimitNOFILE=1000000
+  CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_RAW CAP_NET_BIND_SERVICE CAP_SYS_TIME CAP_SYS_PTRACE CAP_DAC_READ_SEARCH CAP_DAC_OVERRIDE
+  AmbientCapabilities=CAP_NET_ADMIN CAP_NET_RAW CAP_NET_BIND_SERVICE CAP_SYS_TIME CAP_SYS_PTRACE CAP_DAC_READ_SEARCH CAP_DAC_OVERRIDE
+  Restart=always
+  ExecStartPre=/usr/bin/sleep 1s
+  ExecStart=/usr/bin/mihomo -d /etc/mihomo
+  ExecReload=/bin/kill -HUP $MAINPID
+  
+  [Install]
+  WantedBy=multi-user.target
+  ```
+
+  > 注意调整`ExecStart=/usr/bin/mihomo -d /etc/mihomo`，使用deb包安装的mihomo是在`/usr/bin/mihomo`，使用官网的`cp`指令的话就是在`/usr/local/bin/mihomo`里，`-d`后面的路径就是数据和`config.yaml`配置文件存放的文件，可以自行更改
+  >
+  > 输入`which mihomo`可以查询位置
+
+  把你的配置文件放入`/etc/mihomo`中
+
+  ```
+  vim /etc/mihomo/config.yaml
+  ```
+
+  提供一下前25行仅供参考，简单而言把自己订阅文件的内容合并到后面即可，就是不方便更新订阅，更优雅的方法应该是使用[proxy-providers](https://wiki.metacubex.one/example/conf/)
+
+  ```
+  port: 7890
+  socks-port: 7891
+  allow-lan: false
+  mode: rule
+  ipv6: false
+  log-level: error
+  secret: "xxxxxxxxxxxxx"
+  external-controller: 127.0.0.1:9090
+  external-ui: ui
+  external-ui-url: "https://gh-proxy.org/https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip"
+  unified-delay: true
+  lan-allowed-ips:
+    - 172.0.0.0/8
+    - 127.0.0.0/8
+  tun:
+    enable: true
+  dns:
+      enable: true
+      ipv6: false
+      default-nameserver: [223.5.5.5, 119.29.29.29]
+      enhanced-mode: fake-ip
+      fake-ip-range: 198.18.0.1/16
+      use-hosts: true
+      nameserver: ['https://doh.pub/dns-query', 'https://dns.alidns.com/dns-query']
+      fallback: ['https://doh-pure.onedns.net/dns-query', 'https://ada.openbld.net/dns-query', 'https://223.5.5.5/dns-query', 'https://223.6.6.6/dns-query']
+  proxies:
+  	......
+  	......
+  ```
+
+  > 主要是有以下几点
+  >
+  > 1.关闭ipv6防止一些奇怪问题
+  >
+  > 2.设置secret可以从9090端口进行网页控制，**自行修改一下`secret: "xxxxxxxxxxxxx"`！！！**
+  >
+  > 3.allow-lan设置为false不允许局域网其他设备直接访问7890走代理
+  >
+  > **4.打开tun模式，可以让很多流量直接走上代理，比如不设置https_proxy或者docker内都可以直接使用代理**
+  >
+  > 5.设置了一个ui，访问`http://127.0.0.1:9090/ui/`即可进入，WSL的话在window下要输入`http://localhost:9090/ui/`，填入secret设置的密码即可进入网页控制节点，可以通过反代在网页端统一管理多个mihomo核心
+
+  使用以下命令重新加载 systemd:
+
+  ```
+  sudo systemctl daemon-reload
+  ```
+
+  启用 mihomo 服务：
+
+  ```
+  sudo systemctl enable mihomo
+  ```
+
+  使用以下命令立即启动 mihomo:
+
+  ```
+  sudo systemctl start mihomo
+  ```
+
+  使用以下命令使 mihomo 重新加载：
+
+  ```
+  sudo systemctl reload mihomo
+  ```
+
+  使用以下命令检查 mihomo 的运行状况：
+
+  ```
+  sudo systemctl status mihomo
+  ```
+
+  使用以下命令检查 mihomo 的运行日志：
+
+  ```
+  sudo journalctl -u mihomo -o cat -f
+  ```
+
+  > 纯命令行控制节点选择推荐使用**[mihomo-tui](https://github.com/potoo0/mihomo-tui)**
+  >
+  > ```
+  > curl -sSfL https://raw.githubusercontent.com/potoo0/mihomo-tui/main/install.sh | sh
+  > vim ~/.config/mihomo-tui/config.yaml
+  > mihomo-tui
+  > ```
+
 * **[conda](https://mirrors.bfsu.edu.cn/anaconda/archive/)**
 
   ```
-  wget https://mirrors.bfsu.edu.cn/anaconda/archive/Anaconda3-2022.10-Linux-x86_64.sh
+  wget https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/Anaconda3-2025.12-2-Linux-x86_64.sh
   ```
   
   没有过多需求的情况下，直接安装python也是一个很好的选择
+  
+  > 更好的选择或许是[uv](https://uv.oaix.tech/getting-started/installation/)？
   
 * **typora**
 
