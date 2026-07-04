@@ -30,7 +30,7 @@ sticky: true
 >
 > 双系统新装Ubuntu直接一个`/`
 >
-> 想扩容一下的，发现可压缩空间比空闲内存小的多，按照[这个](https://www.bilibili.com/video/BV12L4y1A72s)评论区置顶操作一下就好了
+> 想扩容一下的，发现可压缩空间比空闲内存小的多，按照[这个视频](https://www.bilibili.com/video/BV1GA4m1N7qx)操作一下就好了
 
 ## WSL安装
 
