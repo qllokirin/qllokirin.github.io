@@ -25,7 +25,7 @@ jobs:
         run: npm run build # 运行编译操作
       
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3 # 上传public目录内容
+        uses: actions/upload-pages-artifact@v4 # 上传public目录内容
         with:
           path: ./public
       #- name: SCP Deploy to Remote Server # scp到远端服务器
@@ -49,4 +49,4 @@ jobs:
     steps:         # 使用actions 部署
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
