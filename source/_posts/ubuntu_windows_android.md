@@ -85,6 +85,16 @@ wsl --unregister Ubuntu
 
   `lspci | grep -i net`找到形如`8086:51f1`的信息，输入到后面这个网址查询 [查看网卡型号](https://admin.pci-ids.ucw.cz/mods/PC/10de?action=help?help=pci)
 
+  如果你是2.5G网口用户，比如Realtek RTL8125，你会发现你直接插网线，是完全识别不到的，因为这玩意儿也需要单独安装驱动，[教程在此](https://blog.mvpbang.com/p/57a70fb687d44119ad5b222bd201c1af/)，下为简单指令
+
+  ```
+  git clone https://gh-proxy.org/https://github.com/awesometic/realtek-r8125-dkms.git
+  cd realtek-r8125-dkms
+  sudo ./dkms-install.sh
+  sudo modprobe r8125
+  ip link
+  ```
+
 * **换源**  选择一个国内源安装软件会更快，[Ubuntu清华源](https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/)，注意版本不要选错了
 
   然后打开一个终端<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>T</kbd> ，输入`sudo apt update`和`sudo apt upgrade`更新源和更新软件
@@ -364,12 +374,14 @@ wsl --unregister Ubuntu
   
 * **typora**
 
-  我发现[下载1.0](https://typora.io/releases/all)版本的也不会弹出收费推荐，舒服
+  先去[官网](https://typora.io/releases/all)下载1.9.3版本
 
-  这还有篇文章给了[0.9版本](https://k0tk0t.github.io/2021/03/31/%E5%9C%A8Ubuntu%E4%B8%8A%E5%AE%89%E8%A3%85Typora/)的哈哈
+  使用[Yporaject](https://github.com/liheji/Yporaject)激活
 
-  ```bash
-  wget https://download.typora.io/linux/typora_1.0.3_amd64.deb
+  先[安装nodejs](https://nodejs.org/zh-cn/download)，然后直接
+
+  ```
+  ./inject.sh
   ```
 
 * **神——[docker](https://yeasy.gitbook.io/docker_practice/install/ubuntu)**
