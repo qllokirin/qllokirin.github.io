@@ -219,6 +219,10 @@ wsl --unregister Ubuntu
   > ZSH_THEME="powerlevel10k/powerlevel10k"
   > ```
 
+* **[clash-party](https://github.com/mihomo-party-org/clash-party)**
+
+  目前个人在用mihomo内核的gui，感觉还不错，不错的ui设计以及webdav备份很good
+
 * **[mihomo](https://wiki.metacubex.one/startup/)**
 
   先在[GitHub Release](https://github.com/MetaCubeX/mihomo/releases)或[官网](https://wiki.metacubex.one/startup/)下载二进制包
