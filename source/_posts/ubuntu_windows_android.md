@@ -294,6 +294,11 @@ wsl --unregister Ubuntu
   lan-allowed-ips:
     - 172.0.0.0/8
     - 127.0.0.0/8
+  geox-url:
+    geoip: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
+    geosite: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
+    mmdb: "https://testingcf.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
+    asn: "https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb"
   tun:
     enable: true
   dns:
@@ -321,6 +326,8 @@ wsl --unregister Ubuntu
   > **4.打开tun模式，可以让很多流量直接走上代理，比如不设置https_proxy或者docker内都可以直接使用代理**
   >
   > 5.设置了一个ui，访问`http://127.0.0.1:9090/ui/`即可进入，WSL的话在window下要输入`http://localhost:9090/ui/`，填入secret设置的密码即可进入网页控制节点，可以通过反代在网页端统一管理多个mihomo核心
+  >
+  > 6.`geox-url`的设置可以让你防止下载不下来mmdb文件
 
   使用以下命令重新加载 systemd:
 
@@ -328,7 +335,7 @@ wsl --unregister Ubuntu
   sudo systemctl daemon-reload
   ```
 
-  启用 mihomo 服务：
+  开机自启动 mihomo 服务：
 
   ```
   sudo systemctl enable mihomo
@@ -340,10 +347,16 @@ wsl --unregister Ubuntu
   sudo systemctl start mihomo
   ```
 
-  使用以下命令使 mihomo 重新加载：
+  使用以下命令使 mihomo 停止：
 
   ```
-  sudo systemctl reload mihomo
+  sudo systemctl stop mihomo
+  ```
+
+  使用以下命令使 mihomo 重启：
+
+  ```
+  sudo systemctl restart mihomo
   ```
 
   使用以下命令检查 mihomo 的运行状况：
