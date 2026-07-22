@@ -30,7 +30,7 @@ sticky: true
 >
 > 双系统新装Ubuntu直接一个`/`
 >
-> 想扩容一下的，发现可压缩空间比空闲内存小的多，按照[这个视频](https://www.bilibili.com/video/BV1GA4m1N7qx)操作一下就好了
+> 想分盘发现可压缩空间比空闲内存小的多，按照[这个视频](https://www.bilibili.com/video/BV1GA4m1N7qx)操作一下就好了
 
 ## WSL安装
 
@@ -59,45 +59,69 @@ wsl --unregister Ubuntu
 
   有可能开机之后没有wifi选项，**解决办法**是：先连网线或者手机usb数据共享，换源然后`sudo apt update`和`sudo apt upgrade`，如果还是不行就去网上源码编译一下网卡驱动（去windows下面找到自己的网卡型号然后去搜一搜）就ok了
 
-  但是不排除究极螃蟹网卡（对 我说的是mt7921 会时好时坏）最后我直接换了ax210
-
-  又遇到一个逆天网卡AX101，Ubuntu22.04能有WiFi图标但有时能用有时不行，能用的时候带宽也只有50兆，感觉可能是网卡型号读错了然后不是很适配
+  `lspci | grep -i net`找到形如`8086:51f1`的信息，输入到后面这个网址查询 [查看网卡型号](https://admin.pci-ids.ucw.cz/mods/PC/10de?action=help?help=pci)
 
   自己安装网卡驱动方法
 
   1. [Intel官网](https://www.intel.cn/content/www/cn/zh/support/articles/000005511/wireless.html)，确保内核版本大于要求版本，解压之后放入` /lib/firmware`即可
   2. 更新内核，[这里](https://wireless.wiki.kernel.org/en/users/Drivers/iwlwifi)可以看到Intel网卡与内核版本的关系   [内核图形化更新方法](https://zhuanlan.zhihu.com/p/686362507)
 
-  AX211或AX201在[这里](http://archive.ubuntu.com/ubuntu/pool/universe/b/backport-iwlwifi-dkms/)下这个`backport-iwlwifi-dkms_9858-0ubuntu3_all.deb`，说实话很奇怪，不知道这个包是怎么来的干什么的
+  也是ai时代了，最近用codex直接让他帮我装好了驱动，也是个不错的选择
 
-  ```
-  wget https://archive.ubuntu.com/ubuntu/pool/universe/b/backport-iwlwifi-dkms/backport-iwlwifi-dkms_9858-0ubuntu3_all.deb
-  sudo apt update
-  sudo apt install ./backport-iwlwifi-dkms_9858-0ubuntu3_all.deb
-  ```
+  * MT7921
 
-  [rtl8852be](https://github.com/HRex39/rtl8852be)的安装依赖如下
+    究极螃蟹网卡，Windows下会时好时坏，Ubuntu20.04更是不知如何装驱动，最后我直接换了ax210
 
-  ```
-  sudo apt-get update
-  sudo apt-get install make gcc linux-headers-$(uname -r) build-essential git
-  ```
+    > 现在的话ai能否装上呢（不升级内核的情况下）
 
-  `lspci | grep -i net`找到形如`8086:51f1`的信息，输入到后面这个网址查询 [查看网卡型号](https://admin.pci-ids.ucw.cz/mods/PC/10de?action=help?help=pci)
+  * AX101
 
-  如果你是2.5G网口用户，比如Realtek RTL8125，你会发现你直接插网线，是完全识别不到的，因为这玩意儿也需要单独安装驱动，[教程在此](https://blog.mvpbang.com/p/57a70fb687d44119ad5b222bd201c1af/)，下为简单指令
+    又遇到一个逆天网卡，Ubuntu22.04能有WiFi图标但有时能用有时不行，能用的时候带宽也只有50兆，感觉可能是网卡型号读错了然后不是很适配
 
-  ```
-  git clone https://gh-proxy.org/https://github.com/awesometic/realtek-r8125-dkms.git
-  cd realtek-r8125-dkms
-  sudo ./dkms-install.sh
-  sudo modprobe r8125
-  ip link
-  ```
+  * AX211或AX201
+
+    在[这里](http://archive.ubuntu.com/ubuntu/pool/universe/b/backport-iwlwifi-dkms/)下这个`backport-iwlwifi-dkms_9858-0ubuntu3_all.deb`，说实话很奇怪，不知道这个包是怎么来的干什么的，但是就是可以用
+
+    ```
+    wget https://archive.ubuntu.com/ubuntu/pool/universe/b/backport-iwlwifi-dkms/backport-iwlwifi-dkms_9858-0ubuntu3_all.deb
+    sudo apt update
+    sudo apt install ./backport-iwlwifi-dkms_9858-0ubuntu3_all.deb
+    ```
+
+  * [rtl8852be](https://github.com/HRex39/rtl8852be)
+
+    安装依赖如下，然后按照仓库里面的make一下
+
+    ```
+    sudo apt-get update
+    sudo apt-get install make gcc linux-headers-$(uname -r) build-essential git
+    ```
+
+  * Realtek RTL8125
+
+    这是一个2.5G网口，你会发现你直接插网线，是完全识别不到的，因为这玩意儿也需要单独安装驱动，[教程在此](https://blog.mvpbang.com/p/57a70fb687d44119ad5b222bd201c1af/)，下为简单指令
+
+    ```
+    git clone https://gh-proxy.org/https://github.com/awesometic/realtek-r8125-dkms.git
+    cd realtek-r8125-dkms
+    sudo ./dkms-install.sh
+    sudo modprobe r8125
+    ip link
+    ```
 
 * **换源**  选择一个国内源安装软件会更快，[Ubuntu清华源](https://mirrors.tuna.tsinghua.edu.cn/help/ubuntu/)，注意版本不要选错了
 
   然后打开一个终端<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>T</kbd> ，输入`sudo apt update`和`sudo apt upgrade`更新源和更新软件
+
+  ```
+  # ubuntu20.04清华源
+  deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal main restricted universe multiverse
+  deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-updates main restricted universe multiverse
+  deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-backports main restricted universe multiverse
+  deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse
+  ```
+
+  > 应该是因为20.04停止维护了，所以在清华源官网是没有直接复制20.04的配置文件的按钮的
 
 * ~~**显卡驱动**~~  (**很容易给ubunut安装到打不开，不熟可先跳过**)
 
@@ -132,28 +156,33 @@ wsl --unregister Ubuntu
   # 0代表第一个 windows一般在2
   sudo update-grub
   ```
+  
+* **设置鼠标移动为线性移动（Flat）**
+
+  ```
+  # 查看当前设置
+  gsettings get org.gnome.desktop.peripherals.mouse accel-profile
+  # 设置为flat
+  gsettings set org.gnome.desktop.peripherals.mouse accel-profile 'flat'
+  ```
+
+  相比于Windows，Ubuntu的鼠标感觉很滑，设置完这个会好很多
 
 ## 实用工具
 
-* **[谷歌搜索引擎](https://www.google.com/)**
+* **[谷歌搜索引擎](https://www.google.com/)**及[**谷歌浏览器**](https://www.google.com/intl/zh-CN/chrome/)
 
   谷歌搜索引擎用多了只会觉得百度很垃（
 
   没有梯子时建议使用**必应**
 
-* [**clion编译器**](https://www.jetbrains.com/clion/download/#section=linux)
-
-  好用且配置方便，不过我现在其实用VSCode比较多
-
-  `sudo snap install clion --classic`直接安装，然后输入`clion`运行即可
-
-  > 如果是下载的压缩包，则需运行里面的clion.sh脚本
-  >
-  > 在.bashrc/.zshrc中写入`alias clion=xxx/bin/clion.sh` 之后就也可以输入clion命令打开了
+  谷歌浏览器的话纯属个人习惯
 
 * **输入法**
 
-  首推还是搜狗，[官方教程](https://shurufa.sogou.com/linux/guide)，词库雀食是强大的  如果无法使用可以安装ibus的输出法，一定不会报错
+  > 没太多要求可以直接使用Ubuntu自带的输入法，选择中文界面的情况下右上角可以直接切换
+
+  首推还是搜狗，[官方教程](https://shurufa.sogou.com/linux/guide)，词库雀食是强大的
 
   值得注意的是 如果你选的是英文界面（系统）设置的region& language界面中  manage install language上面要**只留下Chinese**才能使用搜狗 ，别问 问就是捯饬了半天才试出来
 
@@ -202,6 +231,10 @@ wsl --unregister Ubuntu
   ```
 
   输入`source ~/.zshrc`或重启终端即可生效
+
+  ```
+  source ~/.zshrc
+  ```
 
   > 若有字体乱码需要下载字体
   >
@@ -433,8 +466,6 @@ wsl --unregister Ubuntu
   sudo chmod +x /usr/local/bin/docker-compose
   ```
 
-* **命令行走代理**——[**proxychains**](https://m-ouse.github.io/post/proxychains%E9%85%8D%E7%BD%AE/)
-
 * **录屏软件**——kamaz
 
   ```bash
@@ -567,12 +598,6 @@ wsl --unregister Ubuntu
 | --------------- | ------------------------- |
 | TranslucentTB   | 底部栏透明                |
 | Microsoft To Do | 做todolist 多端同步很好用 |
-
-## **百度网盘不限速的神**
-
-| 名称                     | 说明                           |
-| ------------------------ | ------------------------------ |
-| https://pan.f4team.cn/#/ | 需要进tg群获得动态密钥，无限制 |
 
 ## 其他
 
